@@ -1,0 +1,14 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    factify-api:
+        inputs:
+            - location: ./openapi.json
+targets:
+    python:
+        target: python
+        source: factify-api
+        output: .
+        codeSamples:
+            output: codeSamples.yaml
+            style: standard
