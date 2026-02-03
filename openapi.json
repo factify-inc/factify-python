@@ -542,12 +542,6 @@
             "title": "description",
             "type": "string"
           },
-          "document_id": {
-            "description": "Document ID to create version for.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
-            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
-            "title": "document_id",
-            "type": "string"
-          },
           "payload": {
             "description": "PDF file for new version",
             "format": "binary",
@@ -1929,6 +1923,11 @@
             "lang": "typescript",
             "label": "listApiKeys",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.list({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "listApiKeys",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.api_keys.list(organization_id=\"\u003cid\u003e\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
           }
         ]
       },
@@ -1985,6 +1984,11 @@
             "lang": "typescript",
             "label": "createApiKey",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.create({\n    name: \"\u003cvalue\u003e\",\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "createApiKey",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.api_keys.create(name=\"\u003cvalue\u003e\", organization_id=\"\u003cid\u003e\")\n\n    assert res.create_api_key_response is not None\n\n    # Handle response\n    print(res.create_api_key_response)"
           }
         ]
       }
@@ -2071,6 +2075,11 @@
             "lang": "typescript",
             "label": "revokeApiKey",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.revoke({\n    apiKeyId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "revokeApiKey",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.api_keys.revoke(api_key_id=\"\u003cid\u003e\")\n\n    assert res.revoke_api_key_response is not None\n\n    # Handle response\n    print(res.revoke_api_key_response)"
           }
         ]
       }
@@ -2217,11 +2226,17 @@
           "type": "cursor"
         },
         "x-speakeasy-name-override": "list",
+        "x-speakeasy-usage-example": true,
         "x-codeSamples": [
           {
             "lang": "typescript",
             "label": "listDocuments",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.list({\n    pageToken: \"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "listDocuments",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.documents.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
           }
         ]
       },
@@ -2278,6 +2293,11 @@
             "lang": "typescript",
             "label": "createDocument",
             "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.create({\n    payload: await openAsBlob(\"example.file\"),\n    title: \"\u003cvalue\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "createDocument",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.documents.create(payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    }, title=\"\u003cvalue\u003e\")\n\n    assert res.create_document_response is not None\n\n    # Handle response\n    print(res.create_document_response)"
           }
         ]
       }
@@ -2340,6 +2360,11 @@
             "lang": "typescript",
             "label": "getDocument",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.get({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "getDocument",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.documents.get(document_id=\"\u003cid\u003e\")\n\n    assert res.get_document_response is not None\n\n    # Handle response\n    print(res.get_document_response)"
           }
         ]
       },
@@ -2430,6 +2455,11 @@
             "lang": "typescript",
             "label": "updateDocument",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.update({\n    documentId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "updateDocument",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.documents.update(document_id=\"\u003cid\u003e\")\n\n    assert res.update_document_response is not None\n\n    # Handle response\n    print(res.update_document_response)"
           }
         ]
       }
@@ -2493,6 +2523,11 @@
             "lang": "typescript",
             "label": "generateDocumentEntryPage",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.entryPages.generate({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "generateDocumentEntryPage",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.entry_pages.generate(document_id=\"\u003cid\u003e\")\n\n    assert res.generate_entry_page_response is not None\n\n    # Handle response\n    print(res.generate_entry_page_response)"
           }
         ]
       }
@@ -2592,6 +2627,11 @@
             "lang": "typescript",
             "label": "listDocumentPolicies",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policies.list({\n    documentId: \"\u003cid\u003e\",\n    pageToken: \"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "listDocumentPolicies",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.policies.list(document_id=\"\u003cid\u003e\", page_token=\"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
           }
         ]
       },
@@ -2676,6 +2716,11 @@
             "lang": "typescript",
             "label": "attachDocumentPolicy",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policies.attach({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      policyId: \"\u003cid\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "attachDocumentPolicy",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.policies.attach(document_id=\"\u003cid\u003e\", policy_id=\"\u003cid\u003e\")\n\n    assert res.document_policy is not None\n\n    # Handle response\n    print(res.document_policy)"
           }
         ]
       }
@@ -2750,6 +2795,11 @@
             "lang": "typescript",
             "label": "detachDocumentPolicy",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policies.detach({\n    documentId: \"\u003cid\u003e\",\n    policyId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "detachDocumentPolicy",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.policies.detach(document_id=\"\u003cid\u003e\", policy_id=\"\u003cid\u003e\")\n\n    assert res.empty is not None\n\n    # Handle response\n    print(res.empty)"
           }
         ]
       }
@@ -2849,6 +2899,11 @@
             "lang": "typescript",
             "label": "listDocumentVersions",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.list({\n    documentId: \"\u003cid\u003e\",\n    pageToken: \"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "listDocumentVersions",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.versions.list(document_id=\"\u003cid\u003e\", page_token=\"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
           }
         ]
       },
@@ -2919,6 +2974,11 @@
             "lang": "typescript",
             "label": "createDocumentVersion",
             "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.create({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      payload: await openAsBlob(\"example.file\"),\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "createDocumentVersion",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.versions.create(document_id=\"\u003cid\u003e\", payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    })\n\n    assert res.version is not None\n\n    # Handle response\n    print(res.version)"
           }
         ]
       }
@@ -3005,6 +3065,11 @@
             "lang": "typescript",
             "label": "listOrganizations",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.list();\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "listOrganizations",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.list()\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
           }
         ]
       },
@@ -3061,6 +3126,11 @@
             "lang": "typescript",
             "label": "createOrganization",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.create({\n    name: \"\u003cvalue\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "createOrganization",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.create(name=\"\u003cvalue\u003e\")\n\n    assert res.create_organization_response is not None\n\n    # Handle response\n    print(res.create_organization_response)"
           }
         ]
       }
@@ -3123,6 +3193,11 @@
             "lang": "typescript",
             "label": "getOrganization",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.get({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "getOrganization",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.get(organization_id=\"\u003cid\u003e\")\n\n    assert res.get_organization_response is not None\n\n    # Handle response\n    print(res.get_organization_response)"
           }
         ]
       }
@@ -3275,6 +3350,11 @@
             "lang": "typescript",
             "label": "listOrganizationInvites",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.list({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "listOrganizationInvites",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.invites.list(organization_id=\"\u003cid\u003e\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
           }
         ]
       },
@@ -3374,6 +3454,11 @@
             "lang": "typescript",
             "label": "createOrganizationInvite",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.create({\n    organizationId: \"\u003cid\u003e\",\n    body: {\n      email: \"Willie_Parisian16@hotmail.com\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "createOrganizationInvite",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.invites.create(organization_id=\"\u003cid\u003e\", email=\"Willie_Parisian16@hotmail.com\")\n\n    assert res.create_organization_invite_response is not None\n\n    # Handle response\n    print(res.create_organization_invite_response)"
           }
         ]
       }
@@ -3473,6 +3558,11 @@
             "lang": "typescript",
             "label": "acceptOrganizationInvite",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.accept({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {\n      token: \"\u003cvalue\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "acceptOrganizationInvite",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.invites.accept(organization_id=\"\u003cid\u003e\", invite_id=\"\u003cid\u003e\", token=\"\u003cvalue\u003e\")\n\n    assert res.accept_organization_invite_response is not None\n\n    # Handle response\n    print(res.accept_organization_invite_response)"
           }
         ]
       }
@@ -3563,6 +3653,11 @@
             "lang": "typescript",
             "label": "resendOrganizationInvite",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.resend({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "resendOrganizationInvite",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.invites.resend(organization_id=\"\u003cid\u003e\", invite_id=\"\u003cid\u003e\", body={})\n\n    assert res.resend_organization_invite_response is not None\n\n    # Handle response\n    print(res.resend_organization_invite_response)"
           }
         ]
       }
@@ -3653,6 +3748,11 @@
             "lang": "typescript",
             "label": "revokeOrganizationInvite",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.revoke({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "revokeOrganizationInvite",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.invites.revoke(organization_id=\"\u003cid\u003e\", invite_id=\"\u003cid\u003e\", body={})\n\n    assert res.revoke_organization_invite_response is not None\n\n    # Handle response\n    print(res.revoke_organization_invite_response)"
           }
         ]
       }
@@ -3715,6 +3815,11 @@
             "lang": "typescript",
             "label": "getVersion",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.get({\n    versionId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "getVersion",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.versions.get(version_id=\"\u003cid\u003e\")\n\n    assert res.version is not None\n\n    # Handle response\n    print(res.version)"
           }
         ]
       },
@@ -3803,6 +3908,11 @@
             "lang": "typescript",
             "label": "updateVersion",
             "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.update({\n    versionId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "updateVersion",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.versions.update(version_id=\"\u003cid\u003e\")\n\n    assert res.version is not None\n\n    # Handle response\n    print(res.version)"
           }
         ]
       }
