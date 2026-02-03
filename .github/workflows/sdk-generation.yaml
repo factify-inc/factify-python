@@ -27,18 +27,11 @@ jobs:
     outputs:
       version: ${{ steps.get-version.outputs.version }}
     steps:
-      - name: Generate Mr. FactOps App Token
-        id: generate-token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.MR_FACTOPS_APP_ID }}
-          private-key: ${{ secrets.MR_FACTOPS_PRIVATE_KEY }}
-
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          token: ${{ steps.generate-token.outputs.token }}
+          token: ${{ secrets.SDK_PUBLISH_GH_TOKEN }}
 
       - name: Setup Speakeasy CLI
         run: curl -fsSL https://go.speakeasy.com/cli-install.sh | sh
@@ -84,25 +77,12 @@ jobs:
   generate:
     needs: [prepare-version]
     if: always() && (needs.prepare-version.result == 'success' || needs.prepare-version.result == 'skipped')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Generate Mr. FactOps App Token
-        id: generate-token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.MR_FACTOPS_APP_ID }}
-          private-key: ${{ secrets.MR_FACTOPS_PRIVATE_KEY }}
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          token: ${{ steps.generate-token.outputs.token }}
-
-      - uses: speakeasy-api/sdk-generation-action@v15
-        with:
-          speakeasy_version: latest
-          openapi_doc_location: openapi.json
-          github_access_token: ${{ steps.generate-token.outputs.token }}
-          speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
-          publish_python: true
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
+    uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
+    with:
+      force: ${{ github.event.inputs.force || false }}
+      mode: direct
+      set_version: ${{ github.event.inputs.set_version || needs.prepare-version.outputs.version }}
+      target: python
+    secrets:
+      github_access_token: ${{ secrets.SDK_PUBLISH_GH_TOKEN }}
+      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
