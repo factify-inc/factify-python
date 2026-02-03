@@ -30,7 +30,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 python:
-  version: 0.6.0
+  version: 0.7.0
   additionalDependencies:
     dev: {}
     main: {}
@@ -76,7 +76,7 @@ python:
   preApplyUnionDiscriminators: true
   pytestFilterWarnings: []
   pytestTimeout: 0
-  responseFormat: envelope-http
+  responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2
   useAsyncHooks: false
