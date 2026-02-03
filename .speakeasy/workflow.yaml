@@ -1,0 +1,21 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    factify-api:
+        inputs:
+            - location: ./openapi.json
+        registry:
+            location: registry.speakeasyapi.dev/factify/api/factify-api
+targets:
+    python:
+        target: python
+        source: factify-api
+        output: .
+        publish:
+            pypi:
+                token: $pypi_token
+        codeSamples:
+            output: codeSamples.yaml
+            registry:
+                location: registry.speakeasyapi.dev/factify/api/factify-api-python-code-samples
+            style: standard

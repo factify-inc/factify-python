@@ -1,0 +1,89 @@
+name: Generate Python SDK
+permissions:
+  checks: write
+  contents: write
+  pull-requests: write
+  statuses: write
+  id-token: write
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Force generation of SDK
+        type: boolean
+        default: false
+      set_version:
+        description: optionally set a specific SDK version
+        type: string
+  repository_dispatch:
+    types: [openapi-update]
+jobs:
+  prepare-version:
+    name: Prepare SDK Version
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'repository_dispatch' &&
+      github.event.client_payload.release_type != ''
+    outputs:
+      version: ${{ steps.get-version.outputs.version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.SDK_PUBLISH_GH_TOKEN }}
+
+      - name: Setup Speakeasy CLI
+        run: curl -fsSL https://go.speakeasy.com/cli-install.sh | sh
+
+      - name: Set version for RC release
+        if: github.event.client_payload.release_type == 'rc'
+        run: |
+          CURRENT_VERSION=$(yq eval '.python.version' .speakeasy/gen.yaml 2>/dev/null)
+          if [[ -z "$CURRENT_VERSION" ]]; then
+            echo "Error: Failed to determine current Python SDK version from .speakeasy/gen.yaml"
+            exit 1
+          fi
+
+          if [[ "$CURRENT_VERSION" =~ -rc\.[0-9]+$ ]]; then
+            # Already in RC mode - bump the RC number
+            RC_NUMBER=$(echo "$CURRENT_VERSION" | sed -n 's/.*-rc\.\([0-9]*\)/\1/p')
+            NEXT_RC=$((RC_NUMBER + 1))
+            BASE_VERSION=${CURRENT_VERSION%-rc*}
+            RC_VERSION="${BASE_VERSION}-rc.${NEXT_RC}"
+            speakeasy bump -v "$RC_VERSION" -t python
+          else
+            # Not in RC mode - bump patch version and set to -rc.1
+            MAJOR=$(echo "$CURRENT_VERSION" | cut -d. -f1)
+            MINOR=$(echo "$CURRENT_VERSION" | cut -d. -f2)
+            PATCH=$(echo "$CURRENT_VERSION" | cut -d. -f3)
+            NEXT_PATCH=$((PATCH + 1))
+            RC_VERSION="${MAJOR}.${MINOR}.${NEXT_PATCH}-rc.1"
+            speakeasy bump -v "$RC_VERSION" -t python
+          fi
+
+      - name: Promote RC to stable
+        if: github.event.client_payload.release_type == 'stable'
+        run: |
+          speakeasy bump graduate -t python
+
+      - name: Get version for generation
+        id: get-version
+        run: |
+          VERSION=$(yq eval '.python.version' .speakeasy/gen.yaml 2>/dev/null || echo "")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version for generation: $VERSION"
+
+  generate:
+    needs: [prepare-version]
+    if: always() && (needs.prepare-version.result == 'success' || needs.prepare-version.result == 'skipped')
+    uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
+    with:
+      force: ${{ github.event.inputs.force || false }}
+      mode: direct
+      set_version: ${{ github.event.inputs.set_version || needs.prepare-version.outputs.version }}
+      target: python
+    secrets:
+      github_access_token: ${{ secrets.SDK_PUBLISH_GH_TOKEN }}
+      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+      pypi_token: ${{ secrets.PYPI_TOKEN }}

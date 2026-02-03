@@ -1,0 +1,3852 @@
+{
+  "components": {
+    "responses": {
+      "BadRequest": {
+        "content": {
+          "application/json": {
+            "examples": {
+              "validation_error": {
+                "value": {
+                  "error": {
+                    "code": "missing_required_field",
+                    "message": "Document title cannot be empty",
+                    "param": "title",
+                    "retry_after": null,
+                    "type": "invalid_request_error"
+                  }
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "description": "Invalid request parameters"
+      },
+      "Forbidden": {
+        "content": {
+          "application/json": {
+            "examples": {
+              "insufficient_permissions": {
+                "value": {
+                  "error": {
+                    "code": "insufficient_permissions",
+                    "message": "You do not have permission to access this resource",
+                    "param": null,
+                    "retry_after": null,
+                    "type": "authorization_error"
+                  }
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "description": "Authorization failed - valid key but insufficient permissions"
+      },
+      "InternalServerError": {
+        "content": {
+          "application/json": {
+            "examples": {
+              "internal_error": {
+                "value": {
+                  "error": {
+                    "code": "internal_error",
+                    "message": "An unexpected error occurred. Please try again later.",
+                    "param": null,
+                    "retry_after": null,
+                    "type": "api_error"
+                  }
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "description": "Internal server error"
+      },
+      "NotFound": {
+        "content": {
+          "application/json": {
+            "examples": {
+              "resource_not_found": {
+                "value": {
+                  "error": {
+                    "code": "resource_not_found",
+                    "message": "Document not found",
+                    "param": null,
+                    "retry_after": null,
+                    "type": "not_found_error"
+                  }
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "description": "Resource not found"
+      },
+      "RateLimitExceeded": {
+        "content": {
+          "application/json": {
+            "examples": {
+              "rate_limit": {
+                "value": {
+                  "error": {
+                    "code": "rate_limit_exceeded",
+                    "message": "Too many requests. Retry after 30 seconds.",
+                    "param": null,
+                    "retry_after": 30,
+                    "type": "rate_limit_error"
+                  }
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "description": "Too many requests",
+        "headers": {
+          "X-RateLimit-Limit": {
+            "description": "Request limit per minute",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "X-RateLimit-Remaining": {
+            "description": "Remaining requests in current window",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "X-RateLimit-Reset": {
+            "description": "Unix timestamp when rate limit resets",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "content": {
+          "application/json": {
+            "examples": {
+              "missing_key": {
+                "value": {
+                  "error": {
+                    "code": "missing_api_key",
+                    "message": "No API key provided",
+                    "param": null,
+                    "retry_after": null,
+                    "type": "authentication_error"
+                  }
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        },
+        "description": "Authentication failed - missing or invalid API key"
+      }
+    },
+    "schemas": {
+      "AcceptOrganizationInviteRequest": {
+        "additionalProperties": false,
+        "description": "AcceptOrganizationInviteRequest contains the invitation to accept.",
+        "properties": {
+          "invite_id": {
+            "description": "Invitation ID to accept.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "invite_id",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "token": {
+            "description": "The invitation token from the email link.",
+            "maxLength": 128,
+            "title": "token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id",
+          "invite_id",
+          "token"
+        ],
+        "title": "AcceptOrganizationInviteRequest",
+        "type": "object"
+      },
+      "AcceptOrganizationInviteResponse": {
+        "additionalProperties": false,
+        "description": "AcceptOrganizationInviteResponse contains the organization the user joined.",
+        "properties": {
+          "organization": {
+            "$ref": "#/components/schemas/Organization",
+            "description": "The organization the user is now a member of.",
+            "title": "organization"
+          }
+        },
+        "required": [
+          "organization"
+        ],
+        "title": "AcceptOrganizationInviteResponse",
+        "type": "object"
+      },
+      "AccessLevel": {
+        "enum": [
+          "private",
+          "organization",
+          "public"
+        ]
+      },
+      "ApiKey": {
+        "additionalProperties": false,
+        "description": "ApiKey represents an authentication credential for programmatic API access.",
+        "properties": {
+          "created_at": {
+            "description": "Timestamp when the key was created.",
+            "format": "date-time",
+            "title": "created_at",
+            "type": "string"
+          },
+          "expires_at": {
+            "description": "Expiration timestamp. If set, the key becomes invalid after this time.",
+            "format": "date-time",
+            "title": "expires_at",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique ID for the API key.\n Pattern: key_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "key_01jd4h5mck9gq6zrp8bn2t4w3x",
+            "pattern": "^key_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "id",
+            "type": "string"
+          },
+          "is_active": {
+            "description": "Whether the key is currently active (not revoked and not expired).\n Computed: is_active = (revoked_at == null) \u0026\u0026 (expires_at == null || expires_at \u003e now())",
+            "readOnly": true,
+            "title": "is_active",
+            "type": "boolean"
+          },
+          "key_prefix": {
+            "description": "Truncated key prefix for identification in UI (e.g., \"ffy_prod_01jd4h5...\").\n Shows the first 16 characters for better uniqueness while maintaining security.",
+            "example": "ffy_prod_01jd4h5...",
+            "maxLength": 20,
+            "minLength": 16,
+            "title": "key_prefix",
+            "type": "string"
+          },
+          "name": {
+            "description": "Human-readable name for the key (e.g., \"Production\", \"Staging\").",
+            "example": "Production",
+            "maxLength": 63,
+            "minLength": 1,
+            "title": "name",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "ID of the organization this key belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "revoked_at": {
+            "description": "Timestamp when the key was revoked. Null if the key has not been revoked.",
+            "format": "date-time",
+            "readOnly": true,
+            "title": "revoked_at",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "organization_id",
+          "created_at",
+          "is_active",
+          "key_prefix"
+        ],
+        "title": "ApiKey",
+        "type": "object"
+      },
+      "AttachPolicyRequest": {
+        "additionalProperties": false,
+        "description": "AttachPolicyRequest specifies a policy to attach to a document.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "policy_id": {
+            "description": "Policy ID to attach.\n Pattern: pol_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^pol_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "policy_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "policy_id"
+        ],
+        "title": "AttachPolicyRequest",
+        "type": "object"
+      },
+      "CreateApiKeyRequest": {
+        "additionalProperties": false,
+        "description": "CreateApiKeyRequest contains the data needed to create a new API key.",
+        "properties": {
+          "expires_at": {
+            "description": "Expiration timestamp. If not set, the key does not expire.\n When set, must be in the future and within 1 year.\n Security note: Keys without expiration should be rotated periodically.\ntimestamp.gt_now = true\ntimestamp.within = 8760h0m0s\n",
+            "format": "date-time",
+            "title": "expires_at",
+            "type": "string"
+          },
+          "name": {
+            "description": "Human-readable name for the key (e.g., \"Production\", \"Staging\").",
+            "maxLength": 63,
+            "minLength": 1,
+            "title": "name",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization ID to create the key for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id",
+          "name"
+        ],
+        "title": "CreateApiKeyRequest",
+        "type": "object"
+      },
+      "CreateApiKeyResponse": {
+        "additionalProperties": false,
+        "description": "CreateApiKeyResponse contains the newly created API key and its secret.",
+        "properties": {
+          "api_key": {
+            "$ref": "#/components/schemas/ApiKey",
+            "description": "The created API key metadata.",
+            "title": "api_key"
+          },
+          "secret": {
+            "description": "The API key secret. This is only returned once and cannot be retrieved later.\n Format: ffy_{env}_{base32_uuid7}{base62_random}\n - env: \"prod\" or \"test\"\n - base32_uuid7: 26 chars (TypeID base32 alphabet: 0-9a-hjkmnp-tv-z)\n - base62_random: 43 chars (0-9A-Za-z)\n Store this value securely - it will not be shown again.\n SECURITY WARNING: This field must NEVER be logged. Handlers must redact secrets from all logs.",
+            "example": "ffy_prod_01h2xcejqtf2nbrexx3vqjhp41KJ8f3mNpQrStUvWxYz0123456789ABCDEFGHIJKLmNo",
+            "minLength": 78,
+            "pattern": "^ffy_(prod|test)_[A-Za-z0-9]+$",
+            "title": "secret",
+            "type": "string"
+          }
+        },
+        "required": [
+          "api_key",
+          "secret"
+        ],
+        "title": "CreateApiKeyResponse",
+        "type": "object"
+      },
+      "CreateDocumentRequest": {
+        "additionalProperties": false,
+        "description": "CreateDocumentRequest contains the file and metadata for creating a document.",
+        "properties": {
+          "access_level": {
+            "$ref": "#/components/schemas/AccessLevel",
+            "description": "Document access level. Defaults to organization if user belongs to an org, otherwise private.",
+            "nullable": true,
+            "title": "access_level"
+          },
+          "description": {
+            "description": "Optional document description.",
+            "maxLength": 2000,
+            "nullable": true,
+            "title": "description",
+            "type": "string"
+          },
+          "document_id": {
+            "description": "Pre-generated document ID (set by server)",
+            "readOnly": true,
+            "title": "document_id",
+            "type": "string"
+          },
+          "payload": {
+            "description": "PDF file to upload",
+            "format": "binary",
+            "title": "payload",
+            "type": "string"
+          },
+          "payload_key": {
+            "description": "Storage key for uploaded file (set by server)",
+            "readOnly": true,
+            "title": "payload_key",
+            "type": "string"
+          },
+          "title": {
+            "description": "Document title.",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "title",
+            "type": "string"
+          },
+          "version_id": {
+            "description": "Pre-generated version ID (set by server)",
+            "readOnly": true,
+            "title": "version_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "payload",
+          "title"
+        ],
+        "title": "CreateDocumentRequest",
+        "type": "object"
+      },
+      "CreateDocumentResponse": {
+        "additionalProperties": false,
+        "description": "CreateDocumentResponse contains the newly created document.",
+        "properties": {
+          "document": {
+            "$ref": "#/components/schemas/Document",
+            "description": "The created document.",
+            "title": "document"
+          }
+        },
+        "required": [
+          "document"
+        ],
+        "title": "CreateDocumentResponse",
+        "type": "object"
+      },
+      "CreateOrganizationInviteRequest": {
+        "additionalProperties": false,
+        "description": "CreateOrganizationInviteRequest contains the data needed to create an invitation.",
+        "properties": {
+          "email": {
+            "description": "Email address of the recipient.",
+            "format": "email",
+            "title": "email",
+            "type": "string"
+          },
+          "idempotency_key": {
+            "description": "Optional client-provided idempotency key for safe retries.\n If provided, duplicate requests with the same key within 24 hours\n return the original response without resending the invitation email.\n Recommended format: UUID or org_id + email + timestamp hash.",
+            "maxLength": 255,
+            "nullable": true,
+            "title": "idempotency_key",
+            "type": "string"
+          },
+          "message": {
+            "description": "Optional custom message from the sender (max 2000 bytes to support ~500 multibyte characters).",
+            "maxLength": 2000,
+            "nullable": true,
+            "title": "message",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization to invite the user to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id",
+          "email"
+        ],
+        "title": "CreateOrganizationInviteRequest",
+        "type": "object"
+      },
+      "CreateOrganizationInviteResponse": {
+        "additionalProperties": false,
+        "description": "CreateOrganizationInviteResponse contains the created invitation.",
+        "properties": {
+          "invite": {
+            "$ref": "#/components/schemas/OrganizationInvite",
+            "description": "The created (or existing) invitation.",
+            "title": "invite"
+          }
+        },
+        "required": [
+          "invite"
+        ],
+        "title": "CreateOrganizationInviteResponse",
+        "type": "object"
+      },
+      "CreateOrganizationRequest": {
+        "additionalProperties": false,
+        "description": "CreateOrganizationRequest contains the data needed to create a new organization.",
+        "properties": {
+          "name": {
+            "description": "Human-readable organization name.",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "name",
+            "type": "string"
+          },
+          "owner_user_id": {
+            "description": "Owner user ID. If not provided, the authenticated user becomes the owner.\n Authorization: Specifying a different user requires system maintainer role.\n Required when the caller is a service account (service accounts cannot own organizations).\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+            "nullable": true,
+            "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "owner_user_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "CreateOrganizationRequest",
+        "type": "object"
+      },
+      "CreateOrganizationResponse": {
+        "additionalProperties": false,
+        "description": "CreateOrganizationResponse contains the newly created organization.",
+        "properties": {
+          "organization": {
+            "$ref": "#/components/schemas/Organization",
+            "description": "The created organization.",
+            "title": "organization"
+          }
+        },
+        "required": [
+          "organization"
+        ],
+        "title": "CreateOrganizationResponse",
+        "type": "object"
+      },
+      "CreateVersionRequest": {
+        "additionalProperties": false,
+        "description": "CreateVersionRequest contains the file and metadata for creating a version.",
+        "properties": {
+          "description": {
+            "description": "Description of changes in this version.",
+            "nullable": true,
+            "title": "description",
+            "type": "string"
+          },
+          "document_id": {
+            "description": "Document ID to create version for.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "payload": {
+            "description": "PDF file for new version",
+            "format": "binary",
+            "title": "payload",
+            "type": "string"
+          },
+          "payload_key": {
+            "description": "Storage key for uploaded file (set by server)",
+            "readOnly": true,
+            "title": "payload_key",
+            "type": "string"
+          },
+          "title": {
+            "description": "Optional version title.",
+            "maxLength": 255,
+            "nullable": true,
+            "title": "title",
+            "type": "string"
+          },
+          "version_id": {
+            "description": "Pre-generated version ID (set by server)",
+            "readOnly": true,
+            "title": "version_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "payload"
+        ],
+        "title": "CreateVersionRequest",
+        "type": "object"
+      },
+      "DetachPolicyRequest": {
+        "additionalProperties": false,
+        "description": "DetachPolicyRequest identifies a policy to detach from a document.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "policy_id": {
+            "description": "Policy ID to detach.\n Pattern: pol_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^pol_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "policy_id",
+            "type": "string"
+          }
+        },
+        "title": "DetachPolicyRequest",
+        "type": "object"
+      },
+      "Document": {
+        "additionalProperties": false,
+        "description": "Document represents a Factify document.",
+        "properties": {
+          "access_level": {
+            "$ref": "#/components/schemas/AccessLevel",
+            "description": "Document access level.",
+            "title": "access_level"
+          },
+          "created_at": {
+            "description": "Timestamp when document was created.",
+            "format": "date-time",
+            "title": "created_at",
+            "type": "string"
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/User",
+            "description": "User who created the document.",
+            "title": "created_by"
+          },
+          "current_version": {
+            "$ref": "#/components/schemas/VersionRef",
+            "description": "Reference to the current version, if any.",
+            "nullable": true,
+            "title": "current_version"
+          },
+          "description": {
+            "description": "Optional document description.",
+            "example": "Quarterly financial report for Q4 2024",
+            "maxLength": 2000,
+            "nullable": true,
+            "title": "description",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique ID for the document.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "id",
+            "type": "string"
+          },
+          "processing_status": {
+            "$ref": "#/components/schemas/ProcessingStatus",
+            "description": "Processing status.",
+            "title": "processing_status"
+          },
+          "title": {
+            "description": "Document title.",
+            "example": "Q4 2024 Financial Report",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "title",
+            "type": "string"
+          },
+          "url": {
+            "description": "URL for accessing the document on Factify.",
+            "example": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41",
+            "format": "uri",
+            "title": "url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "url",
+          "title",
+          "access_level",
+          "processing_status",
+          "created_at",
+          "created_by"
+        ],
+        "title": "Document",
+        "type": "object"
+      },
+      "DocumentPolicy": {
+        "additionalProperties": false,
+        "description": "DocumentPolicy represents a policy attached to a document.",
+        "properties": {
+          "attached_at": {
+            "description": "Timestamp when policy was attached.",
+            "format": "date-time",
+            "title": "attached_at",
+            "type": "string"
+          },
+          "attached_by": {
+            "$ref": "#/components/schemas/User",
+            "description": "User who attached the policy.",
+            "title": "attached_by"
+          },
+          "document_id": {
+            "description": "Document ID this policy is attached to.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "policy": {
+            "$ref": "#/components/schemas/Policy",
+            "description": "The policy details.",
+            "title": "policy"
+          }
+        },
+        "required": [
+          "document_id",
+          "attached_at",
+          "attached_by",
+          "policy"
+        ],
+        "title": "DocumentPolicy",
+        "type": "object"
+      },
+      "Empty": {
+        "description": "A generic empty message that you can re-use to avoid defining duplicated\n empty messages in your APIs. A typical example is to use it as the request\n or the response type of an API method. For instance:\n\n     service Foo {\n       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);\n     }",
+        "type": "object"
+      },
+      "Error": {
+        "properties": {
+          "error": {
+            "properties": {
+              "code": {
+                "description": "Specific error code for detailed handling",
+                "type": "string"
+              },
+              "message": {
+                "description": "Human-readable error message",
+                "type": "string"
+              },
+              "param": {
+                "description": "Parameter that caused the error (for validation errors)",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "retry_after": {
+                "description": "Seconds to wait before retrying (for rate limit errors)",
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "type": {
+                "description": "Error type for programmatic handling",
+                "enum": [
+                  "invalid_request_error",
+                  "authentication_error",
+                  "authorization_error",
+                  "not_found_error",
+                  "rate_limit_error",
+                  "api_error"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "message",
+              "code",
+              "param",
+              "retry_after"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "type": "object"
+      },
+      "GenerateEntryPageRequest": {
+        "additionalProperties": false,
+        "description": "GenerateEntryPageRequest identifies a document to generate an entry page for.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          }
+        },
+        "title": "GenerateEntryPageRequest",
+        "type": "object"
+      },
+      "GenerateEntryPageResponse": {
+        "additionalProperties": false,
+        "description": "GenerateEntryPageResponse contains the download URL for the entry page.",
+        "properties": {
+          "download_url": {
+            "description": "Temporary download URL for the entry page PDF.",
+            "example": "https://storage.factify.com/entry-pages/abc123.pdf?token=xyz",
+            "format": "uri",
+            "title": "download_url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "download_url"
+        ],
+        "title": "GenerateEntryPageResponse",
+        "type": "object"
+      },
+      "GetDocumentRequest": {
+        "additionalProperties": false,
+        "description": "GetDocumentRequest identifies a document to retrieve.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          }
+        },
+        "title": "GetDocumentRequest",
+        "type": "object"
+      },
+      "GetDocumentResponse": {
+        "additionalProperties": false,
+        "description": "GetDocumentResponse contains the requested document.",
+        "properties": {
+          "document": {
+            "$ref": "#/components/schemas/Document",
+            "description": "The requested document.",
+            "title": "document"
+          }
+        },
+        "required": [
+          "document"
+        ],
+        "title": "GetDocumentResponse",
+        "type": "object"
+      },
+      "GetOrganizationRequest": {
+        "additionalProperties": false,
+        "description": "GetOrganizationRequest identifies an organization to retrieve.",
+        "properties": {
+          "organization_id": {
+            "description": "Organization ID.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id"
+        ],
+        "title": "GetOrganizationRequest",
+        "type": "object"
+      },
+      "GetOrganizationResponse": {
+        "additionalProperties": false,
+        "description": "GetOrganizationResponse contains the requested organization.",
+        "properties": {
+          "organization": {
+            "$ref": "#/components/schemas/Organization",
+            "description": "The requested organization.",
+            "title": "organization"
+          }
+        },
+        "required": [
+          "organization"
+        ],
+        "title": "GetOrganizationResponse",
+        "type": "object"
+      },
+      "GetVersionRequest": {
+        "additionalProperties": false,
+        "description": "GetVersionRequest identifies a specific version to retrieve.",
+        "properties": {
+          "version_id": {
+            "description": "Version ID to retrieve.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "version_id",
+            "type": "string"
+          }
+        },
+        "title": "GetVersionRequest",
+        "type": "object"
+      },
+      "ListApiKeysRequest": {
+        "additionalProperties": false,
+        "description": "ListApiKeysRequest specifies filters and pagination for listing API keys.",
+        "properties": {
+          "include_revoked": {
+            "description": "Whether to include revoked keys in the response.\n Default: false (only active and expired-but-not-revoked keys are returned).\n When true, all keys including revoked ones are returned.\n Note: Expired keys are always included unless also revoked; use is_active to filter.",
+            "title": "include_revoked",
+            "type": "boolean"
+          },
+          "organization_id": {
+            "description": "Organization ID to list keys for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "page_size": {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "format": "int32",
+            "maximum": 100,
+            "minimum": 1,
+            "nullable": true,
+            "title": "page_size",
+            "type": "integer"
+          },
+          "page_token": {
+            "description": "Opaque pagination token from a previous response.",
+            "title": "page_token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id"
+        ],
+        "title": "ListApiKeysRequest",
+        "type": "object"
+      },
+      "ListApiKeysResponse": {
+        "additionalProperties": false,
+        "description": "ListApiKeysResponse contains a page of API keys.",
+        "properties": {
+          "items": {
+            "description": "List of API keys (secrets are never included).",
+            "items": {
+              "$ref": "#/components/schemas/ApiKey"
+            },
+            "title": "items",
+            "type": "array"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination",
+            "description": "Pagination metadata.",
+            "title": "pagination"
+          }
+        },
+        "required": [
+          "pagination"
+        ],
+        "title": "ListApiKeysResponse",
+        "type": "object"
+      },
+      "ListDocumentPoliciesRequest": {
+        "additionalProperties": false,
+        "description": "ListDocumentPoliciesRequest specifies pagination for listing document policies.\n Follows Google AIP-158 for pagination field naming.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "page_size": {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "format": "int32",
+            "maximum": 100,
+            "minimum": 1,
+            "nullable": true,
+            "title": "page_size",
+            "type": "integer"
+          },
+          "page_token": {
+            "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+            "example": "eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0",
+            "title": "page_token",
+            "type": "string"
+          }
+        },
+        "title": "ListDocumentPoliciesRequest",
+        "type": "object"
+      },
+      "ListDocumentPoliciesResponse": {
+        "additionalProperties": false,
+        "description": "ListDocumentPoliciesResponse contains a page of policy attachments.",
+        "properties": {
+          "items": {
+            "description": "List of policy attachments.",
+            "items": {
+              "$ref": "#/components/schemas/DocumentPolicy"
+            },
+            "title": "items",
+            "type": "array"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination",
+            "description": "Pagination metadata.",
+            "title": "pagination"
+          }
+        },
+        "required": [
+          "pagination"
+        ],
+        "title": "ListDocumentPoliciesResponse",
+        "type": "object"
+      },
+      "ListDocumentsRequest": {
+        "additionalProperties": false,
+        "description": "ListDocumentsRequest specifies filters and pagination for listing documents.\n Follows Google AIP-158 for pagination field naming.\n Uses Vanguard-compatible dot notation for nested filters: ?created.after=...\u0026created.before=...\ncreated_time_range // created.after must be before created.before\n",
+        "properties": {
+          "access_level": {
+            "description": "Filter by access level(s). Returns documents matching ANY of the specified levels.\n Accepts single value or comma-separated list.\n REST: ?access_level=private or ?access_level=private,organization\n Accepts clean enum names (case-insensitive): \"private\", \"organization\", \"public\"",
+            "nullable": true,
+            "title": "access_level",
+            "type": "string"
+          },
+          "created": {
+            "description": "Filter by creation time range.\n REST: ?created.after=2024-01-01T00:00:00Z\u0026created.before=2024-12-31T23:59:59Z",
+            "format": "date-time",
+            "nullable": true,
+            "title": "created",
+            "type": "string"
+          },
+          "created_by_id": {
+            "description": "Filter by creator ID(s) (user or service account). Returns documents matching ANY of the specified IDs.\n Accepts single value or comma-separated list.\n REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx,svc_yyy",
+            "nullable": true,
+            "title": "created_by_id",
+            "type": "string"
+          },
+          "page_size": {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "format": "int32",
+            "maximum": 100,
+            "minimum": 1,
+            "nullable": true,
+            "title": "page_size",
+            "type": "integer"
+          },
+          "page_token": {
+            "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+            "example": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
+            "title": "page_token",
+            "type": "string"
+          },
+          "processing_status": {
+            "description": "Filter by processing status(es). Returns documents matching ANY of the specified statuses.\n Accepts single value or comma-separated list.\n REST: ?processing_status=ready or ?processing_status=processing,ready,failed\n Accepts clean enum names (case-insensitive): \"processing\", \"ready\", \"failed\"",
+            "nullable": true,
+            "title": "processing_status",
+            "type": "string"
+          }
+        },
+        "title": "ListDocumentsRequest",
+        "type": "object"
+      },
+      "ListDocumentsResponse": {
+        "additionalProperties": false,
+        "description": "ListDocumentsResponse contains a page of documents.",
+        "properties": {
+          "items": {
+            "description": "List of documents.",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            },
+            "title": "items",
+            "type": "array"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination",
+            "description": "Pagination metadata.",
+            "title": "pagination"
+          }
+        },
+        "required": [
+          "pagination"
+        ],
+        "title": "ListDocumentsResponse",
+        "type": "object"
+      },
+      "ListOrganizationInvitesRequest": {
+        "additionalProperties": false,
+        "description": "ListOrganizationInvitesRequest specifies filters for listing invitations.\ncreated_time_range // created.after must be before created.before\nexpires_time_range // expires.after must be before expires.before\n",
+        "properties": {
+          "created": {
+            "description": "Filter by creation time range.\n REST: ?created.after=2024-01-01T00:00:00Z\u0026created.before=2024-12-31T23:59:59Z",
+            "format": "date-time",
+            "nullable": true,
+            "title": "created",
+            "type": "string"
+          },
+          "email": {
+            "$ref": "#/components/schemas/StringFilter",
+            "description": "Filter by email address.\n REST: ?email.contains=dwight or ?email.exact=dwight@dundermifflin.com",
+            "nullable": true,
+            "title": "email"
+          },
+          "expires": {
+            "description": "Filter by expiration time range.\n Useful for finding invitations expiring soon (expires.before) or still valid beyond a date (expires.after).\n REST: ?expires.after=2024-01-01T00:00:00Z\u0026expires.before=2024-01-31T23:59:59Z",
+            "format": "date-time",
+            "nullable": true,
+            "title": "expires",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization to list invitations for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "page_size": {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "format": "int32",
+            "maximum": 100,
+            "minimum": 1,
+            "nullable": true,
+            "title": "page_size",
+            "type": "integer"
+          },
+          "page_token": {
+            "description": "Opaque pagination token from a previous response.",
+            "title": "page_token",
+            "type": "string"
+          },
+          "sender_id": {
+            "description": "Filter by sender. Only returns invitations sent by this user.\n REST: ?sender_id=user_01h2xcejqtf2nbrexx3vqjhp41\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+            "nullable": true,
+            "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "sender_id",
+            "type": "string"
+          },
+          "status": {
+            "description": "Filter by status. If empty, returns all invitations.\n ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.",
+            "items": {
+              "$ref": "#/components/schemas/OrganizationInviteStatus"
+            },
+            "title": "status",
+            "type": "array"
+          }
+        },
+        "required": [
+          "organization_id"
+        ],
+        "title": "ListOrganizationInvitesRequest",
+        "type": "object"
+      },
+      "ListOrganizationInvitesResponse": {
+        "additionalProperties": false,
+        "description": "ListOrganizationInvitesResponse contains a page of invitations.",
+        "properties": {
+          "items": {
+            "description": "List of invitations.",
+            "items": {
+              "$ref": "#/components/schemas/OrganizationInvite"
+            },
+            "title": "items",
+            "type": "array"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination",
+            "description": "Pagination metadata.",
+            "title": "pagination"
+          }
+        },
+        "required": [
+          "pagination"
+        ],
+        "title": "ListOrganizationInvitesResponse",
+        "type": "object"
+      },
+      "ListOrganizationsRequest": {
+        "additionalProperties": false,
+        "description": "ListOrganizationsRequest specifies pagination for listing organizations.",
+        "properties": {
+          "page_size": {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "format": "int32",
+            "maximum": 100,
+            "minimum": 1,
+            "nullable": true,
+            "title": "page_size",
+            "type": "integer"
+          },
+          "page_token": {
+            "description": "Opaque pagination token from a previous response.",
+            "title": "page_token",
+            "type": "string"
+          }
+        },
+        "title": "ListOrganizationsRequest",
+        "type": "object"
+      },
+      "ListOrganizationsResponse": {
+        "additionalProperties": false,
+        "description": "ListOrganizationsResponse contains a page of organizations.",
+        "properties": {
+          "items": {
+            "description": "List of organizations.",
+            "items": {
+              "$ref": "#/components/schemas/Organization"
+            },
+            "title": "items",
+            "type": "array"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination",
+            "description": "Pagination metadata.",
+            "title": "pagination"
+          }
+        },
+        "required": [
+          "pagination"
+        ],
+        "title": "ListOrganizationsResponse",
+        "type": "object"
+      },
+      "ListVersionsRequest": {
+        "additionalProperties": false,
+        "description": "ListVersionsRequest specifies filters and pagination for listing versions.\n Follows Google AIP-158 for pagination field naming.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID to list versions for.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "page_size": {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "format": "int32",
+            "maximum": 100,
+            "minimum": 1,
+            "nullable": true,
+            "title": "page_size",
+            "type": "integer"
+          },
+          "page_token": {
+            "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+            "example": "eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0",
+            "title": "page_token",
+            "type": "string"
+          }
+        },
+        "title": "ListVersionsRequest",
+        "type": "object"
+      },
+      "ListVersionsResponse": {
+        "additionalProperties": false,
+        "description": "ListVersionsResponse contains a page of versions.",
+        "properties": {
+          "items": {
+            "description": "List of versions.",
+            "items": {
+              "$ref": "#/components/schemas/Version"
+            },
+            "title": "items",
+            "type": "array"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination",
+            "description": "Pagination metadata.",
+            "title": "pagination"
+          }
+        },
+        "required": [
+          "pagination"
+        ],
+        "title": "ListVersionsResponse",
+        "type": "object"
+      },
+      "Organization": {
+        "additionalProperties": false,
+        "description": "Organization represents a Factify organization.",
+        "properties": {
+          "created_at": {
+            "description": "Timestamp when the organization was created.",
+            "format": "date-time",
+            "title": "created_at",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique ID for the organization.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "id",
+            "type": "string"
+          },
+          "name": {
+            "description": "Human-readable organization name.",
+            "example": "Acme Corporation",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "created_at"
+        ],
+        "title": "Organization",
+        "type": "object"
+      },
+      "OrganizationInvite": {
+        "additionalProperties": false,
+        "description": "OrganizationInvite represents an invitation to join an organization.\naccepted_fields_consistency // accepted_at and accepted_by must both be set or both be unset\n",
+        "properties": {
+          "accepted_at": {
+            "description": "When the invitation was accepted (if accepted).",
+            "format": "date-time",
+            "title": "accepted_at",
+            "type": "string"
+          },
+          "accepted_by": {
+            "$ref": "#/components/schemas/User",
+            "description": "User who accepted the invitation (if accepted).",
+            "title": "accepted_by"
+          },
+          "created_at": {
+            "description": "When the invitation was created.",
+            "format": "date-time",
+            "title": "created_at",
+            "type": "string"
+          },
+          "email": {
+            "description": "Email address of the recipient.",
+            "example": "dwight@dundermifflin.com",
+            "format": "email",
+            "title": "email",
+            "type": "string"
+          },
+          "expires_at": {
+            "description": "When the invitation expires.",
+            "format": "date-time",
+            "title": "expires_at",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique identifier for the invitation.",
+            "example": "inv_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "id",
+            "type": "string"
+          },
+          "message": {
+            "description": "Custom message from sender to recipient (if provided).\n Max 2000 bytes to support ~500 multibyte characters.",
+            "maxLength": 2000,
+            "nullable": true,
+            "title": "message",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization the invitation is for.",
+            "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/User",
+            "description": "User who sent the invitation (point-in-time snapshot at creation).",
+            "title": "sender"
+          },
+          "status": {
+            "$ref": "#/components/schemas/OrganizationInviteStatus",
+            "description": "Current status of the invitation.",
+            "title": "status"
+          }
+        },
+        "required": [
+          "id",
+          "organization_id",
+          "email",
+          "status",
+          "sender",
+          "created_at",
+          "expires_at"
+        ],
+        "title": "OrganizationInvite",
+        "type": "object"
+      },
+      "OrganizationInviteStatus": {
+        "description": "OrganizationInviteStatus represents the state of an organization invitation.",
+        "enum": [
+          "ORGANIZATION_INVITE_STATUS_UNSPECIFIED",
+          "ORGANIZATION_INVITE_STATUS_PENDING",
+          "ORGANIZATION_INVITE_STATUS_ACCEPTED",
+          "ORGANIZATION_INVITE_STATUS_EXPIRED",
+          "ORGANIZATION_INVITE_STATUS_REVOKED"
+        ],
+        "title": "OrganizationInviteStatus",
+        "type": "string"
+      },
+      "Pagination": {
+        "additionalProperties": false,
+        "description": "Pagination contains cursor-based pagination metadata.\n Follows Google AIP-158 for pagination field naming.",
+        "properties": {
+          "has_more": {
+            "description": "Whether there are more results in the forward direction.",
+            "title": "has_more",
+            "type": "boolean"
+          },
+          "next_page_token": {
+            "description": "Token to retrieve the next page of results.\n Empty if there are no more results in the forward direction.",
+            "example": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
+            "title": "next_page_token",
+            "type": "string"
+          },
+          "prev_page_token": {
+            "description": "Token to retrieve the previous page of results.\n Empty if this is the first page.",
+            "example": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0",
+            "title": "prev_page_token",
+            "type": "string"
+          }
+        },
+        "title": "Pagination",
+        "type": "object"
+      },
+      "Policy": {
+        "additionalProperties": false,
+        "description": "Policy represents a governance policy.",
+        "properties": {
+          "created_at": {
+            "description": "Timestamp when policy was created.",
+            "format": "date-time",
+            "title": "created_at",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique ID for the policy.\n Pattern: pol_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "pol_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^pol_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "id",
+            "type": "string"
+          },
+          "name": {
+            "description": "Policy name.",
+            "example": "GDPR Compliance Policy",
+            "minLength": 1,
+            "title": "name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "created_at"
+        ],
+        "title": "Policy",
+        "type": "object"
+      },
+      "ProcessingStatus": {
+        "enum": [
+          "processing",
+          "ready",
+          "failed"
+        ]
+      },
+      "ResendOrganizationInviteRequest": {
+        "additionalProperties": false,
+        "description": "ResendOrganizationInviteRequest identifies an invitation to resend.",
+        "properties": {
+          "invite_id": {
+            "description": "Invitation ID to resend.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "invite_id",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id",
+          "invite_id"
+        ],
+        "title": "ResendOrganizationInviteRequest",
+        "type": "object"
+      },
+      "ResendOrganizationInviteResponse": {
+        "additionalProperties": false,
+        "description": "ResendOrganizationInviteResponse contains the updated invitation.",
+        "properties": {
+          "invite": {
+            "$ref": "#/components/schemas/OrganizationInvite",
+            "description": "The invitation with updated send count and timestamp.",
+            "title": "invite"
+          }
+        },
+        "required": [
+          "invite"
+        ],
+        "title": "ResendOrganizationInviteResponse",
+        "type": "object"
+      },
+      "RevokeApiKeyRequest": {
+        "additionalProperties": false,
+        "description": "RevokeApiKeyRequest identifies an API key to revoke.",
+        "properties": {
+          "api_key_id": {
+            "description": "API key ID to revoke.\n Pattern: key_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^key_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "api_key_id",
+            "type": "string"
+          },
+          "reason": {
+            "description": "Optional reason for revocation (for audit purposes).\n The revoking user's identity and timestamp are captured in audit logs separately.",
+            "maxLength": 500,
+            "minLength": 1,
+            "nullable": true,
+            "title": "reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "api_key_id"
+        ],
+        "title": "RevokeApiKeyRequest",
+        "type": "object"
+      },
+      "RevokeApiKeyResponse": {
+        "additionalProperties": false,
+        "description": "RevokeApiKeyResponse contains the revoked API key.",
+        "properties": {
+          "api_key": {
+            "$ref": "#/components/schemas/ApiKey",
+            "description": "The revoked API key with updated revoked_at timestamp.",
+            "title": "api_key"
+          }
+        },
+        "required": [
+          "api_key"
+        ],
+        "title": "RevokeApiKeyResponse",
+        "type": "object"
+      },
+      "RevokeOrganizationInviteRequest": {
+        "additionalProperties": false,
+        "description": "RevokeOrganizationInviteRequest identifies an invitation to revoke.",
+        "properties": {
+          "invite_id": {
+            "description": "Invitation ID to revoke.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "invite_id",
+            "type": "string"
+          },
+          "organization_id": {
+            "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id",
+          "invite_id"
+        ],
+        "title": "RevokeOrganizationInviteRequest",
+        "type": "object"
+      },
+      "RevokeOrganizationInviteResponse": {
+        "additionalProperties": false,
+        "description": "RevokeOrganizationInviteResponse contains the revoked invitation.",
+        "properties": {
+          "invite": {
+            "$ref": "#/components/schemas/OrganizationInvite",
+            "description": "The revoked invitation with updated status.",
+            "title": "invite"
+          }
+        },
+        "required": [
+          "invite"
+        ],
+        "title": "RevokeOrganizationInviteResponse",
+        "type": "object"
+      },
+      "StringFilter": {
+        "additionalProperties": false,
+        "description": "StringFilter provides flexible string matching options.\n Used with Vanguard dot notation: ?email.contains=john or ?email.exact=john@example.com\n\n Note on case sensitivity: `contains` is case-insensitive for user-friendly partial\n matching (e.g., finding \"john\" matches \"John.Doe@...\"). `exact` is case-sensitive\n for precise lookups where the caller knows the exact value. For email addresses,\n this matches RFC 5321 behavior where the domain is case-insensitive but local-part\n handling varies by provider.\nmutually_exclusive // only one of contains or exact can be specified\n",
+        "properties": {
+          "contains": {
+            "description": "Case-insensitive substring match.\n REST: ?field.contains=value",
+            "nullable": true,
+            "title": "contains",
+            "type": "string"
+          },
+          "exact": {
+            "description": "Exact match (case-sensitive).\n REST: ?field.exact=value",
+            "nullable": true,
+            "title": "exact",
+            "type": "string"
+          }
+        },
+        "title": "StringFilter",
+        "type": "object"
+      },
+      "TimestampFilter": {
+        "additionalProperties": false,
+        "description": "TimestampFilter specifies a time range for filtering.\n Used with Vanguard dot notation: ?created.after=...\u0026created.before=...",
+        "properties": {
+          "after": {
+            "description": "Return results after this timestamp (inclusive).",
+            "format": "date-time",
+            "nullable": true,
+            "title": "after",
+            "type": "string"
+          },
+          "before": {
+            "description": "Return results before this timestamp (inclusive).",
+            "format": "date-time",
+            "nullable": true,
+            "title": "before",
+            "type": "string"
+          }
+        },
+        "title": "TimestampFilter",
+        "type": "object"
+      },
+      "UpdateDocumentRequest": {
+        "additionalProperties": false,
+        "description": "UpdateDocumentRequest specifies fields to update on a document.",
+        "properties": {
+          "description": {
+            "description": "New description (max 2000 characters).",
+            "maxLength": 2000,
+            "nullable": true,
+            "title": "description",
+            "type": "string"
+          },
+          "document_id": {
+            "description": "Document ID to update.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "title": {
+            "description": "New title (1-255 characters).",
+            "maxLength": 255,
+            "minLength": 1,
+            "nullable": true,
+            "title": "title",
+            "type": "string"
+          }
+        },
+        "title": "UpdateDocumentRequest",
+        "type": "object"
+      },
+      "UpdateDocumentResponse": {
+        "additionalProperties": false,
+        "description": "UpdateDocumentResponse contains the updated document.",
+        "properties": {
+          "document": {
+            "$ref": "#/components/schemas/Document",
+            "description": "The updated document.",
+            "title": "document"
+          }
+        },
+        "required": [
+          "document"
+        ],
+        "title": "UpdateDocumentResponse",
+        "type": "object"
+      },
+      "UpdateVersionRequest": {
+        "additionalProperties": false,
+        "description": "UpdateVersionRequest specifies fields to update on a version.",
+        "properties": {
+          "description": {
+            "description": "New description.",
+            "nullable": true,
+            "title": "description",
+            "type": "string"
+          },
+          "title": {
+            "description": "New title (max 255 characters).",
+            "maxLength": 255,
+            "nullable": true,
+            "title": "title",
+            "type": "string"
+          },
+          "version_id": {
+            "description": "Version ID to update.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "version_id",
+            "type": "string"
+          }
+        },
+        "title": "UpdateVersionRequest",
+        "type": "object"
+      },
+      "User": {
+        "additionalProperties": false,
+        "description": "User represents a user or service account.",
+        "properties": {
+          "id": {
+            "description": "Unique ID for the user or service account.\n Pattern: user_[0-9a-hjkmnp-tv-z]{26} for users, svc_[0-9a-hjkmnp-tv-z]{26} for service accounts",
+            "example": "user_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^(user|svc)_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "id",
+            "type": "string"
+          },
+          "name": {
+            "description": "Display name of the user or service account.",
+            "example": "John Doe",
+            "minLength": 1,
+            "title": "name",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/UserType",
+            "description": "User type discriminator.",
+            "title": "type"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name"
+        ],
+        "title": "User",
+        "type": "object"
+      },
+      "UserType": {
+        "enum": [
+          "user_account",
+          "service_account"
+        ]
+      },
+      "Version": {
+        "additionalProperties": false,
+        "description": "Version represents a document version.",
+        "properties": {
+          "created_at": {
+            "description": "Timestamp when version was created.",
+            "format": "date-time",
+            "title": "created_at",
+            "type": "string"
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/User",
+            "description": "User who created the version.",
+            "title": "created_by"
+          },
+          "description": {
+            "description": "Description of changes in this version.",
+            "nullable": true,
+            "title": "description",
+            "type": "string"
+          },
+          "document_id": {
+            "description": "Parent document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique ID for the version.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "ver_01h2abcd1234efgh5678jkmnpt",
+            "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "id",
+            "type": "string"
+          },
+          "processing_status": {
+            "$ref": "#/components/schemas/ProcessingStatus",
+            "description": "Processing status.",
+            "title": "processing_status"
+          },
+          "title": {
+            "description": "Optional version title.",
+            "example": "Version 2.0",
+            "maxLength": 255,
+            "nullable": true,
+            "title": "title",
+            "type": "string"
+          },
+          "url": {
+            "description": "URL for accessing this version on Factify.",
+            "example": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1",
+            "format": "uri",
+            "title": "url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "document_id",
+          "url",
+          "processing_status",
+          "created_at",
+          "created_by"
+        ],
+        "title": "Version",
+        "type": "object"
+      },
+      "VersionRef": {
+        "additionalProperties": false,
+        "description": "VersionRef is a lightweight reference to a version.",
+        "properties": {
+          "id": {
+            "description": "Version ID.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "ver_01h2abcd1234efgh5678jkmnpt",
+            "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "VersionRef",
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "bearerFormat": "API Key",
+        "description": "Bearer authentication header of the form Bearer \u003ctoken\u003e, where \u003ctoken\u003e is your auth token.",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "email": "api@factify.com",
+      "name": "Factify API Support",
+      "url": "https://factify.com/support"
+    },
+    "description": "Factify API enables you to create, manage, and control access to legally-binding documents that replace PDFs.\n\n## Authentication\n\nBearer authentication header of the form Bearer \u003ctoken\u003e, where \u003ctoken\u003e is your auth token.\n\n```\nAuthorization: Bearer ffy...\n```\n\n## Rate Limiting\n\n- 1000 requests per minute per API key\n- 100 requests per minute for resource creation (POST)\n\n## Errors\n\nFactify uses conventional HTTP status codes and returns structured error responses:\n\n```json\n{\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"message\": \"Document title cannot be empty\",\n    \"param\": \"title\",\n    \"code\": \"missing_required_field\"\n  }\n}\n```\n",
+    "license": {
+      "name": "Proprietary",
+      "url": "https://factify.com/terms"
+    },
+    "title": "Factify API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/v1beta/api-keys": {
+      "get": {
+        "description": "Lists API keys for an organization.",
+        "operationId": "listApiKeys",
+        "parameters": [
+          {
+            "description": "Organization ID to list keys for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "query",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization ID to list keys for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether to include revoked keys in the response.\n Default: false (only active and expired-but-not-revoked keys are returned).\n When true, all keys including revoked ones are returned.\n Note: Expired keys are always included unless also revoked; use is_active to filter.",
+            "in": "query",
+            "name": "include_revoked",
+            "schema": {
+              "description": "Whether to include revoked keys in the response.\n Default: false (only active and expired-but-not-revoked keys are returned).\n When true, all keys including revoked ones are returned.\n Note: Expired keys are always included unless also revoked; use is_active to filter.",
+              "title": "include_revoked",
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Opaque pagination token from a previous response.",
+            "in": "query",
+            "name": "page_token",
+            "schema": {
+              "description": "Opaque pagination token from a previous response.",
+              "title": "page_token",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "description": "Maximum number of items to return per page (1-100). Default: 50.",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListApiKeysResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "List API keys",
+        "tags": [
+          "API Keys"
+        ],
+        "x-speakeasy-pagination": {
+          "inputs": [
+            {
+              "in": "parameters",
+              "name": "page_token",
+              "type": "cursor"
+            }
+          ],
+          "outputs": {
+            "nextCursor": "$.pagination.next_page_token"
+          },
+          "type": "cursor"
+        },
+        "x-speakeasy-name-override": "list",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "listApiKeys",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.list({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates a new API key for the specified organization. The secret is only returned once in the response and cannot be retrieved later.",
+        "operationId": "createApiKey",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateApiKeyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateApiKeyResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Create an API key",
+        "tags": [
+          "API Keys"
+        ],
+        "x-speakeasy-name-override": "create",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "createApiKey",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.create({\n    name: \"\u003cvalue\u003e\",\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/api-keys/{api_key_id}/revoke": {
+      "post": {
+        "description": "Revokes an API key, immediately preventing it from being used for authentication.",
+        "operationId": "revokeApiKey",
+        "parameters": [
+          {
+            "description": "API key ID to revoke.\n Pattern: key_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "api_key_id",
+            "required": true,
+            "schema": {
+              "description": "API key ID to revoke.\n Pattern: key_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^key_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "api_key_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "RevokeApiKeyRequest identifies an API key to revoke.",
+                "properties": {
+                  "reason": {
+                    "description": "Optional reason for revocation (for audit purposes).\n The revoking user's identity and timestamp are captured in audit logs separately.",
+                    "maxLength": 500,
+                    "minLength": 1,
+                    "nullable": true,
+                    "title": "reason",
+                    "type": "string"
+                  }
+                },
+                "required": [],
+                "title": "RevokeApiKeyRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevokeApiKeyResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Revoke an API key",
+        "tags": [
+          "API Keys"
+        ],
+        "x-speakeasy-name-override": "revoke",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "revokeApiKey",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.revoke({\n    apiKeyId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/documents": {
+      "get": {
+        "description": "List documents with cursor-based pagination.",
+        "operationId": "listDocuments",
+        "parameters": [
+          {
+            "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+            "in": "query",
+            "name": "page_token",
+            "schema": {
+              "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+              "example": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0",
+              "title": "page_token",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "description": "Maximum number of items to return per page (1-100). Default: 50.",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter by creator ID(s). Returns documents matching ANY of the specified IDs.",
+            "explode": false,
+            "in": "query",
+            "name": "created_by_id",
+            "required": false,
+            "schema": {
+              "items": {
+                "description": "User or service account TypeID (e.g., user_xxx, svc_yyy)",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Filter by access level(s). Returns documents matching ANY of the specified levels.",
+            "explode": false,
+            "in": "query",
+            "name": "access_level",
+            "required": false,
+            "schema": {
+              "items": {
+                "description": "Access level",
+                "enum": [
+                  "private",
+                  "organization",
+                  "public"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Filter by processing status(es). Returns documents matching ANY of the specified statuses.",
+            "explode": false,
+            "in": "query",
+            "name": "processing_status",
+            "required": false,
+            "schema": {
+              "items": {
+                "description": "Processing status",
+                "enum": [
+                  "processing",
+                  "ready",
+                  "failed"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "description": "Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)",
+            "in": "query",
+            "name": "created.after",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListDocumentsResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "List documents",
+        "tags": [
+          "Documents"
+        ],
+        "x-speakeasy-pagination": {
+          "inputs": [
+            {
+              "in": "parameters",
+              "name": "page_token",
+              "type": "cursor"
+            }
+          ],
+          "outputs": {
+            "nextCursor": "$.pagination.next_page_token"
+          },
+          "type": "cursor"
+        },
+        "x-speakeasy-name-override": "list",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "listDocuments",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.list({\n    pageToken: \"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates a new document by uploading a PDF file.",
+        "operationId": "createDocument",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDocumentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDocumentResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Create a document",
+        "tags": [
+          "Documents"
+        ],
+        "x-speakeasy-name-override": "create",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "createDocument",
+            "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.create({\n    payload: await openAsBlob(\"example.file\"),\n    title: \"\u003cvalue\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/documents/{document_id}": {
+      "get": {
+        "description": "Retrieve a document by ID.",
+        "operationId": "getDocument",
+        "parameters": [
+          {
+            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDocumentResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Retrieve a document",
+        "tags": [
+          "Documents"
+        ],
+        "x-speakeasy-name-override": "get",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "getDocument",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.get({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Update document title and description.",
+        "operationId": "updateDocument",
+        "parameters": [
+          {
+            "description": "Document ID to update.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID to update.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "UpdateDocumentRequest specifies fields to update on a document.",
+                "properties": {
+                  "description": {
+                    "description": "New description (max 2000 characters).",
+                    "maxLength": 2000,
+                    "nullable": true,
+                    "title": "description",
+                    "type": "string"
+                  },
+                  "title": {
+                    "description": "New title (1-255 characters).",
+                    "maxLength": 255,
+                    "minLength": 1,
+                    "nullable": true,
+                    "title": "title",
+                    "type": "string"
+                  }
+                },
+                "title": "UpdateDocumentRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateDocumentResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Update a document",
+        "tags": [
+          "Documents"
+        ],
+        "x-speakeasy-name-override": "update",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "updateDocument",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.update({\n    documentId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/documents/{document_id}/entry_page": {
+      "post": {
+        "description": "Generate and return a temporary downloadable URL for the document entry page PDF.",
+        "operationId": "generateDocumentEntryPage",
+        "parameters": [
+          {
+            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateEntryPageResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Generate entry page",
+        "tags": [
+          "Sharing \u0026 Distribution"
+        ],
+        "x-speakeasy-group": "entryPages",
+        "x-speakeasy-name-override": "generate",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "generateDocumentEntryPage",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.entryPages.generate({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/documents/{document_id}/policies": {
+      "get": {
+        "description": "List policies attached to a document.",
+        "operationId": "listDocumentPolicies",
+        "parameters": [
+          {
+            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+            "in": "query",
+            "name": "page_token",
+            "schema": {
+              "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+              "example": "eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0",
+              "title": "page_token",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "description": "Maximum number of items to return per page (1-100). Default: 50.",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListDocumentPoliciesResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "List document policies",
+        "tags": [
+          "Policies"
+        ],
+        "x-speakeasy-pagination": {
+          "inputs": [
+            {
+              "in": "parameters",
+              "name": "page_token",
+              "type": "cursor"
+            }
+          ],
+          "outputs": {
+            "nextCursor": "$.pagination.next_page_token"
+          },
+          "type": "cursor"
+        },
+        "x-speakeasy-name-override": "list",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "listDocumentPolicies",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policies.list({\n    documentId: \"\u003cid\u003e\",\n    pageToken: \"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          }
+        ]
+      },
+      "post": {
+        "description": "Attach a policy to a document.",
+        "operationId": "attachDocumentPolicy",
+        "parameters": [
+          {
+            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "AttachPolicyRequest specifies a policy to attach to a document.",
+                "properties": {
+                  "policy_id": {
+                    "description": "Policy ID to attach.\n Pattern: pol_[0-9a-hjkmnp-tv-z]{26}",
+                    "pattern": "^pol_[0-9a-hjkmnp-tv-z]{26}$",
+                    "title": "policy_id",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "policy_id"
+                ],
+                "title": "AttachPolicyRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentPolicy"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Attach a policy",
+        "tags": [
+          "Policies"
+        ],
+        "x-speakeasy-name-override": "attach",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "attachDocumentPolicy",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policies.attach({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      policyId: \"\u003cid\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/documents/{document_id}/policies/{policy_id}": {
+      "delete": {
+        "description": "Detach a policy from a document.",
+        "operationId": "detachDocumentPolicy",
+        "parameters": [
+          {
+            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Policy ID to detach.\n Pattern: pol_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "policy_id",
+            "required": true,
+            "schema": {
+              "description": "Policy ID to detach.\n Pattern: pol_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^pol_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "policy_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empty"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Detach a policy",
+        "tags": [
+          "Policies"
+        ],
+        "x-speakeasy-name-override": "detach",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "detachDocumentPolicy",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policies.detach({\n    documentId: \"\u003cid\u003e\",\n    policyId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/documents/{document_id}/versions": {
+      "get": {
+        "description": "List versions for a document with cursor-based pagination.",
+        "operationId": "listDocumentVersions",
+        "parameters": [
+          {
+            "description": "Document ID to list versions for.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID to list versions for.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+            "in": "query",
+            "name": "page_token",
+            "schema": {
+              "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
+              "example": "eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0",
+              "title": "page_token",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "description": "Maximum number of items to return per page (1-100). Default: 50.",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListVersionsResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "List document versions",
+        "tags": [
+          "Versions"
+        ],
+        "x-speakeasy-pagination": {
+          "inputs": [
+            {
+              "in": "parameters",
+              "name": "page_token",
+              "type": "cursor"
+            }
+          ],
+          "outputs": {
+            "nextCursor": "$.pagination.next_page_token"
+          },
+          "type": "cursor"
+        },
+        "x-speakeasy-name-override": "list",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "listDocumentVersions",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.list({\n    documentId: \"\u003cid\u003e\",\n    pageToken: \"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates a new version by uploading a PDF file.",
+        "operationId": "createDocumentVersion",
+        "parameters": [
+          {
+            "description": "Document ID to create version for.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID to create version for.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVersionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Version"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Create a new version",
+        "tags": [
+          "Versions"
+        ],
+        "x-speakeasy-name-override": "create",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "createDocumentVersion",
+            "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.create({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      payload: await openAsBlob(\"example.file\"),\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/organizations": {
+      "get": {
+        "description": "List organizations the caller has access to.",
+        "operationId": "listOrganizations",
+        "parameters": [
+          {
+            "description": "Opaque pagination token from a previous response.",
+            "in": "query",
+            "name": "page_token",
+            "schema": {
+              "description": "Opaque pagination token from a previous response.",
+              "title": "page_token",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "description": "Maximum number of items to return per page (1-100). Default: 50.",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOrganizationsResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "List organizations",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-pagination": {
+          "inputs": [
+            {
+              "in": "parameters",
+              "name": "page_token",
+              "type": "cursor"
+            }
+          ],
+          "outputs": {
+            "nextCursor": "$.pagination.next_page_token"
+          },
+          "type": "cursor"
+        },
+        "x-speakeasy-name-override": "list",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "listOrganizations",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.list();\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates a new organization. The authenticated user becomes the organization owner.",
+        "operationId": "createOrganization",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrganizationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrganizationResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Create an organization",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-name-override": "create",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "createOrganization",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.create({\n    name: \"\u003cvalue\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/organizations/{organization_id}": {
+      "get": {
+        "description": "Retrieve an organization by ID.",
+        "operationId": "getOrganization",
+        "parameters": [
+          {
+            "description": "Organization ID.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization ID.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOrganizationResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Retrieve an organization",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-name-override": "get",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "getOrganization",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.get({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/organizations/{organization_id}/invites": {
+      "get": {
+        "description": "List invitations for an organization. Requires permission to invite organization members.",
+        "operationId": "listOrganizationInvites",
+        "parameters": [
+          {
+            "description": "Organization to list invitations for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization to list invitations for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by status. If empty, returns all invitations.\n ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.",
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "description": "Filter by status. If empty, returns all invitations.\n ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.",
+              "items": {
+                "$ref": "#/components/schemas/OrganizationInviteStatus"
+              },
+              "title": "status",
+              "type": "array"
+            }
+          },
+          {
+            "description": "Opaque pagination token from a previous response.",
+            "in": "query",
+            "name": "page_token",
+            "schema": {
+              "description": "Opaque pagination token from a previous response.",
+              "title": "page_token",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "description": "Maximum number of items to return per page (1-100). Default: 50.",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Case-insensitive substring match.\n REST: ?field.contains=value",
+            "in": "query",
+            "name": "email.contains",
+            "schema": {
+              "description": "Case-insensitive substring match.\n REST: ?field.contains=value",
+              "title": "contains",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Exact match (case-sensitive).\n REST: ?field.exact=value",
+            "in": "query",
+            "name": "email.exact",
+            "schema": {
+              "description": "Exact match (case-sensitive).\n REST: ?field.exact=value",
+              "title": "exact",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by sender. Only returns invitations sent by this user.\n REST: ?sender_id=user_01h2xcejqtf2nbrexx3vqjhp41\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "query",
+            "name": "sender_id",
+            "schema": {
+              "description": "Filter by sender. Only returns invitations sent by this user.\n REST: ?sender_id=user_01h2xcejqtf2nbrexx3vqjhp41\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "sender_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)",
+            "in": "query",
+            "name": "created.after",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOrganizationInvitesResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "List organization invitations",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-pagination": {
+          "inputs": [
+            {
+              "in": "parameters",
+              "name": "page_token",
+              "type": "cursor"
+            }
+          ],
+          "outputs": {
+            "nextCursor": "$.pagination.next_page_token"
+          },
+          "type": "cursor"
+        },
+        "x-speakeasy-group": "organizations.invites",
+        "x-speakeasy-name-override": "list",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "listOrganizationInvites",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.list({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates an invitation and sends an email to the specified address. Returns FAILED_PRECONDITION if the email belongs to an existing organization member. Idempotency: If a PENDING invitation already exists for this email, the existing invitation is resent (same token, refreshed expiration). Expired or revoked invitations are ignored - a new invitation is created.",
+        "operationId": "createOrganizationInvite",
+        "parameters": [
+          {
+            "description": "Organization to invite the user to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization to invite the user to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "CreateOrganizationInviteRequest contains the data needed to create an invitation.",
+                "properties": {
+                  "email": {
+                    "description": "Email address of the recipient.",
+                    "format": "email",
+                    "title": "email",
+                    "type": "string"
+                  },
+                  "idempotency_key": {
+                    "description": "Optional client-provided idempotency key for safe retries.\n If provided, duplicate requests with the same key within 24 hours\n return the original response without resending the invitation email.\n Recommended format: UUID or org_id + email + timestamp hash.",
+                    "maxLength": 255,
+                    "nullable": true,
+                    "title": "idempotency_key",
+                    "type": "string"
+                  },
+                  "message": {
+                    "description": "Optional custom message from the sender (max 2000 bytes to support ~500 multibyte characters).",
+                    "maxLength": 2000,
+                    "nullable": true,
+                    "title": "message",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email"
+                ],
+                "title": "CreateOrganizationInviteRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrganizationInviteResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Invite a user to join an organization",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-group": "organizations.invites",
+        "x-speakeasy-name-override": "create",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "createOrganizationInvite",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.create({\n    organizationId: \"\u003cid\u003e\",\n    body: {\n      email: \"Willie_Parisian16@hotmail.com\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/organizations/{organization_id}/invites/{invite_id}:accept": {
+      "post": {
+        "description": "Accepts the invitation and adds the authenticated user as a member of the organization. The authenticated user's verified email must match the invitation email (case-insensitive). Returns PERMISSION_DENIED if emails don't match, FAILED_PRECONDITION if the user is already a member, or NOT_FOUND if the invitation is invalid/expired.",
+        "operationId": "acceptOrganizationInvite",
+        "parameters": [
+          {
+            "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Invitation ID to accept.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "invite_id",
+            "required": true,
+            "schema": {
+              "description": "Invitation ID to accept.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "invite_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "AcceptOrganizationInviteRequest contains the invitation to accept.",
+                "properties": {
+                  "token": {
+                    "description": "The invitation token from the email link.",
+                    "maxLength": 128,
+                    "title": "token",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "token"
+                ],
+                "title": "AcceptOrganizationInviteRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcceptOrganizationInviteResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Accept an invitation",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-group": "organizations.invites",
+        "x-speakeasy-name-override": "accept",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "acceptOrganizationInvite",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.accept({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {\n      token: \"\u003cvalue\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/organizations/{organization_id}/invites/{invite_id}:resend": {
+      "post": {
+        "description": "Resend an invitation email to the recipient. Useful if the original email was lost or expired. Requires permission to invite organization members.",
+        "operationId": "resendOrganizationInvite",
+        "parameters": [
+          {
+            "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Invitation ID to resend.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "invite_id",
+            "required": true,
+            "schema": {
+              "description": "Invitation ID to resend.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "invite_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "ResendOrganizationInviteRequest identifies an invitation to resend.",
+                "properties": {},
+                "required": [],
+                "title": "ResendOrganizationInviteRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResendOrganizationInviteResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Resend an invitation email",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-group": "organizations.invites",
+        "x-speakeasy-name-override": "resend",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "resendOrganizationInvite",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.resend({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/organizations/{organization_id}/invites/{invite_id}:revoke": {
+      "post": {
+        "description": "Revoke a pending invitation, preventing the recipient from joining. Requires permission to manage organization members.",
+        "operationId": "revokeOrganizationInvite",
+        "parameters": [
+          {
+            "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization the invitation belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Invitation ID to revoke.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "invite_id",
+            "required": true,
+            "schema": {
+              "description": "Invitation ID to revoke.\n Pattern: inv_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^inv_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "invite_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "RevokeOrganizationInviteRequest identifies an invitation to revoke.",
+                "properties": {},
+                "required": [],
+                "title": "RevokeOrganizationInviteRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevokeOrganizationInviteResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Revoke an invitation",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-group": "organizations.invites",
+        "x-speakeasy-name-override": "revoke",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "revokeOrganizationInvite",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.revoke({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    },
+    "/v1beta/versions/{version_id}": {
+      "get": {
+        "description": "Retrieve a specific version by ID.",
+        "operationId": "getVersion",
+        "parameters": [
+          {
+            "description": "Version ID to retrieve.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "description": "Version ID to retrieve.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "version_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Version"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Retrieve a version",
+        "tags": [
+          "Versions"
+        ],
+        "x-speakeasy-name-override": "get",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "getVersion",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.get({\n    versionId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Update version title and description.",
+        "operationId": "updateVersion",
+        "parameters": [
+          {
+            "description": "Version ID to update.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "description": "Version ID to update.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "version_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "UpdateVersionRequest specifies fields to update on a version.",
+                "properties": {
+                  "description": {
+                    "description": "New description.",
+                    "nullable": true,
+                    "title": "description",
+                    "type": "string"
+                  },
+                  "title": {
+                    "description": "New title (max 255 characters).",
+                    "maxLength": 255,
+                    "nullable": true,
+                    "title": "title",
+                    "type": "string"
+                  }
+                },
+                "title": "UpdateVersionRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Version"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Update a version",
+        "tags": [
+          "Versions"
+        ],
+        "x-speakeasy-name-override": "update",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "updateVersion",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versions.update({\n    versionId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          }
+        ]
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "servers": [
+    {
+      "description": "Production",
+      "url": "https://api.factify.com"
+    },
+    {
+      "description": "Development (internal only)",
+      "url": "https://api.factify-dev.com"
+    }
+  ],
+  "tags": [
+    {
+      "description": "Create, retrieve, update, and manage documents.",
+      "name": "Documents"
+    },
+    {
+      "description": "Manage document versions and version history.",
+      "name": "Versions"
+    },
+    {
+      "description": "Create and manage organizations and member invitations.",
+      "name": "Organizations"
+    },
+    {
+      "description": "Generate and manage API keys for authentication.",
+      "name": "API Keys"
+    },
+    {
+      "description": "Attach and manage access policies for documents.",
+      "name": "Policies"
+    },
+    {
+      "description": "Generate shareable entry pages for documents.",
+      "name": "Sharing \u0026 Distribution"
+    }
+  ]
+}
