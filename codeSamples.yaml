@@ -1,0 +1,143 @@
+overlay: 1.0.0
+info:
+  title: CodeSamples overlay for python target
+  version: 0.0.0
+actions:
+  - target: $["paths"]["/v1beta/api-keys"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "listApiKeys"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.api_keys.list(organization_id=\"<id>\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+  - target: $["paths"]["/v1beta/api-keys"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "createApiKey"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.api_keys.create(name=\"<value>\", organization_id=\"<id>\")\n\n    assert res.create_api_key_response is not None\n\n    # Handle response\n    print(res.create_api_key_response)"
+  - target: $["paths"]["/v1beta/api-keys/{api_key_id}/revoke"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "revokeApiKey"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.api_keys.revoke(api_key_id=\"<id>\")\n\n    assert res.revoke_api_key_response is not None\n\n    # Handle response\n    print(res.revoke_api_key_response)"
+  - target: $["paths"]["/v1beta/documents"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "listDocuments"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+  - target: $["paths"]["/v1beta/documents"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "createDocument"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.create(payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    }, title=\"<value>\")\n\n    assert res.create_document_response is not None\n\n    # Handle response\n    print(res.create_document_response)"
+  - target: $["paths"]["/v1beta/documents/{document_id}"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "getDocument"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.get(document_id=\"<id>\")\n\n    assert res.get_document_response is not None\n\n    # Handle response\n    print(res.get_document_response)"
+  - target: $["paths"]["/v1beta/documents/{document_id}"]["patch"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "updateDocument"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.update(document_id=\"<id>\")\n\n    assert res.update_document_response is not None\n\n    # Handle response\n    print(res.update_document_response)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/entry_page"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "generateDocumentEntryPage"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.entry_pages.generate(document_id=\"<id>\")\n\n    assert res.generate_entry_page_response is not None\n\n    # Handle response\n    print(res.generate_entry_page_response)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/policies"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "listDocumentPolicies"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.policies.list(document_id=\"<id>\", page_token=\"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+  - target: $["paths"]["/v1beta/documents/{document_id}/policies"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "attachDocumentPolicy"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.policies.attach(document_id=\"<id>\", policy_id=\"<id>\")\n\n    assert res.document_policy is not None\n\n    # Handle response\n    print(res.document_policy)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/policies/{policy_id}"]["delete"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "detachDocumentPolicy"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.policies.detach(document_id=\"<id>\", policy_id=\"<id>\")\n\n    assert res.empty is not None\n\n    # Handle response\n    print(res.empty)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/versions"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "listDocumentVersions"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.versions.list(document_id=\"<id>\", page_token=\"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+  - target: $["paths"]["/v1beta/documents/{document_id}/versions"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "createDocumentVersion"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.versions.create(document_id_param=\"<value>\", payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    })\n\n    assert res.version is not None\n\n    # Handle response\n    print(res.version)"
+  - target: $["paths"]["/v1beta/organizations"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "listOrganizations"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.list()\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+  - target: $["paths"]["/v1beta/organizations"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "createOrganization"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.create(name=\"<value>\")\n\n    assert res.create_organization_response is not None\n\n    # Handle response\n    print(res.create_organization_response)"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "getOrganization"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.get(organization_id=\"<id>\")\n\n    assert res.get_organization_response is not None\n\n    # Handle response\n    print(res.get_organization_response)"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/invites"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "listOrganizationInvites"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.invites.list(organization_id=\"<id>\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/invites"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "createOrganizationInvite"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.invites.create(organization_id=\"<id>\", email=\"Willie_Parisian16@hotmail.com\")\n\n    assert res.create_organization_invite_response is not None\n\n    # Handle response\n    print(res.create_organization_invite_response)"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/invites/{invite_id}:accept"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "acceptOrganizationInvite"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.invites.accept(organization_id=\"<id>\", invite_id=\"<id>\", token=\"<value>\")\n\n    assert res.accept_organization_invite_response is not None\n\n    # Handle response\n    print(res.accept_organization_invite_response)"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/invites/{invite_id}:resend"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "resendOrganizationInvite"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.invites.resend(organization_id=\"<id>\", invite_id=\"<id>\", body={})\n\n    assert res.resend_organization_invite_response is not None\n\n    # Handle response\n    print(res.resend_organization_invite_response)"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/invites/{invite_id}:revoke"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "revokeOrganizationInvite"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.invites.revoke(organization_id=\"<id>\", invite_id=\"<id>\", body={})\n\n    assert res.revoke_organization_invite_response is not None\n\n    # Handle response\n    print(res.revoke_organization_invite_response)"
+  - target: $["paths"]["/v1beta/versions/{version_id}"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "getVersion"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.versions.get(version_id=\"<id>\")\n\n    assert res.version is not None\n\n    # Handle response\n    print(res.version)"
+  - target: $["paths"]["/v1beta/versions/{version_id}"]["patch"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "updateVersion"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.versions.update(version_id=\"<id>\")\n\n    assert res.version is not None\n\n    # Handle response\n    print(res.version)"

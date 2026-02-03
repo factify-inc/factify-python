@@ -1,0 +1,40 @@
+speakeasyVersion: 1.700.2
+sources:
+    factify-api:
+        sourceNamespace: factify-api
+        sourceRevisionDigest: sha256:0498319200d789c77a8c712f8807a3a0610f773276f55809b3eb200ee89f7e2a
+        sourceBlobDigest: sha256:d2ce537bf0bc5023c8a1c37a480fbc7dd0191c6ad229f6986d916bcb894f6d4b
+        tags:
+            - latest
+            - speakeasy-sdk-regen-1770139692
+            - 1.0.0
+targets:
+    python:
+        source: factify-api
+        sourceNamespace: factify-api
+        sourceRevisionDigest: sha256:0498319200d789c77a8c712f8807a3a0610f773276f55809b3eb200ee89f7e2a
+        sourceBlobDigest: sha256:d2ce537bf0bc5023c8a1c37a480fbc7dd0191c6ad229f6986d916bcb894f6d4b
+        codeSamplesNamespace: factify-api-python-code-samples
+        codeSamplesRevisionDigest: sha256:d0cc193261d25441af18cce46193e6ed9f4276229a06705c6f820c8200648afa
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        factify-api:
+            inputs:
+                - location: ./openapi.json
+            registry:
+                location: registry.speakeasyapi.dev/factify/api/factify-api
+    targets:
+        python:
+            target: python
+            source: factify-api
+            output: .
+            publish:
+                pypi:
+                    token: $pypi_token
+            codeSamples:
+                output: codeSamples.yaml
+                registry:
+                    location: registry.speakeasyapi.dev/factify/api/factify-api-python-code-samples
+                style: standard

@@ -13,6 +13,7 @@ generation:
     requestResponseComponentNamesFeb2024: true
     securityFeb2025: true
     sharedErrorComponentsApr2025: true
+    sharedNestedComponentsJan2026: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
@@ -30,12 +31,52 @@ generation:
     skipResponseBodyAssertions: false
 python:
   version: 0.6.0
+  additionalDependencies:
+    dev: {}
+    main: {}
+  allowedRedefinedBuiltins:
+    - id
+    - object
+    - input
+  asyncMode: both
   author: Factify
   authors:
     - name: Factify
-  description: Python SDK for the Factify API
-  packageName: factify
+  baseErrorName: FactifyError
   clientServerStatusCodesAsErrors: true
+  constFieldCasing: normal
+  defaultErrorName: FactifyDefaultError
+  description: Python SDK for the Factify API
+  enableCustomCodeRegions: false
+  enumFormat: union
+  fixFlags:
+    asyncPaginationSep2025: true
+    responseRequiredSep2024: true
   flattenGlobalSecurity: true
+  flattenRequests: true
+  flatteningOrder: parameters-first
+  imports:
+    option: openapi
+    paths:
+      callbacks: ""
+      errors: errors
+      operations: ""
+      shared: ""
+      webhooks: ""
+  inferUnionDiscriminators: true
+  inputModelSuffix: input
+  license: Apache-2.0
+  maxMethodParams: 999
+  methodArguments: infer-optional-args
+  moduleName: ""
+  multipartArrayFormat: standard
+  outputModelSuffix: output
+  packageManager: uv
+  packageName: factify
+  preApplyUnionDiscriminators: true
+  pytestFilterWarnings: []
+  pytestTimeout: 0
   responseFormat: envelope-http
+  sseFlatResponse: false
   templateVersion: v2
+  useAsyncHooks: false
