@@ -72,10 +72,8 @@ with Factify(
 
     res = f_client.organizations.create(name="<value>")
 
-    assert res.create_organization_response is not None
-
     # Handle response
-    print(res.create_organization_response)
+    print(res)
 
 ```
 
@@ -117,10 +115,8 @@ with Factify(
 
     res = f_client.organizations.get(organization_id="<id>")
 
-    assert res.get_organization_response is not None
-
     # Handle response
-    print(res.get_organization_response)
+    print(res)
 
 ```
 

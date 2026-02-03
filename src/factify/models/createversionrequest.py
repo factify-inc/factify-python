@@ -57,10 +57,6 @@ class CreateVersionRequestTypedDict(TypedDict):
     r"""PDF file for new version"""
     description: NotRequired[Nullable[str]]
     r"""Description of changes in this version."""
-    document_id: NotRequired[str]
-    r"""Document ID to create version for.
-    Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
-    """
     title: NotRequired[Nullable[str]]
     r"""Optional version title."""
 
@@ -77,17 +73,12 @@ class CreateVersionRequest(BaseModel):
     description: Annotated[OptionalNullable[str], FieldMetadata(multipart=True)] = UNSET
     r"""Description of changes in this version."""
 
-    document_id: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
-    r"""Document ID to create version for.
-    Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
-    """
-
     title: Annotated[OptionalNullable[str], FieldMetadata(multipart=True)] = UNSET
     r"""Optional version title."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "document_id", "title"])
+        optional_fields = set(["description", "title"])
         nullable_fields = set(["description", "title"])
         serialized = handler(self)
         m = {}

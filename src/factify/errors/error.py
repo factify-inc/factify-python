@@ -3,19 +3,14 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from factify.errors import FactifyError
-from factify.models import error as models_error, httpmetadata as models_httpmetadata
+from factify.models import error as models_error
 from factify.types import BaseModel
 import httpx
-import pydantic
 from typing import Optional
-from typing_extensions import Annotated
 
 
 class ErrorData(BaseModel):
     error: models_error.Error
-    http_meta: Annotated[
-        Optional[models_httpmetadata.HTTPMetadata], pydantic.Field(exclude=True)
-    ] = None
 
 
 @dataclass(unsafe_hash=True)

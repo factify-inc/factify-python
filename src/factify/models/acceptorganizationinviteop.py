@@ -5,13 +5,10 @@ from .acceptorganizationinviteresponse import (
     AcceptOrganizationInviteResponse,
     AcceptOrganizationInviteResponseTypedDict,
 )
-from .httpmetadata import HTTPMetadata, HTTPMetadataTypedDict
-from factify.types import BaseModel, UNSET_SENTINEL
+from factify.types import BaseModel
 from factify.utils import FieldMetadata, PathParamMetadata, RequestMetadata
-import pydantic
-from pydantic import model_serializer
-from typing import Dict, List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Dict, List
+from typing_extensions import Annotated, TypedDict
 
 
 class AcceptOrganizationInviteAcceptOrganizationInviteRequestTypedDict(TypedDict):
@@ -62,36 +59,11 @@ class AcceptOrganizationInviteRequest(BaseModel):
 
 
 class AcceptOrganizationInviteResponseResponseTypedDict(TypedDict):
-    http_meta: HTTPMetadataTypedDict
     headers: Dict[str, List[str]]
-    accept_organization_invite_response: NotRequired[
-        AcceptOrganizationInviteResponseTypedDict
-    ]
-    r"""Success"""
+    result: AcceptOrganizationInviteResponseTypedDict
 
 
 class AcceptOrganizationInviteResponseResponse(BaseModel):
-    http_meta: Annotated[Optional[HTTPMetadata], pydantic.Field(exclude=True)] = None
-
     headers: Dict[str, List[str]]
 
-    accept_organization_invite_response: Optional[AcceptOrganizationInviteResponse] = (
-        None
-    )
-    r"""Success"""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["AcceptOrganizationInviteResponse"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
+    result: AcceptOrganizationInviteResponse

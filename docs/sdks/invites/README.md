@@ -78,10 +78,8 @@ with Factify(
 
     res = f_client.organizations.invites.create(organization_id="<id>", email="Willie_Parisian16@hotmail.com")
 
-    assert res.create_organization_invite_response is not None
-
     # Handle response
-    print(res.create_organization_invite_response)
+    print(res)
 
 ```
 
@@ -125,10 +123,8 @@ with Factify(
 
     res = f_client.organizations.invites.accept(organization_id="<id>", invite_id="<id>", token="<value>")
 
-    assert res.accept_organization_invite_response is not None
-
     # Handle response
-    print(res.accept_organization_invite_response)
+    print(res)
 
 ```
 
@@ -171,10 +167,8 @@ with Factify(
 
     res = f_client.organizations.invites.resend(organization_id="<id>", invite_id="<id>", body={})
 
-    assert res.resend_organization_invite_response is not None
-
     # Handle response
-    print(res.resend_organization_invite_response)
+    print(res)
 
 ```
 
@@ -217,10 +211,8 @@ with Factify(
 
     res = f_client.organizations.invites.revoke(organization_id="<id>", invite_id="<id>", body={})
 
-    assert res.revoke_organization_invite_response is not None
-
     # Handle response
-    print(res.revoke_organization_invite_response)
+    print(res)
 
 ```
 

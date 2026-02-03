@@ -74,10 +74,8 @@ with Factify(
 
     res = f_client.api_keys.create(name="<value>", organization_id="<id>")
 
-    assert res.create_api_key_response is not None
-
     # Handle response
-    print(res.create_api_key_response)
+    print(res)
 
 ```
 
@@ -120,10 +118,8 @@ with Factify(
 
     res = f_client.api_keys.revoke(api_key_id="<id>")
 
-    assert res.revoke_api_key_response is not None
-
     # Handle response
-    print(res.revoke_api_key_response)
+    print(res)
 
 ```
 

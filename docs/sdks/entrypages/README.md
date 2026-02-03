@@ -23,10 +23,8 @@ with Factify(
 
     res = f_client.entry_pages.generate(document_id="<id>")
 
-    assert res.generate_entry_page_response is not None
-
     # Handle response
-    print(res.generate_entry_page_response)
+    print(res)
 
 ```
 

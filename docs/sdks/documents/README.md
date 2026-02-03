@@ -80,10 +80,8 @@ with Factify(
         "content": open("example.file", "rb"),
     }, title="<value>")
 
-    assert res.create_document_response is not None
-
     # Handle response
-    print(res.create_document_response)
+    print(res)
 
 ```
 
@@ -127,10 +125,8 @@ with Factify(
 
     res = f_client.documents.get(document_id="<id>")
 
-    assert res.get_document_response is not None
-
     # Handle response
-    print(res.get_document_response)
+    print(res)
 
 ```
 
@@ -171,10 +167,8 @@ with Factify(
 
     res = f_client.documents.update(document_id="<id>")
 
-    assert res.update_document_response is not None
-
     # Handle response
-    print(res.update_document_response)
+    print(res)
 
 ```
 

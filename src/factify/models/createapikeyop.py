@@ -2,41 +2,17 @@
 
 from __future__ import annotations
 from .createapikeyresponse import CreateAPIKeyResponse, CreateAPIKeyResponseTypedDict
-from .httpmetadata import HTTPMetadata, HTTPMetadataTypedDict
-from factify.types import BaseModel, UNSET_SENTINEL
-import pydantic
-from pydantic import model_serializer
-from typing import Dict, List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from factify.types import BaseModel
+from typing import Dict, List
+from typing_extensions import TypedDict
 
 
 class CreateAPIKeyResponseResponseTypedDict(TypedDict):
-    http_meta: HTTPMetadataTypedDict
     headers: Dict[str, List[str]]
-    create_api_key_response: NotRequired[CreateAPIKeyResponseTypedDict]
-    r"""Success"""
+    result: CreateAPIKeyResponseTypedDict
 
 
 class CreateAPIKeyResponseResponse(BaseModel):
-    http_meta: Annotated[Optional[HTTPMetadata], pydantic.Field(exclude=True)] = None
-
     headers: Dict[str, List[str]]
 
-    create_api_key_response: Optional[CreateAPIKeyResponse] = None
-    r"""Success"""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["CreateApiKeyResponse"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
+    result: CreateAPIKeyResponse

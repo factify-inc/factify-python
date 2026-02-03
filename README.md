@@ -40,7 +40,6 @@ Factify uses conventional HTTP status codes and returns structured error respons
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
 * [Factify Python SDK](#factify-python-sdk)
-  * [Summary](#summary)
   * [Authentication](#authentication)
   * [Rate Limiting](#rate-limiting)
   * [Errors](#errors)
@@ -150,7 +149,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.api_keys.list(organization_id="<id>")
+    res = f_client.documents.list(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0")
 
     while res is not None:
         # Handle items
@@ -173,7 +172,7 @@ async def main():
         bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
     ) as f_client:
 
-        res = await f_client.api_keys.list_async(organization_id="<id>")
+        res = await f_client.documents.list_async(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0")
 
         while res is not None:
             # Handle items
@@ -316,10 +315,8 @@ with Factify(
         "content": open("example.file", "rb"),
     }, title="<value>")
 
-    assert res.create_document_response is not None
-
     # Handle response
-    print(res.create_document_response)
+    print(res)
 
 ```
 <!-- End File uploads [file-upload] -->
@@ -414,7 +411,6 @@ with Factify(
         # Depending on the method different errors may be thrown
         if isinstance(e, errors.Error):
             print(e.data.error)  # models.Error
-            print(e.data.http_meta)  # models.HTTPMetadata
 ```
 
 ### Error Classes

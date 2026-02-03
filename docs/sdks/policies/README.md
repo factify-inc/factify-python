@@ -73,10 +73,8 @@ with Factify(
 
     res = f_client.policies.attach(document_id="<id>", policy_id="<id>")
 
-    assert res.document_policy is not None
-
     # Handle response
-    print(res.document_policy)
+    print(res)
 
 ```
 
@@ -118,10 +116,8 @@ with Factify(
 
     res = f_client.policies.detach(document_id="<id>", policy_id="<id>")
 
-    assert res.empty is not None
-
     # Handle response
-    print(res.empty)
+    print(res)
 
 ```
 

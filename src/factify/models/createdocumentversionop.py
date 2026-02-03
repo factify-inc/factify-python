@@ -2,18 +2,15 @@
 
 from __future__ import annotations
 from .createversionrequest import CreateVersionRequest, CreateVersionRequestTypedDict
-from .httpmetadata import HTTPMetadata, HTTPMetadataTypedDict
 from .version import Version, VersionTypedDict
-from factify.types import BaseModel, UNSET_SENTINEL
+from factify.types import BaseModel
 from factify.utils import FieldMetadata, PathParamMetadata, RequestMetadata
-import pydantic
-from pydantic import model_serializer
-from typing import Dict, List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Dict, List
+from typing_extensions import Annotated, TypedDict
 
 
 class CreateDocumentVersionRequestTypedDict(TypedDict):
-    document_id_param: str
+    document_id: str
     r"""Document ID to create version for.
     Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
     """
@@ -21,10 +18,8 @@ class CreateDocumentVersionRequestTypedDict(TypedDict):
 
 
 class CreateDocumentVersionRequest(BaseModel):
-    document_id_param: Annotated[
-        str,
-        pydantic.Field(alias="document_id"),
-        FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
+    document_id: Annotated[
+        str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
     r"""Document ID to create version for.
     Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
@@ -37,32 +32,11 @@ class CreateDocumentVersionRequest(BaseModel):
 
 
 class CreateDocumentVersionResponseTypedDict(TypedDict):
-    http_meta: HTTPMetadataTypedDict
     headers: Dict[str, List[str]]
-    version: NotRequired[VersionTypedDict]
-    r"""Success"""
+    result: VersionTypedDict
 
 
 class CreateDocumentVersionResponse(BaseModel):
-    http_meta: Annotated[Optional[HTTPMetadata], pydantic.Field(exclude=True)] = None
-
     headers: Dict[str, List[str]]
 
-    version: Optional[Version] = None
-    r"""Success"""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["Version"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
+    result: Version

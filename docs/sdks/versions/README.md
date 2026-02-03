@@ -72,15 +72,13 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.versions.create(document_id_param="<value>", payload={
+    res = f_client.versions.create(document_id="<value>", payload={
         "file_name": "example.file",
         "content": open("example.file", "rb"),
     })
 
-    assert res.version is not None
-
     # Handle response
-    print(res.version)
+    print(res)
 
 ```
 
@@ -88,10 +86,9 @@ with Factify(
 
 | Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
 | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `document_id_param`                                                               | *str*                                                                             | :heavy_check_mark:                                                                | Document ID to create version for.<br/> Pattern: doc_[0-9a-hjkmnp-tv-z]{26}       |
+| `document_id`                                                                     | *str*                                                                             | :heavy_check_mark:                                                                | Document ID to create version for.<br/> Pattern: doc_[0-9a-hjkmnp-tv-z]{26}       |
 | `payload`                                                                         | [models.CreateVersionRequestPayload](../../models/createversionrequestpayload.md) | :heavy_check_mark:                                                                | PDF file for new version                                                          |
 | `description`                                                                     | *OptionalNullable[str]*                                                           | :heavy_minus_sign:                                                                | Description of changes in this version.                                           |
-| `document_id`                                                                     | *Optional[str]*                                                                   | :heavy_minus_sign:                                                                | Document ID to create version for.<br/> Pattern: doc_[0-9a-hjkmnp-tv-z]{26}       |
 | `title`                                                                           | *OptionalNullable[str]*                                                           | :heavy_minus_sign:                                                                | Optional version title.                                                           |
 | `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
 
@@ -125,10 +122,8 @@ with Factify(
 
     res = f_client.versions.get(version_id="<id>")
 
-    assert res.version is not None
-
     # Handle response
-    print(res.version)
+    print(res)
 
 ```
 
@@ -169,10 +164,8 @@ with Factify(
 
     res = f_client.versions.update(version_id="<id>")
 
-    assert res.version is not None
-
     # Handle response
-    print(res.version)
+    print(res)
 
 ```
 

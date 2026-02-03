@@ -114,10 +114,7 @@ class Versions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.ListDocumentVersionsResponse(
-                list_versions_response=unmarshal_json_response(
-                    Optional[models.ListVersionsResponse], http_res
-                ),
-                http_meta=models.HTTPMetadata(request=req, response=http_res),
+                result=unmarshal_json_response(models.ListVersionsResponse, http_res),
                 next=next_func,
                 headers={},
             )
@@ -125,21 +122,12 @@ class Versions(BaseSDK):
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -259,10 +247,7 @@ class Versions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.ListDocumentVersionsResponse(
-                list_versions_response=unmarshal_json_response(
-                    Optional[models.ListVersionsResponse], http_res
-                ),
-                http_meta=models.HTTPMetadata(request=req, response=http_res),
+                result=unmarshal_json_response(models.ListVersionsResponse, http_res),
                 next=next_func,
                 headers={},
             )
@@ -270,21 +255,12 @@ class Versions(BaseSDK):
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -302,13 +278,12 @@ class Versions(BaseSDK):
     def create(
         self,
         *,
-        document_id_param: str,
+        document_id: str,
         payload: Union[
             models.CreateVersionRequestPayload,
             models.CreateVersionRequestPayloadTypedDict,
         ],
         description: OptionalNullable[str] = UNSET,
-        document_id: Optional[str] = None,
         title: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -319,12 +294,10 @@ class Versions(BaseSDK):
 
         Creates a new version by uploading a PDF file.
 
-        :param document_id_param: Document ID to create version for.
+        :param document_id: Document ID to create version for.
             Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
         :param payload: PDF file for new version
         :param description: Description of changes in this version.
-        :param document_id: Document ID to create version for.
-            Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
         :param title: Optional version title.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -342,10 +315,9 @@ class Versions(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateDocumentVersionRequest(
-            document_id_param=document_id_param,
+            document_id=document_id,
             body=models.CreateVersionRequest(
                 description=description,
-                document_id=document_id,
                 payload=utils.get_pydantic_model(
                     payload, models.CreateVersionRequestPayload
                 ),
@@ -397,29 +369,18 @@ class Versions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.CreateDocumentVersionResponse(
-                version=unmarshal_json_response(Optional[models.Version], http_res),
-                http_meta=models.HTTPMetadata(request=req, response=http_res),
-                headers={},
+                result=unmarshal_json_response(models.Version, http_res), headers={}
             )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -437,13 +398,12 @@ class Versions(BaseSDK):
     async def create_async(
         self,
         *,
-        document_id_param: str,
+        document_id: str,
         payload: Union[
             models.CreateVersionRequestPayload,
             models.CreateVersionRequestPayloadTypedDict,
         ],
         description: OptionalNullable[str] = UNSET,
-        document_id: Optional[str] = None,
         title: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -454,12 +414,10 @@ class Versions(BaseSDK):
 
         Creates a new version by uploading a PDF file.
 
-        :param document_id_param: Document ID to create version for.
+        :param document_id: Document ID to create version for.
             Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
         :param payload: PDF file for new version
         :param description: Description of changes in this version.
-        :param document_id: Document ID to create version for.
-            Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
         :param title: Optional version title.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -477,10 +435,9 @@ class Versions(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateDocumentVersionRequest(
-            document_id_param=document_id_param,
+            document_id=document_id,
             body=models.CreateVersionRequest(
                 description=description,
-                document_id=document_id,
                 payload=utils.get_pydantic_model(
                     payload, models.CreateVersionRequestPayload
                 ),
@@ -532,29 +489,18 @@ class Versions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.CreateDocumentVersionResponse(
-                version=unmarshal_json_response(Optional[models.Version], http_res),
-                http_meta=models.HTTPMetadata(request=req, response=http_res),
-                headers={},
+                result=unmarshal_json_response(models.Version, http_res), headers={}
             )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -644,29 +590,18 @@ class Versions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.GetVersionResponse(
-                version=unmarshal_json_response(Optional[models.Version], http_res),
-                http_meta=models.HTTPMetadata(request=req, response=http_res),
-                headers={},
+                result=unmarshal_json_response(models.Version, http_res), headers={}
             )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -756,29 +691,18 @@ class Versions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.GetVersionResponse(
-                version=unmarshal_json_response(Optional[models.Version], http_res),
-                http_meta=models.HTTPMetadata(request=req, response=http_res),
-                headers={},
+                result=unmarshal_json_response(models.Version, http_res), headers={}
             )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -883,29 +807,18 @@ class Versions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.UpdateVersionResponse(
-                version=unmarshal_json_response(Optional[models.Version], http_res),
-                http_meta=models.HTTPMetadata(request=req, response=http_res),
-                headers={},
+                result=unmarshal_json_response(models.Version, http_res), headers={}
             )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -1010,29 +923,18 @@ class Versions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return models.UpdateVersionResponse(
-                version=unmarshal_json_response(Optional[models.Version], http_res),
-                http_meta=models.HTTPMetadata(request=req, response=http_res),
-                headers={},
+                result=unmarshal_json_response(models.Version, http_res), headers={}
             )
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(errors.ErrorData, http_res)
-            response_data.http_meta = models.HTTPMetadata(
-                request=req, response=http_res
-            )
             raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

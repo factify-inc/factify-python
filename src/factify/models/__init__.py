@@ -130,7 +130,6 @@ if TYPE_CHECKING:
         GetVersionResponse,
         GetVersionResponseTypedDict,
     )
-    from .httpmetadata import HTTPMetadata, HTTPMetadataTypedDict
     from .listapikeysop import (
         ListAPIKeysRequest,
         ListAPIKeysRequestTypedDict,
@@ -346,8 +345,6 @@ __all__ = [
     "GetVersionRequestTypedDict",
     "GetVersionResponse",
     "GetVersionResponseTypedDict",
-    "HTTPMetadata",
-    "HTTPMetadataTypedDict",
     "ListAPIKeysRequest",
     "ListAPIKeysRequestTypedDict",
     "ListAPIKeysResponse",
@@ -535,8 +532,6 @@ _dynamic_imports: dict[str, str] = {
     "GetVersionRequestTypedDict": ".getversionop",
     "GetVersionResponse": ".getversionop",
     "GetVersionResponseTypedDict": ".getversionop",
-    "HTTPMetadata": ".httpmetadata",
-    "HTTPMetadataTypedDict": ".httpmetadata",
     "ListAPIKeysRequest": ".listapikeysop",
     "ListAPIKeysRequestTypedDict": ".listapikeysop",
     "ListAPIKeysResponseResponse": ".listapikeysop",
