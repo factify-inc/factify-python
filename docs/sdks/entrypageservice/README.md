@@ -1,0 +1,49 @@
+# EntryPageService
+
+## Overview
+
+EntryPageService provides operations for document entry pages.
+ Tags default to "EntryPageService", post-processor renames to "Sharing & Distribution".
+
+### Available Operations
+
+* [generate_document_entry_page](#generate_document_entry_page) - Generate entry page
+
+## generate_document_entry_page
+
+Generate and return a temporary downloadable URL for the document entry page PDF.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="generateDocumentEntryPage" method="post" path="/v1beta/documents/{document_id}/entry_page" -->
+```python
+from factify import Factify
+
+
+with Factify(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+) as f_client:
+
+    res = f_client.entry_page_service.generate_document_entry_page(document_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `document_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Document ID.<br/> Pattern: doc_[0-9a-hjkmnp-tv-z]{26}               |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.FactifyAPIV1betaGenerateEntryPageResponse](../../models/factifyapiv1betagenerateentrypageresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |

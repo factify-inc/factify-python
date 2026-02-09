@@ -8,12 +8,10 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.documents.list(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0")
+    res = f_client.api_keys.list_api_keys(organization_id="<id>")
 
-    while res is not None:
-        # Handle items
-
-        res = res.next()
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -31,12 +29,10 @@ async def main():
         bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
     ) as f_client:
 
-        res = await f_client.documents.list_async(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0")
+        res = await f_client.api_keys.list_api_keys_async(organization_id="<id>")
 
-        while res is not None:
-            # Handle items
-
-            res = res.next()
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```

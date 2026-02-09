@@ -1,0 +1,10 @@
+# FactifyAPIV1betaCreateOrganizationInviteResponse
+
+CreateOrganizationInviteResponse contains the created invitation.
+
+
+## Fields
+
+| Field                                                                                                                                                              | Type                                                                                                                                                               | Required                                                                                                                                                           | Description                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `invite`                                                                                                                                                           | [models.FactifyAPIV1betaOrganizationInvite](../models/factifyapiv1betaorganizationinvite.md)                                                                       | :heavy_check_mark:                                                                                                                                                 | OrganizationInvite represents an invitation to join an organization.<br/>accepted_fields_consistency // accepted_at and accepted_by must both be set or both be unset<br/> |

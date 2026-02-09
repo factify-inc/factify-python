@@ -48,7 +48,6 @@ Factify uses conventional HTTP status codes and returns structured error respons
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication-1)
   * [Available Resources and Operations](#available-resources-and-operations)
-  * [Pagination](#pagination)
   * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -106,7 +105,7 @@ It's also possible to write a standalone Python script without needing to set up
 ```python
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.9"
+# requires-python = ">=3.10"
 # dependencies = [
 #     "factify",
 # ]
@@ -149,12 +148,10 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.documents.list(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0")
+    res = f_client.api_keys.list_api_keys(organization_id="<id>")
 
-    while res is not None:
-        # Handle items
-
-        res = res.next()
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -172,12 +169,10 @@ async def main():
         bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
     ) as f_client:
 
-        res = await f_client.documents.list_async(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0")
+        res = await f_client.api_keys.list_api_keys_async(organization_id="<id>")
 
-        while res is not None:
-            # Handle items
-
-            res = res.next()
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
@@ -203,12 +198,10 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.api_keys.list(organization_id="<id>")
+    res = f_client.api_keys.list_api_keys(organization_id="<id>")
 
-    while res is not None:
-        # Handle items
-
-        res = res.next()
+    # Handle response
+    print(res)
 
 ```
 <!-- End Authentication [security] -->
@@ -221,76 +214,68 @@ with Factify(
 
 ### [APIKeys](docs/sdks/apikeys/README.md)
 
-* [list](docs/sdks/apikeys/README.md#list) - List API keys
-* [create](docs/sdks/apikeys/README.md#create) - Create an API key
-* [revoke](docs/sdks/apikeys/README.md#revoke) - Revoke an API key
+* [list_api_keys](docs/sdks/apikeys/README.md#list_api_keys) - List API keys
+* [create_api_key](docs/sdks/apikeys/README.md#create_api_key) - Create an API key
+* [revoke_api_key](docs/sdks/apikeys/README.md#revoke_api_key) - Revoke an API key
 
-### [Documents](docs/sdks/documents/README.md)
+### [DocumentService](docs/sdks/documentservice/README.md)
 
-* [list](docs/sdks/documents/README.md#list) - List documents
-* [create](docs/sdks/documents/README.md#create) - Create a document
-* [get](docs/sdks/documents/README.md#get) - Retrieve a document
-* [update](docs/sdks/documents/README.md#update) - Update a document
+* [list_documents](docs/sdks/documentservice/README.md#list_documents) - List documents
+* [create_document](docs/sdks/documentservice/README.md#create_document) - Create a document
+* [get_document](docs/sdks/documentservice/README.md#get_document) - Retrieve a document
+* [update_document](docs/sdks/documentservice/README.md#update_document) - Update a document
 
-### [EntryPages](docs/sdks/entrypages/README.md)
+### [EntryPageService](docs/sdks/entrypageservice/README.md)
 
-* [generate](docs/sdks/entrypages/README.md#generate) - Generate entry page
+* [generate_document_entry_page](docs/sdks/entrypageservice/README.md#generate_document_entry_page) - Generate entry page
+
+### [IdentityService](docs/sdks/identityservice/README.md)
+
+* [list_api_keys](docs/sdks/identityservice/README.md#list_api_keys) - List API keys
+* [create_api_key](docs/sdks/identityservice/README.md#create_api_key) - Create an API key
+* [revoke_api_key](docs/sdks/identityservice/README.md#revoke_api_key) - Revoke an API key
 
 ### [Organizations](docs/sdks/organizations/README.md)
 
-* [list](docs/sdks/organizations/README.md#list) - List organizations
-* [create](docs/sdks/organizations/README.md#create) - Create an organization
-* [get](docs/sdks/organizations/README.md#get) - Retrieve an organization
+* [list_organizations](docs/sdks/organizations/README.md#list_organizations) - List organizations
+* [create_organization](docs/sdks/organizations/README.md#create_organization) - Create an organization
+* [get_organization](docs/sdks/organizations/README.md#get_organization) - Retrieve an organization
+* [list_organization_invites](docs/sdks/organizations/README.md#list_organization_invites) - List organization invitations
+* [create_organization_invite](docs/sdks/organizations/README.md#create_organization_invite) - Invite a user to join an organization
+* [accept_organization_invite](docs/sdks/organizations/README.md#accept_organization_invite) - Accept an invitation
+* [resend_organization_invite](docs/sdks/organizations/README.md#resend_organization_invite) - Resend an invitation email
+* [revoke_organization_invite](docs/sdks/organizations/README.md#revoke_organization_invite) - Revoke an invitation
 
-### [Organizations.Invites](docs/sdks/invites/README.md)
+### [OrganizationService](docs/sdks/organizationservice/README.md)
 
-* [list](docs/sdks/invites/README.md#list) - List organization invitations
-* [create](docs/sdks/invites/README.md#create) - Invite a user to join an organization
-* [accept](docs/sdks/invites/README.md#accept) - Accept an invitation
-* [resend](docs/sdks/invites/README.md#resend) - Resend an invitation email
-* [revoke](docs/sdks/invites/README.md#revoke) - Revoke an invitation
+* [list_organizations](docs/sdks/organizationservice/README.md#list_organizations) - List organizations
+* [create_organization](docs/sdks/organizationservice/README.md#create_organization) - Create an organization
+* [get_organization](docs/sdks/organizationservice/README.md#get_organization) - Retrieve an organization
+* [list_organization_invites](docs/sdks/organizationservice/README.md#list_organization_invites) - List organization invitations
+* [create_organization_invite](docs/sdks/organizationservice/README.md#create_organization_invite) - Invite a user to join an organization
+* [accept_organization_invite](docs/sdks/organizationservice/README.md#accept_organization_invite) - Accept an invitation
+* [resend_organization_invite](docs/sdks/organizationservice/README.md#resend_organization_invite) - Resend an invitation email
+* [revoke_organization_invite](docs/sdks/organizationservice/README.md#revoke_organization_invite) - Revoke an invitation
 
-### [Policies](docs/sdks/policies/README.md)
+### [PolicyService](docs/sdks/policyservice/README.md)
 
-* [list](docs/sdks/policies/README.md#list) - List document policies
-* [attach](docs/sdks/policies/README.md#attach) - Attach a policy
-* [detach](docs/sdks/policies/README.md#detach) - Detach a policy
+* [list_document_policies](docs/sdks/policyservice/README.md#list_document_policies) - List document policies
+* [attach_document_policy](docs/sdks/policyservice/README.md#attach_document_policy) - Attach a policy
+* [detach_document_policy](docs/sdks/policyservice/README.md#detach_document_policy) - Detach a policy
 
-### [Versions](docs/sdks/versions/README.md)
+### [SharingAndDistribution](docs/sdks/sharinganddistribution/README.md)
 
-* [list](docs/sdks/versions/README.md#list) - List document versions
-* [create](docs/sdks/versions/README.md#create) - Create a new version
-* [get](docs/sdks/versions/README.md#get) - Retrieve a version
-* [update](docs/sdks/versions/README.md#update) - Update a version
+* [generate_document_entry_page](docs/sdks/sharinganddistribution/README.md#generate_document_entry_page) - Generate entry page
+
+### [VersionService](docs/sdks/versionservice/README.md)
+
+* [list_document_versions](docs/sdks/versionservice/README.md#list_document_versions) - List document versions
+* [create_document_version](docs/sdks/versionservice/README.md#create_document_version) - Create a new version
+* [get_version](docs/sdks/versionservice/README.md#get_version) - Retrieve a version
+* [update_version](docs/sdks/versionservice/README.md#update_version) - Update a version
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
-
-<!-- Start Pagination [pagination] -->
-## Pagination
-
-Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
-returned response object will have a `Next` method that can be called to pull down the next group of results. If the
-return value of `Next` is `None`, then there are no more pages to be fetched.
-
-Here's an example of one such pagination call:
-```python
-from factify import Factify
-
-
-with Factify(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-) as f_client:
-
-    res = f_client.api_keys.list(organization_id="<id>")
-
-    while res is not None:
-        # Handle items
-
-        res = res.next()
-
-```
-<!-- End Pagination [pagination] -->
 
 <!-- Start File uploads [file-upload] -->
 ## File uploads
@@ -310,7 +295,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.documents.create(payload={
+    res = f_client.document_service.create_document(payload={
         "file_name": "example.file",
         "content": open("example.file", "rb"),
     }, title="<value>")
@@ -336,13 +321,11 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.api_keys.list(organization_id="<id>",
+    res = f_client.api_keys.list_api_keys(organization_id="<id>",
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
-    while res is not None:
-        # Handle items
-
-        res = res.next()
+    # Handle response
+    print(res)
 
 ```
 
@@ -357,12 +340,10 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.api_keys.list(organization_id="<id>")
+    res = f_client.api_keys.list_api_keys(organization_id="<id>")
 
-    while res is not None:
-        # Handle items
-
-        res = res.next()
+    # Handle response
+    print(res)
 
 ```
 <!-- End Retries [retries] -->
@@ -372,14 +353,13 @@ with Factify(
 
 [`FactifyError`](./src/factify/errors/factifyerror.py) is the base class for all HTTP error responses. It has the following properties:
 
-| Property           | Type             | Description                                                                             |
-| ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
-| `err.message`      | `str`            | Error message                                                                           |
-| `err.status_code`  | `int`            | HTTP response status code eg `404`                                                      |
-| `err.headers`      | `httpx.Headers`  | HTTP response headers                                                                   |
-| `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned.                                  |
-| `err.raw_response` | `httpx.Response` | Raw HTTP response                                                                       |
-| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
+| Property           | Type             | Description                                            |
+| ------------------ | ---------------- | ------------------------------------------------------ |
+| `err.message`      | `str`            | Error message                                          |
+| `err.status_code`  | `int`            | HTTP response status code eg `404`                     |
+| `err.headers`      | `httpx.Headers`  | HTTP response headers                                  |
+| `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned. |
+| `err.raw_response` | `httpx.Response` | Raw HTTP response                                      |
 
 ### Example
 ```python
@@ -392,12 +372,10 @@ with Factify(
     res = None
     try:
 
-        res = f_client.api_keys.list(organization_id="<id>")
+        res = f_client.api_keys.list_api_keys(organization_id="<id>")
 
-        while res is not None:
-            # Handle items
-
-            res = res.next()
+        # Handle response
+        print(res)
 
 
     except errors.FactifyError as e:
@@ -408,15 +386,11 @@ with Factify(
         print(e.headers)
         print(e.raw_response)
 
-        # Depending on the method different errors may be thrown
-        if isinstance(e, errors.Error):
-            print(e.data.error)  # models.Error
 ```
 
 ### Error Classes
-**Primary errors:**
+**Primary error:**
 * [`FactifyError`](./src/factify/errors/factifyerror.py): The base class for HTTP error responses.
-  * [`Error`](./src/factify/errors/error.py): Invalid request parameters.
 
 <details><summary>Less common errors (5)</summary>
 
@@ -457,12 +431,10 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.api_keys.list(organization_id="<id>")
+    res = f_client.api_keys.list_api_keys(organization_id="<id>")
 
-    while res is not None:
-        # Handle items
-
-        res = res.next()
+    # Handle response
+    print(res)
 
 ```
 
@@ -478,12 +450,10 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.api_keys.list(organization_id="<id>")
+    res = f_client.api_keys.list_api_keys(organization_id="<id>")
 
-    while res is not None:
-        # Handle items
-
-        res = res.next()
+    # Handle response
+    print(res)
 
 ```
 <!-- End Server Selection [server] -->

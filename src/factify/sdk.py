@@ -16,11 +16,14 @@ import weakref
 
 if TYPE_CHECKING:
     from factify.api_keys import APIKeys
-    from factify.documents import Documents
-    from factify.entrypages import EntryPages
+    from factify.documentservice import DocumentService
+    from factify.entrypageservice import EntryPageService
+    from factify.identityservice import IdentityService
     from factify.organizations import Organizations
-    from factify.policies import Policies
-    from factify.versions import Versions
+    from factify.organizationservice import OrganizationService
+    from factify.policyservice import PolicyService
+    from factify.sharing_and_distribution import SharingAndDistribution
+    from factify.versionservice import VersionService
 
 
 class Factify(BaseSDK):
@@ -58,22 +61,72 @@ class Factify(BaseSDK):
 
     api_keys: "APIKeys"
     r"""Generate and manage API keys for authentication."""
-    documents: "Documents"
-    r"""Create, retrieve, update, and manage documents."""
-    entry_pages: "EntryPages"
-    policies: "Policies"
-    r"""Attach and manage access policies for documents."""
-    versions: "Versions"
-    r"""Manage document versions and version history."""
+    identity_service: "IdentityService"
+    r"""IdentityService provides APIs for managing API keys.
+    Enables programmatic access through API key generation and management.
+
+    v1beta Scope:
+    - Services and service accounts are NOT exposed in v1beta. When an organization
+    is created, default service and service account are provisioned internally.
+    - API keys grant organization admin privileges. Granular permissions will be
+    added in a future version.
+
+    Authorization Model:
+    - CreateApiKey: Requires organization admin role.
+    - ListApiKeys: Requires organization admin role.
+    - RevokeApiKey: Requires organization admin role.
+
+    Lifecycle Management:
+    - API keys can be created and revoked but not updated. Use revoke + create for rotation.
+    """
+    document_service: "DocumentService"
+    r"""DocumentService provides operations on documents.
+    Tags default to \"DocumentService\", post-processor renames to \"Documents\".
+    """
+    sharing_and_distribution: "SharingAndDistribution"
+    r"""Generate shareable entry pages for documents."""
+    entry_page_service: "EntryPageService"
+    r"""EntryPageService provides operations for document entry pages.
+    Tags default to \"EntryPageService\", post-processor renames to \"Sharing & Distribution\".
+    """
+    policy_service: "PolicyService"
+    r"""PolicyService provides operations on document policies.
+    Tags default to \"PolicyService\", post-processor renames to \"Policies\".
+    """
+    version_service: "VersionService"
+    r"""VersionService provides operations on document versions.
+    Tags default to \"VersionService\", post-processor renames to \"Versions\".
+    """
     organizations: "Organizations"
     r"""Create and manage organizations and member invitations."""
+    organization_service: "OrganizationService"
+    r"""OrganizationService provides APIs for managing organizations and member invitations.
+
+    Authorization Model:
+    - CreateOrganization: Any authenticated user. The caller becomes the organization owner.
+    Specifying owner_user_id for a different user requires system maintainer role.
+    - GetOrganization/ListOrganizations: Requires organization membership.
+    - Invitation operations: Requires organization#manage permission.
+
+    Lifecycle Management:
+    - Organizations are immutable after creation (no update/delete).
+    - Invitations can be created, revoked, and resent. They expire after 7 days. ==========================================================================
+    Organizations
+    ==========================================================================
+    """
     _sub_sdk_map = {
         "api_keys": ("factify.api_keys", "APIKeys"),
-        "documents": ("factify.documents", "Documents"),
-        "entry_pages": ("factify.entrypages", "EntryPages"),
-        "policies": ("factify.policies", "Policies"),
-        "versions": ("factify.versions", "Versions"),
+        "identity_service": ("factify.identityservice", "IdentityService"),
+        "document_service": ("factify.documentservice", "DocumentService"),
+        "sharing_and_distribution": (
+            "factify.sharing_and_distribution",
+            "SharingAndDistribution",
+        ),
+        "entry_page_service": ("factify.entrypageservice", "EntryPageService"),
+        "policy_service": ("factify.policyservice", "PolicyService"),
+        "version_service": ("factify.versionservice", "VersionService"),
         "organizations": ("factify.organizations", "Organizations"),
+        "organization_service": ("factify.organizationservice", "OrganizationService"),
     }
 
     def __init__(
