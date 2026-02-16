@@ -48,6 +48,7 @@ Factify uses conventional HTTP status codes and returns structured error respons
   * [SDK Example Usage](https://github.com/factify-inc/factify-python/blob/master/#sdk-example-usage)
   * [Authentication](https://github.com/factify-inc/factify-python/blob/master/#authentication-1)
   * [Available Resources and Operations](https://github.com/factify-inc/factify-python/blob/master/#available-resources-and-operations)
+  * [Pagination](https://github.com/factify-inc/factify-python/blob/master/#pagination)
   * [File uploads](https://github.com/factify-inc/factify-python/blob/master/#file-uploads)
   * [Retries](https://github.com/factify-inc/factify-python/blob/master/#retries)
   * [Error Handling](https://github.com/factify-inc/factify-python/blob/master/#error-handling)
@@ -148,10 +149,12 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.api_keys.list_api_keys(organization_id="<id>")
+    res = f_client.documents.list(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 ```
 
 </br>
@@ -169,10 +172,12 @@ async def main():
         bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
     ) as f_client:
 
-        res = await f_client.api_keys.list_api_keys_async(organization_id="<id>")
+        res = await f_client.documents.list_async(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0")
 
-        # Handle response
-        print(res)
+        while res is not None:
+            # Handle items
+
+            res = res.next()
 
 asyncio.run(main())
 ```
@@ -198,7 +203,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.api_keys.list_api_keys(organization_id="<id>")
+    res = f_client.quotas.quota_service_delete_organization_quota()
 
     # Handle response
     print(res)
@@ -214,68 +219,89 @@ with Factify(
 
 ### [APIKeys](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/apikeys/README.md)
 
-* [list_api_keys](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/apikeys/README.md#list_api_keys) - List API keys
-* [create_api_key](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/apikeys/README.md#create_api_key) - Create an API key
-* [revoke_api_key](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/apikeys/README.md#revoke_api_key) - Revoke an API key
+* [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/apikeys/README.md#list) - List API keys
+* [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/apikeys/README.md#create) - Create an API key
+* [revoke](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/apikeys/README.md#revoke) - Revoke an API key
 
-### [DocumentService](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documentservice/README.md)
+### [Documents](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md)
 
-* [list_documents](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documentservice/README.md#list_documents) - List documents
-* [create_document](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documentservice/README.md#create_document) - Create a document
-* [get_document](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documentservice/README.md#get_document) - Retrieve a document
-* [update_document](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documentservice/README.md#update_document) - Update a document
+* [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#list) - List documents
+* [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#create) - Create a document
+* [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#get) - Retrieve a document
+* [update](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#update) - Update a document
 
-### [EntryPageService](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/entrypageservice/README.md)
+### [EntryPages](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/entrypages/README.md)
 
-* [generate_document_entry_page](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/entrypageservice/README.md#generate_document_entry_page) - Generate entry page
-
-### [IdentityService](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/identityservice/README.md)
-
-* [list_api_keys](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/identityservice/README.md#list_api_keys) - List API keys
-* [create_api_key](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/identityservice/README.md#create_api_key) - Create an API key
-* [revoke_api_key](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/identityservice/README.md#revoke_api_key) - Revoke an API key
+* [generate](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/entrypages/README.md#generate) - Generate entry page
 
 ### [Organizations](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md)
 
-* [list_organizations](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#list_organizations) - List organizations
-* [create_organization](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#create_organization) - Create an organization
-* [get_organization](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#get_organization) - Retrieve an organization
-* [list_organization_invites](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#list_organization_invites) - List organization invitations
-* [create_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#create_organization_invite) - Invite a user to join an organization
+* [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#list) - List organizations
+* [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#create) - Create an organization
+* [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#get) - Retrieve an organization
 * [accept_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#accept_organization_invite) - Accept an invitation
 * [resend_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#resend_organization_invite) - Resend an invitation email
 * [revoke_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#revoke_organization_invite) - Revoke an invitation
 
-### [OrganizationService](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationservice/README.md)
+### [Organizations.Invites](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md)
 
-* [list_organizations](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationservice/README.md#list_organizations) - List organizations
-* [create_organization](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationservice/README.md#create_organization) - Create an organization
-* [get_organization](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationservice/README.md#get_organization) - Retrieve an organization
-* [list_organization_invites](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationservice/README.md#list_organization_invites) - List organization invitations
-* [create_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationservice/README.md#create_organization_invite) - Invite a user to join an organization
-* [accept_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationservice/README.md#accept_organization_invite) - Accept an invitation
-* [resend_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationservice/README.md#resend_organization_invite) - Resend an invitation email
-* [revoke_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationservice/README.md#revoke_organization_invite) - Revoke an invitation
+* [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#list) - List organization invitations
+* [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#create) - Invite a user to join an organization
 
-### [PolicyService](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policyservice/README.md)
+### [Policies](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policies/README.md)
 
-* [list_document_policies](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policyservice/README.md#list_document_policies) - List document policies
-* [attach_document_policy](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policyservice/README.md#attach_document_policy) - Attach a policy
-* [detach_document_policy](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policyservice/README.md#detach_document_policy) - Detach a policy
+* [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policies/README.md#list) - List document policies
+* [attach](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policies/README.md#attach) - Attach a policy
+* [detach](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policies/README.md#detach) - Detach a policy
 
-### [SharingAndDistribution](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharinganddistribution/README.md)
+### [Quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quota/README.md)
 
-* [generate_document_entry_page](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharinganddistribution/README.md#generate_document_entry_page) - Generate entry page
+* [get_organization_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quota/README.md#get_organization_quota) - Get organization quota status
+* [list_api_key_quotas](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quota/README.md#list_api_key_quotas) - List API key quotas
+* [delete_api_key_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quota/README.md#delete_api_key_quota) - Delete API key quota
+* [set_api_key_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quota/README.md#set_api_key_quota) - Set API key quota
+* [get_usage_history](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quota/README.md#get_usage_history) - Get usage history
 
-### [VersionService](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versionservice/README.md)
+### [Quotas](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quotas/README.md)
 
-* [list_document_versions](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versionservice/README.md#list_document_versions) - List document versions
-* [create_document_version](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versionservice/README.md#create_document_version) - Create a new version
-* [get_version](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versionservice/README.md#get_version) - Retrieve a version
-* [update_version](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versionservice/README.md#update_version) - Update a version
+* [quota_service_delete_organization_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quotas/README.md#quota_service_delete_organization_quota) - DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+* [quota_service_set_organization_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quotas/README.md#quota_service_set_organization_quota) - SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+
+### [Versions](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versions/README.md)
+
+* [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versions/README.md#list) - List document versions
+* [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versions/README.md#create) - Create a new version
+* [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versions/README.md#get) - Retrieve a version
+* [update](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versions/README.md#update) - Update a version
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
+
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `None`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+```python
+from factify import Factify
+
+
+with Factify(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+) as f_client:
+
+    res = f_client.api_keys.list(organization_id="<id>")
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+<!-- End Pagination [pagination] -->
 
 <!-- Start File uploads [file-upload] -->
 ## File uploads
@@ -295,7 +321,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.document_service.create_document(payload={
+    res = f_client.documents.create(payload={
         "file_name": "example.file",
         "content": open("example.file", "rb"),
     }, title="<value>")
@@ -321,7 +347,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.api_keys.list_api_keys(organization_id="<id>",
+    res = f_client.quotas.quota_service_delete_organization_quota(,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -340,7 +366,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.api_keys.list_api_keys(organization_id="<id>")
+    res = f_client.quotas.quota_service_delete_organization_quota()
 
     # Handle response
     print(res)
@@ -353,13 +379,14 @@ with Factify(
 
 [`FactifyError`](https://github.com/factify-inc/factify-python/blob/master/./src/factify/errors/factifyerror.py) is the base class for all HTTP error responses. It has the following properties:
 
-| Property           | Type             | Description                                            |
-| ------------------ | ---------------- | ------------------------------------------------------ |
-| `err.message`      | `str`            | Error message                                          |
-| `err.status_code`  | `int`            | HTTP response status code eg `404`                     |
-| `err.headers`      | `httpx.Headers`  | HTTP response headers                                  |
-| `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned. |
-| `err.raw_response` | `httpx.Response` | Raw HTTP response                                      |
+| Property           | Type             | Description                                                                             |
+| ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
+| `err.message`      | `str`            | Error message                                                                           |
+| `err.status_code`  | `int`            | HTTP response status code eg `404`                                                      |
+| `err.headers`      | `httpx.Headers`  | HTTP response headers                                                                   |
+| `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned.                                  |
+| `err.raw_response` | `httpx.Response` | Raw HTTP response                                                                       |
+| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](https://github.com/factify-inc/factify-python/blob/master/#error-classes). |
 
 ### Example
 ```python
@@ -372,7 +399,7 @@ with Factify(
     res = None
     try:
 
-        res = f_client.api_keys.list_api_keys(organization_id="<id>")
+        res = f_client.quotas.quota_service_delete_organization_quota()
 
         # Handle response
         print(res)
@@ -386,11 +413,15 @@ with Factify(
         print(e.headers)
         print(e.raw_response)
 
+        # Depending on the method different errors may be thrown
+        if isinstance(e, errors.Error):
+            print(e.data.error)  # models.Error
 ```
 
 ### Error Classes
-**Primary error:**
+**Primary errors:**
 * [`FactifyError`](https://github.com/factify-inc/factify-python/blob/master/./src/factify/errors/factifyerror.py): The base class for HTTP error responses.
+  * [`Error`](https://github.com/factify-inc/factify-python/blob/master/./src/factify/errors/error.py): Invalid request parameters.
 
 <details><summary>Less common errors (5)</summary>
 
@@ -431,7 +462,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.api_keys.list_api_keys(organization_id="<id>")
+    res = f_client.quotas.quota_service_delete_organization_quota()
 
     # Handle response
     print(res)
@@ -450,7 +481,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.api_keys.list_api_keys(organization_id="<id>")
+    res = f_client.quotas.quota_service_delete_organization_quota()
 
     # Handle response
     print(res)

@@ -1,0 +1,14 @@
+# APIKeyQuota
+
+APIKeyQuota represents per-key quota status.
+
+
+## Fields
+
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     | Example                                                                         |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `api_key_id`                                                                    | *Optional[str]*                                                                 | :heavy_minus_sign:                                                              | The API key ID.                                                                 | key_01h2xcejqtf2nbrexx3vqjhp41                                                  |
+| `current_usage`                                                                 | *Optional[int]*                                                                 | :heavy_minus_sign:                                                              | Current usage for this key in the billing period.                               |                                                                                 |
+| `is_exceeded`                                                                   | *Optional[bool]*                                                                | :heavy_minus_sign:                                                              | Whether this key's quota is exceeded. Only true when limit is set and exceeded. |                                                                                 |
+| `limit`                                                                         | *OptionalNullable[int]*                                                         | :heavy_minus_sign:                                                              | The configured limit for this key. Not set means no explicit key limit.         |                                                                                 |
+| `remaining`                                                                     | *Optional[int]*                                                                 | :heavy_minus_sign:                                                              | Remaining requests for this key. Only meaningful when limit is set.             |                                                                                 |

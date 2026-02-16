@@ -6,13 +6,14 @@ from factify import errors, models, utils
 from factify._hooks import HookContext
 from factify.types import OptionalNullable, UNSET
 from factify.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Mapping, Optional
+from jsonpath import JSONPath
+from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
 
 
 class APIKeys(BaseSDK):
     r"""Generate and manage API keys for authentication."""
 
-    def list_api_keys(
+    def list(
         self,
         *,
         organization_id: str,
@@ -23,7 +24,7 @@ class APIKeys(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.FactifyAPIV1betaListAPIKeysResponse:
+    ) -> Optional[models.ListAPIKeysResponseResponse]:
         r"""List API keys
 
         Lists API keys for an organization.
@@ -92,14 +93,48 @@ class APIKeys(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.FactifyAPIV1betaListAPIKeysResponse, http_res
+        def next_func() -> Optional[models.ListAPIKeysResponseResponse]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+
+            next_cursor = JSONPath("$.pagination.next_page_token").parse(body)
+
+            if len(next_cursor) == 0:
+                return None
+
+            next_cursor = next_cursor[0]
+            if next_cursor is None or str(next_cursor).strip() == "":
+                return None
+
+            return self.list(
+                organization_id=organization_id,
+                include_revoked=include_revoked,
+                page_token=next_cursor,
+                page_size=page_size,
+                retries=retries,
             )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.ListAPIKeysResponseResponse(
+                result=unmarshal_json_response(models.ListAPIKeysResponse, http_res),
+                next=next_func,
+                headers={},
+            )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.FactifyDefaultError(
@@ -113,7 +148,7 @@ class APIKeys(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def list_api_keys_async(
+    async def list_async(
         self,
         *,
         organization_id: str,
@@ -124,7 +159,7 @@ class APIKeys(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.FactifyAPIV1betaListAPIKeysResponse:
+    ) -> Optional[models.ListAPIKeysResponseResponse]:
         r"""List API keys
 
         Lists API keys for an organization.
@@ -193,14 +228,51 @@ class APIKeys(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.FactifyAPIV1betaListAPIKeysResponse, http_res
+        def next_func() -> Awaitable[Optional[models.ListAPIKeysResponseResponse]]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+
+            async def empty_result():
+                return None
+
+            next_cursor = JSONPath("$.pagination.next_page_token").parse(body)
+
+            if len(next_cursor) == 0:
+                return empty_result()
+
+            next_cursor = next_cursor[0]
+            if next_cursor is None or str(next_cursor).strip() == "":
+                return empty_result()
+
+            return self.list_async(
+                organization_id=organization_id,
+                include_revoked=include_revoked,
+                page_token=next_cursor,
+                page_size=page_size,
+                retries=retries,
             )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.ListAPIKeysResponseResponse(
+                result=unmarshal_json_response(models.ListAPIKeysResponse, http_res),
+                next=next_func,
+                headers={},
+            )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.FactifyDefaultError(
@@ -214,113 +286,30 @@ class APIKeys(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def create_api_key(
+    def create(
         self,
         *,
-        organization_id: str,
         name: str,
+        organization_id: str,
         expires_at: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.FactifyAPIV1betaCreateAPIKeyResponse:
+    ) -> models.CreateAPIKeyResponseResponse:
         r"""Create an API key
 
         Creates a new API key for the specified organization. The secret is only returned once in the response and cannot be retrieved later.
 
+        :param name: Human-readable name for the key (e.g., \"Production\", \"Staging\").
         :param organization_id: Organization ID to create the key for.
             Pattern: org_[0-9a-hjkmnp-tv-z]{26}
-        :param name: Human-readable name for the key (e.g., \"Production\", \"Staging\").
-        :param expires_at: A Timestamp represents a point in time independent of any time zone or local
-            calendar, encoded as a count of seconds and fractions of seconds at
-            nanosecond resolution. The count is relative to an epoch at UTC midnight on
-            January 1, 1970, in the proleptic Gregorian calendar which extends the
-            Gregorian calendar backwards to year one.
+        :param expires_at: Expiration timestamp. If not set, the key does not expire.
+            When set, must be in the future and within 1 year.
+            Security note: Keys without expiration should be rotated periodically.
+            timestamp.gt_now = true
+            timestamp.within = 8760h0m0s
 
-            All minutes are 60 seconds long. Leap seconds are \"smeared\" so that no leap
-            second table is needed for interpretation, using a [24-hour linear
-            smear](https://developers.google.com/time/smear).
-
-            The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
-            restricting to that range, we ensure that we can convert to and from [RFC
-            3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.
-
-            # Examples
-
-            Example 1: Compute Timestamp from POSIX `time()`.
-
-            Timestamp timestamp;
-            timestamp.set_seconds(time(NULL));
-            timestamp.set_nanos(0);
-
-            Example 2: Compute Timestamp from POSIX `gettimeofday()`.
-
-            struct timeval tv;
-            gettimeofday(&tv, NULL);
-
-            Timestamp timestamp;
-            timestamp.set_seconds(tv.tv_sec);
-            timestamp.set_nanos(tv.tv_usec * 1000);
-
-            Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.
-
-            FILETIME ft;
-            GetSystemTimeAsFileTime(&ft);
-            UINT64 ticks = (((UINT64)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;
-
-            // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
-            // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
-            Timestamp timestamp;
-            timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
-            timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
-
-            Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.
-
-            long millis = System.currentTimeMillis();
-
-            Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
-            .setNanos((int) ((millis % 1000) * 1000000)).build();
-
-            Example 5: Compute Timestamp from Java `Instant.now()`.
-
-            Instant now = Instant.now();
-
-            Timestamp timestamp =
-            Timestamp.newBuilder().setSeconds(now.getEpochSecond())
-            .setNanos(now.getNano()).build();
-
-            Example 6: Compute Timestamp from current time in Python.
-
-            timestamp = Timestamp()
-            timestamp.GetCurrentTime()
-
-            # JSON Mapping
-
-            In JSON format, the Timestamp type is encoded as a string in the
-            [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the
-            format is \"{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z\"
-            where {year} is always expressed using four digits while {month}, {day},
-            {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
-            seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
-            are optional. The \"Z\" suffix indicates the timezone (\"UTC\"); the timezone
-            is required. A proto3 JSON serializer should always use UTC (as indicated by
-            \"Z\") when printing the Timestamp type and a proto3 JSON parser should be
-            able to accept both UTC and other timezones (as indicated by an offset).
-
-            For example, \"2017-01-15T01:30:15.01Z\" encodes 15.01 seconds past
-            01:30 UTC on January 15, 2017.
-
-            In JavaScript, one can convert a Date object to this format using the
-            standard
-            [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
-            method. In Python, a standard `datetime.datetime` object can be converted
-            to this format using
-            [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with
-            the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use
-            the Joda Time's [`ISODateTimeFormat.dateTime()`](
-            http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()
-            ) to obtain a formatter capable of generating timestamps in this format.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -336,10 +325,10 @@ class APIKeys(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.FactifyAPIV1betaCreateAPIKeyRequest(
-            organization_id=organization_id,
-            name=name,
+        request = models.CreateAPIKeyRequest(
             expires_at=expires_at,
+            name=name,
+            organization_id=organization_id,
         )
 
         req = self._build_request(
@@ -356,11 +345,7 @@ class APIKeys(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                False,
-                "json",
-                models.FactifyAPIV1betaCreateAPIKeyRequest,
+                request, False, False, "json", models.CreateAPIKeyRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -383,14 +368,27 @@ class APIKeys(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.FactifyAPIV1betaCreateAPIKeyResponse, http_res
+            return models.CreateAPIKeyResponseResponse(
+                result=unmarshal_json_response(models.CreateAPIKeyResponse, http_res),
+                headers={},
             )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.FactifyDefaultError(
@@ -404,113 +402,30 @@ class APIKeys(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def create_api_key_async(
+    async def create_async(
         self,
         *,
-        organization_id: str,
         name: str,
+        organization_id: str,
         expires_at: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.FactifyAPIV1betaCreateAPIKeyResponse:
+    ) -> models.CreateAPIKeyResponseResponse:
         r"""Create an API key
 
         Creates a new API key for the specified organization. The secret is only returned once in the response and cannot be retrieved later.
 
+        :param name: Human-readable name for the key (e.g., \"Production\", \"Staging\").
         :param organization_id: Organization ID to create the key for.
             Pattern: org_[0-9a-hjkmnp-tv-z]{26}
-        :param name: Human-readable name for the key (e.g., \"Production\", \"Staging\").
-        :param expires_at: A Timestamp represents a point in time independent of any time zone or local
-            calendar, encoded as a count of seconds and fractions of seconds at
-            nanosecond resolution. The count is relative to an epoch at UTC midnight on
-            January 1, 1970, in the proleptic Gregorian calendar which extends the
-            Gregorian calendar backwards to year one.
+        :param expires_at: Expiration timestamp. If not set, the key does not expire.
+            When set, must be in the future and within 1 year.
+            Security note: Keys without expiration should be rotated periodically.
+            timestamp.gt_now = true
+            timestamp.within = 8760h0m0s
 
-            All minutes are 60 seconds long. Leap seconds are \"smeared\" so that no leap
-            second table is needed for interpretation, using a [24-hour linear
-            smear](https://developers.google.com/time/smear).
-
-            The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
-            restricting to that range, we ensure that we can convert to and from [RFC
-            3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.
-
-            # Examples
-
-            Example 1: Compute Timestamp from POSIX `time()`.
-
-            Timestamp timestamp;
-            timestamp.set_seconds(time(NULL));
-            timestamp.set_nanos(0);
-
-            Example 2: Compute Timestamp from POSIX `gettimeofday()`.
-
-            struct timeval tv;
-            gettimeofday(&tv, NULL);
-
-            Timestamp timestamp;
-            timestamp.set_seconds(tv.tv_sec);
-            timestamp.set_nanos(tv.tv_usec * 1000);
-
-            Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.
-
-            FILETIME ft;
-            GetSystemTimeAsFileTime(&ft);
-            UINT64 ticks = (((UINT64)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;
-
-            // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
-            // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
-            Timestamp timestamp;
-            timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));
-            timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
-
-            Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.
-
-            long millis = System.currentTimeMillis();
-
-            Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
-            .setNanos((int) ((millis % 1000) * 1000000)).build();
-
-            Example 5: Compute Timestamp from Java `Instant.now()`.
-
-            Instant now = Instant.now();
-
-            Timestamp timestamp =
-            Timestamp.newBuilder().setSeconds(now.getEpochSecond())
-            .setNanos(now.getNano()).build();
-
-            Example 6: Compute Timestamp from current time in Python.
-
-            timestamp = Timestamp()
-            timestamp.GetCurrentTime()
-
-            # JSON Mapping
-
-            In JSON format, the Timestamp type is encoded as a string in the
-            [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the
-            format is \"{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z\"
-            where {year} is always expressed using four digits while {month}, {day},
-            {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
-            seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
-            are optional. The \"Z\" suffix indicates the timezone (\"UTC\"); the timezone
-            is required. A proto3 JSON serializer should always use UTC (as indicated by
-            \"Z\") when printing the Timestamp type and a proto3 JSON parser should be
-            able to accept both UTC and other timezones (as indicated by an offset).
-
-            For example, \"2017-01-15T01:30:15.01Z\" encodes 15.01 seconds past
-            01:30 UTC on January 15, 2017.
-
-            In JavaScript, one can convert a Date object to this format using the
-            standard
-            [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
-            method. In Python, a standard `datetime.datetime` object can be converted
-            to this format using
-            [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with
-            the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use
-            the Joda Time's [`ISODateTimeFormat.dateTime()`](
-            http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()
-            ) to obtain a formatter capable of generating timestamps in this format.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -526,10 +441,10 @@ class APIKeys(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.FactifyAPIV1betaCreateAPIKeyRequest(
-            organization_id=organization_id,
-            name=name,
+        request = models.CreateAPIKeyRequest(
             expires_at=expires_at,
+            name=name,
+            organization_id=organization_id,
         )
 
         req = self._build_request_async(
@@ -546,11 +461,7 @@ class APIKeys(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                False,
-                "json",
-                models.FactifyAPIV1betaCreateAPIKeyRequest,
+                request, False, False, "json", models.CreateAPIKeyRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -573,14 +484,27 @@ class APIKeys(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.FactifyAPIV1betaCreateAPIKeyResponse, http_res
+            return models.CreateAPIKeyResponseResponse(
+                result=unmarshal_json_response(models.CreateAPIKeyResponse, http_res),
+                headers={},
             )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.FactifyDefaultError(
@@ -594,23 +518,20 @@ class APIKeys(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def revoke_api_key(
+    def revoke(
         self,
         *,
-        api_key_id_param: str,
         api_key_id: str,
         reason: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.FactifyAPIV1betaRevokeAPIKeyResponse:
+    ) -> models.RevokeAPIKeyResponseResponse:
         r"""Revoke an API key
 
         Revokes an API key, immediately preventing it from being used for authentication.
 
-        :param api_key_id_param: API key ID to revoke.
-            Pattern: key_[0-9a-hjkmnp-tv-z]{26}
         :param api_key_id: API key ID to revoke.
             Pattern: key_[0-9a-hjkmnp-tv-z]{26}
         :param reason: Optional reason for revocation (for audit purposes).
@@ -631,9 +552,8 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.RevokeAPIKeyRequest(
-            api_key_id_param=api_key_id_param,
+            api_key_id=api_key_id,
             body=models.RevokeAPIKeyRevokeAPIKeyRequest(
-                api_key_id=api_key_id,
                 reason=reason,
             ),
         )
@@ -679,14 +599,27 @@ class APIKeys(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.FactifyAPIV1betaRevokeAPIKeyResponse, http_res
+            return models.RevokeAPIKeyResponseResponse(
+                result=unmarshal_json_response(models.RevokeAPIKeyResponse, http_res),
+                headers={},
             )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.FactifyDefaultError(
@@ -700,23 +633,20 @@ class APIKeys(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def revoke_api_key_async(
+    async def revoke_async(
         self,
         *,
-        api_key_id_param: str,
         api_key_id: str,
         reason: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.FactifyAPIV1betaRevokeAPIKeyResponse:
+    ) -> models.RevokeAPIKeyResponseResponse:
         r"""Revoke an API key
 
         Revokes an API key, immediately preventing it from being used for authentication.
 
-        :param api_key_id_param: API key ID to revoke.
-            Pattern: key_[0-9a-hjkmnp-tv-z]{26}
         :param api_key_id: API key ID to revoke.
             Pattern: key_[0-9a-hjkmnp-tv-z]{26}
         :param reason: Optional reason for revocation (for audit purposes).
@@ -737,9 +667,8 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.RevokeAPIKeyRequest(
-            api_key_id_param=api_key_id_param,
+            api_key_id=api_key_id,
             body=models.RevokeAPIKeyRevokeAPIKeyRequest(
-                api_key_id=api_key_id,
                 reason=reason,
             ),
         )
@@ -785,14 +714,27 @@ class APIKeys(BaseSDK):
                 security_source=self.sdk_configuration.security,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.FactifyAPIV1betaRevokeAPIKeyResponse, http_res
+            return models.RevokeAPIKeyResponseResponse(
+                result=unmarshal_json_response(models.RevokeAPIKeyResponse, http_res),
+                headers={},
             )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorData, http_res)
+            raise errors.Error(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.FactifyDefaultError(
