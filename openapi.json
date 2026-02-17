@@ -4476,18 +4476,18 @@
         },
         "summary": "Get organization quota status",
         "tags": [
-          "Quota"
+          "Usage"
         ],
         "x-codeSamples": [
           {
             "lang": "typescript",
             "label": "getOrganizationQuota",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.quota.getOrganizationQuota({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.usage.getOrganizationQuota({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "lang": "python",
             "label": "getOrganizationQuota",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.quota.get_organization_quota(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_organization_quota_response is not None\n\n    # Handle response\n    print(res.get_organization_quota_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.get_organization_quota(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_organization_quota_response is not None\n\n    # Handle response\n    print(res.get_organization_quota_response)"
           }
         ]
       }
@@ -4542,18 +4542,18 @@
         },
         "summary": "List API key quotas",
         "tags": [
-          "Quota"
+          "Usage"
         ],
         "x-codeSamples": [
           {
             "lang": "typescript",
             "label": "listAPIKeyQuotas",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.quota.listAPIKeyQuotas({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.usage.listAPIKeyQuotas({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "lang": "python",
             "label": "listAPIKeyQuotas",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.quota.list_api_key_quotas(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.list_api_key_quotas_response is not None\n\n    # Handle response\n    print(res.list_api_key_quotas_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.list_api_key_quotas(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.list_api_key_quotas_response is not None\n\n    # Handle response\n    print(res.list_api_key_quotas_response)"
           }
         ]
       }
@@ -4621,18 +4621,18 @@
         },
         "summary": "Delete API key quota",
         "tags": [
-          "Quota"
+          "Usage"
         ],
         "x-codeSamples": [
           {
             "lang": "typescript",
             "label": "deleteAPIKeyQuota",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.quota.deleteAPIKeyQuota({\n    apiKeyId: \"<id>\",\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.usage.deleteAPIKeyQuota({\n    apiKeyId: \"<id>\",\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "lang": "python",
             "label": "deleteAPIKeyQuota",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.quota.delete_api_key_quota(api_key_id=\"<id>\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.delete_api_key_quota_response is not None\n\n    # Handle response\n    print(res.delete_api_key_quota_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.delete_api_key_quota(api_key_id=\"<id>\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.delete_api_key_quota_response is not None\n\n    # Handle response\n    print(res.delete_api_key_quota_response)"
           }
         ]
       },
@@ -4717,18 +4717,18 @@
         },
         "summary": "Set API key quota",
         "tags": [
-          "Quota"
+          "Usage"
         ],
         "x-codeSamples": [
           {
             "lang": "typescript",
             "label": "setAPIKeyQuota",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.quota.setAPIKeyQuota({\n    apiKeyId: \"<id>\",\n    body: {\n      organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.usage.setAPIKeyQuota({\n    apiKeyId: \"<id>\",\n    body: {\n      organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "lang": "python",
             "label": "setAPIKeyQuota",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.quota.set_api_key_quota(api_key_id=\"<id>\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.set_api_key_quota_response is not None\n\n    # Handle response\n    print(res.set_api_key_quota_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.set_api_key_quota(api_key_id=\"<id>\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.set_api_key_quota_response is not None\n\n    # Handle response\n    print(res.set_api_key_quota_response)"
           }
         ]
       }
@@ -4792,18 +4792,18 @@
         },
         "summary": "Get usage history",
         "tags": [
-          "Quota"
+          "Usage"
         ],
         "x-codeSamples": [
           {
             "lang": "typescript",
             "label": "getUsageHistory",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.quota.getUsageHistory({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.usage.getUsageHistory({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "lang": "python",
             "label": "getUsageHistory",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.quota.get_usage_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_usage_history_response is not None\n\n    # Handle response\n    print(res.get_usage_history_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.get_usage_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_usage_history_response is not None\n\n    # Handle response\n    print(res.get_usage_history_response)"
           }
         ]
       }
@@ -5003,7 +5003,7 @@
     },
     {
       "description": "Query API usage and quota information for your organization.",
-      "name": "Quota"
+      "name": "Usage"
     },
     {
       "description": "Attach and manage access policies for documents.",
