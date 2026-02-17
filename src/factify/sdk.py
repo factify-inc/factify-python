@@ -20,8 +20,8 @@ if TYPE_CHECKING:
     from factify.entrypages import EntryPages
     from factify.organizations import Organizations
     from factify.policies import Policies
-    from factify.quota import Quota
     from factify.quotas import Quotas
+    from factify.usage import Usage
     from factify.versions import Versions
 
 
@@ -70,7 +70,7 @@ class Factify(BaseSDK):
     r"""Manage document versions and version history."""
     organizations: "Organizations"
     r"""Create and manage organizations and member invitations."""
-    quota: "Quota"
+    usage: "Usage"
     r"""Query API usage and quota information for your organization."""
     _sub_sdk_map = {
         "quotas": ("factify.quotas", "Quotas"),
@@ -80,7 +80,7 @@ class Factify(BaseSDK):
         "policies": ("factify.policies", "Policies"),
         "versions": ("factify.versions", "Versions"),
         "organizations": ("factify.organizations", "Organizations"),
-        "quota": ("factify.quota", "Quota"),
+        "usage": ("factify.usage", "Usage"),
     }
 
     def __init__(

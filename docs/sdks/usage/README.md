@@ -1,4 +1,4 @@
-# Quota
+# Usage
 
 ## Overview
 
@@ -27,7 +27,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.quota.get_organization_quota(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
+    res = f_client.usage.get_organization_quota(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
 
     # Handle response
     print(res)
@@ -69,7 +69,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.quota.list_api_key_quotas(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
+    res = f_client.usage.list_api_key_quotas(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
 
     # Handle response
     print(res)
@@ -111,7 +111,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.quota.delete_api_key_quota(api_key_id="<id>", organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
+    res = f_client.usage.delete_api_key_quota(api_key_id="<id>", organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
 
     # Handle response
     print(res)
@@ -154,7 +154,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.quota.set_api_key_quota(api_key_id="<id>", organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
+    res = f_client.usage.set_api_key_quota(api_key_id="<id>", organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
 
     # Handle response
     print(res)
@@ -198,7 +198,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.quota.get_usage_history(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
+    res = f_client.usage.get_usage_history(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
 
     # Handle response
     print(res)

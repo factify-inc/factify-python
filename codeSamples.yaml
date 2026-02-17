@@ -146,31 +146,31 @@ actions:
       "x-codeSamples":
         - "lang": "python"
           "label": "getOrganizationQuota"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.quota.get_organization_quota(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.get_organization_quota(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/quota/keys"]["get"]
     update:
       "x-codeSamples":
         - "lang": "python"
           "label": "listAPIKeyQuotas"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.quota.list_api_key_quotas(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.list_api_key_quotas(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/quota/keys/{api_key_id}"]["delete"]
     update:
       "x-codeSamples":
         - "lang": "python"
           "label": "deleteAPIKeyQuota"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.quota.delete_api_key_quota(api_key_id=\"<id>\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.delete_api_key_quota(api_key_id=\"<id>\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/quota/keys/{api_key_id}"]["put"]
     update:
       "x-codeSamples":
         - "lang": "python"
           "label": "setAPIKeyQuota"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.quota.set_api_key_quota(api_key_id=\"<id>\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.set_api_key_quota(api_key_id=\"<id>\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/quota/usage"]["get"]
     update:
       "x-codeSamples":
         - "lang": "python"
           "label": "getUsageHistory"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.quota.get_usage_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.get_usage_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/versions/{version_id}"]["get"]
     update:
       "x-codeSamples":

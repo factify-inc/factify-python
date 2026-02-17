@@ -9,7 +9,7 @@ from factify.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional
 
 
-class Quota(BaseSDK):
+class Usage(BaseSDK):
     r"""Query API usage and quota information for your organization."""
 
     def get_organization_quota(
