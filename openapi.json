@@ -7,22 +7,48 @@
             "examples": {
               "validation_error": {
                 "value": {
-                  "error": {
-                    "code": "missing_required_field",
-                    "message": "Document title cannot be empty",
-                    "param": "title",
-                    "retry_after": null,
-                    "type": "invalid_request_error"
-                  }
+                  "code": "invalid_argument",
+                  "details": [
+                    {
+                      "param": "title",
+                      "reason": "missing_required_field",
+                      "request_id": "req_01arwx4k8xrgqskvxq69gdn019"
+                    }
+                  ],
+                  "message": "Document title cannot be empty"
                 }
               }
             },
             "schema": {
-              "$ref": "#/components/schemas/Error"
+              "$ref": "#/components/schemas/ErrorResponse"
             }
           }
         },
         "description": "Invalid request parameters"
+      },
+      "Conflict": {
+        "content": {
+          "application/json": {
+            "examples": {
+              "already_exists": {
+                "value": {
+                  "code": "already_exists",
+                  "details": [
+                    {
+                      "reason": "resource_already_exists",
+                      "request_id": "req_01arwx4k8xrgqskvxq69gdn019"
+                    }
+                  ],
+                  "message": "Document already exists"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        },
+        "description": "Resource already exists"
       },
       "Forbidden": {
         "content": {
@@ -30,18 +56,19 @@
             "examples": {
               "insufficient_permissions": {
                 "value": {
-                  "error": {
-                    "code": "insufficient_permissions",
-                    "message": "You do not have permission to access this resource",
-                    "param": null,
-                    "retry_after": null,
-                    "type": "authorization_error"
-                  }
+                  "code": "permission_denied",
+                  "details": [
+                    {
+                      "reason": "insufficient_permissions",
+                      "request_id": "req_01arwx4k8xrgqskvxq69gdn019"
+                    }
+                  ],
+                  "message": "Permission denied"
                 }
               }
             },
             "schema": {
-              "$ref": "#/components/schemas/Error"
+              "$ref": "#/components/schemas/ErrorResponse"
             }
           }
         },
@@ -53,18 +80,19 @@
             "examples": {
               "internal_error": {
                 "value": {
-                  "error": {
-                    "code": "internal_error",
-                    "message": "An unexpected error occurred. Please try again later.",
-                    "param": null,
-                    "retry_after": null,
-                    "type": "api_error"
-                  }
+                  "code": "internal",
+                  "details": [
+                    {
+                      "reason": "internal_error",
+                      "request_id": "req_01arwx4k8xrgqskvxq69gdn019"
+                    }
+                  ],
+                  "message": "An internal error occurred"
                 }
               }
             },
             "schema": {
-              "$ref": "#/components/schemas/Error"
+              "$ref": "#/components/schemas/ErrorResponse"
             }
           }
         },
@@ -76,18 +104,19 @@
             "examples": {
               "resource_not_found": {
                 "value": {
-                  "error": {
-                    "code": "resource_not_found",
-                    "message": "Document not found",
-                    "param": null,
-                    "retry_after": null,
-                    "type": "not_found_error"
-                  }
+                  "code": "not_found",
+                  "details": [
+                    {
+                      "reason": "resource_not_found",
+                      "request_id": "req_01arwx4k8xrgqskvxq69gdn019"
+                    }
+                  ],
+                  "message": "Document not found"
                 }
               }
             },
             "schema": {
-              "$ref": "#/components/schemas/Error"
+              "$ref": "#/components/schemas/ErrorResponse"
             }
           }
         },
@@ -99,18 +128,19 @@
             "examples": {
               "rate_limit": {
                 "value": {
-                  "error": {
-                    "code": "rate_limit_exceeded",
-                    "message": "Too many requests. Retry after 30 seconds.",
-                    "param": null,
-                    "retry_after": 30,
-                    "type": "rate_limit_error"
-                  }
+                  "code": "resource_exhausted",
+                  "details": [
+                    {
+                      "reason": "rate_limit_exceeded",
+                      "request_id": "req_01arwx4k8xrgqskvxq69gdn019"
+                    }
+                  ],
+                  "message": "Too many requests"
                 }
               }
             },
             "schema": {
-              "$ref": "#/components/schemas/Error"
+              "$ref": "#/components/schemas/ErrorResponse"
             }
           }
         },
@@ -136,24 +166,49 @@
           }
         }
       },
+      "ServiceUnavailable": {
+        "content": {
+          "application/json": {
+            "examples": {
+              "unavailable": {
+                "value": {
+                  "code": "unavailable",
+                  "details": [
+                    {
+                      "reason": "service_unavailable",
+                      "request_id": "req_01arwx4k8xrgqskvxq69gdn019"
+                    }
+                  ],
+                  "message": "Service temporarily unavailable"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        },
+        "description": "Service temporarily unavailable"
+      },
       "Unauthorized": {
         "content": {
           "application/json": {
             "examples": {
               "missing_key": {
                 "value": {
-                  "error": {
-                    "code": "missing_api_key",
-                    "message": "No API key provided",
-                    "param": null,
-                    "retry_after": null,
-                    "type": "authentication_error"
-                  }
+                  "code": "unauthenticated",
+                  "details": [
+                    {
+                      "reason": "missing_api_key",
+                      "request_id": "req_01arwx4k8xrgqskvxq69gdn019"
+                    }
+                  ],
+                  "message": "API key is required"
                 }
               }
             },
             "schema": {
-              "$ref": "#/components/schemas/Error"
+              "$ref": "#/components/schemas/ErrorResponse"
             }
           }
         },
@@ -813,57 +868,82 @@
         "description": "A generic empty message that you can re-use to avoid defining duplicated\n empty messages in your APIs. A typical example is to use it as the request\n or the response type of an API method. For instance:\n\n     service Foo {\n       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);\n     }",
         "type": "object"
       },
-      "Error": {
+      "ErrorDetail": {
         "properties": {
-          "error": {
-            "properties": {
-              "code": {
-                "description": "Specific error code for detailed handling",
-                "type": "string"
-              },
-              "message": {
-                "description": "Human-readable error message",
-                "type": "string"
-              },
-              "param": {
-                "description": "Parameter that caused the error (for validation errors)",
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "retry_after": {
-                "description": "Seconds to wait before retrying (for rate limit errors)",
-                "type": [
-                  "integer",
-                  "null"
-                ]
-              },
-              "type": {
-                "description": "Error type for programmatic handling",
-                "enum": [
-                  "invalid_request_error",
-                  "authentication_error",
-                  "authorization_error",
-                  "not_found_error",
-                  "rate_limit_error",
-                  "api_error"
-                ],
-                "type": "string"
-              }
-            },
-            "required": [
-              "type",
-              "message",
-              "code",
-              "param",
-              "retry_after"
+          "param": {
+            "description": "The parameter that caused the error (only set for validation errors)",
+            "type": "string"
+          },
+          "reason": {
+            "description": "Machine-readable error reason for programmatic handling",
+            "enum": [
+              "missing_required_field",
+              "invalid_field_value",
+              "invalid_enum_value",
+              "invalid_cursor",
+              "invalid_id_format",
+              "missing_api_key",
+              "invalid_api_key",
+              "expired_api_key",
+              "invalid_token",
+              "expired_token",
+              "authentication_required",
+              "insufficient_permissions",
+              "resource_not_found",
+              "resource_already_exists",
+              "rate_limit_exceeded",
+              "quota_exceeded",
+              "precondition_failed",
+              "feature_disabled",
+              "internal_error",
+              "service_unavailable",
+              "unimplemented"
             ],
-            "type": "object"
+            "type": "string"
+          },
+          "request_id": {
+            "description": "Request correlation ID for tracing and log lookup (e.g., \"req_01arwx4k8xrgqskvxq69gdn019\")",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "code": {
+            "description": "ConnectRPC error code. Maps to HTTP status codes:\n- invalid_argument, failed_precondition -> 400\n- unauthenticated -> 401\n- permission_denied -> 403\n- not_found -> 404\n- already_exists -> 409\n- resource_exhausted -> 429\n- deadline_exceeded -> 408\n- canceled -> 499\n- internal, unknown -> 500 (unknown may appear as 400 for malformed JSON requests)\n- unimplemented -> 501\n- unavailable -> 503\n",
+            "enum": [
+              "unknown",
+              "invalid_argument",
+              "unauthenticated",
+              "permission_denied",
+              "not_found",
+              "already_exists",
+              "resource_exhausted",
+              "failed_precondition",
+              "internal",
+              "unavailable",
+              "unimplemented",
+              "canceled",
+              "deadline_exceeded"
+            ],
+            "type": "string"
+          },
+          "details": {
+            "description": "Structured error details for programmatic handling",
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            },
+            "type": "array"
+          },
+          "message": {
+            "description": "Human-readable error message",
+            "type": "string"
           }
         },
         "required": [
-          "error"
+          "code",
+          "message"
         ],
         "type": "object"
       },
@@ -2318,7 +2398,7 @@
       "name": "Factify API Support",
       "url": "https://factify.com/support"
     },
-    "description": "Factify API enables you to create, manage, and control access to legally-binding documents that replace PDFs.\n\n## Authentication\n\nBearer authentication header of the form Bearer <token>, where <token> is your auth token.\n\n```\nAuthorization: Bearer ffy...\n```\n\n## Rate Limiting\n\n- 1000 requests per minute per API key\n- 100 requests per minute for resource creation (POST)\n\n## Errors\n\nFactify uses conventional HTTP status codes and returns structured error responses:\n\n```json\n{\n  \"error\": {\n    \"type\": \"invalid_request_error\",\n    \"message\": \"Document title cannot be empty\",\n    \"param\": \"title\",\n    \"code\": \"missing_required_field\"\n  }\n}\n```\n",
+    "description": "Factify API enables you to create, manage, and control access to legally-binding documents that replace PDFs.\n\n## Authentication\n\nBearer authentication header of the form Bearer <token>, where <token> is your auth token.\n\n```\nAuthorization: Bearer ffy...\n```\n\n## Rate Limiting\n\n- 1000 requests per minute per API key\n- 100 requests per minute for resource creation (POST)\n\n## Errors\n\nFactify uses conventional HTTP status codes and returns structured error responses\nusing the [ConnectRPC error format](https://connectrpc.com/docs/protocol#error-codes):\n\n```json\n{\n  \"code\": \"invalid_argument\",\n  \"message\": \"limit must be positive\",\n  \"details\": [\n    {\n      \"reason\": \"invalid_field_value\",\n      \"request_id\": \"req_01arwx4k8xrgqskvxq69gdn019\",\n      \"param\": \"limit\"\n    }\n  ]\n}\n```\n",
     "license": {
       "name": "Proprietary",
       "url": "https://factify.com/terms"
