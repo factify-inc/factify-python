@@ -12,7 +12,7 @@ from typing import Any, Dict, List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-Code = Literal[
+ConnectErrorCode = Literal[
     "canceled",
     "unknown",
     "invalid_argument",
@@ -36,7 +36,7 @@ r"""The status code, which should be an enum value of [google.rpc.Code][google.r
 class ConnectErrorTypedDict(TypedDict):
     r"""Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation"""
 
-    code: NotRequired[Code]
+    code: NotRequired[ConnectErrorCode]
     r"""The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code]."""
     details: NotRequired[List[ConnectErrorDetailsAnyTypedDict]]
     r"""A list of messages that carry the error details. There is no limit on the number of messages."""
@@ -52,7 +52,7 @@ class ConnectError(BaseModel):
     )
     __pydantic_extra__: Dict[str, Any] = pydantic.Field(init=False)
 
-    code: Optional[Code] = None
+    code: Optional[ConnectErrorCode] = None
     r"""The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code]."""
 
     details: Optional[List[ConnectErrorDetailsAny]] = None

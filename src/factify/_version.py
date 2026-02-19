@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "factify"
-__version__: str = "0.7.1-rc.4"
+__version__: str = "0.7.1-rc.5"
 __openapi_doc_version__: str = "1.0.0"
-__gen_version__: str = "2.827.0"
-__user_agent__: str = "speakeasy-sdk/python 0.7.1-rc.4 2.827.0 1.0.0 factify"
+__gen_version__: str = "2.832.6"
+__user_agent__: str = "speakeasy-sdk/python 0.7.1-rc.5 2.832.6 1.0.0 factify"
 
 try:
     if __package__ is not None:

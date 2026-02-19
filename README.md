@@ -22,16 +22,20 @@ Authorization: Bearer ffy...
 
 ## Errors
 
-Factify uses conventional HTTP status codes and returns structured error responses:
+Factify uses conventional HTTP status codes and returns structured error responses
+using the [ConnectRPC error format](https://connectrpc.com/docs/protocol#error-codes):
 
 ```json
 {
-  "error": {
-    "type": "invalid_request_error",
-    "message": "Document title cannot be empty",
-    "param": "title",
-    "code": "missing_required_field"
-  }
+  "code": "invalid_argument",
+  "message": "limit must be positive",
+  "details": [
+    {
+      "reason": "invalid_field_value",
+      "request_id": "req_01arwx4k8xrgqskvxq69gdn019",
+      "param": "limit"
+    }
+  ]
 }
 ```
 <!-- End Summary [summary] -->
@@ -414,14 +418,16 @@ with Factify(
         print(e.raw_response)
 
         # Depending on the method different errors may be thrown
-        if isinstance(e, errors.Error):
-            print(e.data.error)  # models.Error
+        if isinstance(e, errors.ErrorResponse):
+            print(e.data.code)  # models.ErrorResponseCode
+            print(e.data.details)  # Optional[List[models.ErrorDetail]]
+            print(e.data.message)  # str
 ```
 
 ### Error Classes
 **Primary errors:**
 * [`FactifyError`](./src/factify/errors/factifyerror.py): The base class for HTTP error responses.
-  * [`Error`](./src/factify/errors/error.py): Invalid request parameters.
+  * [`ErrorResponse`](./src/factify/errors/errorresponse.py): Invalid request parameters.
 
 <details><summary>Less common errors (5)</summary>
 

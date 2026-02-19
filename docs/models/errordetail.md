@@ -1,0 +1,10 @@
+# ErrorDetail
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `param`                                                                                    | *Optional[str]*                                                                            | :heavy_minus_sign:                                                                         | The parameter that caused the error (only set for validation errors)                       |
+| `reason`                                                                                   | [Optional[models.Reason]](../models/reason.md)                                             | :heavy_minus_sign:                                                                         | Machine-readable error reason for programmatic handling                                    |
+| `request_id`                                                                               | *Optional[str]*                                                                            | :heavy_minus_sign:                                                                         | Request correlation ID for tracing and log lookup (e.g., "req_01arwx4k8xrgqskvxq69gdn019") |

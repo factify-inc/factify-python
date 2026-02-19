@@ -43,16 +43,20 @@ class Factify(BaseSDK):
 
     ## Errors
 
-    Factify uses conventional HTTP status codes and returns structured error responses:
+    Factify uses conventional HTTP status codes and returns structured error responses
+    using the [ConnectRPC error format](https://connectrpc.com/docs/protocol#error-codes):
 
     ```json
     {
-    \"error\": {
-    \"type\": \"invalid_request_error\",
-    \"message\": \"Document title cannot be empty\",
-    \"param\": \"title\",
-    \"code\": \"missing_required_field\"
+    \"code\": \"invalid_argument\",
+    \"message\": \"limit must be positive\",
+    \"details\": [
+    {
+    \"reason\": \"invalid_field_value\",
+    \"request_id\": \"req_01arwx4k8xrgqskvxq69gdn019\",
+    \"param\": \"limit\"
     }
+    ]
     }
     ```
 

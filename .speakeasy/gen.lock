@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: b072938232f4985183d8c05028b761fa
+  docChecksum: e6fb0caf530230c261870c8156e6bd62
   docVersion: 1.0.0
-  speakeasyVersion: 1.720.0
-  generationVersion: 2.827.0
-  releaseVersion: 0.7.1-rc.4
-  configChecksum: 4c428f49d47ff893aa2848f2d0427f13
+  speakeasyVersion: 1.722.6
+  generationVersion: 2.832.6
+  releaseVersion: 0.7.1-rc.5
+  configChecksum: 7f573d77cd77ae47da1391e967f96c50
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: 4cd1cd59-17ba-4ab5-ba0b-4433e71e950c
-  pristine_commit_hash: c54556900f83dd6cbc27d07f4bedfbfe06ff6678
-  pristine_tree_hash: cd19f2b43583673d0e0d6005bcf10bfdd9aa9252
+  generation_id: 9518f86c-a71b-4761-b1b6-9ed8602c3a4f
+  pristine_commit_hash: a3e39910450c76d983feb258e7c7df368f9d281f
+  pristine_tree_hash: f30b922e977afe5eddf37c36cc4aa8a218b6023f
 features:
   python:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.6
-    core: 6.0.6
+    core: 6.0.8
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
@@ -38,7 +38,7 @@ features:
     nullables: 1.0.2
     pagination: 3.0.7
     responseFormat: 1.1.0
-    retries: 3.0.3
+    retries: 3.0.4
     sdkHooks: 1.2.1
     unions: 3.1.4
     uploadStreams: 1.0.0
@@ -55,10 +55,10 @@ trackedFiles:
     id: 3aed33ce6e6f
     last_write_checksum: sha1:1e6044b8df354f3585348f7962fe575b3205fe7c
     pristine_git_object: 3b8fbafba26b84f8330ecea3b618c77d13405c1c
-  docs/errors/error.md:
-    id: 098e4ba23534
-    last_write_checksum: sha1:a52269ca8f90b1a42f6f55dcf48ac287f44954fd
-    pristine_git_object: f096ccc44e6de6778f240fb0730b824d25ae5b63
+  docs/errors/errorresponse.md:
+    id: 910ef333346b
+    last_write_checksum: sha1:a39d61fa187f1ad906f3e2ef0b827006c3b6fb14
+    pristine_git_object: e38a2f142568c73d98fa1f67b68aae83b3408601
   docs/models/acceptorganizationinviteacceptorganizationinviterequest.md:
     id: f4478c333022
     last_write_checksum: sha1:53745f58a76434514ffdc993b3061bcb065187cc
@@ -99,14 +99,14 @@ trackedFiles:
     id: 8601488d651d
     last_write_checksum: sha1:4cfe9e244ff65eb91c5b0d56c43bb5cef9cdaba9
     pristine_git_object: f7bf7e7afe7ad29fc590e4f3251a094a0f875d60
-  docs/models/code.md:
-    id: 2fcb3964c9c0
-    last_write_checksum: sha1:84ef72a44506c8023dbe11cc75bda8d3278b643a
-    pristine_git_object: 67dbd2307c06b24371d2ec0a0ae1f5f98c12e9d0
   docs/models/connecterror.md:
     id: c2723113090a
-    last_write_checksum: sha1:f75258a1b3d4c0a97866754abeb9f4de5c8c3fa6
-    pristine_git_object: 15d9d92cb34599e75ce205f92e33ddee4384abdf
+    last_write_checksum: sha1:4be0f92f1d5401ae935ce955039cd58460f9a2cf
+    pristine_git_object: b72cac160764034824ccc0960aabce94bbf62974
+  docs/models/connecterrorcode.md:
+    id: 49e4f7c52335
+    last_write_checksum: sha1:bbafda9d856fedf3ffbc5e6fde7426408b8e5b21
+    pristine_git_object: e2d70d0561c9f69f762e70c7b3b5baca51918d89
   docs/models/connecterrordetailsany.md:
     id: 6b91ab191084
     last_write_checksum: sha1:05a2f2e7d0bf8441c7a3bb9896afd4ceefce1a22
@@ -231,10 +231,14 @@ trackedFiles:
     id: b557679773a6
     last_write_checksum: sha1:6d3dc785671bab2893660c7b20cdbc235652c5f5
     pristine_git_object: d78b72a88c79071e7108bb6b302001d7b6f1bd1a
-  docs/models/error.md:
-    id: b96a6fb71e96
-    last_write_checksum: sha1:d75149f541903d8e5a1acd3309804579ab7391e0
-    pristine_git_object: f873d432284ac4957cd3dcbde2989dcca28369ec
+  docs/models/errordetail.md:
+    id: 8ef87dd0aeb1
+    last_write_checksum: sha1:917a9559710a76fa6793e6104f091ce78a22c508
+    pristine_git_object: 912347a482feb7d482aec1404b409f8fa801c70e
+  docs/models/errorresponsecode.md:
+    id: efb5019826be
+    last_write_checksum: sha1:602c5366f42d95789f6b334b34f5678384f87623
+    pristine_git_object: 5ed99dd9672738ae61342a3dc7c03bcb5010a208
   docs/models/generatedocumententrypagerequest.md:
     id: 29b54169b01e
     last_write_checksum: sha1:32e59431f7ad06a925c0a989f0f8e8f72660892f
@@ -455,6 +459,10 @@ trackedFiles:
     id: 3d1904143345
     last_write_checksum: sha1:a3cfbf10bcc8908ab063f049a3a1089712199695
     pristine_git_object: 686b2986bf8c4073fb681f7a9d1dd6a99a31286c
+  docs/models/reason.md:
+    id: 087688da6fd4
+    last_write_checksum: sha1:1f2349f102862caf34d75e59f70c37eb399af157
+    pristine_git_object: 41127b792f48a4d6c563bbc3186560ae12adfb95
   docs/models/resendorganizationinviterequest.md:
     id: f302f6bac0c0
     last_write_checksum: sha1:de5f371af9af6cfb47cf8f83e9a5a0c68978cee6
@@ -531,10 +539,6 @@ trackedFiles:
     id: 09810953fa92
     last_write_checksum: sha1:ff92c940c6422f6691edcdc918e7322965bb288d
     pristine_git_object: ec299a1e41be8f44c97d92842fd6a7f420af28d6
-  docs/models/type.md:
-    id: 98c32f09b2c8
-    last_write_checksum: sha1:4dc1f99fe28714517c3b53c5c080899a73a0ec6c
-    pristine_git_object: 4c0d8ca77be96476fddfc6a1e3f1f1ab89e27850
   docs/models/updatedocumentrequest.md:
     id: ee4e094a6aa7
     last_write_checksum: sha1:9ad72d59301a8ee43bdbd2ead72d42756411d5a4
@@ -585,40 +589,40 @@ trackedFiles:
     pristine_git_object: 1b5e5aaa7d439cd2dede2249b576025252561c7b
   docs/sdks/apikeys/README.md:
     id: e2bd25998427
-    last_write_checksum: sha1:2de572405de007a963f275895b40c591c64052f2
-    pristine_git_object: 3cc6ef2c3fbd05778be47675d85fb0a252060cb5
+    last_write_checksum: sha1:833826b8eecf1b64f597994f3985ef584409dc6f
+    pristine_git_object: 9dcb104087cc3a5c5dcac744af51a60e998b68f9
   docs/sdks/documents/README.md:
     id: 9758e88a0a9d
-    last_write_checksum: sha1:2558956cf2c3c7f940bafc4cda3d7e33072994db
-    pristine_git_object: 98f77cc53d4aaccbc5a09f439484ead757928f5c
+    last_write_checksum: sha1:243cb518b7d252c1cba7a7ad8b7f1aabee74c2ae
+    pristine_git_object: 741ab59d19e59ae6856391d0808c493528fb2799
   docs/sdks/entrypages/README.md:
     id: 7fec98293884
-    last_write_checksum: sha1:4211436041b2a06a46acbf4e055a702270b61434
-    pristine_git_object: e72bfa88529f5485e8cf095222b8ae5aebcf597e
+    last_write_checksum: sha1:c171abfb492af76519bbfc8c8d731c70d1839496
+    pristine_git_object: 6ead339e1ff2af324e22d81719136da98638cc95
   docs/sdks/invites/README.md:
     id: 292e7df78f50
-    last_write_checksum: sha1:92cf5af87a65100ba0754f5011e79c51b0c4aabf
-    pristine_git_object: f6c69641776a74f285beb94c5aef964b98b73647
+    last_write_checksum: sha1:61bd9717d13803dc8b95fb4d734f906121233d97
+    pristine_git_object: 22f4418d83e31e2a28eb1dca5cbde951a29a71a4
   docs/sdks/organizations/README.md:
     id: 3425667a2db5
-    last_write_checksum: sha1:3b4f12db90db70cd4aa1f6742acc3d1e10ea240a
-    pristine_git_object: e46a3e4d36bb3f87ae2b075c4e162922e6dc31b4
+    last_write_checksum: sha1:56db253255b3093b9679747afa9f15b4b51cee6f
+    pristine_git_object: 60df95b6396b9a5441837bba732c51e9c7248688
   docs/sdks/policies/README.md:
     id: 636269b04e57
-    last_write_checksum: sha1:846f29c7d94e85c3139c7fd6de525dc68724b086
-    pristine_git_object: 8813d88eea2b17203035f469e79a3bf1a8d29d88
+    last_write_checksum: sha1:1e0bbcc864bbf4b45785b46a7efea785694e259f
+    pristine_git_object: f7ac1469522b78064b04b7fd6ba752c45013c8e5
   docs/sdks/quotas/README.md:
     id: 688e75141996
-    last_write_checksum: sha1:776b48bab77a84ebcb60cb4fd0206ddc7a35aa58
-    pristine_git_object: 7408bf885dd5938bd80fe4049aa2049f4ade990d
+    last_write_checksum: sha1:0462db51a27f982de7767a5b6c5f3bfa04d4afb9
+    pristine_git_object: 91949e282e0ca4751d0c50e710e459d358c3b03f
   docs/sdks/usage/README.md:
     id: 631af2d7ce26
-    last_write_checksum: sha1:672e391ba7741f391389eacd6e4747a71360f2d4
-    pristine_git_object: adf6cba683dbe862387222b66a823edf01936f70
+    last_write_checksum: sha1:0fb86bf15cec28df0eb79f9ed4c3ce1da7e5becb
+    pristine_git_object: dcd5ef78825d9f860420e78f89e180169b51d557
   docs/sdks/versions/README.md:
     id: 83ec5ed3804d
-    last_write_checksum: sha1:16a3627a45981108bceac22fe7acd99d140ca501
-    pristine_git_object: 228b951d6ec8d87ddcf8fc55ee5524dadc6ed91f
+    last_write_checksum: sha1:2c83c0ebde65a4d11531a428bd651f478c427200
+    pristine_git_object: bbc34b4ce0855149e9de38ad9952d1a3ee42ee28
   py.typed:
     id: 258c3ed47ae4
     last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
@@ -629,8 +633,8 @@ trackedFiles:
     pristine_git_object: 24e7c7e3823711ee8105b0c215275acc7bab7f0a
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:891c1be17221c13de84863520d0656dc95c9f2e4
-    pristine_git_object: 5a0d0d397ed809d7d7f04f2971d85b3070e35fd3
+    last_write_checksum: sha1:fd8f692344c2f8f192df348522bcd6788fa39645
+    pristine_git_object: 7a85ba77dcc49bcff033187abb7611ae45afce57
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -657,32 +661,32 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:7672fb3a885dfd06f79fb3436ad5395ae5f57585
-    pristine_git_object: 9fd555f80d6163e0f47eaf17f3c1da355f5c2ebb
+    last_write_checksum: sha1:a6883756545af25ef796b6fd3be9eace458023f7
+    pristine_git_object: 1e2890a09eeb3aa3ff2ce508cdcafd194404f083
   src/factify/api_keys.py:
     id: 10eb7ea2e1e3
-    last_write_checksum: sha1:6476e37b040cd5070cc0e687c300c15ab68f1667
-    pristine_git_object: 9501ea4010133e1fdc4851457872a00d0e888d6e
+    last_write_checksum: sha1:b5694f520576608f0aa62e06138dbd65c39e1958
+    pristine_git_object: eb4c6d25437d0d58561c210d32da3ad92eabb29c
   src/factify/basesdk.py:
     id: 5781356a3488
     last_write_checksum: sha1:84af7f66fabec7dbc865468f4aecfe36a2565724
     pristine_git_object: d12c57680f6d7c60f6f990c09bfdd91fc0be137b
   src/factify/documents.py:
     id: d7b8f9150d12
-    last_write_checksum: sha1:bd8635b3c995d7271a3f00b4f446e7d3d400fc5d
-    pristine_git_object: c3135efbd2e00cf0f099bd2835aff17f6e4fbe71
+    last_write_checksum: sha1:f4108074ad1153144eb314ad747e6d8440c84d2b
+    pristine_git_object: 3d949867cf44bc57eaa9630a4f1e685cef1696d5
   src/factify/entrypages.py:
     id: dd805ed9ee64
-    last_write_checksum: sha1:3d4fbf8fdafd89025226f4dab16f1c2494604d4a
-    pristine_git_object: 5a470c9edc8f317cd178cf746c3e55f41265f81f
+    last_write_checksum: sha1:bd9ff1743397225efb96f4f5aa204105bf2a17e4
+    pristine_git_object: f094dd5001e242f00293ca225d65acb95eefe39a
   src/factify/errors/__init__.py:
     id: 3fcda200b9d3
-    last_write_checksum: sha1:771aa77a2804fb2b88ab2c29b14235a5461cd1ee
-    pristine_git_object: abc4b3a8d07b00b71cf4946b80c3f69a9cd9c98d
-  src/factify/errors/error.py:
-    id: 2a51f91120bb
-    last_write_checksum: sha1:46a75fb352f40c272318e936afbcc9a3650b69d5
-    pristine_git_object: 2b5daa7a3479b8581431c0cf5f0ac99bcd2adf83
+    last_write_checksum: sha1:fb94a27a40dac263f2a25d4ad65b99aa924ef78b
+    pristine_git_object: 08444b5e70ff0c3024bd11e5d593b59d461f8b1b
+  src/factify/errors/errorresponse.py:
+    id: "875191779653"
+    last_write_checksum: sha1:095f3b227c402e74f7d97239386bc6d22951a20d
+    pristine_git_object: bf49431d31119ea514e474f4636f4416cf490df7
   src/factify/errors/factifydefaulterror.py:
     id: 7ef4d8b6c108
     last_write_checksum: sha1:1e4f07dfcacdcbba99afc38f961895729bafcb0a
@@ -705,12 +709,12 @@ trackedFiles:
     pristine_git_object: 89560b566073785535643e694c112bedbd3db13d
   src/factify/invites.py:
     id: ee0a01f92ea9
-    last_write_checksum: sha1:c5cd6c4a60040481c3e1fa263f9e3b573153bbcf
-    pristine_git_object: 4beb28f996b7d5b6b3eaaa6c18e2287ba1161392
+    last_write_checksum: sha1:662916360a1dedee3b8034e16c09aa0b5e0aabca
+    pristine_git_object: 0d2a024e0186d8cb2b36e077fc8a7e5cc6361e1b
   src/factify/models/__init__.py:
     id: b45df6051cc0
-    last_write_checksum: sha1:ef2d5faebb76e06644ee0e4803af5b722cde6a06
-    pristine_git_object: 21c0f9de5d30335692c6028fc9b27c5bfd98d62b
+    last_write_checksum: sha1:0d998297d87c0a4058154843fa6621b3f8b9130d
+    pristine_git_object: e5f232f4273c012f8021b9a4c890ff97ae1a2846
   src/factify/models/acceptorganizationinviteop.py:
     id: 90bc63055feb
     last_write_checksum: sha1:f20b151a408c61fc3f958393f751b2ee99ecd08d
@@ -737,8 +741,8 @@ trackedFiles:
     pristine_git_object: 53dd4c77650a1c5fae98590175e2cf4f61ff1b35
   src/factify/models/connect_error.py:
     id: 440f92a09177
-    last_write_checksum: sha1:4a4b788864855553111ca036eb04e35e70f1a8e1
-    pristine_git_object: 08575ee7fd0ca97e76434e7f9562738b30c75e5e
+    last_write_checksum: sha1:3ba0ae4cd69ee1f074832a26dfbbf72a41373bc6
+    pristine_git_object: d2a20af782f149193acac91257a4ee867922769b
   src/factify/models/connect_error_details_any.py:
     id: 6794ed5b8106
     last_write_checksum: sha1:1e540674601bce9c3cf3e46b70ff015031cc5fa2
@@ -831,10 +835,14 @@ trackedFiles:
     id: 8f2c7e3e13cf
     last_write_checksum: sha1:70e41156e18e51202fd4c3d44d6da36015b185c2
     pristine_git_object: 2c350c636507407a893649844fb95c18ef746f09
-  src/factify/models/error.py:
-    id: 5629c4aea955
-    last_write_checksum: sha1:21680e085bff9340b22e4a5dc3ee4fce8c2f2f88
-    pristine_git_object: b4d1b30b6963bb20e9770ae801781b875ed22891
+  src/factify/models/errordetail.py:
+    id: aec1bf84514b
+    last_write_checksum: sha1:4af60d33908c8fa5a2052c74ac19b79cefa4a879
+    pristine_git_object: 0f87c7ae8dccc732185fdc0d1b35101357936d9a
+  src/factify/models/errorresponse.py:
+    id: 003520b9cd8b
+    last_write_checksum: sha1:505ec649a30976530243bb46b50041b12654c86f
+    pristine_git_object: e251fb42bcab0f46ea79802cbfb23eab7451bb72
   src/factify/models/generatedocumententrypageop.py:
     id: 461623b8b2df
     last_write_checksum: sha1:c78b6ca6f4b2688079375a0d7ae27e3d116e3183
@@ -1053,24 +1061,24 @@ trackedFiles:
     pristine_git_object: fb9ac9a3d24c69cf6370bcad7abb1af71ea969df
   src/factify/organizations.py:
     id: dd0e03191fd4
-    last_write_checksum: sha1:5f800ce834cac1bf4398092d12983b76c1cfec13
-    pristine_git_object: 5665ad5e4fffb87ed7895d04aad1a89565bb842a
+    last_write_checksum: sha1:97cb39cca701d7d36d6fe2f17d66aa7f99f0cfe2
+    pristine_git_object: acc708fcf5375aee6f5d64508109531307dbd2f0
   src/factify/policies.py:
     id: "699742277325"
-    last_write_checksum: sha1:1725a14549d3be8114a36b2cf62f3e3ea9881886
-    pristine_git_object: 1aebf5aa6d0db765c28da43d600c46c384934140
+    last_write_checksum: sha1:43b2e9595b25732038de257fb039de1b09b910f5
+    pristine_git_object: 4f398147bea83b3c8a64a7f63641722ea4fcd62d
   src/factify/py.typed:
     id: 644010d06af0
     last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   src/factify/quotas.py:
     id: 7f788558309f
-    last_write_checksum: sha1:2060fdf948a675b2bbeef078edb6c75237daac11
-    pristine_git_object: cc86a1217050897b6e294d647c26ee96bd1ee73d
+    last_write_checksum: sha1:43cc21a748d50f2f8d83650ec2e62406c5d6ecc2
+    pristine_git_object: 69223100c01efdb61ba465a644318ae52ac175e8
   src/factify/sdk.py:
     id: a71d663e8f75
-    last_write_checksum: sha1:aafb138f3e451767560ccede42151174eff856a2
-    pristine_git_object: 55c96c56b2764eacd8ebf15d4570f5524a397aeb
+    last_write_checksum: sha1:6056c70b021963ecc4a52f46e4b617ce3124351a
+    pristine_git_object: dd1994d3efffb394984132977b419779cfa897ba
   src/factify/sdkconfiguration.py:
     id: c36aff7bf3dc
     last_write_checksum: sha1:6aaf3c968d83ab19f91836b4d2be9274757a7df0
@@ -1085,8 +1093,8 @@ trackedFiles:
     pristine_git_object: a9a640a1a7048736383f96c67c6290c86bf536ee
   src/factify/usage.py:
     id: 5d56e2f1ad70
-    last_write_checksum: sha1:8d3a0efbd0281aafcc62c4a9cba8feccc60f03ab
-    pristine_git_object: 156d9b17cd843e28c1b63136092423ab746dd3ae
+    last_write_checksum: sha1:7f66eb09f951626652fb1e365e18ac5da1e7c007
+    pristine_git_object: c9e2ede31462ce4561abda8c135a1fafadc123e0
   src/factify/utils/__init__.py:
     id: e62abc30a143
     last_write_checksum: sha1:524d7c0b4c84871908fb74cefa00f7ec0e920397
@@ -1137,8 +1145,8 @@ trackedFiles:
     pristine_git_object: 1de32b6d26f46590232f398fdba6ce0072f1659c
   src/factify/utils/retries.py:
     id: 92d12250f668
-    last_write_checksum: sha1:5b97ac4f59357d70c2529975d50364c88bcad607
-    pristine_git_object: 88a91b10cd2076b4a2c6cff2ac6bfaa5e3c5ad13
+    last_write_checksum: sha1:471372f5c5d1dd5583239c9cf3c75f1b636e5d87
+    pristine_git_object: af07d4e941007af4213c5ec9047ef8a2fca04e5e
   src/factify/utils/security.py:
     id: a534a96998b9
     last_write_checksum: sha1:435dd8b180cefcd733e635b9fa45512da091d9c0
@@ -1161,8 +1169,8 @@ trackedFiles:
     pristine_git_object: dae01a44384ac3bc13ae07453a053bf6c898ebe3
   src/factify/versions.py:
     id: e5fd221c415c
-    last_write_checksum: sha1:54174975ae19c997210585e4c483d3a9d257e1ca
-    pristine_git_object: 3cb1c94baa11c2b8cc96ca9eff7b3d85b1d1ebc3
+    last_write_checksum: sha1:7548eb7437fef55e64f68aa9131ba96cfcca4d00
+    pristine_git_object: 9f1f29acfced37d27011b57799f8c6d2edc1a742
 examples:
   listApiKeys:
     validation_error:
@@ -1171,11 +1179,11 @@ examples:
           organization_id: "<id>"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-list-api-keys:
       parameters:
         query:
@@ -1184,22 +1192,22 @@ examples:
         "200":
           application/json: {"items": [{"created_at": "2024-09-24T03:59:01.022Z", "id": "key_01jd4h5mck9gq6zrp8bn2t4w3x", "is_active": true, "key_prefix": "ffy_prod_01jd4h5...", "name": "Production", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 940425, "type": "rate_limit_error"}}
+          application/json: {"code": "permission_denied", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 940425, "type": "rate_limit_error"}}
+          application/json: {"code": "permission_denied", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 940425, "type": "rate_limit_error"}}
+          application/json: {"code": "permission_denied", "message": "<value>"}
   createApiKey:
     validation_error:
       requestBody:
         application/json: {"name": "<value>", "organization_id": "<id>"}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-create-api-key:
       requestBody:
         application/json: {"name": "<value>", "organization_id": "<id>"}
@@ -1207,11 +1215,11 @@ examples:
         "200":
           application/json: {"api_key": {"created_at": "2025-10-10T17:58:58.215Z", "id": "key_01jd4h5mck9gq6zrp8bn2t4w3x", "is_active": true, "key_prefix": "ffy_prod_01jd4h5...", "name": "Production", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41"}, "secret": "ffy_prod_01h2xcejqtf2nbrexx3vqjhp41KJ8f3mNpQrStUvWxYz0123456789ABCDEFGHIJKLmNo"}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 147967, "type": "not_found_error"}}
+          application/json: {"code": "failed_precondition", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 147967, "type": "not_found_error"}}
+          application/json: {"code": "failed_precondition", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 147967, "type": "not_found_error"}}
+          application/json: {"code": "failed_precondition", "message": "<value>"}
   revokeApiKey:
     validation_error:
       parameters:
@@ -1221,11 +1229,11 @@ examples:
         application/json: {}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-revoke-api-key:
       parameters:
         path:
@@ -1236,11 +1244,11 @@ examples:
         "200":
           application/json: {"api_key": {"created_at": "2026-06-24T15:50:14.207Z", "id": "key_01jd4h5mck9gq6zrp8bn2t4w3x", "is_active": false, "key_prefix": "ffy_prod_01jd4h5...", "name": "Production", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 922785, "type": "authorization_error"}}
+          application/json: {"code": "unimplemented", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 922785, "type": "authorization_error"}}
+          application/json: {"code": "unimplemented", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 922785, "type": "authorization_error"}}
+          application/json: {"code": "unimplemented", "message": "<value>"}
   listDocuments:
     validation_error:
       parameters:
@@ -1248,11 +1256,11 @@ examples:
           page_token: "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-list-documents:
       parameters:
         query:
@@ -1261,22 +1269,22 @@ examples:
         "200":
           application/json: {"items": [{"access_level": "private", "created_at": "2024-04-10T01:05:36.575Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "ready", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 256734, "type": "authorization_error"}}
+          application/json: {"code": "permission_denied", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 256734, "type": "authorization_error"}}
+          application/json: {"code": "permission_denied", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 256734, "type": "authorization_error"}}
+          application/json: {"code": "permission_denied", "message": "<value>"}
   createDocument:
     validation_error:
       requestBody:
         multipart/form-data: {"payload": "x-file: example.file", "title": "<value>"}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-create-document:
       requestBody:
         multipart/form-data: {"payload": "x-file: example.file", "title": "<value>"}
@@ -1284,11 +1292,11 @@ examples:
         "200":
           application/json: {"document": {"access_level": "private", "created_at": "2024-02-28T19:09:19.845Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "failed", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 159870, "type": "authorization_error"}}
+          application/json: {"code": "unknown", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 159870, "type": "authorization_error"}}
+          application/json: {"code": "unknown", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 159870, "type": "authorization_error"}}
+          application/json: {"code": "unknown", "message": "<value>"}
   getDocument:
     validation_error:
       parameters:
@@ -1296,11 +1304,11 @@ examples:
           document_id: "<id>"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-get-document:
       parameters:
         path:
@@ -1309,11 +1317,11 @@ examples:
         "200":
           application/json: {"document": {"access_level": "organization", "created_at": "2025-08-28T09:44:27.862Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "processing", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 155913, "type": "not_found_error"}}
+          application/json: {"code": "resource_exhausted", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 155913, "type": "not_found_error"}}
+          application/json: {"code": "resource_exhausted", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 155913, "type": "not_found_error"}}
+          application/json: {"code": "resource_exhausted", "message": "<value>"}
   updateDocument:
     validation_error:
       parameters:
@@ -1323,11 +1331,11 @@ examples:
         application/json: {}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-update-document:
       parameters:
         path:
@@ -1338,11 +1346,11 @@ examples:
         "200":
           application/json: {"document": {"access_level": "public", "created_at": "2024-08-12T11:38:39.237Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "failed", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 521859, "type": "not_found_error"}}
+          application/json: {"code": "unimplemented", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 521859, "type": "not_found_error"}}
+          application/json: {"code": "unimplemented", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 521859, "type": "not_found_error"}}
+          application/json: {"code": "unimplemented", "message": "<value>"}
   generateDocumentEntryPage:
     validation_error:
       parameters:
@@ -1350,11 +1358,11 @@ examples:
           document_id: "<id>"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-generate-document-entry-page:
       parameters:
         path:
@@ -1363,11 +1371,11 @@ examples:
         "200":
           application/json: {"download_url": "https://storage.factify.com/entry-pages/abc123.pdf?token=xyz"}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 784276, "type": "rate_limit_error"}}
+          application/json: {"code": "internal", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 784276, "type": "rate_limit_error"}}
+          application/json: {"code": "internal", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 784276, "type": "rate_limit_error"}}
+          application/json: {"code": "internal", "message": "<value>"}
   listDocumentPolicies:
     validation_error:
       parameters:
@@ -1377,11 +1385,11 @@ examples:
           page_token: "eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-list-document-policies:
       parameters:
         path:
@@ -1392,11 +1400,11 @@ examples:
         "200":
           application/json: {"items": [{"attached_at": "2025-07-11T12:22:46.808Z", "attached_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "policy": {"created_at": "2025-12-15T12:15:25.816Z", "id": "pol_01h2xcejqtf2nbrexx3vqjhp41", "name": "GDPR Compliance Policy"}}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 424376, "type": "authentication_error"}}
+          application/json: {"code": "resource_exhausted", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 424376, "type": "authentication_error"}}
+          application/json: {"code": "resource_exhausted", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 424376, "type": "authentication_error"}}
+          application/json: {"code": "resource_exhausted", "message": "<value>"}
   attachDocumentPolicy:
     validation_error:
       parameters:
@@ -1406,11 +1414,11 @@ examples:
         application/json: {"policy_id": "<id>"}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-attach-document-policy:
       parameters:
         path:
@@ -1421,11 +1429,11 @@ examples:
         "200":
           application/json: {"attached_at": "2026-02-17T07:57:08.704Z", "attached_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "policy": {"created_at": "2025-02-20T21:52:12.756Z", "id": "pol_01h2xcejqtf2nbrexx3vqjhp41", "name": "GDPR Compliance Policy"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 602258, "type": "rate_limit_error"}}
+          application/json: {"code": "unavailable", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 602258, "type": "rate_limit_error"}}
+          application/json: {"code": "unavailable", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 602258, "type": "rate_limit_error"}}
+          application/json: {"code": "unavailable", "message": "<value>"}
   detachDocumentPolicy:
     validation_error:
       parameters:
@@ -1434,11 +1442,11 @@ examples:
           policy_id: "<id>"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-detach-document-policy:
       parameters:
         path:
@@ -1448,11 +1456,11 @@ examples:
         "200":
           application/json: {}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 17774, "type": "authorization_error"}}
+          application/json: {"code": "canceled", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 17774, "type": "authorization_error"}}
+          application/json: {"code": "canceled", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 17774, "type": "authorization_error"}}
+          application/json: {"code": "canceled", "message": "<value>"}
   listDocumentVersions:
     validation_error:
       parameters:
@@ -1462,11 +1470,11 @@ examples:
           page_token: "eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-list-document-versions:
       parameters:
         path:
@@ -1477,11 +1485,11 @@ examples:
         "200":
           application/json: {"items": [{"created_at": "2026-05-29T06:29:21.750Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "ready", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "api_error"}}
+          application/json: {"code": "unimplemented", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "api_error"}}
+          application/json: {"code": "unimplemented", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "api_error"}}
+          application/json: {"code": "unimplemented", "message": "<value>"}
   createDocumentVersion:
     validation_error:
       parameters:
@@ -1491,11 +1499,11 @@ examples:
         multipart/form-data: {"payload": "x-file: example.file"}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-create-document-version:
       parameters:
         path:
@@ -1506,11 +1514,11 @@ examples:
         "200":
           application/json: {"created_at": "2024-10-02T02:47:01.599Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "ready", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 935796, "type": "authorization_error"}}
+          application/json: {"code": "permission_denied", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 935796, "type": "authorization_error"}}
+          application/json: {"code": "permission_denied", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 935796, "type": "authorization_error"}}
+          application/json: {"code": "permission_denied", "message": "<value>"}
   getVersion:
     validation_error:
       parameters:
@@ -1518,11 +1526,11 @@ examples:
           version_id: "<id>"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-get-version:
       parameters:
         path:
@@ -1531,11 +1539,11 @@ examples:
         "200":
           application/json: {"created_at": "2024-04-07T22:28:44.078Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "processing", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 728795, "type": "rate_limit_error"}}
+          application/json: {"code": "invalid_argument", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 728795, "type": "rate_limit_error"}}
+          application/json: {"code": "invalid_argument", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 728795, "type": "rate_limit_error"}}
+          application/json: {"code": "invalid_argument", "message": "<value>"}
   updateVersion:
     validation_error:
       parameters:
@@ -1545,11 +1553,11 @@ examples:
         application/json: {}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-update-version:
       parameters:
         path:
@@ -1560,41 +1568,41 @@ examples:
         "200":
           application/json: {"created_at": "2026-04-02T18:16:04.278Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "document_id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "id": "ver_01h2abcd1234efgh5678jkmnpt", "processing_status": "ready", "title": "Version 2.0", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1"}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 754999, "type": "invalid_request_error"}}
+          application/json: {"code": "unavailable", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 754999, "type": "invalid_request_error"}}
+          application/json: {"code": "unavailable", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 754999, "type": "invalid_request_error"}}
+          application/json: {"code": "unavailable", "message": "<value>"}
   listOrganizations:
     validation_error:
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-list-organizations:
       responses:
         "200":
           application/json: {"items": [{"created_at": "2025-02-19T05:11:59.955Z", "id": "org_01h2xcejqtf2nbrexx3vqjhp41", "name": "Acme Corporation"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 42244, "type": "not_found_error"}}
+          application/json: {"code": "not_found", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 42244, "type": "not_found_error"}}
+          application/json: {"code": "not_found", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 42244, "type": "not_found_error"}}
+          application/json: {"code": "not_found", "message": "<value>"}
   createOrganization:
     validation_error:
       requestBody:
         application/json: {"name": "<value>"}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-create-organization:
       requestBody:
         application/json: {"name": "<value>"}
@@ -1602,11 +1610,11 @@ examples:
         "200":
           application/json: {"organization": {"created_at": "2025-03-25T20:24:12.317Z", "id": "org_01h2xcejqtf2nbrexx3vqjhp41", "name": "Acme Corporation"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 851294, "type": "authentication_error"}}
+          application/json: {"code": "already_exists", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 851294, "type": "authentication_error"}}
+          application/json: {"code": "already_exists", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 851294, "type": "authentication_error"}}
+          application/json: {"code": "already_exists", "message": "<value>"}
   getOrganization:
     validation_error:
       parameters:
@@ -1614,11 +1622,11 @@ examples:
           organization_id: "<id>"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-get-organization:
       parameters:
         path:
@@ -1627,11 +1635,11 @@ examples:
         "200":
           application/json: {"organization": {"created_at": "2025-03-07T23:45:20.495Z", "id": "org_01h2xcejqtf2nbrexx3vqjhp41", "name": "Acme Corporation"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 271821, "type": "authorization_error"}}
+          application/json: {"code": "already_exists", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 271821, "type": "authorization_error"}}
+          application/json: {"code": "already_exists", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 271821, "type": "authorization_error"}}
+          application/json: {"code": "already_exists", "message": "<value>"}
   listOrganizationInvites:
     validation_error:
       parameters:
@@ -1639,11 +1647,11 @@ examples:
           organization_id: "<id>"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-list-organization-invites:
       parameters:
         path:
@@ -1652,11 +1660,11 @@ examples:
         "200":
           application/json: {"items": [{"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2025-10-27T07:43:49.957Z", "email": "dwight@dundermifflin.com", "expires_at": "2025-12-01T10:42:58.059Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "status": "ORGANIZATION_INVITE_STATUS_ACCEPTED"}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 89862, "type": "api_error"}}
+          application/json: {"code": "unknown", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 89862, "type": "api_error"}}
+          application/json: {"code": "unknown", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 89862, "type": "api_error"}}
+          application/json: {"code": "unknown", "message": "<value>"}
   createOrganizationInvite:
     validation_error:
       parameters:
@@ -1666,11 +1674,11 @@ examples:
         application/json: {"email": "Willie_Parisian16@hotmail.com"}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-create-organization-invite:
       parameters:
         path:
@@ -1681,11 +1689,11 @@ examples:
         "200":
           application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2025-07-26T07:49:48.068Z", "email": "dwight@dundermifflin.com", "expires_at": "2026-01-04T12:23:16.764Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "ORGANIZATION_INVITE_STATUS_ACCEPTED"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 9747, "type": "invalid_request_error"}}
+          application/json: {"code": "deadline_exceeded", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 9747, "type": "invalid_request_error"}}
+          application/json: {"code": "deadline_exceeded", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 9747, "type": "invalid_request_error"}}
+          application/json: {"code": "deadline_exceeded", "message": "<value>"}
   acceptOrganizationInvite:
     validation_error:
       parameters:
@@ -1696,11 +1704,11 @@ examples:
         application/json: {"token": "<value>"}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-accept-organization-invite:
       parameters:
         path:
@@ -1712,11 +1720,11 @@ examples:
         "200":
           application/json: {"organization": {"created_at": "2026-08-24T11:58:03.251Z", "id": "org_01h2xcejqtf2nbrexx3vqjhp41", "name": "Acme Corporation"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "authentication_error"}}
+          application/json: {"code": "canceled", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "authentication_error"}}
+          application/json: {"code": "canceled", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "authentication_error"}}
+          application/json: {"code": "canceled", "message": "<value>"}
   resendOrganizationInvite:
     validation_error:
       parameters:
@@ -1727,11 +1735,11 @@ examples:
         application/json: {}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-resend-organization-invite:
       parameters:
         path:
@@ -1743,11 +1751,11 @@ examples:
         "200":
           application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}, "created_at": "2026-03-26T20:10:39.093Z", "email": "dwight@dundermifflin.com", "expires_at": "2026-01-04T23:55:34.416Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "ORGANIZATION_INVITE_STATUS_EXPIRED"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 440301, "type": "authentication_error"}}
+          application/json: {"code": "invalid_argument", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 440301, "type": "authentication_error"}}
+          application/json: {"code": "invalid_argument", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 440301, "type": "authentication_error"}}
+          application/json: {"code": "invalid_argument", "message": "<value>"}
   revokeOrganizationInvite:
     validation_error:
       parameters:
@@ -1758,11 +1766,11 @@ examples:
         application/json: {}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-revoke-organization-invite:
       parameters:
         path:
@@ -1774,11 +1782,11 @@ examples:
         "200":
           application/json: {"invite": {"accepted_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "created_at": "2025-02-05T03:30:38.591Z", "email": "dwight@dundermifflin.com", "expires_at": "2024-08-08T12:50:51.355Z", "id": "inv_01h2xcejqtf2nbrexx3vqjhp41", "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "sender": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}, "status": "ORGANIZATION_INVITE_STATUS_PENDING"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 3333, "type": "authorization_error"}}
+          application/json: {"code": "unavailable", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 3333, "type": "authorization_error"}}
+          application/json: {"code": "unavailable", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 3333, "type": "authorization_error"}}
+          application/json: {"code": "unavailable", "message": "<value>"}
   QuotaService_DeleteOrganizationQuota:
     validation_error:
       parameters:
@@ -1788,11 +1796,11 @@ examples:
         application/json: {}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-quota-service-delete-organization-quota:
       parameters:
         header:
@@ -1803,11 +1811,11 @@ examples:
         "200":
           application/json: {}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 553195, "type": "not_found_error"}}
+          application/json: {"code": "deadline_exceeded", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 553195, "type": "not_found_error"}}
+          application/json: {"code": "deadline_exceeded", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 553195, "type": "not_found_error"}}
+          application/json: {"code": "deadline_exceeded", "message": "<value>"}
         default:
           application/json: {"code": "not_found"}
   QuotaService_SetOrganizationQuota:
@@ -1819,11 +1827,11 @@ examples:
         application/json: {}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-quota-service-set-organization-quota:
       parameters:
         header:
@@ -1834,11 +1842,11 @@ examples:
         "200":
           application/json: {}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 891503, "type": "invalid_request_error"}}
+          application/json: {"code": "unauthenticated", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 891503, "type": "invalid_request_error"}}
+          application/json: {"code": "unauthenticated", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 891503, "type": "invalid_request_error"}}
+          application/json: {"code": "unauthenticated", "message": "<value>"}
         default:
           application/json: {"code": "not_found"}
   getOrganizationQuota:
@@ -1848,11 +1856,11 @@ examples:
           organization_id: "org_01h2xcejqtf2nbrexx3vqjhp41"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-get-organization-quota:
       parameters:
         query:
@@ -1861,11 +1869,11 @@ examples:
         "200":
           application/json: {"quota": {"organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 465222, "type": "authentication_error"}}
+          application/json: {"code": "invalid_argument", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 465222, "type": "authentication_error"}}
+          application/json: {"code": "invalid_argument", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 465222, "type": "authentication_error"}}
+          application/json: {"code": "invalid_argument", "message": "<value>"}
   listAPIKeyQuotas:
     validation_error:
       parameters:
@@ -1873,11 +1881,11 @@ examples:
           organization_id: "org_01h2xcejqtf2nbrexx3vqjhp41"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-list-API-key-quotas:
       parameters:
         query:
@@ -1886,11 +1894,11 @@ examples:
         "200":
           application/json: {"quotas": [{"api_key_id": "key_01h2xcejqtf2nbrexx3vqjhp41"}]}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "authentication_error"}}
+          application/json: {"code": "failed_precondition", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "authentication_error"}}
+          application/json: {"code": "failed_precondition", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": null, "type": "authentication_error"}}
+          application/json: {"code": "failed_precondition", "message": "<value>"}
   deleteAPIKeyQuota:
     validation_error:
       parameters:
@@ -1900,11 +1908,11 @@ examples:
           organization_id: "org_01h2xcejqtf2nbrexx3vqjhp41"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-delete-API-key-quota:
       parameters:
         path:
@@ -1915,11 +1923,11 @@ examples:
         "200":
           application/json: {}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 537451, "type": "invalid_request_error"}}
+          application/json: {"code": "already_exists", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 537451, "type": "invalid_request_error"}}
+          application/json: {"code": "already_exists", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 537451, "type": "invalid_request_error"}}
+          application/json: {"code": "already_exists", "message": "<value>"}
   setAPIKeyQuota:
     validation_error:
       parameters:
@@ -1929,11 +1937,11 @@ examples:
         application/json: {"organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41"}
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-set-API-key-quota:
       parameters:
         path:
@@ -1944,11 +1952,11 @@ examples:
         "200":
           application/json: {"quota": {"api_key_id": "key_01h2xcejqtf2nbrexx3vqjhp41"}}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 393625, "type": "authentication_error"}}
+          application/json: {"code": "unimplemented", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 393625, "type": "authentication_error"}}
+          application/json: {"code": "unimplemented", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "retry_after": 393625, "type": "authentication_error"}}
+          application/json: {"code": "unimplemented", "message": "<value>"}
   getUsageHistory:
     validation_error:
       parameters:
@@ -1956,11 +1964,11 @@ examples:
           organization_id: "org_01h2xcejqtf2nbrexx3vqjhp41"
       responses:
         "400":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "429":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
         "500":
-          application/json: {"error": {"code": "missing_required_field", "message": "Document title cannot be empty", "param": "title", "retry_after": null, "type": "invalid_request_error"}}
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
     speakeasy-default-get-usage-history:
       parameters:
         query:
@@ -1969,21 +1977,41 @@ examples:
         "200":
           application/json: {"daily_usage": [{"date": "2026-01-15"}], "organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41"}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 691002, "type": "rate_limit_error"}}
+          application/json: {"code": "unknown", "message": "<value>"}
         "429":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 691002, "type": "rate_limit_error"}}
+          application/json: {"code": "unknown", "message": "<value>"}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": null, "retry_after": 691002, "type": "rate_limit_error"}}
+          application/json: {"code": "unknown", "message": "<value>"}
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `factify.usage.get_organization_quota()`: **Added**
-  * `factify.usage.list_api_key_quotas()`: **Added**
-  * `factify.usage.delete_api_key_quota()`: **Added**
-  * `factify.usage.set_api_key_quota()`: **Added**
-  * `factify.usage.get_usage_history()`: **Added**
-  * `factify.quota.get_organization_quota()`: **Removed** (Breaking ⚠️)
-  * `factify.quota.list_api_key_quotas()`: **Removed** (Breaking ⚠️)
-  * `factify.quota.delete_api_key_quota()`: **Removed** (Breaking ⚠️)
-  * `factify.quota.set_api_key_quota()`: **Removed** (Breaking ⚠️)
-  * `factify.quota.get_usage_history()`: **Removed** (Breaking ⚠️)
+  * `factify.quotas.quota_service_delete_organization_quota()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.quotas.quota_service_set_organization_quota()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.api_keys.list()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.api_keys.create()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.api_keys.revoke()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.documents.list()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.documents.create()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.documents.get()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.documents.update()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.entry_pages.generate()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.policies.list()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.policies.attach()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.policies.detach()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.versions.list()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.versions.create()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.versions.get()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.versions.update()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.organizations.list()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.organizations.create()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.organizations.get()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.organizations.accept_organization_invite()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.organizations.resend_organization_invite()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.organizations.revoke_organization_invite()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.organizations.invites.list()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.organizations.invites.create()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.usage.get_organization_quota()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.usage.list_api_key_quotas()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.usage.delete_api_key_quota()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.usage.set_api_key_quota()`:  `error` **Changed** (Breaking ⚠️)
+  * `factify.usage.get_usage_history()`:  `error` **Changed** (Breaking ⚠️)

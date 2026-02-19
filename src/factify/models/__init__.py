@@ -28,7 +28,7 @@ if TYPE_CHECKING:
         AttachPolicyRequest,
         AttachPolicyRequestTypedDict,
     )
-    from .connect_error import Code, ConnectError, ConnectErrorTypedDict
+    from .connect_error import ConnectError, ConnectErrorCode, ConnectErrorTypedDict
     from .connect_error_details_any import (
         ConnectErrorDetailsAny,
         ConnectErrorDetailsAnyTypedDict,
@@ -122,7 +122,8 @@ if TYPE_CHECKING:
     from .document import Document, DocumentTypedDict
     from .documentpolicy import DocumentPolicy, DocumentPolicyTypedDict
     from .empty import Empty, EmptyTypedDict
-    from .error import Error, ErrorTypedDict, Type
+    from .errordetail import ErrorDetail, ErrorDetailTypedDict, Reason
+    from .errorresponse import ErrorResponseCode
     from .generatedocumententrypageop import (
         GenerateDocumentEntryPageRequest,
         GenerateDocumentEntryPageRequestTypedDict,
@@ -375,8 +376,8 @@ __all__ = [
     "AttachDocumentPolicyResponseTypedDict",
     "AttachPolicyRequest",
     "AttachPolicyRequestTypedDict",
-    "Code",
     "ConnectError",
+    "ConnectErrorCode",
     "ConnectErrorDetailsAny",
     "ConnectErrorDetailsAnyTypedDict",
     "ConnectErrorTypedDict",
@@ -440,8 +441,9 @@ __all__ = [
     "DocumentTypedDict",
     "Empty",
     "EmptyTypedDict",
-    "Error",
-    "ErrorTypedDict",
+    "ErrorDetail",
+    "ErrorDetailTypedDict",
+    "ErrorResponseCode",
     "GenerateDocumentEntryPageRequest",
     "GenerateDocumentEntryPageRequestTypedDict",
     "GenerateDocumentEntryPageResponse",
@@ -547,6 +549,7 @@ __all__ = [
     "QuotaServiceSetOrganizationQuotaResponseResultTypedDict",
     "QuotaServiceSetOrganizationQuotaResponseTypedDict",
     "QuotaTier",
+    "Reason",
     "ResendOrganizationInviteRequest",
     "ResendOrganizationInviteRequestTypedDict",
     "ResendOrganizationInviteResendOrganizationInviteRequest",
@@ -585,7 +588,6 @@ __all__ = [
     "SetOrganizationQuotaRequestTypedDict",
     "SetOrganizationQuotaResponse",
     "SetOrganizationQuotaResponseTypedDict",
-    "Type",
     "UpdateDocumentRequest",
     "UpdateDocumentRequestTypedDict",
     "UpdateDocumentResponse",
@@ -629,8 +631,8 @@ _dynamic_imports: dict[str, str] = {
     "AttachDocumentPolicyResponseTypedDict": ".attachdocumentpolicyop",
     "AttachPolicyRequest": ".attachdocumentpolicyop",
     "AttachPolicyRequestTypedDict": ".attachdocumentpolicyop",
-    "Code": ".connect_error",
     "ConnectError": ".connect_error",
+    "ConnectErrorCode": ".connect_error",
     "ConnectErrorTypedDict": ".connect_error",
     "ConnectErrorDetailsAny": ".connect_error_details_any",
     "ConnectErrorDetailsAnyTypedDict": ".connect_error_details_any",
@@ -694,9 +696,10 @@ _dynamic_imports: dict[str, str] = {
     "DocumentPolicyTypedDict": ".documentpolicy",
     "Empty": ".empty",
     "EmptyTypedDict": ".empty",
-    "Error": ".error",
-    "ErrorTypedDict": ".error",
-    "Type": ".error",
+    "ErrorDetail": ".errordetail",
+    "ErrorDetailTypedDict": ".errordetail",
+    "Reason": ".errordetail",
+    "ErrorResponseCode": ".errorresponse",
     "GenerateDocumentEntryPageRequest": ".generatedocumententrypageop",
     "GenerateDocumentEntryPageRequestTypedDict": ".generatedocumententrypageop",
     "GenerateDocumentEntryPageResponse": ".generatedocumententrypageop",

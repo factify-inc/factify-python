@@ -6,14 +6,14 @@ from typing import TYPE_CHECKING
 from factify.utils.dynamic_imports import lazy_getattr, lazy_dir
 
 if TYPE_CHECKING:
-    from .error import Error, ErrorData
+    from .errorresponse import ErrorResponse, ErrorResponseData
     from .factifydefaulterror import FactifyDefaultError
     from .no_response_error import NoResponseError
     from .responsevalidationerror import ResponseValidationError
 
 __all__ = [
-    "Error",
-    "ErrorData",
+    "ErrorResponse",
+    "ErrorResponseData",
     "FactifyDefaultError",
     "FactifyError",
     "NoResponseError",
@@ -21,8 +21,8 @@ __all__ = [
 ]
 
 _dynamic_imports: dict[str, str] = {
-    "Error": ".error",
-    "ErrorData": ".error",
+    "ErrorResponse": ".errorresponse",
+    "ErrorResponseData": ".errorresponse",
     "FactifyDefaultError": ".factifydefaulterror",
     "NoResponseError": ".no_response_error",
     "ResponseValidationError": ".responsevalidationerror",

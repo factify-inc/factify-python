@@ -47,9 +47,9 @@ with Factify(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| errors.Error               | 400, 401, 403, 404         | application/json           |
-| errors.Error               | 429                        | application/json           |
-| errors.Error               | 500                        | application/json           |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
 ## quota_service_set_organization_quota
@@ -93,7 +93,7 @@ with Factify(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| errors.Error               | 400, 401, 403, 404         | application/json           |
-| errors.Error               | 429                        | application/json           |
-| errors.Error               | 500                        | application/json           |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
