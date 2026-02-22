@@ -809,7 +809,7 @@
           },
           "url": {
             "description": "URL for accessing the document on Factify.",
-            "example": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41",
+            "example": "https://app.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41",
             "format": "uri",
             "title": "url",
             "type": "string"
@@ -2260,7 +2260,7 @@
           },
           "url": {
             "description": "URL for accessing this version on Factify.",
-            "example": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1",
+            "example": "https://app.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41/v/1",
             "format": "uri",
             "title": "url",
             "type": "string"
