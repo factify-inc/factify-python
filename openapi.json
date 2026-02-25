@@ -1406,7 +1406,7 @@
             "type": "string"
           },
           "status": {
-            "description": "Filter by status. If empty, returns all invitations.\n ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.",
+            "description": "Filter by invitation status.\n If empty, returns all invitations.\n REST: ?status=pending or ?status=pending&status=expired",
             "items": {
               "$ref": "#/components/schemas/OrganizationInviteStatus"
             },
@@ -1461,6 +1461,14 @@
             "description": "Opaque pagination token from a previous response.",
             "title": "page_token",
             "type": "string"
+          },
+          "role": {
+            "description": "Filter by the caller's role in the organization.\n If omitted or empty, returns all organizations the caller can view (no filtering).\n REST: ?role=admin or ?role=admin&role=owner",
+            "items": {
+              "$ref": "#/components/schemas/OrganizationRole"
+            },
+            "title": "role",
+            "type": "array"
           }
         },
         "title": "ListOrganizationsRequest",
@@ -1656,16 +1664,12 @@
         "type": "object"
       },
       "OrganizationInviteStatus": {
-        "description": "OrganizationInviteStatus represents the state of an organization invitation.",
         "enum": [
-          "ORGANIZATION_INVITE_STATUS_UNSPECIFIED",
-          "ORGANIZATION_INVITE_STATUS_PENDING",
-          "ORGANIZATION_INVITE_STATUS_ACCEPTED",
-          "ORGANIZATION_INVITE_STATUS_EXPIRED",
-          "ORGANIZATION_INVITE_STATUS_REVOKED"
-        ],
-        "title": "OrganizationInviteStatus",
-        "type": "string"
+          "pending",
+          "accepted",
+          "expired",
+          "revoked"
+        ]
       },
       "OrganizationQuota": {
         "additionalProperties": false,
@@ -1771,6 +1775,13 @@
         },
         "title": "OrganizationQuotaConfig",
         "type": "object"
+      },
+      "OrganizationRole": {
+        "enum": [
+          "owner",
+          "admin",
+          "member"
+        ]
       },
       "Pagination": {
         "additionalProperties": false,
@@ -3777,6 +3788,19 @@
               "title": "page_size",
               "type": "integer"
             }
+          },
+          {
+            "description": "Filter by the caller's role in the organization.\n If omitted or empty, returns all organizations the caller can view (no filtering).\n REST: ?role=admin or ?role=admin&role=owner",
+            "in": "query",
+            "name": "role",
+            "schema": {
+              "description": "Filter by the caller's role in the organization.\n If omitted or empty, returns all organizations the caller can view (no filtering).\n REST: ?role=admin or ?role=admin&role=owner",
+              "items": {
+                "$ref": "#/components/schemas/OrganizationRole"
+              },
+              "title": "role",
+              "type": "array"
+            }
           }
         ],
         "responses": {
@@ -3987,11 +4011,11 @@
             }
           },
           {
-            "description": "Filter by status. If empty, returns all invitations.\n ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.",
+            "description": "Filter by invitation status.\n If empty, returns all invitations.\n REST: ?status=pending or ?status=pending&status=expired",
             "in": "query",
             "name": "status",
             "schema": {
-              "description": "Filter by status. If empty, returns all invitations.\n ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.",
+              "description": "Filter by invitation status.\n If empty, returns all invitations.\n REST: ?status=pending or ?status=pending&status=expired",
               "items": {
                 "$ref": "#/components/schemas/OrganizationInviteStatus"
               },
