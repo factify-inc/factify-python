@@ -5,6 +5,7 @@ from .listorganizationsresponse import (
     ListOrganizationsResponse,
     ListOrganizationsResponseTypedDict,
 )
+from .organizationrole import OrganizationRole
 from factify.types import BaseModel, UNSET_SENTINEL
 from factify.utils import FieldMetadata, QueryParamMetadata
 from pydantic import model_serializer
@@ -17,6 +18,11 @@ class ListOrganizationsRequestTypedDict(TypedDict):
     r"""Opaque pagination token from a previous response."""
     page_size: NotRequired[int]
     r"""Maximum number of items to return per page (1-100). Default: 50."""
+    role: NotRequired[List[OrganizationRole]]
+    r"""Filter by the caller's role in the organization.
+    If omitted or empty, returns all organizations the caller can view (no filtering).
+    REST: ?role=admin or ?role=admin&role=owner
+    """
 
 
 class ListOrganizationsRequest(BaseModel):
@@ -32,9 +38,18 @@ class ListOrganizationsRequest(BaseModel):
     ] = None
     r"""Maximum number of items to return per page (1-100). Default: 50."""
 
+    role: Annotated[
+        Optional[List[OrganizationRole]],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter by the caller's role in the organization.
+    If omitted or empty, returns all organizations the caller can view (no filtering).
+    REST: ?role=admin or ?role=admin&role=owner
+    """
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["page_token", "page_size"])
+        optional_fields = set(["page_token", "page_size", "role"])
         serialized = handler(self)
         m = {}
 

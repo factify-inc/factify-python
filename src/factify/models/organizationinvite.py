@@ -29,7 +29,6 @@ class OrganizationInviteTypedDict(TypedDict):
     sender: UserTypedDict
     r"""User represents a user or service account."""
     status: OrganizationInviteStatus
-    r"""OrganizationInviteStatus represents the state of an organization invitation."""
     accepted_at: NotRequired[datetime]
     r"""When the invitation was accepted (if accepted)."""
     accepted_by: NotRequired[UserTypedDict]
@@ -65,7 +64,6 @@ class OrganizationInvite(BaseModel):
     r"""User represents a user or service account."""
 
     status: OrganizationInviteStatus
-    r"""OrganizationInviteStatus represents the state of an organization invitation."""
 
     accepted_at: Optional[datetime] = None
     r"""When the invitation was accepted (if accepted)."""

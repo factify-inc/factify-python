@@ -21,8 +21,9 @@ class ListOrganizationInvitesRequestTypedDict(TypedDict):
     Pattern: org_[0-9a-hjkmnp-tv-z]{26}
     """
     status: NotRequired[List[OrganizationInviteStatus]]
-    r"""Filter by status. If empty, returns all invitations.
-    ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.
+    r"""Filter by invitation status.
+    If empty, returns all invitations.
+    REST: ?status=pending or ?status=pending&status=expired
     """
     page_token: NotRequired[str]
     r"""Opaque pagination token from a previous response."""
@@ -57,8 +58,9 @@ class ListOrganizationInvitesRequest(BaseModel):
         Optional[List[OrganizationInviteStatus]],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter by status. If empty, returns all invitations.
-    ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.
+    r"""Filter by invitation status.
+    If empty, returns all invitations.
+    REST: ?status=pending or ?status=pending&status=expired
     """
 
     page_token: Annotated[

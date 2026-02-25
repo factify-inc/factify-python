@@ -254,6 +254,7 @@ if TYPE_CHECKING:
         OrganizationQuotaConfig,
         OrganizationQuotaConfigTypedDict,
     )
+    from .organizationrole import OrganizationRole
     from .pagination import Pagination, PaginationTypedDict
     from .policy import Policy, PolicyTypedDict
     from .processingstatus import ProcessingStatus
@@ -530,6 +531,7 @@ __all__ = [
     "OrganizationQuotaConfig",
     "OrganizationQuotaConfigTypedDict",
     "OrganizationQuotaTypedDict",
+    "OrganizationRole",
     "OrganizationTypedDict",
     "Pagination",
     "PaginationTypedDict",
@@ -787,6 +789,7 @@ _dynamic_imports: dict[str, str] = {
     "OrganizationQuotaTypedDict": ".organizationquota",
     "OrganizationQuotaConfig": ".organizationquotaconfig",
     "OrganizationQuotaConfigTypedDict": ".organizationquotaconfig",
+    "OrganizationRole": ".organizationrole",
     "Pagination": ".pagination",
     "PaginationTypedDict": ".pagination",
     "Policy": ".policy",

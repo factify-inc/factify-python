@@ -31,6 +31,7 @@ class Organizations(BaseSDK):
         *,
         page_token: Optional[str] = None,
         page_size: Optional[int] = None,
+        role: Optional[List[models.OrganizationRole]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -42,6 +43,9 @@ class Organizations(BaseSDK):
 
         :param page_token: Opaque pagination token from a previous response.
         :param page_size: Maximum number of items to return per page (1-100). Default: 50.
+        :param role: Filter by the caller's role in the organization.
+            If omitted or empty, returns all organizations the caller can view (no filtering).
+            REST: ?role=admin or ?role=admin&role=owner
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -60,6 +64,7 @@ class Organizations(BaseSDK):
         request = models.ListOrganizationsRequest(
             page_token=page_token,
             page_size=page_size,
+            role=role,
         )
 
         req = self._build_request(
@@ -115,6 +120,7 @@ class Organizations(BaseSDK):
             return self.list(
                 page_token=next_cursor,
                 page_size=page_size,
+                role=role,
                 retries=retries,
             )
 
@@ -156,6 +162,7 @@ class Organizations(BaseSDK):
         *,
         page_token: Optional[str] = None,
         page_size: Optional[int] = None,
+        role: Optional[List[models.OrganizationRole]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -167,6 +174,9 @@ class Organizations(BaseSDK):
 
         :param page_token: Opaque pagination token from a previous response.
         :param page_size: Maximum number of items to return per page (1-100). Default: 50.
+        :param role: Filter by the caller's role in the organization.
+            If omitted or empty, returns all organizations the caller can view (no filtering).
+            REST: ?role=admin or ?role=admin&role=owner
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -185,6 +195,7 @@ class Organizations(BaseSDK):
         request = models.ListOrganizationsRequest(
             page_token=page_token,
             page_size=page_size,
+            role=role,
         )
 
         req = self._build_request_async(
@@ -245,6 +256,7 @@ class Organizations(BaseSDK):
             return self.list_async(
                 page_token=next_cursor,
                 page_size=page_size,
+                role=role,
                 retries=retries,
             )
 

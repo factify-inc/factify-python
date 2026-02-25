@@ -4,9 +4,8 @@ from __future__ import annotations
 from typing import Literal
 
 
-OrganizationInviteStatus = Literal[
-    "pending",
-    "accepted",
-    "expired",
-    "revoked",
+OrganizationRole = Literal[
+    "owner",
+    "admin",
+    "member",
 ]

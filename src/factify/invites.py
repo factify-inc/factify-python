@@ -33,8 +33,9 @@ class Invites(BaseSDK):
 
         :param organization_id: Organization to list invitations for.
             Pattern: org_[0-9a-hjkmnp-tv-z]{26}
-        :param status: Filter by status. If empty, returns all invitations.
-            ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.
+        :param status: Filter by invitation status.
+            If empty, returns all invitations.
+            REST: ?status=pending or ?status=pending&status=expired
         :param page_token: Opaque pagination token from a previous response.
         :param page_size: Maximum number of items to return per page (1-100). Default: 50.
         :param email_contains: Case-insensitive substring match.
@@ -188,8 +189,9 @@ class Invites(BaseSDK):
 
         :param organization_id: Organization to list invitations for.
             Pattern: org_[0-9a-hjkmnp-tv-z]{26}
-        :param status: Filter by status. If empty, returns all invitations.
-            ORGANIZATION_INVITE_STATUS_UNSPECIFIED (0) is not a valid filter value.
+        :param status: Filter by invitation status.
+            If empty, returns all invitations.
+            REST: ?status=pending or ?status=pending&status=expired
         :param page_token: Opaque pagination token from a previous response.
         :param page_size: Maximum number of items to return per page (1-100). Default: 50.
         :param email_contains: Case-insensitive substring match.
