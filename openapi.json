@@ -1444,6 +1444,61 @@
         "title": "ListOrganizationInvitesResponse",
         "type": "object"
       },
+      "ListOrganizationMembersRequest": {
+        "additionalProperties": false,
+        "description": "ListOrganizationMembersRequest specifies the organization and pagination.",
+        "properties": {
+          "organization_id": {
+            "description": "Organization to list members for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "page_size": {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "format": "int32",
+            "maximum": 100,
+            "minimum": 1,
+            "nullable": true,
+            "title": "page_size",
+            "type": "integer"
+          },
+          "page_token": {
+            "description": "Opaque pagination token from a previous response.",
+            "title": "page_token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id"
+        ],
+        "title": "ListOrganizationMembersRequest",
+        "type": "object"
+      },
+      "ListOrganizationMembersResponse": {
+        "additionalProperties": false,
+        "description": "ListOrganizationMembersResponse contains a page of organization members.",
+        "properties": {
+          "items": {
+            "description": "List of organization members.",
+            "items": {
+              "$ref": "#/components/schemas/OrganizationMember"
+            },
+            "title": "items",
+            "type": "array"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination",
+            "description": "Pagination metadata.",
+            "title": "pagination"
+          }
+        },
+        "required": [
+          "pagination"
+        ],
+        "title": "ListOrganizationMembersResponse",
+        "type": "object"
+      },
       "ListOrganizationsRequest": {
         "additionalProperties": false,
         "description": "ListOrganizationsRequest specifies pagination for listing organizations.",
@@ -1671,6 +1726,47 @@
           "revoked"
         ]
       },
+      "OrganizationMember": {
+        "additionalProperties": false,
+        "description": "OrganizationMember represents a member of an organization.",
+        "properties": {
+          "email": {
+            "description": "Email address of the member.",
+            "format": "email",
+            "title": "email",
+            "type": "string"
+          },
+          "joined_at": {
+            "description": "When the member joined the organization.",
+            "format": "date-time",
+            "title": "joined_at",
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/OrganizationRole",
+            "description": "Role of the member within the organization.",
+            "not": {
+              "enum": [
+                0
+              ]
+            },
+            "title": "role"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "description": "User account details.",
+            "title": "user"
+          }
+        },
+        "required": [
+          "user",
+          "email",
+          "joined_at",
+          "role"
+        ],
+        "title": "OrganizationMember",
+        "type": "object"
+      },
       "OrganizationQuota": {
         "additionalProperties": false,
         "description": "OrganizationQuota represents the quota status for an organization.",
@@ -1857,6 +1953,36 @@
         ],
         "title": "QuotaTier",
         "type": "string"
+      },
+      "RemoveOrganizationMemberRequest": {
+        "additionalProperties": false,
+        "description": "RemoveOrganizationMemberRequest identifies a member to remove.",
+        "properties": {
+          "organization_id": {
+            "description": "Organization to remove the member from.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "user_id": {
+            "description": "User account ID of the member to remove.\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "user_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id",
+          "user_id"
+        ],
+        "title": "RemoveOrganizationMemberRequest",
+        "type": "object"
+      },
+      "RemoveOrganizationMemberResponse": {
+        "additionalProperties": false,
+        "description": "RemoveOrganizationMemberResponse is empty on success.",
+        "title": "RemoveOrganizationMemberResponse",
+        "type": "object"
       },
       "ResendOrganizationInviteRequest": {
         "additionalProperties": false,
@@ -2154,6 +2280,58 @@
           "document"
         ],
         "title": "UpdateDocumentResponse",
+        "type": "object"
+      },
+      "UpdateOrganizationMemberRequest": {
+        "additionalProperties": false,
+        "description": "UpdateOrganizationMemberRequest identifies a member and the new role.",
+        "properties": {
+          "organization_id": {
+            "description": "Organization the member belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/OrganizationRole",
+            "description": "New role for the member. Cannot be UNSPECIFIED or OWNER.\n OWNER transfer is not supported — the owner is set at organization creation.",
+            "not": {
+              "enum": [
+                0,
+                1
+              ]
+            },
+            "title": "role"
+          },
+          "user_id": {
+            "description": "User account ID of the member to update.\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "user_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id",
+          "user_id",
+          "role"
+        ],
+        "title": "UpdateOrganizationMemberRequest",
+        "type": "object"
+      },
+      "UpdateOrganizationMemberResponse": {
+        "additionalProperties": false,
+        "description": "UpdateOrganizationMemberResponse contains the updated member.",
+        "properties": {
+          "member": {
+            "$ref": "#/components/schemas/OrganizationMember",
+            "description": "The updated organization member with the new role.",
+            "title": "member"
+          }
+        },
+        "required": [
+          "member"
+        ],
+        "title": "UpdateOrganizationMemberResponse",
         "type": "object"
       },
       "UpdateVersionRequest": {
@@ -4526,6 +4704,291 @@
             "lang": "python",
             "label": "revokeOrganizationInvite",
             "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.revoke_organization_invite(organization_id=\"<id>\", invite_id=\"<id>\", body={})\n\n    assert res.revoke_organization_invite_response is not None\n\n    # Handle response\n    print(res.revoke_organization_invite_response)"
+          }
+        ]
+      }
+    },
+    "/v1beta/organizations/{organization_id}/members": {
+      "get": {
+        "description": "List members of an organization. Requires organization membership.",
+        "operationId": "listOrganizationMembers",
+        "parameters": [
+          {
+            "description": "Organization to list members for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization to list members for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Opaque pagination token from a previous response.",
+            "in": "query",
+            "name": "page_token",
+            "schema": {
+              "description": "Opaque pagination token from a previous response.",
+              "title": "page_token",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of items to return per page (1-100). Default: 50.",
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "description": "Maximum number of items to return per page (1-100). Default: 50.",
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOrganizationMembersResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "List organization members",
+        "tags": [
+          "Organizations"
+        ],
+        "x-speakeasy-pagination": {
+          "inputs": [
+            {
+              "in": "parameters",
+              "name": "page_token",
+              "type": "cursor"
+            }
+          ],
+          "outputs": {
+            "nextCursor": "$.pagination.next_page_token"
+          },
+          "type": "cursor"
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "listOrganizationMembers",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.listOrganizationMembers({\n    organizationId: \"<id>\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "listOrganizationMembers",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.list_organization_members(organization_id=\"<id>\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+          }
+        ]
+      }
+    },
+    "/v1beta/organizations/{organization_id}/members/{user_id}": {
+      "delete": {
+        "description": "Remove a member from an organization. Requires manage permission, or the member can remove themselves. The organization owner cannot be removed.",
+        "operationId": "removeOrganizationMember",
+        "parameters": [
+          {
+            "description": "Organization to remove the member from.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization to remove the member from.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "User account ID of the member to remove.\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "description": "User account ID of the member to remove.\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "user_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoveOrganizationMemberResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Remove an organization member",
+        "tags": [
+          "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "removeOrganizationMember",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.removeOrganizationMember({\n    organizationId: \"<id>\",\n    userId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "removeOrganizationMember",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.remove_organization_member(organization_id=\"<id>\", user_id=\"<id>\")\n\n    assert res.remove_organization_member_response is not None\n\n    # Handle response\n    print(res.remove_organization_member_response)"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Update a member's role within an organization. Requires manage permission (owner or admin). The organization owner's role cannot be changed.",
+        "operationId": "updateOrganizationMember",
+        "parameters": [
+          {
+            "description": "Organization the member belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization the member belongs to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "User account ID of the member to update.\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "description": "User account ID of the member to update.\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "user_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "UpdateOrganizationMemberRequest identifies a member and the new role.",
+                "properties": {
+                  "role": {
+                    "$ref": "#/components/schemas/OrganizationRole",
+                    "description": "New role for the member. Cannot be UNSPECIFIED or OWNER.\n OWNER transfer is not supported — the owner is set at organization creation.",
+                    "not": {
+                      "enum": [
+                        0,
+                        1
+                      ]
+                    },
+                    "title": "role"
+                  }
+                },
+                "required": [
+                  "role"
+                ],
+                "title": "UpdateOrganizationMemberRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateOrganizationMemberResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Update an organization member",
+        "tags": [
+          "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "updateOrganizationMember",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.updateOrganizationMember({\n    organizationId: \"<id>\",\n    userId: \"<id>\",\n    body: {\n      role: \"member\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "lang": "python",
+            "label": "updateOrganizationMember",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.update_organization_member(organization_id=\"<id>\", user_id=\"<id>\", role=\"member\")\n\n    assert res.update_organization_member_response is not None\n\n    # Handle response\n    print(res.update_organization_member_response)"
           }
         ]
       }
