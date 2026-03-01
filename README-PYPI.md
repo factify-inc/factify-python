@@ -246,6 +246,9 @@ with Factify(
 * [accept_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#accept_organization_invite) - Accept an invitation
 * [resend_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#resend_organization_invite) - Resend an invitation email
 * [revoke_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#revoke_organization_invite) - Revoke an invitation
+* [list_organization_members](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#list_organization_members) - List organization members
+* [remove_organization_member](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#remove_organization_member) - Remove an organization member
+* [update_organization_member](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#update_organization_member) - Update an organization member
 
 ### [Organizations.Invites](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md)
 

@@ -1,35 +1,35 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: dbbfe0453b3955b2f2bfa0fce52489fc
+  docChecksum: 3713249c6f72b95ec373f2b780e2a492
   docVersion: 1.0.0
-  speakeasyVersion: 1.729.0
-  generationVersion: 2.841.0
-  releaseVersion: 0.7.1-rc.7
-  configChecksum: e29ea7cb6cda41236be9cd1086482318
+  speakeasyVersion: 1.736.2
+  generationVersion: 2.845.15
+  releaseVersion: 0.7.1-rc.8
+  configChecksum: e58e5dd2f770e14d2ea84e7453631566
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: 6ce30d18-a622-4684-b552-da70cf9d8e71
-  pristine_commit_hash: 9b8fd08aa57224d4e2ec2801e321b94474d7034e
-  pristine_tree_hash: 44316a419672b7a79b83dfbcdd5b6784dff791d3
+  generation_id: e9688505-87d3-4031-bf80-ac73d4cb086b
+  pristine_commit_hash: 988a50dab0d8ae093a4cc391c3c2cced12e65bad
+  pristine_tree_hash: 691a69eeeeaabf42f0cb65e73fe253711a9fd034
 features:
   python:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.7
-    core: 6.0.12
+    core: 6.0.15
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
-    examples: 3.0.2
+    examples: 3.0.3
     flatRequests: 1.0.1
     flattening: 3.1.1
     globalSecurity: 3.0.5
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
-    globalServerURLs: 3.2.0
+    globalServerURLs: 3.2.1
     groups: 3.0.1
     inputOutputModels: 3.0.0
     methodArguments: 1.0.2
@@ -383,6 +383,18 @@ trackedFiles:
     id: 8f70f3f53b55
     last_write_checksum: sha1:988a6ae6c37871493147fd9b6e804bbe7cbd3570
     pristine_git_object: a8a7369e65d3c706ef538389cf7fcf6a270b3fe2
+  docs/models/listorganizationmembersrequest.md:
+    id: 81f6c1b37cac
+    last_write_checksum: sha1:399f7ece75e14b72049a64f557de3cc34d10c8c5
+    pristine_git_object: 22f42a2c6f82587f0fe4f1c3909b83299bd731f2
+  docs/models/listorganizationmembersresponse.md:
+    id: d30414a1ea1d
+    last_write_checksum: sha1:ab56edec447d026ad61802f968c1bbc128a2ac02
+    pristine_git_object: 58759b1eb938ca8ef4321e9ce7c37bacc3f01718
+  docs/models/listorganizationmembersresponseresponse.md:
+    id: 00155004073c
+    last_write_checksum: sha1:af74c6e480947d57d941ba3d4bcf6c0e01ecb50f
+    pristine_git_object: bca79c537dc9c2a6a53f2c02e18fc912ed7f0964
   docs/models/listorganizationsrequest.md:
     id: 69e14dd3c847
     last_write_checksum: sha1:5d7da8324f4b6d2cefd2ba8b2edf58376b626ef1
@@ -411,6 +423,10 @@ trackedFiles:
     id: e4d252b34cbb
     last_write_checksum: sha1:4bad94ab6d32fed04cb0425764cc44a95e63a406
     pristine_git_object: 34dfbce83cae7879bef3ed74e28a0a52ef579a65
+  docs/models/organizationmember.md:
+    id: 7e5cd60a4c6e
+    last_write_checksum: sha1:d0fc3d3398431ee6e36678dff960f04403238630
+    pristine_git_object: 24323fe21aecec0fbfa0367193e7b0338af310d0
   docs/models/organizationquota.md:
     id: f493d276851d
     last_write_checksum: sha1:28737041885fe6128a429652e8f356b3266f4e72
@@ -467,6 +483,18 @@ trackedFiles:
     id: 087688da6fd4
     last_write_checksum: sha1:1f2349f102862caf34d75e59f70c37eb399af157
     pristine_git_object: 41127b792f48a4d6c563bbc3186560ae12adfb95
+  docs/models/removeorganizationmemberrequest.md:
+    id: aecf70500da7
+    last_write_checksum: sha1:2a66d74e6e3a8c11ff098a2e2f4b25e3e0ec696a
+    pristine_git_object: 68c2be1a341ee99f905fdd08c0821c364fafe61c
+  docs/models/removeorganizationmemberresponse.md:
+    id: e4a8eb37f0b4
+    last_write_checksum: sha1:671a4e7c00c4556eba9fb902c933586dd15e701d
+    pristine_git_object: 28060032152f44c89600337a0fdcded0fa699ce9
+  docs/models/removeorganizationmemberresponseresponse.md:
+    id: c3e7cdbdce17
+    last_write_checksum: sha1:6d05e249c9af6f4f6b8f686bbd55ace1763579b9
+    pristine_git_object: 1be31dcd58022f47bdb1c9fb1d30803326e72be4
   docs/models/resendorganizationinviterequest.md:
     id: f302f6bac0c0
     last_write_checksum: sha1:de5f371af9af6cfb47cf8f83e9a5a0c68978cee6
@@ -559,6 +587,22 @@ trackedFiles:
     id: dd72c44829f5
     last_write_checksum: sha1:3c4e5fc83304cb255f19ccea36128d405a1d5df3
     pristine_git_object: 154bf79b81750353ceb1dd9778238019b5fb8a8f
+  docs/models/updateorganizationmemberrequest.md:
+    id: b0a01bd45e5e
+    last_write_checksum: sha1:eaf012097bb5133e275b3ac250a3b8f12f345293
+    pristine_git_object: e8b1c263624c33b8cd003215ad9c682b3cb0d5ff
+  docs/models/updateorganizationmemberresponse.md:
+    id: aad87b1a4ad8
+    last_write_checksum: sha1:4d01050fddd88be9bad0bbcebf2a908ceeb76fad
+    pristine_git_object: 0879505cf3c513aad6c78af0881dde3ea3490879
+  docs/models/updateorganizationmemberresponseresponse.md:
+    id: f83e4bd83c09
+    last_write_checksum: sha1:ebb6471a4cb638d37fc9f66de3961797a9569899
+    pristine_git_object: c58151f2adf4bfae489cd62a451af1cff74b3a2a
+  docs/models/updateorganizationmemberupdateorganizationmemberrequest.md:
+    id: 16a78604462c
+    last_write_checksum: sha1:abb7e2a16382ffed2ac6aa95ff810bf0a86decaf
+    pristine_git_object: 7748874952a51f2ad3b003d3ba60956e7595d304
   docs/models/updateversionrequest.md:
     id: 971613149dfe
     last_write_checksum: sha1:dd448a57344c716679d7f25f612362313f9d801d
@@ -609,8 +653,8 @@ trackedFiles:
     pristine_git_object: 8e419565342ad7bf1acc622755c616460fb82013
   docs/sdks/organizations/README.md:
     id: 3425667a2db5
-    last_write_checksum: sha1:48cd32b64c8eec39eac4dd5e00d9707b4b3473e4
-    pristine_git_object: 4b8cd0a22bbd1c8e344e7ddac65c453fc039fba9
+    last_write_checksum: sha1:4f3acc91cba2c085408a77be03eec545c5bb232d
+    pristine_git_object: 076950e9f099814e5658eca92b6c3ae210113f2e
   docs/sdks/policies/README.md:
     id: 636269b04e57
     last_write_checksum: sha1:1e0bbcc864bbf4b45785b46a7efea785694e259f
@@ -637,8 +681,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:09cd5427540a804df99ccbae3f6b52fedc6bdd44
-    pristine_git_object: 1796581bd7c09f9091e6e15b2b632fccb8923eda
+    last_write_checksum: sha1:a80be527ee65a415a4a16d3088c991b4906af99e
+    pristine_git_object: c1d4da6a8d8a61da1f5dfa07f2c88aa014879ff7
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -665,8 +709,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:2cd72da2f208261db754a233e653769c313f1a96
-    pristine_git_object: 0905dbd96f9aa7aa331fa306516f2f8f19fd6ec0
+    last_write_checksum: sha1:c21f17e1fdb468ed47d2f62590316ee312d656d7
+    pristine_git_object: 79f5b86b60b0d89ac458c18a4610a3e4f69b144f
   src/factify/api_keys.py:
     id: 10eb7ea2e1e3
     last_write_checksum: sha1:b5694f520576608f0aa62e06138dbd65c39e1958
@@ -717,8 +761,8 @@ trackedFiles:
     pristine_git_object: b53d2419032970dbd612ba982d8e00687cb11b3e
   src/factify/models/__init__.py:
     id: b45df6051cc0
-    last_write_checksum: sha1:a8abf097aa7edfc31de28a56d140167314ac953b
-    pristine_git_object: 26c442aff5e367fb27f621277784b9548d15540b
+    last_write_checksum: sha1:819ce6a9390a32b3c53a24a054ff67c80db4fccb
+    pristine_git_object: 42b8929d91cc5b2128aa78fd00a645d6755c2f9c
   src/factify/models/acceptorganizationinviteop.py:
     id: 90bc63055feb
     last_write_checksum: sha1:f20b151a408c61fc3f958393f751b2ee99ecd08d
@@ -935,6 +979,14 @@ trackedFiles:
     id: 755ef122cbcd
     last_write_checksum: sha1:372a235533bb2aa6d01c2fb5b6f32fa76faf075a
     pristine_git_object: e200859cd0a7ee6f70ecceef3096d148551c8545
+  src/factify/models/listorganizationmembersop.py:
+    id: 74efc6163ce5
+    last_write_checksum: sha1:095b0ae7c738f4a4cf2a819bdeced40f730d9a61
+    pristine_git_object: 60824a0d9e98ba786545e09000a0ca2ebd4b8c1c
+  src/factify/models/listorganizationmembersresponse.py:
+    id: 6175e6291956
+    last_write_checksum: sha1:78a9ca74dd303ebc71b962300943327d2173e274
+    pristine_git_object: 904074df8e7ba6f8b238c1fdc25fe86058d12364
   src/factify/models/listorganizationsop.py:
     id: 75e198b7cea9
     last_write_checksum: sha1:c9eb930c5da23274b29626698b42efc76598fd87
@@ -959,6 +1011,10 @@ trackedFiles:
     id: d0a6cce46e72
     last_write_checksum: sha1:b89d3d5e300564c401f09c14edf017d1e1f03a3c
     pristine_git_object: 1520e859abc1f29eba2a6e8560fac307d723bcc0
+  src/factify/models/organizationmember.py:
+    id: f63a00e6ea06
+    last_write_checksum: sha1:eb10fd0ed934d6b4634695eee64001233c39e0a9
+    pristine_git_object: 6169c09c7229326df2c174054ffc918a979c7fc5
   src/factify/models/organizationquota.py:
     id: 6bed71b7ff22
     last_write_checksum: sha1:be30580f6c96a6d2437d6119c8db56a1808721ec
@@ -995,6 +1051,14 @@ trackedFiles:
     id: a4904ad2fdca
     last_write_checksum: sha1:9dfbe9585eefa3c646549eeacc6cf8191d982e2f
     pristine_git_object: 7dd9782be0a56d5160e5d49a4e96d6582f8e4760
+  src/factify/models/removeorganizationmemberop.py:
+    id: b96c5c024513
+    last_write_checksum: sha1:f6a9677c5bdf4f6b9cf48bc4d43d460e1c5f2062
+    pristine_git_object: 70c63b48950abd12772d40865853cd8950aae0b0
+  src/factify/models/removeorganizationmemberresponse.py:
+    id: 57c2a4466bd8
+    last_write_checksum: sha1:7cbe5d9514c73b5ece169a7a3fba9858df5b49ed
+    pristine_git_object: e3fdca8e92a7cff9bfb065a924b836acdf51bf2f
   src/factify/models/resendorganizationinviteop.py:
     id: 5743a78ef145
     last_write_checksum: sha1:c3e482aa35eeeae477b4e998fc8111d94e01a61b
@@ -1047,6 +1111,14 @@ trackedFiles:
     id: 6fc670e04b8d
     last_write_checksum: sha1:b7a22d6bfdadaf302fab27b06802024ce3e8d82f
     pristine_git_object: 856aa6a10464be4cbd65de36371b1457a90e69bd
+  src/factify/models/updateorganizationmemberop.py:
+    id: 95db952985eb
+    last_write_checksum: sha1:635eb6e5e9fec49dccc56760ce2dbf93d3065b19
+    pristine_git_object: e6b47c8857ec4b177dfd917ccd847355c3ea06a9
+  src/factify/models/updateorganizationmemberresponse.py:
+    id: d54bee038e4c
+    last_write_checksum: sha1:210371e7632073b8959bc12563482d934a38e74e
+    pristine_git_object: 2bb171343aa3780a76f9459ef529fffb3297d6e4
   src/factify/models/updateversionop.py:
     id: af0efab943a9
     last_write_checksum: sha1:3556d9a6be8c7e37219c7c5cc65b0380531aaf21
@@ -1069,8 +1141,8 @@ trackedFiles:
     pristine_git_object: fb9ac9a3d24c69cf6370bcad7abb1af71ea969df
   src/factify/organizations.py:
     id: dd0e03191fd4
-    last_write_checksum: sha1:ade41d3248b11165d228aa2987cc365bb13e76c6
-    pristine_git_object: d26255049b44fb54178813b8b3236945e5eec8cc
+    last_write_checksum: sha1:75d2297df8fa5dd0ba45c54d69bdd2fc7dc7b98f
+    pristine_git_object: ea728265cf23ac3cf0e6f6d4f850d326fcadb666
   src/factify/policies.py:
     id: "699742277325"
     last_write_checksum: sha1:43b2e9595b25732038de257fb039de1b09b910f5
@@ -1085,8 +1157,8 @@ trackedFiles:
     pristine_git_object: 69223100c01efdb61ba465a644318ae52ac175e8
   src/factify/sdk.py:
     id: a71d663e8f75
-    last_write_checksum: sha1:6056c70b021963ecc4a52f46e4b617ce3124351a
-    pristine_git_object: dd1994d3efffb394984132977b419779cfa897ba
+    last_write_checksum: sha1:5a5290bf2f7bec7a2f09c2235ade60d344dd14ac
+    pristine_git_object: 31be8cc097b1a44fa6129359db952edde14b1de6
   src/factify/sdkconfiguration.py:
     id: c36aff7bf3dc
     last_write_checksum: sha1:6aaf3c968d83ab19f91836b4d2be9274757a7df0
@@ -1990,5 +2062,92 @@ examples:
           application/json: {"code": "unknown", "message": "<value>"}
         "500":
           application/json: {"code": "unknown", "message": "<value>"}
+  listOrganizationMembers:
+    validation_error:
+      parameters:
+        path:
+          organization_id: "<id>"
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-list-organization-members:
+      parameters:
+        path:
+          organization_id: "<id>"
+      responses:
+        "200":
+          application/json: {"items": [{"email": "Victor.Schmitt89@yahoo.com", "joined_at": "2026-01-01T13:16:21.982Z", "role": "admin", "user": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "service_account"}}], "pagination": {"next_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", "prev_page_token": "eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJwcmV2In0"}}
+        "400":
+          application/json: {"code": "unavailable", "message": "<value>"}
+        "429":
+          application/json: {"code": "unavailable", "message": "<value>"}
+        "500":
+          application/json: {"code": "unavailable", "message": "<value>"}
+  removeOrganizationMember:
+    validation_error:
+      parameters:
+        path:
+          organization_id: "<id>"
+          user_id: "<id>"
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-remove-organization-member:
+      parameters:
+        path:
+          organization_id: "<id>"
+          user_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "failed_precondition", "message": "<value>"}
+        "429":
+          application/json: {"code": "failed_precondition", "message": "<value>"}
+        "500":
+          application/json: {"code": "failed_precondition", "message": "<value>"}
+  updateOrganizationMember:
+    validation_error:
+      parameters:
+        path:
+          organization_id: "<id>"
+          user_id: "<id>"
+      requestBody:
+        application/json: {"role": "member"}
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-update-organization-member:
+      parameters:
+        path:
+          organization_id: "<id>"
+          user_id: "<id>"
+      requestBody:
+        application/json: {"role": "member"}
+      responses:
+        "200":
+          application/json: {"member": {"email": "Angie13@hotmail.com", "joined_at": "2024-02-21T08:29:30.715Z", "role": "admin", "user": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user_account"}}}
+        "400":
+          application/json: {"code": "not_found", "message": "<value>"}
+        "429":
+          application/json: {"code": "not_found", "message": "<value>"}
+        "500":
+          application/json: {"code": "not_found", "message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `factify.organizations.resend_organization_invite()`:  `response.invite.status` **Changed** (Breaking ⚠️)\n* `factify.organizations.revoke_organization_invite()`:  `response.invite.status` **Changed** (Breaking ⚠️)\n* `factify.organizations.invites.list()`: \n  *  `request.status` **Changed** (Breaking ⚠️)\n  *  `response.items[].status` **Changed** (Breaking ⚠️)\n* `factify.organizations.invites.create()`:  `response.invite.status` **Changed** (Breaking ⚠️)\n* `factify.organizations.list()`:  `request.role` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `factify.organizations.list_organization_members()`: **Added**
+  * `factify.organizations.remove_organization_member()`: **Added**
+  * `factify.organizations.update_organization_member()`: **Added**

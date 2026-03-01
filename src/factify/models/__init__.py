@@ -232,6 +232,16 @@ if TYPE_CHECKING:
         ListOrganizationInvitesResponse,
         ListOrganizationInvitesResponseTypedDict,
     )
+    from .listorganizationmembersop import (
+        ListOrganizationMembersRequest,
+        ListOrganizationMembersRequestTypedDict,
+        ListOrganizationMembersResponseResponse,
+        ListOrganizationMembersResponseResponseTypedDict,
+    )
+    from .listorganizationmembersresponse import (
+        ListOrganizationMembersResponse,
+        ListOrganizationMembersResponseTypedDict,
+    )
     from .listorganizationsop import (
         ListOrganizationsRequest,
         ListOrganizationsRequestTypedDict,
@@ -249,6 +259,7 @@ if TYPE_CHECKING:
     from .organization import Organization, OrganizationTypedDict
     from .organizationinvite import OrganizationInvite, OrganizationInviteTypedDict
     from .organizationinvitestatus import OrganizationInviteStatus
+    from .organizationmember import OrganizationMember, OrganizationMemberTypedDict
     from .organizationquota import OrganizationQuota, OrganizationQuotaTypedDict
     from .organizationquotaconfig import (
         OrganizationQuotaConfig,
@@ -275,6 +286,16 @@ if TYPE_CHECKING:
         QuotaServiceSetOrganizationQuotaResponseTypedDict,
     )
     from .quotatier import QuotaTier
+    from .removeorganizationmemberop import (
+        RemoveOrganizationMemberRequest,
+        RemoveOrganizationMemberRequestTypedDict,
+        RemoveOrganizationMemberResponseResponse,
+        RemoveOrganizationMemberResponseResponseTypedDict,
+    )
+    from .removeorganizationmemberresponse import (
+        RemoveOrganizationMemberResponse,
+        RemoveOrganizationMemberResponseTypedDict,
+    )
     from .resendorganizationinviteop import (
         ResendOrganizationInviteRequest,
         ResendOrganizationInviteRequestTypedDict,
@@ -343,6 +364,18 @@ if TYPE_CHECKING:
     from .updatedocumentresponse import (
         UpdateDocumentResponse,
         UpdateDocumentResponseTypedDict,
+    )
+    from .updateorganizationmemberop import (
+        UpdateOrganizationMemberRequest,
+        UpdateOrganizationMemberRequestTypedDict,
+        UpdateOrganizationMemberResponseResponse,
+        UpdateOrganizationMemberResponseResponseTypedDict,
+        UpdateOrganizationMemberUpdateOrganizationMemberRequest,
+        UpdateOrganizationMemberUpdateOrganizationMemberRequestTypedDict,
+    )
+    from .updateorganizationmemberresponse import (
+        UpdateOrganizationMemberResponse,
+        UpdateOrganizationMemberResponseTypedDict,
     )
     from .updateversionop import (
         UpdateVersionRequest,
@@ -515,6 +548,12 @@ __all__ = [
     "ListOrganizationInvitesResponseResponse",
     "ListOrganizationInvitesResponseResponseTypedDict",
     "ListOrganizationInvitesResponseTypedDict",
+    "ListOrganizationMembersRequest",
+    "ListOrganizationMembersRequestTypedDict",
+    "ListOrganizationMembersResponse",
+    "ListOrganizationMembersResponseResponse",
+    "ListOrganizationMembersResponseResponseTypedDict",
+    "ListOrganizationMembersResponseTypedDict",
     "ListOrganizationsRequest",
     "ListOrganizationsRequestTypedDict",
     "ListOrganizationsResponse",
@@ -527,6 +566,8 @@ __all__ = [
     "OrganizationInvite",
     "OrganizationInviteStatus",
     "OrganizationInviteTypedDict",
+    "OrganizationMember",
+    "OrganizationMemberTypedDict",
     "OrganizationQuota",
     "OrganizationQuotaConfig",
     "OrganizationQuotaConfigTypedDict",
@@ -552,6 +593,12 @@ __all__ = [
     "QuotaServiceSetOrganizationQuotaResponseTypedDict",
     "QuotaTier",
     "Reason",
+    "RemoveOrganizationMemberRequest",
+    "RemoveOrganizationMemberRequestTypedDict",
+    "RemoveOrganizationMemberResponse",
+    "RemoveOrganizationMemberResponseResponse",
+    "RemoveOrganizationMemberResponseResponseTypedDict",
+    "RemoveOrganizationMemberResponseTypedDict",
     "ResendOrganizationInviteRequest",
     "ResendOrganizationInviteRequestTypedDict",
     "ResendOrganizationInviteResendOrganizationInviteRequest",
@@ -598,6 +645,14 @@ __all__ = [
     "UpdateDocumentResponseTypedDict",
     "UpdateDocumentUpdateDocumentRequest",
     "UpdateDocumentUpdateDocumentRequestTypedDict",
+    "UpdateOrganizationMemberRequest",
+    "UpdateOrganizationMemberRequestTypedDict",
+    "UpdateOrganizationMemberResponse",
+    "UpdateOrganizationMemberResponseResponse",
+    "UpdateOrganizationMemberResponseResponseTypedDict",
+    "UpdateOrganizationMemberResponseTypedDict",
+    "UpdateOrganizationMemberUpdateOrganizationMemberRequest",
+    "UpdateOrganizationMemberUpdateOrganizationMemberRequestTypedDict",
     "UpdateVersionRequest",
     "UpdateVersionRequestTypedDict",
     "UpdateVersionResponse",
@@ -772,6 +827,12 @@ _dynamic_imports: dict[str, str] = {
     "ListOrganizationInvitesResponseResponseTypedDict": ".listorganizationinvitesop",
     "ListOrganizationInvitesResponse": ".listorganizationinvitesresponse",
     "ListOrganizationInvitesResponseTypedDict": ".listorganizationinvitesresponse",
+    "ListOrganizationMembersRequest": ".listorganizationmembersop",
+    "ListOrganizationMembersRequestTypedDict": ".listorganizationmembersop",
+    "ListOrganizationMembersResponseResponse": ".listorganizationmembersop",
+    "ListOrganizationMembersResponseResponseTypedDict": ".listorganizationmembersop",
+    "ListOrganizationMembersResponse": ".listorganizationmembersresponse",
+    "ListOrganizationMembersResponseTypedDict": ".listorganizationmembersresponse",
     "ListOrganizationsRequest": ".listorganizationsop",
     "ListOrganizationsRequestTypedDict": ".listorganizationsop",
     "ListOrganizationsResponseResponse": ".listorganizationsop",
@@ -785,6 +846,8 @@ _dynamic_imports: dict[str, str] = {
     "OrganizationInvite": ".organizationinvite",
     "OrganizationInviteTypedDict": ".organizationinvite",
     "OrganizationInviteStatus": ".organizationinvitestatus",
+    "OrganizationMember": ".organizationmember",
+    "OrganizationMemberTypedDict": ".organizationmember",
     "OrganizationQuota": ".organizationquota",
     "OrganizationQuotaTypedDict": ".organizationquota",
     "OrganizationQuotaConfig": ".organizationquotaconfig",
@@ -808,6 +871,12 @@ _dynamic_imports: dict[str, str] = {
     "QuotaServiceSetOrganizationQuotaResponseResultTypedDict": ".quotaservice_setorganizationquotaop",
     "QuotaServiceSetOrganizationQuotaResponseTypedDict": ".quotaservice_setorganizationquotaop",
     "QuotaTier": ".quotatier",
+    "RemoveOrganizationMemberRequest": ".removeorganizationmemberop",
+    "RemoveOrganizationMemberRequestTypedDict": ".removeorganizationmemberop",
+    "RemoveOrganizationMemberResponseResponse": ".removeorganizationmemberop",
+    "RemoveOrganizationMemberResponseResponseTypedDict": ".removeorganizationmemberop",
+    "RemoveOrganizationMemberResponse": ".removeorganizationmemberresponse",
+    "RemoveOrganizationMemberResponseTypedDict": ".removeorganizationmemberresponse",
     "ResendOrganizationInviteRequest": ".resendorganizationinviteop",
     "ResendOrganizationInviteRequestTypedDict": ".resendorganizationinviteop",
     "ResendOrganizationInviteResendOrganizationInviteRequest": ".resendorganizationinviteop",
@@ -854,6 +923,14 @@ _dynamic_imports: dict[str, str] = {
     "UpdateDocumentUpdateDocumentRequestTypedDict": ".updatedocumentop",
     "UpdateDocumentResponse": ".updatedocumentresponse",
     "UpdateDocumentResponseTypedDict": ".updatedocumentresponse",
+    "UpdateOrganizationMemberRequest": ".updateorganizationmemberop",
+    "UpdateOrganizationMemberRequestTypedDict": ".updateorganizationmemberop",
+    "UpdateOrganizationMemberResponseResponse": ".updateorganizationmemberop",
+    "UpdateOrganizationMemberResponseResponseTypedDict": ".updateorganizationmemberop",
+    "UpdateOrganizationMemberUpdateOrganizationMemberRequest": ".updateorganizationmemberop",
+    "UpdateOrganizationMemberUpdateOrganizationMemberRequestTypedDict": ".updateorganizationmemberop",
+    "UpdateOrganizationMemberResponse": ".updateorganizationmemberresponse",
+    "UpdateOrganizationMemberResponseTypedDict": ".updateorganizationmemberresponse",
     "UpdateVersionRequest": ".updateversionop",
     "UpdateVersionRequestTypedDict": ".updateversionop",
     "UpdateVersionResponse": ".updateversionop",
