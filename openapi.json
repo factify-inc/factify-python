@@ -327,7 +327,7 @@
             "type": "string"
           },
           "is_active": {
-            "description": "Whether the key is currently active (not revoked and not expired).\n Computed: is_active = (revoked_at == null) && (expires_at == null || expires_at > now())",
+            "description": "Whether the key is currently active (not revoked and not expired).\n Computed: is_active = (revoked_at == null) \u0026\u0026 (expires_at == null || expires_at \u003e now())",
             "readOnly": true,
             "title": "is_active",
             "type": "boolean"
@@ -911,7 +911,7 @@
       "ErrorResponse": {
         "properties": {
           "code": {
-            "description": "ConnectRPC error code. Maps to HTTP status codes:\n- invalid_argument, failed_precondition -> 400\n- unauthenticated -> 401\n- permission_denied -> 403\n- not_found -> 404\n- already_exists -> 409\n- resource_exhausted -> 429\n- deadline_exceeded -> 408\n- canceled -> 499\n- internal, unknown -> 500 (unknown may appear as 400 for malformed JSON requests)\n- unimplemented -> 501\n- unavailable -> 503\n",
+            "description": "ConnectRPC error code. Maps to HTTP status codes:\n- invalid_argument, failed_precondition -\u003e 400\n- unauthenticated -\u003e 401\n- permission_denied -\u003e 403\n- not_found -\u003e 404\n- already_exists -\u003e 409\n- resource_exhausted -\u003e 429\n- deadline_exceeded -\u003e 408\n- canceled -\u003e 499\n- internal, unknown -\u003e 500 (unknown may appear as 400 for malformed JSON requests)\n- unimplemented -\u003e 501\n- unavailable -\u003e 503\n",
             "enum": [
               "unknown",
               "invalid_argument",
@@ -1076,7 +1076,7 @@
         "description": "GetUsageHistoryRequest is a request to get usage history.\ndate_range_valid // date.before must be after date.after\n",
         "properties": {
           "date": {
-            "description": "Filter by date range.\n REST: ?date.after=2026-01-01T00:00:00Z&date.before=2026-02-01T00:00:00Z",
+            "description": "Filter by date range.\n REST: ?date.after=2026-01-01T00:00:00Z\u0026date.before=2026-02-01T00:00:00Z",
             "format": "date-time",
             "nullable": true,
             "title": "date",
@@ -1284,16 +1284,18 @@
       },
       "ListDocumentsRequest": {
         "additionalProperties": false,
-        "description": "ListDocumentsRequest specifies filters and pagination for listing documents.\n Follows Google AIP-158 for pagination field naming.\n Uses Vanguard-compatible dot notation for nested filters: ?created.after=...&created.before=...\ncreated_time_range // created.after must be before created.before\n",
+        "description": "ListDocumentsRequest specifies filters and pagination for listing documents.\n Follows Google AIP-158 for pagination field naming.\n Uses Vanguard-compatible dot notation for nested filters: ?created.after=...\u0026created.before=...\ncreated_time_range // created.after must be before created.before\n",
         "properties": {
           "access_level": {
-            "description": "Filter by access level(s). Returns documents matching ANY of the specified levels.\n Accepts single value or comma-separated list.\n REST: ?access_level=private or ?access_level=private,organization\n Accepts clean enum names (case-insensitive): \"private\", \"organization\", \"public\"",
-            "nullable": true,
+            "description": "Filter by access level(s). Returns documents matching ANY of the specified levels.\n REST: ?access_level=private or ?access_level=private\u0026access_level=organization",
+            "items": {
+              "$ref": "#/components/schemas/AccessLevel"
+            },
             "title": "access_level",
-            "type": "string"
+            "type": "array"
           },
           "created": {
-            "description": "Filter by creation time range.\n REST: ?created.after=2024-01-01T00:00:00Z&created.before=2024-12-31T23:59:59Z",
+            "description": "Filter by creation time range.\n REST: ?created.after=2024-01-01T00:00:00Z\u0026created.before=2024-12-31T23:59:59Z",
             "format": "date-time",
             "nullable": true,
             "title": "created",
@@ -1321,10 +1323,12 @@
             "type": "string"
           },
           "processing_status": {
-            "description": "Filter by processing status(es). Returns documents matching ANY of the specified statuses.\n Accepts single value or comma-separated list.\n REST: ?processing_status=ready or ?processing_status=processing,ready,failed\n Accepts clean enum names (case-insensitive): \"processing\", \"ready\", \"failed\"",
-            "nullable": true,
+            "description": "Filter by processing status(es). Returns documents matching ANY of the specified statuses.\n REST: ?processing_status=ready or ?processing_status=processing\u0026processing_status=ready",
+            "items": {
+              "$ref": "#/components/schemas/ProcessingStatus"
+            },
             "title": "processing_status",
-            "type": "string"
+            "type": "array"
           }
         },
         "title": "ListDocumentsRequest",
@@ -1359,7 +1363,7 @@
         "description": "ListOrganizationInvitesRequest specifies filters for listing invitations.\ncreated_time_range // created.after must be before created.before\nexpires_time_range // expires.after must be before expires.before\n",
         "properties": {
           "created": {
-            "description": "Filter by creation time range.\n REST: ?created.after=2024-01-01T00:00:00Z&created.before=2024-12-31T23:59:59Z",
+            "description": "Filter by creation time range.\n REST: ?created.after=2024-01-01T00:00:00Z\u0026created.before=2024-12-31T23:59:59Z",
             "format": "date-time",
             "nullable": true,
             "title": "created",
@@ -1372,7 +1376,7 @@
             "title": "email"
           },
           "expires": {
-            "description": "Filter by expiration time range.\n Useful for finding invitations expiring soon (expires.before) or still valid beyond a date (expires.after).\n REST: ?expires.after=2024-01-01T00:00:00Z&expires.before=2024-01-31T23:59:59Z",
+            "description": "Filter by expiration time range.\n Useful for finding invitations expiring soon (expires.before) or still valid beyond a date (expires.after).\n REST: ?expires.after=2024-01-01T00:00:00Z\u0026expires.before=2024-01-31T23:59:59Z",
             "format": "date-time",
             "nullable": true,
             "title": "expires",
@@ -1406,7 +1410,7 @@
             "type": "string"
           },
           "status": {
-            "description": "Filter by invitation status.\n If empty, returns all invitations.\n REST: ?status=pending or ?status=pending&status=expired",
+            "description": "Filter by invitation status.\n If empty, returns all invitations.\n REST: ?status=pending or ?status=pending\u0026status=expired",
             "items": {
               "$ref": "#/components/schemas/OrganizationInviteStatus"
             },
@@ -1518,7 +1522,7 @@
             "type": "string"
           },
           "role": {
-            "description": "Filter by the caller's role in the organization.\n If omitted or empty, returns all organizations the caller can view (no filtering).\n REST: ?role=admin or ?role=admin&role=owner",
+            "description": "Filter by the caller's role in the organization.\n If omitted or empty, returns all organizations the caller can view (no filtering).\n REST: ?role=admin or ?role=admin\u0026role=owner",
             "items": {
               "$ref": "#/components/schemas/OrganizationRole"
             },
@@ -2113,7 +2117,7 @@
             "type": "string"
           },
           "limit": {
-            "description": "The limit for this key. Must be > 0.",
+            "description": "The limit for this key. Must be \u003e 0.",
             "exclusiveMinimum": 0,
             "format": "int32",
             "nullable": true,
@@ -2150,7 +2154,7 @@
         "description": "SetOrganizationQuotaRequest is a request to set quota configuration.",
         "properties": {
           "limit": {
-            "description": "Optional limit override. If not set, uses the configured tier default.\n Must be > 0 when set. Use a very high value (e.g., 999999999) for unlimited.",
+            "description": "Optional limit override. If not set, uses the configured tier default.\n Must be \u003e 0 when set. Use a very high value (e.g., 999999999) for unlimited.",
             "exclusiveMinimum": 0,
             "format": "int32",
             "nullable": true,
@@ -2213,7 +2217,7 @@
       },
       "TimestampFilter": {
         "additionalProperties": false,
-        "description": "TimestampFilter specifies a time range for filtering.\n Used with Vanguard dot notation: ?created.after=...&created.before=...",
+        "description": "TimestampFilter specifies a time range for filtering.\n Used with Vanguard dot notation: ?created.after=...\u0026created.before=...",
         "properties": {
           "after": {
             "description": "Return results after this timestamp (inclusive).",
@@ -2571,7 +2575,7 @@
     "securitySchemes": {
       "bearerAuth": {
         "bearerFormat": "API Key",
-        "description": "Bearer authentication header of the form Bearer <token>, where <token> is your auth token.",
+        "description": "Bearer authentication header of the form Bearer \u003ctoken\u003e, where \u003ctoken\u003e is your auth token.",
         "scheme": "bearer",
         "type": "http"
       }
@@ -2583,7 +2587,7 @@
       "name": "Factify API Support",
       "url": "https://factify.com/support"
     },
-    "description": "Factify API enables you to create, manage, and control access to legally-binding documents that replace PDFs.\n\n## Authentication\n\nBearer authentication header of the form Bearer <token>, where <token> is your auth token.\n\n```\nAuthorization: Bearer ffy...\n```\n\n## Rate Limiting\n\n- 1000 requests per minute per API key\n- 100 requests per minute for resource creation (POST)\n\n## Errors\n\nFactify uses conventional HTTP status codes and returns structured error responses\nusing the [ConnectRPC error format](https://connectrpc.com/docs/protocol#error-codes):\n\n```json\n{\n  \"code\": \"invalid_argument\",\n  \"message\": \"limit must be positive\",\n  \"details\": [\n    {\n      \"reason\": \"invalid_field_value\",\n      \"request_id\": \"req_01arwx4k8xrgqskvxq69gdn019\",\n      \"param\": \"limit\"\n    }\n  ]\n}\n```\n",
+    "description": "Factify API enables you to create, manage, and control access to legally-binding documents that replace PDFs.\n\n## Authentication\n\nBearer authentication header of the form Bearer \u003ctoken\u003e, where \u003ctoken\u003e is your auth token.\n\n```\nAuthorization: Bearer ffy...\n```\n\n## Rate Limiting\n\n- 1000 requests per minute per API key\n- 100 requests per minute for resource creation (POST)\n\n## Errors\n\nFactify uses conventional HTTP status codes and returns structured error responses\nusing the [ConnectRPC error format](https://connectrpc.com/docs/protocol#error-codes):\n\n```json\n{\n  \"code\": \"invalid_argument\",\n  \"message\": \"limit must be positive\",\n  \"details\": [\n    {\n      \"reason\": \"invalid_field_value\",\n      \"request_id\": \"req_01arwx4k8xrgqskvxq69gdn019\",\n      \"param\": \"limit\"\n    }\n  ]\n}\n```\n",
     "license": {
       "name": "Proprietary",
       "url": "https://factify.com/terms"
@@ -2667,18 +2671,6 @@
         "summary": "DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).",
         "tags": [
           "Quotas"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "QuotaService_DeleteOrganizationQuota",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.quotas.quotaServiceDeleteOrganizationQuota({\n    connectProtocolVersion: 1,\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "QuotaService_DeleteOrganizationQuota",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.quotas.quota_service_delete_organization_quota()\n\n    assert res.delete_organization_quota_response is not None\n\n    # Handle response\n    print(res.delete_organization_quota_response)"
-          }
         ]
       }
     },
@@ -2756,18 +2748,6 @@
         "summary": "SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).",
         "tags": [
           "Quotas"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "QuotaService_SetOrganizationQuota",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.quotas.quotaServiceSetOrganizationQuota({\n    connectProtocolVersion: 1,\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "QuotaService_SetOrganizationQuota",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.quotas.quota_service_set_organization_quota()\n\n    assert res.set_organization_quota_response is not None\n\n    # Handle response\n    print(res.set_organization_quota_response)"
-          }
         ]
       }
     },
@@ -2869,19 +2849,7 @@
           },
           "type": "cursor"
         },
-        "x-speakeasy-name-override": "list",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "listApiKeys",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.list({\n    organizationId: \"<id>\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "listApiKeys",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.api_keys.list(organization_id=\"<id>\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
-          }
-        ]
+        "x-speakeasy-name-override": "list"
       },
       "post": {
         "description": "Creates a new API key for the specified organization. The secret is only returned once in the response and cannot be retrieved later.",
@@ -2930,19 +2898,7 @@
         "tags": [
           "API Keys"
         ],
-        "x-speakeasy-name-override": "create",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "createApiKey",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.create({\n    name: \"<value>\",\n    organizationId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "createApiKey",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.api_keys.create(name=\"<value>\", organization_id=\"<id>\")\n\n    assert res.create_api_key_response is not None\n\n    # Handle response\n    print(res.create_api_key_response)"
-          }
-        ]
+        "x-speakeasy-name-override": "create"
       }
     },
     "/v1beta/api-keys/{api_key_id}/revoke": {
@@ -3021,19 +2977,7 @@
         "tags": [
           "API Keys"
         ],
-        "x-speakeasy-name-override": "revoke",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "revokeApiKey",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.revoke({\n    apiKeyId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "revokeApiKey",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.api_keys.revoke(api_key_id=\"<id>\")\n\n    assert res.revoke_api_key_response is not None\n\n    # Handle response\n    print(res.revoke_api_key_response)"
-          }
-        ]
+        "x-speakeasy-name-override": "revoke"
       }
     },
     "/v1beta/documents": {
@@ -3178,19 +3122,7 @@
           "type": "cursor"
         },
         "x-speakeasy-name-override": "list",
-        "x-speakeasy-usage-example": true,
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "listDocuments",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.list({\n    pageToken: \"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "listDocuments",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
-          }
-        ]
+        "x-speakeasy-usage-example": true
       },
       "post": {
         "description": "Creates a new document by uploading a PDF file.",
@@ -3239,19 +3171,7 @@
         "tags": [
           "Documents"
         ],
-        "x-speakeasy-name-override": "create",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "createDocument",
-            "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.create({\n    payload: await openAsBlob(\"example.file\"),\n    title: \"<value>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "createDocument",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.create(payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    }, title=\"<value>\")\n\n    assert res.create_document_response is not None\n\n    # Handle response\n    print(res.create_document_response)"
-          }
-        ]
+        "x-speakeasy-name-override": "create"
       }
     },
     "/v1beta/documents/{document_id}": {
@@ -3306,19 +3226,7 @@
         "tags": [
           "Documents"
         ],
-        "x-speakeasy-name-override": "get",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "getDocument",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.get({\n    documentId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "getDocument",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.get(document_id=\"<id>\")\n\n    assert res.get_document_response is not None\n\n    # Handle response\n    print(res.get_document_response)"
-          }
-        ]
+        "x-speakeasy-name-override": "get"
       },
       "patch": {
         "description": "Update document title and description.",
@@ -3401,19 +3309,7 @@
         "tags": [
           "Documents"
         ],
-        "x-speakeasy-name-override": "update",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "updateDocument",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.update({\n    documentId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "updateDocument",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.update(document_id=\"<id>\")\n\n    assert res.update_document_response is not None\n\n    # Handle response\n    print(res.update_document_response)"
-          }
-        ]
+        "x-speakeasy-name-override": "update"
       }
     },
     "/v1beta/documents/{document_id}/entry_page": {
@@ -3466,22 +3362,10 @@
         },
         "summary": "Generate entry page",
         "tags": [
-          "Sharing & Distribution"
+          "Sharing \u0026 Distribution"
         ],
         "x-speakeasy-group": "entryPages",
-        "x-speakeasy-name-override": "generate",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "generateDocumentEntryPage",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.entryPages.generate({\n    documentId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "generateDocumentEntryPage",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.entry_pages.generate(document_id=\"<id>\")\n\n    assert res.generate_entry_page_response is not None\n\n    # Handle response\n    print(res.generate_entry_page_response)"
-          }
-        ]
+        "x-speakeasy-name-override": "generate"
       }
     },
     "/v1beta/documents/{document_id}/policies": {
@@ -3573,19 +3457,7 @@
           },
           "type": "cursor"
         },
-        "x-speakeasy-name-override": "list",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "listDocumentPolicies",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.policies.list({\n    documentId: \"<id>\",\n    pageToken: \"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "listDocumentPolicies",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.policies.list(document_id=\"<id>\", page_token=\"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
-          }
-        ]
+        "x-speakeasy-name-override": "list"
       },
       "post": {
         "description": "Attach a policy to a document.",
@@ -3662,19 +3534,7 @@
         "tags": [
           "Policies"
         ],
-        "x-speakeasy-name-override": "attach",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "attachDocumentPolicy",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.policies.attach({\n    documentId: \"<id>\",\n    body: {\n      policyId: \"<id>\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "attachDocumentPolicy",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.policies.attach(document_id=\"<id>\", policy_id=\"<id>\")\n\n    assert res.document_policy is not None\n\n    # Handle response\n    print(res.document_policy)"
-          }
-        ]
+        "x-speakeasy-name-override": "attach"
       }
     },
     "/v1beta/documents/{document_id}/policies/{policy_id}": {
@@ -3741,19 +3601,7 @@
         "tags": [
           "Policies"
         ],
-        "x-speakeasy-name-override": "detach",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "detachDocumentPolicy",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.policies.detach({\n    documentId: \"<id>\",\n    policyId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "detachDocumentPolicy",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.policies.detach(document_id=\"<id>\", policy_id=\"<id>\")\n\n    assert res.empty is not None\n\n    # Handle response\n    print(res.empty)"
-          }
-        ]
+        "x-speakeasy-name-override": "detach"
       }
     },
     "/v1beta/documents/{document_id}/versions": {
@@ -3845,19 +3693,7 @@
           },
           "type": "cursor"
         },
-        "x-speakeasy-name-override": "list",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "listDocumentVersions",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.list({\n    documentId: \"<id>\",\n    pageToken: \"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "listDocumentVersions",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.versions.list(document_id=\"<id>\", page_token=\"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
-          }
-        ]
+        "x-speakeasy-name-override": "list"
       },
       "post": {
         "description": "Creates a new version by uploading a PDF file.",
@@ -3920,19 +3756,7 @@
         "tags": [
           "Versions"
         ],
-        "x-speakeasy-name-override": "create",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "createDocumentVersion",
-            "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.create({\n    documentId: \"<id>\",\n    body: {\n      payload: await openAsBlob(\"example.file\"),\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "createDocumentVersion",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.versions.create(document_id=\"<id>\", payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    })\n\n    assert res.version is not None\n\n    # Handle response\n    print(res.version)"
-          }
-        ]
+        "x-speakeasy-name-override": "create"
       }
     },
     "/v1beta/organizations": {
@@ -3964,11 +3788,11 @@
             }
           },
           {
-            "description": "Filter by the caller's role in the organization.\n If omitted or empty, returns all organizations the caller can view (no filtering).\n REST: ?role=admin or ?role=admin&role=owner",
+            "description": "Filter by the caller's role in the organization.\n If omitted or empty, returns all organizations the caller can view (no filtering).\n REST: ?role=admin or ?role=admin\u0026role=owner",
             "in": "query",
             "name": "role",
             "schema": {
-              "description": "Filter by the caller's role in the organization.\n If omitted or empty, returns all organizations the caller can view (no filtering).\n REST: ?role=admin or ?role=admin&role=owner",
+              "description": "Filter by the caller's role in the organization.\n If omitted or empty, returns all organizations the caller can view (no filtering).\n REST: ?role=admin or ?role=admin\u0026role=owner",
               "items": {
                 "$ref": "#/components/schemas/OrganizationRole"
               },
@@ -4024,19 +3848,7 @@
           },
           "type": "cursor"
         },
-        "x-speakeasy-name-override": "list",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "listOrganizations",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.list();\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "listOrganizations",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.list()\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
-          }
-        ]
+        "x-speakeasy-name-override": "list"
       },
       "post": {
         "description": "Creates a new organization. The authenticated user becomes the organization owner.",
@@ -4085,19 +3897,7 @@
         "tags": [
           "Organizations"
         ],
-        "x-speakeasy-name-override": "create",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "createOrganization",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.create({\n    name: \"<value>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "createOrganization",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.create(name=\"<value>\")\n\n    assert res.create_organization_response is not None\n\n    # Handle response\n    print(res.create_organization_response)"
-          }
-        ]
+        "x-speakeasy-name-override": "create"
       }
     },
     "/v1beta/organizations/{organization_id}": {
@@ -4152,19 +3952,7 @@
         "tags": [
           "Organizations"
         ],
-        "x-speakeasy-name-override": "get",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "getOrganization",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.get({\n    organizationId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "getOrganization",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.get(organization_id=\"<id>\")\n\n    assert res.get_organization_response is not None\n\n    # Handle response\n    print(res.get_organization_response)"
-          }
-        ]
+        "x-speakeasy-name-override": "get"
       }
     },
     "/v1beta/organizations/{organization_id}/invites": {
@@ -4185,11 +3973,11 @@
             }
           },
           {
-            "description": "Filter by invitation status.\n If empty, returns all invitations.\n REST: ?status=pending or ?status=pending&status=expired",
+            "description": "Filter by invitation status.\n If empty, returns all invitations.\n REST: ?status=pending or ?status=pending\u0026status=expired",
             "in": "query",
             "name": "status",
             "schema": {
-              "description": "Filter by invitation status.\n If empty, returns all invitations.\n REST: ?status=pending or ?status=pending&status=expired",
+              "description": "Filter by invitation status.\n If empty, returns all invitations.\n REST: ?status=pending or ?status=pending\u0026status=expired",
               "items": {
                 "$ref": "#/components/schemas/OrganizationInviteStatus"
               },
@@ -4309,19 +4097,7 @@
           "type": "cursor"
         },
         "x-speakeasy-group": "organizations.invites",
-        "x-speakeasy-name-override": "list",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "listOrganizationInvites",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.list({\n    organizationId: \"<id>\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "listOrganizationInvites",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.invites.list(organization_id=\"<id>\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
-          }
-        ]
+        "x-speakeasy-name-override": "list"
       },
       "post": {
         "description": "Creates an invitation and sends an email to the specified address. Returns FAILED_PRECONDITION if the email belongs to an existing organization member. Idempotency: If a PENDING invitation already exists for this email, the existing invitation is resent with a new token and refreshed expiration. Expired or revoked invitations are ignored - a new invitation is created.",
@@ -4413,19 +4189,7 @@
           "Organizations"
         ],
         "x-speakeasy-group": "organizations.invites",
-        "x-speakeasy-name-override": "create",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "createOrganizationInvite",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.create({\n    organizationId: \"<id>\",\n    body: {\n      email: \"Willie_Parisian16@hotmail.com\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "createOrganizationInvite",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.invites.create(organization_id=\"<id>\", email=\"Willie_Parisian16@hotmail.com\")\n\n    assert res.create_organization_invite_response is not None\n\n    # Handle response\n    print(res.create_organization_invite_response)"
-          }
-        ]
+        "x-speakeasy-name-override": "create"
       }
     },
     "/v1beta/organizations/{organization_id}/invites/accept": {
@@ -4503,18 +4267,6 @@
         "summary": "Accept an invitation",
         "tags": [
           "Organizations"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "acceptOrganizationInvite",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.acceptOrganizationInvite({\n    organizationId: \"<id>\",\n    body: {\n      token: \"<value>\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "acceptOrganizationInvite",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.accept_organization_invite(organization_id=\"<id>\", token=\"<value>\")\n\n    assert res.accept_organization_invite_response is not None\n\n    # Handle response\n    print(res.accept_organization_invite_response)"
-          }
         ]
       }
     },
@@ -4596,18 +4348,6 @@
         "summary": "Resend an invitation email",
         "tags": [
           "Organizations"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "resendOrganizationInvite",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.resendOrganizationInvite({\n    organizationId: \"<id>\",\n    inviteId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "resendOrganizationInvite",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.resend_organization_invite(organization_id=\"<id>\", invite_id=\"<id>\", body={})\n\n    assert res.resend_organization_invite_response is not None\n\n    # Handle response\n    print(res.resend_organization_invite_response)"
-          }
         ]
       }
     },
@@ -4689,18 +4429,6 @@
         "summary": "Revoke an invitation",
         "tags": [
           "Organizations"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "revokeOrganizationInvite",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.revokeOrganizationInvite({\n    organizationId: \"<id>\",\n    inviteId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "revokeOrganizationInvite",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.revoke_organization_invite(organization_id=\"<id>\", invite_id=\"<id>\", body={})\n\n    assert res.revoke_organization_invite_response is not None\n\n    # Handle response\n    print(res.revoke_organization_invite_response)"
-          }
         ]
       }
     },
@@ -4791,19 +4519,7 @@
             "nextCursor": "$.pagination.next_page_token"
           },
           "type": "cursor"
-        },
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "listOrganizationMembers",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.listOrganizationMembers({\n    organizationId: \"<id>\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "listOrganizationMembers",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.list_organization_members(organization_id=\"<id>\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
-          }
-        ]
+        }
       }
     },
     "/v1beta/organizations/{organization_id}/members/{user_id}": {
@@ -4869,18 +4585,6 @@
         "summary": "Remove an organization member",
         "tags": [
           "Organizations"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "removeOrganizationMember",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.removeOrganizationMember({\n    organizationId: \"<id>\",\n    userId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "removeOrganizationMember",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.remove_organization_member(organization_id=\"<id>\", user_id=\"<id>\")\n\n    assert res.remove_organization_member_response is not None\n\n    # Handle response\n    print(res.remove_organization_member_response)"
-          }
         ]
       },
       "patch": {
@@ -4974,18 +4678,6 @@
         "summary": "Update an organization member",
         "tags": [
           "Organizations"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "updateOrganizationMember",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.updateOrganizationMember({\n    organizationId: \"<id>\",\n    userId: \"<id>\",\n    body: {\n      role: \"member\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "updateOrganizationMember",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.update_organization_member(organization_id=\"<id>\", user_id=\"<id>\", role=\"member\")\n\n    assert res.update_organization_member_response is not None\n\n    # Handle response\n    print(res.update_organization_member_response)"
-          }
         ]
       }
     },
@@ -5040,18 +4732,6 @@
         "summary": "Get organization quota status",
         "tags": [
           "Usage"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "getOrganizationQuota",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.usage.getOrganizationQuota({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "getOrganizationQuota",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.get_organization_quota(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_organization_quota_response is not None\n\n    # Handle response\n    print(res.get_organization_quota_response)"
-          }
         ]
       }
     },
@@ -5106,18 +4786,6 @@
         "summary": "List API key quotas",
         "tags": [
           "Usage"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "listAPIKeyQuotas",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.usage.listAPIKeyQuotas({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "listAPIKeyQuotas",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.list_api_key_quotas(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.list_api_key_quotas_response is not None\n\n    # Handle response\n    print(res.list_api_key_quotas_response)"
-          }
         ]
       }
     },
@@ -5185,18 +4853,6 @@
         "summary": "Delete API key quota",
         "tags": [
           "Usage"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "deleteAPIKeyQuota",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.usage.deleteAPIKeyQuota({\n    apiKeyId: \"<id>\",\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "deleteAPIKeyQuota",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.delete_api_key_quota(api_key_id=\"<id>\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.delete_api_key_quota_response is not None\n\n    # Handle response\n    print(res.delete_api_key_quota_response)"
-          }
         ]
       },
       "put": {
@@ -5225,7 +4881,7 @@
                 "description": "SetAPIKeyQuotaRequest creates or updates a per-key quota.",
                 "properties": {
                   "limit": {
-                    "description": "The limit for this key. Must be > 0.",
+                    "description": "The limit for this key. Must be \u003e 0.",
                     "exclusiveMinimum": 0,
                     "format": "int32",
                     "nullable": true,
@@ -5281,18 +4937,6 @@
         "summary": "Set API key quota",
         "tags": [
           "Usage"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "setAPIKeyQuota",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.usage.setAPIKeyQuota({\n    apiKeyId: \"<id>\",\n    body: {\n      organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "setAPIKeyQuota",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.set_api_key_quota(api_key_id=\"<id>\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.set_api_key_quota_response is not None\n\n    # Handle response\n    print(res.set_api_key_quota_response)"
-          }
         ]
       }
     },
@@ -5356,18 +5000,6 @@
         "summary": "Get usage history",
         "tags": [
           "Usage"
-        ],
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "getUsageHistory",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.usage.getUsageHistory({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "getUsageHistory",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.get_usage_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_usage_history_response is not None\n\n    # Handle response\n    print(res.get_usage_history_response)"
-          }
         ]
       }
     },
@@ -5423,19 +5055,7 @@
         "tags": [
           "Versions"
         ],
-        "x-speakeasy-name-override": "get",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "getVersion",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.get({\n    versionId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "getVersion",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.versions.get(version_id=\"<id>\")\n\n    assert res.version is not None\n\n    # Handle response\n    print(res.version)"
-          }
-        ]
+        "x-speakeasy-name-override": "get"
       },
       "patch": {
         "description": "Update version title and description.",
@@ -5516,19 +5136,7 @@
         "tags": [
           "Versions"
         ],
-        "x-speakeasy-name-override": "update",
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "updateVersion",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.update({\n    versionId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "lang": "python",
-            "label": "updateVersion",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.versions.update(version_id=\"<id>\")\n\n    assert res.version is not None\n\n    # Handle response\n    print(res.version)"
-          }
-        ]
+        "x-speakeasy-name-override": "update"
       }
     }
   },
@@ -5574,7 +5182,7 @@
     },
     {
       "description": "Generate shareable entry pages for documents.",
-      "name": "Sharing & Distribution"
+      "name": "Sharing \u0026 Distribution"
     }
   ]
 }
