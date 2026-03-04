@@ -2,6 +2,13 @@
 
 Machine-readable error reason for programmatic handling
 
+## Example Usage
+
+```python
+from factify.models import Reason
+value: Reason = "missing_required_field"
+```
+
 
 ## Values
 

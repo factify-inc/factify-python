@@ -2,6 +2,13 @@
 
 The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
 
+## Example Usage
+
+```python
+from factify.models import ConnectErrorCode
+value: ConnectErrorCode = "canceled"
+```
+
 
 ## Values
 

@@ -29,7 +29,6 @@ class OrganizationQuotaTypedDict(TypedDict):
     reset_at: NotRequired[datetime]
     r"""When the quota resets (start of next billing period)."""
     tier: NotRequired[QuotaTier]
-    r"""QuotaTier represents the organization's quota tier."""
     usage_percent: NotRequired[int]
     r"""Usage as a percentage (0-100+)."""
 
@@ -61,7 +60,6 @@ class OrganizationQuota(BaseModel):
     r"""When the quota resets (start of next billing period)."""
 
     tier: Optional[QuotaTier] = None
-    r"""QuotaTier represents the organization's quota tier."""
 
     usage_percent: Optional[int] = None
     r"""Usage as a percentage (0-100+)."""

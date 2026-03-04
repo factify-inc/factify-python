@@ -1,12 +1,16 @@
 # QuotaTier
 
-QuotaTier represents the organization's quota tier.
+## Example Usage
+
+```python
+from factify.models import QuotaTier
+value: QuotaTier = "free"
+```
 
 
 ## Values
 
-| Name                     | Value                    |
-| ------------------------ | ------------------------ |
-| `QUOTA_TIER_UNSPECIFIED` | QUOTA_TIER_UNSPECIFIED   |
-| `QUOTA_TIER_FREE`        | QUOTA_TIER_FREE          |
-| `QUOTA_TIER_CUSTOM`      | QUOTA_TIER_CUSTOM        |
+| Name     | Value    |
+| -------- | -------- |
+| `FREE`   | free     |
+| `CUSTOM` | custom   |

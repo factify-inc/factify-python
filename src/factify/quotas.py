@@ -274,7 +274,7 @@ class Quotas(BaseSDK):
         :param limit: Optional limit override. If not set, uses the configured tier default.
             Must be > 0 when set. Use a very high value (e.g., 999999999) for unlimited.
         :param organization_id: The organization ID (required).
-        :param tier: QuotaTier represents the organization's quota tier.
+        :param tier:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -398,7 +398,7 @@ class Quotas(BaseSDK):
         :param limit: Optional limit override. If not set, uses the configured tier default.
             Must be > 0 when set. Use a very high value (e.g., 999999999) for unlimited.
         :param organization_id: The organization ID (required).
-        :param tier: QuotaTier represents the organization's quota tier.
+        :param tier:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

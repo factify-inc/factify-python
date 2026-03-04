@@ -18,7 +18,6 @@ class SetOrganizationQuotaRequestTypedDict(TypedDict):
     organization_id: NotRequired[str]
     r"""The organization ID (required)."""
     tier: NotRequired[QuotaTier]
-    r"""QuotaTier represents the organization's quota tier."""
 
 
 class SetOrganizationQuotaRequest(BaseModel):
@@ -33,7 +32,6 @@ class SetOrganizationQuotaRequest(BaseModel):
     r"""The organization ID (required)."""
 
     tier: Optional[QuotaTier] = None
-    r"""QuotaTier represents the organization's quota tier."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

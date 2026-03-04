@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: 3713249c6f72b95ec373f2b780e2a492
+  docChecksum: 3878171ffe504261945ad930d811f9d9
   docVersion: 1.0.0
-  speakeasyVersion: 1.736.2
-  generationVersion: 2.845.15
-  releaseVersion: 0.7.1-rc.8
-  configChecksum: e58e5dd2f770e14d2ea84e7453631566
+  speakeasyVersion: 1.741.0
+  generationVersion: 2.849.2
+  releaseVersion: 0.7.1-rc.9
+  configChecksum: 0cc6bee126fb41f9d27c53a99af75b2c
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: e9688505-87d3-4031-bf80-ac73d4cb086b
-  pristine_commit_hash: 988a50dab0d8ae093a4cc391c3c2cced12e65bad
-  pristine_tree_hash: 691a69eeeeaabf42f0cb65e73fe253711a9fd034
+  generation_id: 268f1b14-fde7-4552-865e-9a2f11c5c5e6
+  pristine_commit_hash: 079d8c66dd0aa86249eca6449c9466086b7581f9
+  pristine_tree_hash: c4c6e7f6bc4aae8337f321b04d3625f778803044
 features:
   python:
     additionalDependencies: 1.0.0
@@ -77,8 +77,8 @@ trackedFiles:
     pristine_git_object: 9d50af2e0bd74b9e0c0f24da4314cc675dcca2ee
   docs/models/accesslevel.md:
     id: 42855991af11
-    last_write_checksum: sha1:e1f9d9dc9dab54b5e2e328bc307f5fcf165e60db
-    pristine_git_object: 0e3f8f0a275cb54ded7c9666bff32ce87de94617
+    last_write_checksum: sha1:7fbdfe3e1fb52b03bdcbe9080815dffb4be5af1d
+    pristine_git_object: 5ebc3b14b78b4168dc554fc34441736147228634
   docs/models/apikey.md:
     id: 3cd1b4235d4f
     last_write_checksum: sha1:f9eeb2f8845ada3830f6d8aa0e61670c33fb3b8a
@@ -105,8 +105,8 @@ trackedFiles:
     pristine_git_object: b72cac160764034824ccc0960aabce94bbf62974
   docs/models/connecterrorcode.md:
     id: 49e4f7c52335
-    last_write_checksum: sha1:bbafda9d856fedf3ffbc5e6fde7426408b8e5b21
-    pristine_git_object: e2d70d0561c9f69f762e70c7b3b5baca51918d89
+    last_write_checksum: sha1:73974e9d4d47d06ecde3f9cee0178926939cf879
+    pristine_git_object: 23884555311f746de168718c2af94d20f4c11508
   docs/models/connecterrordetailsany.md:
     id: 6b91ab191084
     last_write_checksum: sha1:05a2f2e7d0bf8441c7a3bb9896afd4ceefce1a22
@@ -237,8 +237,8 @@ trackedFiles:
     pristine_git_object: 912347a482feb7d482aec1404b409f8fa801c70e
   docs/models/errorresponsecode.md:
     id: efb5019826be
-    last_write_checksum: sha1:602c5366f42d95789f6b334b34f5678384f87623
-    pristine_git_object: 5ed99dd9672738ae61342a3dc7c03bcb5010a208
+    last_write_checksum: sha1:0084933bd8ecd6447f6250775b4dd2af355d5e4f
+    pristine_git_object: bfb3f52c28ea2cdbb9e0e01e94c52ccfcf223067
   docs/models/generatedocumententrypagerequest.md:
     id: 29b54169b01e
     last_write_checksum: sha1:32e59431f7ad06a925c0a989f0f8e8f72660892f
@@ -345,12 +345,12 @@ trackedFiles:
     pristine_git_object: af7fb7bec6c324b89a0ae19a7badc2f5e65920b3
   docs/models/listdocumentsaccesslevel.md:
     id: 9f36d6352fe2
-    last_write_checksum: sha1:b4cfda7f6fe7c8a667672e098529f36122ecd16d
-    pristine_git_object: 3bb6a3e7a9e547192224d3b3d5e2789aa228bac6
+    last_write_checksum: sha1:3778761ad2111b1be045d2fb29582125c0c68f16
+    pristine_git_object: 6bea5cca083b31c4790f03e081c6d24617f3d13f
   docs/models/listdocumentsprocessingstatus.md:
     id: 76cfaeae8ed2
-    last_write_checksum: sha1:29c38b7fe16138f641037e1eeb9e8776636bfbc8
-    pristine_git_object: a6ea89434ad5537749925bbd8c8b1ed588eec565
+    last_write_checksum: sha1:fb536c0517f179bcddff12776f98a499cd4a41b6
+    pristine_git_object: d3df92e2b75728cb61dd5792e9336ef62a558c20
   docs/models/listdocumentsrequest.md:
     id: 36c8a1116534
     last_write_checksum: sha1:bbd0eff1353a1471ea0f695ad87faa39f70d2c3c
@@ -421,24 +421,24 @@ trackedFiles:
     pristine_git_object: 1a5995f9b31151f0abeca62c04e564a7e2a12839
   docs/models/organizationinvitestatus.md:
     id: e4d252b34cbb
-    last_write_checksum: sha1:4bad94ab6d32fed04cb0425764cc44a95e63a406
-    pristine_git_object: 34dfbce83cae7879bef3ed74e28a0a52ef579a65
+    last_write_checksum: sha1:0fe5256f4829e1802f9f787286428c7ffacff109
+    pristine_git_object: e7be4920af5dbb1e699b6cc968a715f7a3874ccc
   docs/models/organizationmember.md:
     id: 7e5cd60a4c6e
     last_write_checksum: sha1:d0fc3d3398431ee6e36678dff960f04403238630
     pristine_git_object: 24323fe21aecec0fbfa0367193e7b0338af310d0
   docs/models/organizationquota.md:
     id: f493d276851d
-    last_write_checksum: sha1:28737041885fe6128a429652e8f356b3266f4e72
-    pristine_git_object: 7c2f4e9b29ff769b04a63ffc86dd32742c04236f
+    last_write_checksum: sha1:c9c7ea0edfc08169d82d2a431c24d8e6bd55ddc1
+    pristine_git_object: e46a3444daebd1c5a14a1c78547af65b86765689
   docs/models/organizationquotaconfig.md:
     id: 64e630031601
-    last_write_checksum: sha1:59a1ea1d237e9546ed12a9e06cdd589d26c40090
-    pristine_git_object: 245cb1fa88963d643357e509fecfbdd4d6bb32a8
+    last_write_checksum: sha1:e676a01de10c76c6290a9a6a8b3c7c1d214fd963
+    pristine_git_object: b32bcfbd17bf4317f2ab1ce4806788cf27df4d70
   docs/models/organizationrole.md:
     id: 5a70793f04e6
-    last_write_checksum: sha1:241516768e88bf18296ea9797a003b43a3781287
-    pristine_git_object: 9236d8e555a8b07b844beda287df2617c53fb2f9
+    last_write_checksum: sha1:ad96cf10aa201d8cc75b987a8d8bd55d057dfbd2
+    pristine_git_object: 23b32336cb4f9fb220140c01b80c47abea972973
   docs/models/pagination.md:
     id: a9ff902f6a16
     last_write_checksum: sha1:f734f7e815ee8d65ced38746e99a2efd8be1a181
@@ -449,8 +449,8 @@ trackedFiles:
     pristine_git_object: a6b070076a4458f1f24ca0847cd36aa3cf30cbc1
   docs/models/processingstatus.md:
     id: 06047222d2ff
-    last_write_checksum: sha1:cc746915ff7b20f7f5a7c200c297a301e80bf56b
-    pristine_git_object: 6c7b5a5eb76ae9f61ccdd5b259bd456e3154744a
+    last_write_checksum: sha1:26f5c11cc4398a08f83c3f1407df3bdfe0328cff
+    pristine_git_object: 698ee0d771920764ed85477b8df8083fafb523b8
   docs/models/quotaservicedeleteorganizationquotarequest.md:
     id: 3bf6552f10cb
     last_write_checksum: sha1:ed2d1e361e314bff07762c37d984365d156beab1
@@ -477,12 +477,12 @@ trackedFiles:
     pristine_git_object: 3b54572e867533e37f304b619795cef7022a70c7
   docs/models/quotatier.md:
     id: 3d1904143345
-    last_write_checksum: sha1:a3cfbf10bcc8908ab063f049a3a1089712199695
-    pristine_git_object: 686b2986bf8c4073fb681f7a9d1dd6a99a31286c
+    last_write_checksum: sha1:44bee88055307d5f16ec8bf5cfad6cfa2c46a4cd
+    pristine_git_object: 048a1ddd0d7f3191e3dea578b3feb6eefa19f9f9
   docs/models/reason.md:
     id: 087688da6fd4
-    last_write_checksum: sha1:1f2349f102862caf34d75e59f70c37eb399af157
-    pristine_git_object: 41127b792f48a4d6c563bbc3186560ae12adfb95
+    last_write_checksum: sha1:d3d11b6e0354fb4ce8450f61b8b490ff6eecfd2a
+    pristine_git_object: ed83d7c13a74b62941ac4737dac7d555c3f35cf4
   docs/models/removeorganizationmemberrequest.md:
     id: aecf70500da7
     last_write_checksum: sha1:2a66d74e6e3a8c11ff098a2e2f4b25e3e0ec696a
@@ -565,8 +565,8 @@ trackedFiles:
     pristine_git_object: 78d235c58de04a0a6d9b3732b054dfb4efdaf956
   docs/models/setorganizationquotarequest.md:
     id: b539a4bcedbf
-    last_write_checksum: sha1:b769d1ecb7b9b9d6ba75de68cba5ed6b13318acf
-    pristine_git_object: a96ba99dc5533bc6186ace7d640705d756e9ee16
+    last_write_checksum: sha1:489f224a444566101cbb21e16d4bb7d380a5aadb
+    pristine_git_object: f032d8c04febd7ffafc88eca229985407f5f6bdf
   docs/models/setorganizationquotaresponse.md:
     id: 09810953fa92
     last_write_checksum: sha1:ff92c940c6422f6691edcdc918e7322965bb288d
@@ -621,8 +621,8 @@ trackedFiles:
     pristine_git_object: df89f48503aeb3eb62801f0821d36dddf5d4e546
   docs/models/usertype.md:
     id: caefb3a3f739
-    last_write_checksum: sha1:20647f7eb5d4d15da31d4a28fb6a2ef0043d762c
-    pristine_git_object: e74e13d1acdf76edb794c1e1043b18974e09f670
+    last_write_checksum: sha1:5fcef40392c8be2d92a6d7e0d6e174b46c9444ea
+    pristine_git_object: 21b9661e82e46b96e966ebc7aa54bcdfbe62cb82
   docs/models/utils/retryconfig.md:
     id: 4343ac43161c
     last_write_checksum: sha1:562c0f21e308ad10c27f85f75704c15592c6929d
@@ -661,8 +661,8 @@ trackedFiles:
     pristine_git_object: f7ac1469522b78064b04b7fd6ba752c45013c8e5
   docs/sdks/quotas/README.md:
     id: 688e75141996
-    last_write_checksum: sha1:0462db51a27f982de7767a5b6c5f3bfa04d4afb9
-    pristine_git_object: 91949e282e0ca4751d0c50e710e459d358c3b03f
+    last_write_checksum: sha1:133c6f77d6b54bf3b46976e38c5d225d77f35a64
+    pristine_git_object: 2187234950b5801091e3e19632b1980397f62303
   docs/sdks/usage/README.md:
     id: 631af2d7ce26
     last_write_checksum: sha1:0fb86bf15cec28df0eb79f9ed4c3ce1da7e5becb
@@ -681,8 +681,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a80be527ee65a415a4a16d3088c991b4906af99e
-    pristine_git_object: c1d4da6a8d8a61da1f5dfa07f2c88aa014879ff7
+    last_write_checksum: sha1:64eb4ca44a9ea1c44a03813523a6eb93201e186d
+    pristine_git_object: 379518932cac4d09b8fde3bea23665da7115f6e4
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -709,8 +709,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:c21f17e1fdb468ed47d2f62590316ee312d656d7
-    pristine_git_object: 79f5b86b60b0d89ac458c18a4610a3e4f69b144f
+    last_write_checksum: sha1:ec6bb6809094cbbd0cde67515998780ce6ee8bcc
+    pristine_git_object: e1c3e52da33f4430e24f4c73b73a218ef915ef59
   src/factify/api_keys.py:
     id: 10eb7ea2e1e3
     last_write_checksum: sha1:b5694f520576608f0aa62e06138dbd65c39e1958
@@ -1017,12 +1017,12 @@ trackedFiles:
     pristine_git_object: 6169c09c7229326df2c174054ffc918a979c7fc5
   src/factify/models/organizationquota.py:
     id: 6bed71b7ff22
-    last_write_checksum: sha1:be30580f6c96a6d2437d6119c8db56a1808721ec
-    pristine_git_object: 9ebfa062f31dd8a0ab1493ef59942047089507dc
+    last_write_checksum: sha1:8c303b2e289c7cade92e12f19fec81e3cf2bc982
+    pristine_git_object: 63a1ecd8d6e156ddbffd5eff2db085f58c772bf4
   src/factify/models/organizationquotaconfig.py:
     id: 25ce9e410cba
-    last_write_checksum: sha1:7edf800dad78362d9aa2c0ee6211323a6db0f09b
-    pristine_git_object: 4438877101dfaf64047bdd42f0d3ea04f54073a1
+    last_write_checksum: sha1:b5f9aaeeee3c0c3886092e87a6525a23fa475c68
+    pristine_git_object: cab7eb4f912d7c50d4da1a0f7361a20ad4507659
   src/factify/models/organizationrole.py:
     id: 0cfff552cff2
     last_write_checksum: sha1:000f6b35c1beb3951196b1a0894809234ff39bc4
@@ -1049,8 +1049,8 @@ trackedFiles:
     pristine_git_object: d753e8d5c4f1f05706ee88c8d9af4724b04b1af7
   src/factify/models/quotatier.py:
     id: a4904ad2fdca
-    last_write_checksum: sha1:9dfbe9585eefa3c646549eeacc6cf8191d982e2f
-    pristine_git_object: 7dd9782be0a56d5160e5d49a4e96d6582f8e4760
+    last_write_checksum: sha1:9817547f9fd377d552abe3a99763a69be9266479
+    pristine_git_object: 39793c5ecfc12bdf2bb441da5630d9a5d1d72962
   src/factify/models/removeorganizationmemberop.py:
     id: b96c5c024513
     last_write_checksum: sha1:f6a9677c5bdf4f6b9cf48bc4d43d460e1c5f2062
@@ -1097,8 +1097,8 @@ trackedFiles:
     pristine_git_object: d42d34f112aee39bb454652900a2ef1dad280f71
   src/factify/models/setorganizationquotarequest.py:
     id: 1a86169ea4c9
-    last_write_checksum: sha1:6188d99e35c8475b42ad56a474488f8100f13225
-    pristine_git_object: cd25447212a70718ceac9b1a791c30f24715246d
+    last_write_checksum: sha1:0931fe61f406f2c4e5d36d8c3d824f17e4d2f639
+    pristine_git_object: 52e6d8bed33716d43d97fefe53e007b1b9e59d84
   src/factify/models/setorganizationquotaresponse.py:
     id: e2c4dc9f9847
     last_write_checksum: sha1:bbfda5ff4b148975c71b795cd638603de75e2478
@@ -1153,8 +1153,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   src/factify/quotas.py:
     id: 7f788558309f
-    last_write_checksum: sha1:43cc21a748d50f2f8d83650ec2e62406c5d6ecc2
-    pristine_git_object: 69223100c01efdb61ba465a644318ae52ac175e8
+    last_write_checksum: sha1:eb6e05df29e0ad6cc629f6b7819a0236007db800
+    pristine_git_object: 5dec3af1c99a789a398eeea9834c38df915ac535
   src/factify/sdk.py:
     id: a71d663e8f75
     last_write_checksum: sha1:5a5290bf2f7bec7a2f09c2235ade60d344dd14ac
@@ -2146,8 +2146,4 @@ examples:
         "500":
           application/json: {"code": "not_found", "message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `factify.organizations.list_organization_members()`: **Added**
-  * `factify.organizations.remove_organization_member()`: **Added**
-  * `factify.organizations.update_organization_member()`: **Added**
+releaseNotes: "## Python SDK Changes:\n* `factify.quotas.quota_service_set_organization_quota()`: \n  *  `request.tier` **Changed** (Breaking ⚠️)\n  *  `response.quota.tier` **Changed** (Breaking ⚠️)\n* `factify.usage.get_organization_quota()`:  `response.quota.tier` **Changed** (Breaking ⚠️)\n"

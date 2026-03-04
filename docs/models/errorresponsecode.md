@@ -14,6 +14,13 @@ ConnectRPC error code. Maps to HTTP status codes:
 - unavailable -> 503
 
 
+## Example Usage
+
+```python
+from factify.models import ErrorResponseCode
+value: ErrorResponseCode = "unknown"
+```
+
 
 ## Values
 

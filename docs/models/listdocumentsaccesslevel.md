@@ -2,6 +2,13 @@
 
 Access level
 
+## Example Usage
+
+```python
+from factify.models import ListDocumentsAccessLevel
+value: ListDocumentsAccessLevel = "private"
+```
+
 
 ## Values
 

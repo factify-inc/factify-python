@@ -89,3 +89,13 @@ Based on:
 - [python v0.7.1-rc.8] .
 ### Releases
 - [PyPI v0.7.1-rc.8] https://pypi.org/project/factify/0.7.1-rc.8 - .
+
+## 2026-03-04 14:30:26
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.741.0 (2.849.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v0.7.1-rc.9] .
+### Releases
+- [PyPI v0.7.1-rc.9] https://pypi.org/project/factify/0.7.1-rc.9 - .

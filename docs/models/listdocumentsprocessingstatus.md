@@ -2,6 +2,13 @@
 
 Processing status
 
+## Example Usage
+
+```python
+from factify.models import ListDocumentsProcessingStatus
+value: ListDocumentsProcessingStatus = "processing"
+```
+
 
 ## Values
 

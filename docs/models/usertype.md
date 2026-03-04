@@ -1,5 +1,12 @@
 # UserType
 
+## Example Usage
+
+```python
+from factify.models import UserType
+value: UserType = "user_account"
+```
+
 
 ## Values
 

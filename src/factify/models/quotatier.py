@@ -5,8 +5,6 @@ from typing import Literal
 
 
 QuotaTier = Literal[
-    "QUOTA_TIER_UNSPECIFIED",
-    "QUOTA_TIER_FREE",
-    "QUOTA_TIER_CUSTOM",
+    "free",
+    "custom",
 ]
-r"""QuotaTier represents the organization's quota tier."""

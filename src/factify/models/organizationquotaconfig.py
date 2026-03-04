@@ -21,7 +21,6 @@ class OrganizationQuotaConfigTypedDict(TypedDict):
     organization_id: NotRequired[str]
     r"""The organization ID."""
     tier: NotRequired[QuotaTier]
-    r"""QuotaTier represents the organization's quota tier."""
     updated_at: NotRequired[datetime]
     r"""When the configuration was last updated."""
 
@@ -42,7 +41,6 @@ class OrganizationQuotaConfig(BaseModel):
     r"""The organization ID."""
 
     tier: Optional[QuotaTier] = None
-    r"""QuotaTier represents the organization's quota tier."""
 
     updated_at: Optional[datetime] = None
     r"""When the configuration was last updated."""
