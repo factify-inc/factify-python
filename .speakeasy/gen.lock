@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: 3878171ffe504261945ad930d811f9d9
+  docChecksum: 4d7c2cbdc682139ac11c63eede89d6fd
   docVersion: 1.0.0
-  speakeasyVersion: 1.741.0
-  generationVersion: 2.849.2
-  releaseVersion: 0.7.1-rc.9
-  configChecksum: 0cc6bee126fb41f9d27c53a99af75b2c
+  speakeasyVersion: 1.741.2
+  generationVersion: 2.849.3
+  releaseVersion: 0.7.1-rc.10
+  configChecksum: 24c27344c37a6998de1bf234f9383340
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: 268f1b14-fde7-4552-865e-9a2f11c5c5e6
-  pristine_commit_hash: 079d8c66dd0aa86249eca6449c9466086b7581f9
-  pristine_tree_hash: c4c6e7f6bc4aae8337f321b04d3625f778803044
+  generation_id: c4b6ff34-7c4a-49f1-b29d-0c7b23ed1d3c
+  pristine_commit_hash: 72695f647b91d9a183320428d63fb25eeb7dfbf6
+  pristine_tree_hash: faf132b5f55aa620c319cf8697fe3966dc37951e
 features:
   python:
     additionalDependencies: 1.0.0
@@ -681,8 +681,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:64eb4ca44a9ea1c44a03813523a6eb93201e186d
-    pristine_git_object: 379518932cac4d09b8fde3bea23665da7115f6e4
+    last_write_checksum: sha1:679aec1656f41ee569efece183c62f16de828511
+    pristine_git_object: 37bcaa45b4145af13ea9786a09ada6bc39f389e8
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -709,8 +709,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:ec6bb6809094cbbd0cde67515998780ce6ee8bcc
-    pristine_git_object: e1c3e52da33f4430e24f4c73b73a218ef915ef59
+    last_write_checksum: sha1:60924fb9bfbc204dde304995c0d882472dedeba5
+    pristine_git_object: 6dbc6de89f3ca169fd03d6ff86b7e94e2f8eed1a
   src/factify/api_keys.py:
     id: 10eb7ea2e1e3
     last_write_checksum: sha1:b5694f520576608f0aa62e06138dbd65c39e1958
@@ -2146,4 +2146,3 @@ examples:
         "500":
           application/json: {"code": "not_found", "message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `factify.quotas.quota_service_set_organization_quota()`: \n  *  `request.tier` **Changed** (Breaking ⚠️)\n  *  `response.quota.tier` **Changed** (Breaking ⚠️)\n* `factify.usage.get_organization_quota()`:  `response.quota.tier` **Changed** (Breaking ⚠️)\n"
