@@ -1945,14 +1945,10 @@
         ]
       },
       "QuotaTier": {
-        "description": "QuotaTier represents the organization's quota tier.",
         "enum": [
-          "QUOTA_TIER_UNSPECIFIED",
-          "QUOTA_TIER_FREE",
-          "QUOTA_TIER_CUSTOM"
-        ],
-        "title": "QuotaTier",
-        "type": "string"
+          "free",
+          "custom"
+        ]
       },
       "RemoveOrganizationMemberRequest": {
         "additionalProperties": false,
