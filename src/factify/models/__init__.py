@@ -18,6 +18,18 @@ if TYPE_CHECKING:
         AcceptOrganizationInviteResponseTypedDict,
     )
     from .accesslevel import AccessLevel
+    from .addorganizationmemberop import (
+        AddOrganizationMemberAddOrganizationMemberRequest,
+        AddOrganizationMemberAddOrganizationMemberRequestTypedDict,
+        AddOrganizationMemberRequest,
+        AddOrganizationMemberRequestTypedDict,
+        AddOrganizationMemberResponseResponse,
+        AddOrganizationMemberResponseResponseTypedDict,
+    )
+    from .addorganizationmemberresponse import (
+        AddOrganizationMemberResponse,
+        AddOrganizationMemberResponseTypedDict,
+    )
     from .apikey import APIKey, APIKeyTypedDict
     from .apikeyquota import APIKeyQuota, APIKeyQuotaTypedDict
     from .attachdocumentpolicyop import (
@@ -404,6 +416,14 @@ __all__ = [
     "AcceptOrganizationInviteResponseResponseTypedDict",
     "AcceptOrganizationInviteResponseTypedDict",
     "AccessLevel",
+    "AddOrganizationMemberAddOrganizationMemberRequest",
+    "AddOrganizationMemberAddOrganizationMemberRequestTypedDict",
+    "AddOrganizationMemberRequest",
+    "AddOrganizationMemberRequestTypedDict",
+    "AddOrganizationMemberResponse",
+    "AddOrganizationMemberResponseResponse",
+    "AddOrganizationMemberResponseResponseTypedDict",
+    "AddOrganizationMemberResponseTypedDict",
     "AttachDocumentPolicyRequest",
     "AttachDocumentPolicyRequestTypedDict",
     "AttachDocumentPolicyResponse",
@@ -678,6 +698,14 @@ _dynamic_imports: dict[str, str] = {
     "AcceptOrganizationInviteResponse": ".acceptorganizationinviteresponse",
     "AcceptOrganizationInviteResponseTypedDict": ".acceptorganizationinviteresponse",
     "AccessLevel": ".accesslevel",
+    "AddOrganizationMemberAddOrganizationMemberRequest": ".addorganizationmemberop",
+    "AddOrganizationMemberAddOrganizationMemberRequestTypedDict": ".addorganizationmemberop",
+    "AddOrganizationMemberRequest": ".addorganizationmemberop",
+    "AddOrganizationMemberRequestTypedDict": ".addorganizationmemberop",
+    "AddOrganizationMemberResponseResponse": ".addorganizationmemberop",
+    "AddOrganizationMemberResponseResponseTypedDict": ".addorganizationmemberop",
+    "AddOrganizationMemberResponse": ".addorganizationmemberresponse",
+    "AddOrganizationMemberResponseTypedDict": ".addorganizationmemberresponse",
     "APIKey": ".apikey",
     "APIKeyTypedDict": ".apikey",
     "APIKeyQuota": ".apikeyquota",

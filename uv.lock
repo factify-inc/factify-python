@@ -83,7 +83,7 @@ wheels = [
 
 [[package]]
 name = "factify"
-version = "0.7.1rc10"
+version = "0.7.1rc11"
 source = { editable = "." }
 dependencies = [
     { name = "httpcore" },
