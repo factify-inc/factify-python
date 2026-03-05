@@ -27,12 +27,16 @@ class OrganizationInviteTypedDict(TypedDict):
     organization_id: str
     r"""Organization the invitation is for."""
     sender: UserTypedDict
-    r"""User represents a user or service account."""
+    r"""User represents a human user account.
+    Returned by GetUser (endpoint deferred).
+    """
     status: OrganizationInviteStatus
     accepted_at: NotRequired[datetime]
     r"""When the invitation was accepted (if accepted)."""
     accepted_by: NotRequired[UserTypedDict]
-    r"""User represents a user or service account."""
+    r"""User represents a human user account.
+    Returned by GetUser (endpoint deferred).
+    """
     message: NotRequired[Nullable[str]]
     r"""Custom message from sender to recipient (if provided).
     Max 2000 bytes to support ~500 multibyte characters.
@@ -61,7 +65,9 @@ class OrganizationInvite(BaseModel):
     r"""Organization the invitation is for."""
 
     sender: User
-    r"""User represents a user or service account."""
+    r"""User represents a human user account.
+    Returned by GetUser (endpoint deferred).
+    """
 
     status: OrganizationInviteStatus
 
@@ -69,7 +75,9 @@ class OrganizationInvite(BaseModel):
     r"""When the invitation was accepted (if accepted)."""
 
     accepted_by: Optional[User] = None
-    r"""User represents a user or service account."""
+    r"""User represents a human user account.
+    Returned by GetUser (endpoint deferred).
+    """
 
     message: OptionalNullable[str] = UNSET
     r"""Custom message from sender to recipient (if provided).

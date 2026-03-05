@@ -3,7 +3,7 @@
 from __future__ import annotations
 from .accesslevel import AccessLevel
 from .processingstatus import ProcessingStatus
-from .user import User, UserTypedDict
+from .subject import Subject, SubjectTypedDict
 from .versionref import VersionRef, VersionRefTypedDict
 from datetime import datetime
 from factify.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
@@ -18,8 +18,13 @@ class DocumentTypedDict(TypedDict):
     access_level: AccessLevel
     created_at: datetime
     r"""Timestamp when document was created."""
-    created_by: UserTypedDict
-    r"""User represents a user or service account."""
+    created_by: SubjectTypedDict
+    r"""Subject is a lightweight reference to either a user or a bot.
+    Used in embedded fields like created_by.
+    For full details, call GetUser or GetBot with the subject's id.
+    subject_type_matches_id_prefix // id prefix must match type (user_ for user, bot_ for bot)
+
+    """
     id: str
     r"""Unique ID for the document.
     Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
@@ -43,8 +48,13 @@ class Document(BaseModel):
     created_at: datetime
     r"""Timestamp when document was created."""
 
-    created_by: User
-    r"""User represents a user or service account."""
+    created_by: Subject
+    r"""Subject is a lightweight reference to either a user or a bot.
+    Used in embedded fields like created_by.
+    For full details, call GetUser or GetBot with the subject's id.
+    subject_type_matches_id_prefix // id prefix must match type (user_ for user, bot_ for bot)
+
+    """
 
     id: str
     r"""Unique ID for the document.

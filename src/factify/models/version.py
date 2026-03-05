@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .processingstatus import ProcessingStatus
-from .user import User, UserTypedDict
+from .subject import Subject, SubjectTypedDict
 from datetime import datetime
 from factify.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
@@ -14,8 +14,13 @@ class VersionTypedDict(TypedDict):
 
     created_at: datetime
     r"""Timestamp when version was created."""
-    created_by: UserTypedDict
-    r"""User represents a user or service account."""
+    created_by: SubjectTypedDict
+    r"""Subject is a lightweight reference to either a user or a bot.
+    Used in embedded fields like created_by.
+    For full details, call GetUser or GetBot with the subject's id.
+    subject_type_matches_id_prefix // id prefix must match type (user_ for user, bot_ for bot)
+
+    """
     document_id: str
     r"""Parent document ID.
     Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
@@ -39,8 +44,13 @@ class Version(BaseModel):
     created_at: datetime
     r"""Timestamp when version was created."""
 
-    created_by: User
-    r"""User represents a user or service account."""
+    created_by: Subject
+    r"""Subject is a lightweight reference to either a user or a bot.
+    Used in embedded fields like created_by.
+    For full details, call GetUser or GetBot with the subject's id.
+    subject_type_matches_id_prefix // id prefix must match type (user_ for user, bot_ for bot)
+
+    """
 
     document_id: str
     r"""Parent document ID.

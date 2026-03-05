@@ -11,20 +11,17 @@ from typing_extensions import TypedDict
 class OrganizationMemberTypedDict(TypedDict):
     r"""OrganizationMember represents a member of an organization."""
 
-    email: str
-    r"""Email address of the member."""
     joined_at: datetime
     r"""When the member joined the organization."""
     role: OrganizationRole
     user: UserTypedDict
-    r"""User represents a user or service account."""
+    r"""User represents a human user account.
+    Returned by GetUser (endpoint deferred).
+    """
 
 
 class OrganizationMember(BaseModel):
     r"""OrganizationMember represents a member of an organization."""
-
-    email: str
-    r"""Email address of the member."""
 
     joined_at: datetime
     r"""When the member joined the organization."""
@@ -32,4 +29,6 @@ class OrganizationMember(BaseModel):
     role: OrganizationRole
 
     user: User
-    r"""User represents a user or service account."""
+    r"""User represents a human user account.
+    Returned by GetUser (endpoint deferred).
+    """

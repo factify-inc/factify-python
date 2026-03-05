@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 from .policy import Policy, PolicyTypedDict
-from .user import User, UserTypedDict
 from datetime import datetime
 from factify.types import BaseModel
 from typing_extensions import TypedDict
@@ -13,8 +12,6 @@ class DocumentPolicyTypedDict(TypedDict):
 
     attached_at: datetime
     r"""Timestamp when policy was attached."""
-    attached_by: UserTypedDict
-    r"""User represents a user or service account."""
     document_id: str
     r"""Document ID this policy is attached to.
     Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
@@ -28,9 +25,6 @@ class DocumentPolicy(BaseModel):
 
     attached_at: datetime
     r"""Timestamp when policy was attached."""
-
-    attached_by: User
-    r"""User represents a user or service account."""
 
     document_id: str
     r"""Document ID this policy is attached to.

@@ -365,6 +365,8 @@ if TYPE_CHECKING:
         SetOrganizationQuotaResponse,
         SetOrganizationQuotaResponseTypedDict,
     )
+    from .subject import Subject, SubjectTypedDict
+    from .subjecttype import SubjectType
     from .updatedocumentop import (
         UpdateDocumentRequest,
         UpdateDocumentRequestTypedDict,
@@ -398,7 +400,6 @@ if TYPE_CHECKING:
         UpdateVersionUpdateVersionRequestTypedDict,
     )
     from .user import User, UserTypedDict
-    from .usertype import UserType
     from .version import Version, VersionTypedDict
     from .versionref import VersionRef, VersionRefTypedDict
 
@@ -657,6 +658,9 @@ __all__ = [
     "SetOrganizationQuotaRequestTypedDict",
     "SetOrganizationQuotaResponse",
     "SetOrganizationQuotaResponseTypedDict",
+    "Subject",
+    "SubjectType",
+    "SubjectTypedDict",
     "UpdateDocumentRequest",
     "UpdateDocumentRequestTypedDict",
     "UpdateDocumentResponse",
@@ -680,7 +684,6 @@ __all__ = [
     "UpdateVersionUpdateVersionRequest",
     "UpdateVersionUpdateVersionRequestTypedDict",
     "User",
-    "UserType",
     "UserTypedDict",
     "Version",
     "VersionRef",
@@ -943,6 +946,9 @@ _dynamic_imports: dict[str, str] = {
     "SetOrganizationQuotaRequestTypedDict": ".setorganizationquotarequest",
     "SetOrganizationQuotaResponse": ".setorganizationquotaresponse",
     "SetOrganizationQuotaResponseTypedDict": ".setorganizationquotaresponse",
+    "Subject": ".subject",
+    "SubjectTypedDict": ".subject",
+    "SubjectType": ".subjecttype",
     "UpdateDocumentRequest": ".updatedocumentop",
     "UpdateDocumentRequestTypedDict": ".updatedocumentop",
     "UpdateDocumentResponseResponse": ".updatedocumentop",
@@ -967,7 +973,6 @@ _dynamic_imports: dict[str, str] = {
     "UpdateVersionUpdateVersionRequestTypedDict": ".updateversionop",
     "User": ".user",
     "UserTypedDict": ".user",
-    "UserType": ".usertype",
     "Version": ".version",
     "VersionTypedDict": ".version",
     "VersionRef": ".versionref",

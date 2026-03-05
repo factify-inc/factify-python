@@ -4,7 +4,7 @@ from __future__ import annotations
 from typing import Literal
 
 
-UserType = Literal[
-    "user_account",
-    "service_account",
+SubjectType = Literal[
+    "user",
+    "bot",
 ]
