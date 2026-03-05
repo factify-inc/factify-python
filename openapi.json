@@ -838,6 +838,11 @@
             "title": "description",
             "type": "string"
           },
+          "general_access": {
+            "$ref": "#/components/schemas/AccessLevel",
+            "description": "General access level controlling who can discover the document.",
+            "title": "general_access"
+          },
           "id": {
             "description": "Unique ID for the document.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
             "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
@@ -845,10 +850,32 @@
             "title": "id",
             "type": "string"
           },
+          "last_viewed_at": {
+            "description": "Timestamp when the authenticated user last viewed this document.\n Absent if the user has never viewed it.",
+            "format": "date-time",
+            "title": "last_viewed_at",
+            "type": "string"
+          },
+          "permission_set": {
+            "$ref": "#/components/schemas/DocumentPermissionSet",
+            "description": "Permissions the authenticated user has on this document.\n Present in list and get responses when the caller is authenticated.",
+            "title": "permission_set"
+          },
           "processing_status": {
             "$ref": "#/components/schemas/ProcessingStatus",
             "description": "Processing status.",
             "title": "processing_status"
+          },
+          "shared_at": {
+            "description": "Timestamp when this document was last shared to the authenticated user.\n Absent if the document was never shared to them.",
+            "format": "date-time",
+            "title": "shared_at",
+            "type": "string"
+          },
+          "thumbnail_url": {
+            "description": "URL of the document thumbnail image.",
+            "title": "thumbnail_url",
+            "type": "string"
           },
           "title": {
             "description": "Document title.",
@@ -856,6 +883,18 @@
             "maxLength": 255,
             "minLength": 1,
             "title": "title",
+            "type": "string"
+          },
+          "trashed_at": {
+            "description": "Timestamp when the document was trashed, if applicable.\n Absent if the document is not trashed.",
+            "format": "date-time",
+            "title": "trashed_at",
+            "type": "string"
+          },
+          "updated_at": {
+            "description": "Timestamp when document was last updated.",
+            "format": "date-time",
+            "title": "updated_at",
             "type": "string"
           },
           "url": {
@@ -876,6 +915,84 @@
           "created_by"
         ],
         "title": "Document",
+        "type": "object"
+      },
+      "DocumentOwnership": {
+        "enum": [
+          "owned",
+          "not_owned"
+        ]
+      },
+      "DocumentPermissionSet": {
+        "additionalProperties": false,
+        "description": "DocumentPermissionSet contains the permissions the authenticated user has on a document.",
+        "properties": {
+          "attach_policy": {
+            "title": "attach_policy",
+            "type": "boolean"
+          },
+          "comment_private": {
+            "title": "comment_private",
+            "type": "boolean"
+          },
+          "comment_public": {
+            "title": "comment_public",
+            "type": "boolean"
+          },
+          "copy_content": {
+            "title": "copy_content",
+            "type": "boolean"
+          },
+          "create_version": {
+            "title": "create_version",
+            "type": "boolean"
+          },
+          "export": {
+            "title": "export",
+            "type": "boolean"
+          },
+          "grant_access": {
+            "title": "grant_access",
+            "type": "boolean"
+          },
+          "list_versions": {
+            "title": "list_versions",
+            "type": "boolean"
+          },
+          "manage_access": {
+            "title": "manage_access",
+            "type": "boolean"
+          },
+          "open": {
+            "title": "open",
+            "type": "boolean"
+          },
+          "screenshot": {
+            "title": "screenshot",
+            "type": "boolean"
+          },
+          "trash": {
+            "title": "trash",
+            "type": "boolean"
+          },
+          "view": {
+            "title": "view",
+            "type": "boolean"
+          },
+          "view_analytics": {
+            "title": "view_analytics",
+            "type": "boolean"
+          },
+          "view_leads": {
+            "title": "view_leads",
+            "type": "boolean"
+          },
+          "view_timeline": {
+            "title": "view_timeline",
+            "type": "boolean"
+          }
+        },
+        "title": "DocumentPermissionSet",
         "type": "object"
       },
       "DocumentPolicy": {
@@ -908,6 +1025,12 @@
         ],
         "title": "DocumentPolicy",
         "type": "object"
+      },
+      "DocumentTrashState": {
+        "enum": [
+          "active",
+          "trashed"
+        ]
       },
       "Empty": {
         "description": "A generic empty message that you can re-use to avoid defining duplicated\n empty messages in your APIs. A typical example is to use it as the request\n or the response type of an API method. For instance:\n\n     service Foo {\n       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);\n     }",
@@ -1355,6 +1478,20 @@
             "title": "created_by_id",
             "type": "array"
           },
+          "organization_scope": {
+            "description": "Organization scope filter. When true, restrict to documents within the user's organization.\n REST: ?organization_scope=true",
+            "nullable": true,
+            "title": "organization_scope",
+            "type": "boolean"
+          },
+          "ownership": {
+            "description": "Ownership filter. Returns documents matching the specified ownership state.\n REST: ?ownership=owned or ?ownership=not_owned",
+            "items": {
+              "$ref": "#/components/schemas/DocumentOwnership"
+            },
+            "title": "ownership",
+            "type": "array"
+          },
           "page_size": {
             "description": "Maximum number of items to return per page (1-100). Default: 50.",
             "format": "int32",
@@ -1376,6 +1513,26 @@
               "$ref": "#/components/schemas/ProcessingStatus"
             },
             "title": "processing_status",
+            "type": "array"
+          },
+          "query": {
+            "description": "Full-text search filter. Case-insensitive substring match on document name and description.\n REST: ?query=budget",
+            "nullable": true,
+            "title": "query",
+            "type": "string"
+          },
+          "sort": {
+            "description": "Sort field and direction. Prefix with `-` for descending order.\n Allowed values: created_at, updated_at, name, last_viewed_at, last_shared_at.\n Default (omitted): created_at descending.\n REST: ?sort=last_viewed_at or ?sort=-name",
+            "nullable": true,
+            "title": "sort",
+            "type": "string"
+          },
+          "trash_state": {
+            "description": "Trash state filter. Returns documents matching the specified trash state.\n REST: ?trash_state=active or ?trash_state=trashed or ?trash_state=active\u0026trash_state=trashed\n Default (omitted): active documents only.",
+            "items": {
+              "$ref": "#/components/schemas/DocumentTrashState"
+            },
+            "title": "trash_state",
             "type": "array"
           }
         },
@@ -3210,6 +3367,62 @@
               },
               "title": "processing_status",
               "type": "array"
+            }
+          },
+          {
+            "description": "Sort field and direction. Prefix with `-` for descending order.\n Allowed values: created_at, updated_at, name, last_viewed_at, last_shared_at.\n Default (omitted): created_at descending.\n REST: ?sort=last_viewed_at or ?sort=-name",
+            "in": "query",
+            "name": "sort",
+            "schema": {
+              "description": "Sort field and direction. Prefix with `-` for descending order.\n Allowed values: created_at, updated_at, name, last_viewed_at, last_shared_at.\n Default (omitted): created_at descending.\n REST: ?sort=last_viewed_at or ?sort=-name",
+              "title": "sort",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Full-text search filter. Case-insensitive substring match on document name and description.\n REST: ?query=budget",
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "description": "Full-text search filter. Case-insensitive substring match on document name and description.\n REST: ?query=budget",
+              "title": "query",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Ownership filter. Returns documents matching the specified ownership state.\n REST: ?ownership=owned or ?ownership=not_owned",
+            "in": "query",
+            "name": "ownership",
+            "schema": {
+              "description": "Ownership filter. Returns documents matching the specified ownership state.\n REST: ?ownership=owned or ?ownership=not_owned",
+              "items": {
+                "$ref": "#/components/schemas/DocumentOwnership"
+              },
+              "title": "ownership",
+              "type": "array"
+            }
+          },
+          {
+            "description": "Trash state filter. Returns documents matching the specified trash state.\n REST: ?trash_state=active or ?trash_state=trashed or ?trash_state=active\u0026trash_state=trashed\n Default (omitted): active documents only.",
+            "in": "query",
+            "name": "trash_state",
+            "schema": {
+              "description": "Trash state filter. Returns documents matching the specified trash state.\n REST: ?trash_state=active or ?trash_state=trashed or ?trash_state=active\u0026trash_state=trashed\n Default (omitted): active documents only.",
+              "items": {
+                "$ref": "#/components/schemas/DocumentTrashState"
+              },
+              "title": "trash_state",
+              "type": "array"
+            }
+          },
+          {
+            "description": "Organization scope filter. When true, restrict to documents within the user's organization.\n REST: ?organization_scope=true",
+            "in": "query",
+            "name": "organization_scope",
+            "schema": {
+              "description": "Organization scope filter. When true, restrict to documents within the user's organization.\n REST: ?organization_scope=true",
+              "title": "organization_scope",
+              "type": "boolean"
             }
           },
           {
