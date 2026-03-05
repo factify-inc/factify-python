@@ -1347,10 +1347,13 @@
             "type": "string"
           },
           "created_by_id": {
-            "description": "Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.\n Accepts single value or comma-separated list.\n REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx,bot_yyy",
-            "nullable": true,
+            "description": "Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.\n REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx\u0026created_by_id=bot_yyy",
+            "items": {
+              "pattern": "^(user|bot)_[0-9a-hjkmnp-tv-z]{26}$",
+              "type": "string"
+            },
             "title": "created_by_id",
-            "type": "string"
+            "type": "array"
           },
           "page_size": {
             "description": "Maximum number of items to return per page (1-100). Default: 50.",
@@ -2741,6 +2744,18 @@
         "summary": "DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).",
         "tags": [
           "Quotas"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "QuotaService_DeleteOrganizationQuota",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.quotaService.quotaServiceDeleteOrganizationQuota({\n    connectProtocolVersion: 1,\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "QuotaService_DeleteOrganizationQuota",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.quota_service.quota_service_delete_organization_quota()\n\n    assert res.factify_api_v1beta_delete_organization_quota_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_delete_organization_quota_response)"
+          }
         ]
       }
     },
@@ -2818,6 +2833,18 @@
         "summary": "SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).",
         "tags": [
           "Quotas"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "QuotaService_SetOrganizationQuota",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.quotaService.quotaServiceSetOrganizationQuota({\n    connectProtocolVersion: 1,\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "QuotaService_SetOrganizationQuota",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.quota_service.quota_service_set_organization_quota()\n\n    assert res.factify_api_v1beta_set_organization_quota_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_set_organization_quota_response)"
+          }
         ]
       }
     },
@@ -2906,6 +2933,28 @@
         "tags": [
           "API Keys"
         ],
+        "x-codeSamples": [
+          {
+            "label": "listApiKeys",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.list({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listApiKeys",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.identityService.list({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listApiKeys",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.api_keys.list(organization_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_list_api_keys_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_list_api_keys_response)"
+          },
+          {
+            "label": "listApiKeys",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.identity_service.list(organization_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_list_api_keys_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_list_api_keys_response)"
+          }
+        ],
         "x-speakeasy-name-override": "list",
         "x-speakeasy-pagination": {
           "inputs": [
@@ -2967,6 +3016,28 @@
         "summary": "Create an API key",
         "tags": [
           "API Keys"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "createApiKey",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.create({\n    organizationId: \"\u003cid\u003e\",\n    name: \"\u003cvalue\u003e\",\n    expiresAt: new Date(\"2023-01-15T01:30:15.01Z\"),\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "createApiKey",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.identityService.create({\n    organizationId: \"\u003cid\u003e\",\n    name: \"\u003cvalue\u003e\",\n    expiresAt: new Date(\"2023-01-15T01:30:15.01Z\"),\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "createApiKey",
+            "lang": "python",
+            "source": "from factify import Factify\nfrom factify.utils import parse_datetime\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.api_keys.create(organization_id=\"\u003cid\u003e\", name=\"\u003cvalue\u003e\", expires_at=parse_datetime(\"2023-01-15T01:30:15.01Z\"))\n\n    assert res.factify_api_v1beta_create_api_key_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_create_api_key_response)"
+          },
+          {
+            "label": "createApiKey",
+            "lang": "python",
+            "source": "from factify import Factify\nfrom factify.utils import parse_datetime\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.identity_service.create(organization_id=\"\u003cid\u003e\", name=\"\u003cvalue\u003e\", expires_at=parse_datetime(\"2023-01-15T01:30:15.01Z\"))\n\n    assert res.factify_api_v1beta_create_api_key_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_create_api_key_response)"
+          }
         ],
         "x-speakeasy-name-override": "create"
       }
@@ -3047,6 +3118,28 @@
         "tags": [
           "API Keys"
         ],
+        "x-codeSamples": [
+          {
+            "label": "revokeApiKey",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.apiKeys.revoke({\n    apiKeyId: \"\u003cid\u003e\",\n    body: {\n      apiKeyId: \"\u003cid\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "revokeApiKey",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.identityService.revoke({\n    apiKeyId: \"\u003cid\u003e\",\n    body: {\n      apiKeyId: \"\u003cid\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "revokeApiKey",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.api_keys.revoke(api_key_id_param=\"\u003cvalue\u003e\", api_key_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_revoke_api_key_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_revoke_api_key_response)"
+          },
+          {
+            "label": "revokeApiKey",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.identity_service.revoke(api_key_id_param=\"\u003cvalue\u003e\", api_key_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_revoke_api_key_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_revoke_api_key_response)"
+          }
+        ],
         "x-speakeasy-name-override": "revoke"
       }
     },
@@ -3080,59 +3173,44 @@
             }
           },
           {
-            "description": "Filter by creator ID(s). Returns documents matching ANY of the specified IDs.",
-            "explode": false,
+            "description": "Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.\n REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx\u0026created_by_id=bot_yyy",
             "in": "query",
             "name": "created_by_id",
-            "required": false,
             "schema": {
+              "description": "Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.\n REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx\u0026created_by_id=bot_yyy",
               "items": {
-                "description": "User or bot TypeID (e.g., user_xxx, bot_yyy)",
+                "pattern": "^(user|bot)_[0-9a-hjkmnp-tv-z]{26}$",
                 "type": "string"
               },
+              "title": "created_by_id",
               "type": "array"
-            },
-            "style": "form"
+            }
           },
           {
-            "description": "Filter by access level(s). Returns documents matching ANY of the specified levels.",
-            "explode": false,
+            "description": "Filter by access level(s). Returns documents matching ANY of the specified levels.\n REST: ?access_level=private or ?access_level=private\u0026access_level=organization",
             "in": "query",
             "name": "access_level",
-            "required": false,
             "schema": {
+              "description": "Filter by access level(s). Returns documents matching ANY of the specified levels.\n REST: ?access_level=private or ?access_level=private\u0026access_level=organization",
               "items": {
-                "description": "Access level",
-                "enum": [
-                  "private",
-                  "organization",
-                  "public"
-                ],
-                "type": "string"
+                "$ref": "#/components/schemas/AccessLevel"
               },
+              "title": "access_level",
               "type": "array"
-            },
-            "style": "form"
+            }
           },
           {
-            "description": "Filter by processing status(es). Returns documents matching ANY of the specified statuses.",
-            "explode": false,
+            "description": "Filter by processing status(es). Returns documents matching ANY of the specified statuses.\n REST: ?processing_status=ready or ?processing_status=processing\u0026processing_status=ready",
             "in": "query",
             "name": "processing_status",
-            "required": false,
             "schema": {
+              "description": "Filter by processing status(es). Returns documents matching ANY of the specified statuses.\n REST: ?processing_status=ready or ?processing_status=processing\u0026processing_status=ready",
               "items": {
-                "description": "Processing status",
-                "enum": [
-                  "processing",
-                  "ready",
-                  "failed"
-                ],
-                "type": "string"
+                "$ref": "#/components/schemas/ProcessingStatus"
               },
+              "title": "processing_status",
               "type": "array"
-            },
-            "style": "form"
+            }
           },
           {
             "description": "Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)",
@@ -3177,6 +3255,18 @@
         "summary": "List documents",
         "tags": [
           "Documents"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "listDocuments",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documentService.list({\n    pageToken: \"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listDocuments",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.document_service.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\")\n\n    assert res.factify_api_v1beta_list_documents_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_list_documents_response)"
+          }
         ],
         "x-speakeasy-name-override": "list",
         "x-speakeasy-pagination": {
@@ -3241,6 +3331,18 @@
         "tags": [
           "Documents"
         ],
+        "x-codeSamples": [
+          {
+            "label": "createDocument",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documentService.create({\n    payload: await openAsBlob(\"example.file\"),\n    title: \"\u003cvalue\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "createDocument",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.document_service.create(payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    }, title=\"\u003cvalue\u003e\")\n\n    assert res.factify_api_v1beta_create_document_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_create_document_response)"
+          }
+        ],
         "x-speakeasy-name-override": "create"
       }
     },
@@ -3295,6 +3397,18 @@
         "summary": "Retrieve a document",
         "tags": [
           "Documents"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "getDocument",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documentService.get({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getDocument",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.document_service.get(document_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_get_document_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_get_document_response)"
+          }
         ],
         "x-speakeasy-name-override": "get"
       },
@@ -3379,6 +3493,18 @@
         "tags": [
           "Documents"
         ],
+        "x-codeSamples": [
+          {
+            "label": "updateDocument",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documentService.update({\n    documentId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "updateDocument",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.document_service.update(document_id_param=\"\u003cvalue\u003e\")\n\n    assert res.factify_api_v1beta_update_document_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_update_document_response)"
+          }
+        ],
         "x-speakeasy-name-override": "update"
       }
     },
@@ -3433,6 +3559,18 @@
         "summary": "Generate entry page",
         "tags": [
           "Sharing \u0026 Distribution"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "generateDocumentEntryPage",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.entryPages.generate({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "generateDocumentEntryPage",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.entry_pages.generate(document_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_generate_entry_page_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_generate_entry_page_response)"
+          }
         ],
         "x-speakeasy-group": "entryPages",
         "x-speakeasy-name-override": "generate"
@@ -3513,6 +3651,18 @@
         "summary": "List document policies",
         "tags": [
           "Policies"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "listDocumentPolicies",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policyService.list({\n    documentId: \"\u003cid\u003e\",\n    pageToken: \"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listDocumentPolicies",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.policy_service.list(document_id=\"\u003cid\u003e\", page_token=\"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    assert res.factify_api_v1beta_list_document_policies_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_list_document_policies_response)"
+          }
         ],
         "x-speakeasy-name-override": "list",
         "x-speakeasy-pagination": {
@@ -3604,6 +3754,18 @@
         "tags": [
           "Policies"
         ],
+        "x-codeSamples": [
+          {
+            "label": "attachDocumentPolicy",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policyService.attach({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      policyId: \"\u003cid\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "attachDocumentPolicy",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.policy_service.attach(document_id_param=\"\u003cvalue\u003e\", policy_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_document_policy is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_document_policy)"
+          }
+        ],
         "x-speakeasy-name-override": "attach"
       }
     },
@@ -3670,6 +3832,18 @@
         "summary": "Detach a policy",
         "tags": [
           "Policies"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "detachDocumentPolicy",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.policyService.detach({\n    documentId: \"\u003cid\u003e\",\n    policyId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "detachDocumentPolicy",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.policy_service.detach(document_id=\"\u003cid\u003e\", policy_id=\"\u003cid\u003e\")\n\n    assert res.google_protobuf_empty is not None\n\n    # Handle response\n    print(res.google_protobuf_empty)"
+          }
         ],
         "x-speakeasy-name-override": "detach"
       }
@@ -3750,6 +3924,18 @@
         "tags": [
           "Versions"
         ],
+        "x-codeSamples": [
+          {
+            "label": "listDocumentVersions",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versionService.list({\n    documentId: \"\u003cid\u003e\",\n    pageToken: \"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listDocumentVersions",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.version_service.list(document_id=\"\u003cid\u003e\", page_token=\"eyJpZCI6InZlcl8wMWgyYWJjZDEyMzRlZmdoNTY3OGprbW5wdCIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    assert res.factify_api_v1beta_list_versions_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_list_versions_response)"
+          }
+        ],
         "x-speakeasy-name-override": "list",
         "x-speakeasy-pagination": {
           "inputs": [
@@ -3825,6 +4011,18 @@
         "summary": "Create a new version",
         "tags": [
           "Versions"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "createDocumentVersion",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\nimport { openAsBlob } from \"node:fs\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versionService.create({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      payload: await openAsBlob(\"example.file\"),\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "createDocumentVersion",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.version_service.create(document_id_param=\"\u003cvalue\u003e\", payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    })\n\n    assert res.factify_api_v1beta_version is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_version)"
+          }
         ],
         "x-speakeasy-name-override": "create"
       }
@@ -3905,6 +4103,28 @@
         "tags": [
           "Organizations"
         ],
+        "x-codeSamples": [
+          {
+            "label": "listOrganizations",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizationService.list();\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listOrganizations",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.list();\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listOrganizations",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organization_service.list()\n\n    assert res.factify_api_v1beta_list_organizations_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_list_organizations_response)"
+          },
+          {
+            "label": "listOrganizations",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.list()\n\n    assert res.factify_api_v1beta_list_organizations_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_list_organizations_response)"
+          }
+        ],
         "x-speakeasy-name-override": "list",
         "x-speakeasy-pagination": {
           "inputs": [
@@ -3967,6 +4187,28 @@
         "tags": [
           "Organizations"
         ],
+        "x-codeSamples": [
+          {
+            "label": "createOrganization",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizationService.create({\n    name: \"\u003cvalue\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "createOrganization",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.create({\n    name: \"\u003cvalue\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "createOrganization",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organization_service.create(name=\"\u003cvalue\u003e\")\n\n    assert res.factify_api_v1beta_create_organization_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_create_organization_response)"
+          },
+          {
+            "label": "createOrganization",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.create(name=\"\u003cvalue\u003e\")\n\n    assert res.factify_api_v1beta_create_organization_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_create_organization_response)"
+          }
+        ],
         "x-speakeasy-name-override": "create"
       }
     },
@@ -4021,6 +4263,28 @@
         "summary": "Retrieve an organization",
         "tags": [
           "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "getOrganization",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizationService.get({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getOrganization",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.get({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getOrganization",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organization_service.get(organization_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_get_organization_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_get_organization_response)"
+          },
+          {
+            "label": "getOrganization",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.get(organization_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_get_organization_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_get_organization_response)"
+          }
         ],
         "x-speakeasy-name-override": "get"
       }
@@ -4153,6 +4417,18 @@
         "tags": [
           "Organizations"
         ],
+        "x-codeSamples": [
+          {
+            "label": "listOrganizationInvites",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.list({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listOrganizationInvites",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.invites.list(organization_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_list_organization_invites_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_list_organization_invites_response)"
+          }
+        ],
         "x-speakeasy-group": "organizations.invites",
         "x-speakeasy-name-override": "list",
         "x-speakeasy-pagination": {
@@ -4258,6 +4534,18 @@
         "tags": [
           "Organizations"
         ],
+        "x-codeSamples": [
+          {
+            "label": "createOrganizationInvite",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.create({\n    organizationId: \"\u003cid\u003e\",\n    body: {\n      organizationId: \"\u003cid\u003e\",\n      email: \"Willie_Parisian16@hotmail.com\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "createOrganizationInvite",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.invites.create(organization_id_param=\"\u003cvalue\u003e\", organization_id=\"\u003cid\u003e\", email=\"Willie_Parisian16@hotmail.com\")\n\n    assert res.factify_api_v1beta_create_organization_invite_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_create_organization_invite_response)"
+          }
+        ],
         "x-speakeasy-group": "organizations.invites",
         "x-speakeasy-name-override": "create"
       }
@@ -4337,6 +4625,28 @@
         "summary": "Accept an invitation",
         "tags": [
           "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "acceptOrganizationInvite",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizationService.acceptOrganizationInvite({\n    organizationId: \"\u003cid\u003e\",\n    body: {\n      organizationId: \"\u003cid\u003e\",\n      token: \"\u003cvalue\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "acceptOrganizationInvite",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.acceptOrganizationInvite({\n    organizationId: \"\u003cid\u003e\",\n    body: {\n      organizationId: \"\u003cid\u003e\",\n      token: \"\u003cvalue\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "acceptOrganizationInvite",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organization_service.accept_organization_invite(organization_id_param=\"\u003cvalue\u003e\", organization_id=\"\u003cid\u003e\", token=\"\u003cvalue\u003e\")\n\n    assert res.factify_api_v1beta_accept_organization_invite_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_accept_organization_invite_response)"
+          },
+          {
+            "label": "acceptOrganizationInvite",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.accept_organization_invite(organization_id_param=\"\u003cvalue\u003e\", organization_id=\"\u003cid\u003e\", token=\"\u003cvalue\u003e\")\n\n    assert res.factify_api_v1beta_accept_organization_invite_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_accept_organization_invite_response)"
+          }
         ]
       }
     },
@@ -4418,6 +4728,28 @@
         "summary": "Resend an invitation email",
         "tags": [
           "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "resendOrganizationInvite",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizationService.resendOrganizationInvite({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {\n      organizationId: \"\u003cid\u003e\",\n      inviteId: \"\u003cid\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "resendOrganizationInvite",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.resendOrganizationInvite({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {\n      organizationId: \"\u003cid\u003e\",\n      inviteId: \"\u003cid\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "resendOrganizationInvite",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organization_service.resend_organization_invite(organization_id_param=\"\u003cvalue\u003e\", invite_id_param=\"\u003cvalue\u003e\", organization_id=\"\u003cid\u003e\", invite_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_resend_organization_invite_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_resend_organization_invite_response)"
+          },
+          {
+            "label": "resendOrganizationInvite",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.resend_organization_invite(organization_id_param=\"\u003cvalue\u003e\", invite_id_param=\"\u003cvalue\u003e\", organization_id=\"\u003cid\u003e\", invite_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_resend_organization_invite_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_resend_organization_invite_response)"
+          }
         ]
       }
     },
@@ -4499,6 +4831,28 @@
         "summary": "Revoke an invitation",
         "tags": [
           "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "revokeOrganizationInvite",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizationService.revokeOrganizationInvite({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {\n      organizationId: \"\u003cid\u003e\",\n      inviteId: \"\u003cid\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "revokeOrganizationInvite",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.revokeOrganizationInvite({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {\n      organizationId: \"\u003cid\u003e\",\n      inviteId: \"\u003cid\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "revokeOrganizationInvite",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organization_service.revoke_organization_invite(organization_id_param=\"\u003cvalue\u003e\", invite_id_param=\"\u003cvalue\u003e\", organization_id=\"\u003cid\u003e\", invite_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_revoke_organization_invite_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_revoke_organization_invite_response)"
+          },
+          {
+            "label": "revokeOrganizationInvite",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.revoke_organization_invite(organization_id_param=\"\u003cvalue\u003e\", invite_id_param=\"\u003cvalue\u003e\", organization_id=\"\u003cid\u003e\", invite_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_revoke_organization_invite_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_revoke_organization_invite_response)"
+          }
         ]
       }
     },
@@ -4576,6 +4930,28 @@
         "summary": "List organization members",
         "tags": [
           "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "listOrganizationMembers",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizationService.listOrganizationMembers({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listOrganizationMembers",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.listOrganizationMembers({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listOrganizationMembers",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organization_service.list_organization_members(organization_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_list_organization_members_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_list_organization_members_response)"
+          },
+          {
+            "label": "listOrganizationMembers",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.list_organization_members(organization_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_list_organization_members_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_list_organization_members_response)"
+          }
         ],
         "x-speakeasy-pagination": {
           "inputs": [
@@ -4677,6 +5053,28 @@
         "summary": "Add a member to an organization",
         "tags": [
           "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "addOrganizationMember",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizationService.addOrganizationMember({\n    organizationId: \"\u003cid\u003e\",\n    body: {\n      organizationId: \"\u003cid\u003e\",\n      userId: \"\u003cid\u003e\",\n      role: \"member\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "addOrganizationMember",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.addOrganizationMember({\n    organizationId: \"\u003cid\u003e\",\n    body: {\n      organizationId: \"\u003cid\u003e\",\n      userId: \"\u003cid\u003e\",\n      role: \"member\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "addOrganizationMember",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organization_service.add_organization_member(organization_id_param=\"\u003cvalue\u003e\", organization_id=\"\u003cid\u003e\", user_id=\"\u003cid\u003e\", role=\"member\")\n\n    assert res.factify_api_v1beta_add_organization_member_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_add_organization_member_response)"
+          },
+          {
+            "label": "addOrganizationMember",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.add_organization_member(organization_id_param=\"\u003cvalue\u003e\", organization_id=\"\u003cid\u003e\", user_id=\"\u003cid\u003e\", role=\"member\")\n\n    assert res.factify_api_v1beta_add_organization_member_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_add_organization_member_response)"
+          }
         ]
       }
     },
@@ -4743,6 +5141,28 @@
         "summary": "Remove an organization member",
         "tags": [
           "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "removeOrganizationMember",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizationService.removeOrganizationMember({\n    organizationId: \"\u003cid\u003e\",\n    userId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "removeOrganizationMember",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.removeOrganizationMember({\n    organizationId: \"\u003cid\u003e\",\n    userId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "removeOrganizationMember",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organization_service.remove_organization_member(organization_id=\"\u003cid\u003e\", user_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_remove_organization_member_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_remove_organization_member_response)"
+          },
+          {
+            "label": "removeOrganizationMember",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.remove_organization_member(organization_id=\"\u003cid\u003e\", user_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_remove_organization_member_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_remove_organization_member_response)"
+          }
         ]
       },
       "patch": {
@@ -4836,6 +5256,28 @@
         "summary": "Update an organization member",
         "tags": [
           "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "updateOrganizationMember",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizationService.updateOrganizationMember({\n    organizationId: \"\u003cid\u003e\",\n    userId: \"\u003cid\u003e\",\n    body: {\n      organizationId: \"\u003cid\u003e\",\n      userId: \"\u003cid\u003e\",\n      role: \"member\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "updateOrganizationMember",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.updateOrganizationMember({\n    organizationId: \"\u003cid\u003e\",\n    userId: \"\u003cid\u003e\",\n    body: {\n      organizationId: \"\u003cid\u003e\",\n      userId: \"\u003cid\u003e\",\n      role: \"member\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "updateOrganizationMember",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organization_service.update_organization_member(organization_id_param=\"\u003cvalue\u003e\", user_id_param=\"\u003cvalue\u003e\", organization_id=\"\u003cid\u003e\", user_id=\"\u003cid\u003e\", role=\"member\")\n\n    assert res.factify_api_v1beta_update_organization_member_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_update_organization_member_response)"
+          },
+          {
+            "label": "updateOrganizationMember",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.update_organization_member(organization_id_param=\"\u003cvalue\u003e\", user_id_param=\"\u003cvalue\u003e\", organization_id=\"\u003cid\u003e\", user_id=\"\u003cid\u003e\", role=\"member\")\n\n    assert res.factify_api_v1beta_update_organization_member_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_update_organization_member_response)"
+          }
         ]
       }
     },
@@ -4890,6 +5332,28 @@
         "summary": "Get organization quota status",
         "tags": [
           "Usage"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "getOrganizationQuota",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.quotaService.getOrganizationQuota({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getOrganizationQuota",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.usage.getOrganizationQuota({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getOrganizationQuota",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.quota_service.get_organization_quota(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.factify_api_v1beta_get_organization_quota_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_get_organization_quota_response)"
+          },
+          {
+            "label": "getOrganizationQuota",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.usage.get_organization_quota(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.factify_api_v1beta_get_organization_quota_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_get_organization_quota_response)"
+          }
         ]
       }
     },
@@ -4944,6 +5408,28 @@
         "summary": "List API key quotas",
         "tags": [
           "Usage"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "listAPIKeyQuotas",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.quotaService.listAPIKeyQuotas({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listAPIKeyQuotas",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.usage.listAPIKeyQuotas({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listAPIKeyQuotas",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.quota_service.list_api_key_quotas(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.factify_api_v1beta_list_api_key_quotas_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_list_api_key_quotas_response)"
+          },
+          {
+            "label": "listAPIKeyQuotas",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.usage.list_api_key_quotas(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.factify_api_v1beta_list_api_key_quotas_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_list_api_key_quotas_response)"
+          }
         ]
       }
     },
@@ -5011,6 +5497,28 @@
         "summary": "Delete API key quota",
         "tags": [
           "Usage"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "deleteAPIKeyQuota",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.quotaService.deleteAPIKeyQuota({\n    apiKeyId: \"\u003cid\u003e\",\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "deleteAPIKeyQuota",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.usage.deleteAPIKeyQuota({\n    apiKeyId: \"\u003cid\u003e\",\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "deleteAPIKeyQuota",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.quota_service.delete_api_key_quota(api_key_id=\"\u003cid\u003e\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.factify_api_v1beta_delete_api_key_quota_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_delete_api_key_quota_response)"
+          },
+          {
+            "label": "deleteAPIKeyQuota",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.usage.delete_api_key_quota(api_key_id=\"\u003cid\u003e\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.factify_api_v1beta_delete_api_key_quota_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_delete_api_key_quota_response)"
+          }
         ]
       },
       "put": {
@@ -5095,6 +5603,28 @@
         "summary": "Set API key quota",
         "tags": [
           "Usage"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "setAPIKeyQuota",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.quotaService.setAPIKeyQuota({\n    apiKeyId: \"\u003cid\u003e\",\n    body: {\n      organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "setAPIKeyQuota",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.usage.setAPIKeyQuota({\n    apiKeyId: \"\u003cid\u003e\",\n    body: {\n      organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "setAPIKeyQuota",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.quota_service.set_api_key_quota(api_key_id_param=\"\u003cvalue\u003e\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.factify_api_v1beta_set_api_key_quota_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_set_api_key_quota_response)"
+          },
+          {
+            "label": "setAPIKeyQuota",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.usage.set_api_key_quota(api_key_id_param=\"\u003cvalue\u003e\", organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.factify_api_v1beta_set_api_key_quota_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_set_api_key_quota_response)"
+          }
         ]
       }
     },
@@ -5158,6 +5688,28 @@
         "summary": "Get usage history",
         "tags": [
           "Usage"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "getUsageHistory",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.quotaService.getUsageHistory({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getUsageHistory",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.usage.getUsageHistory({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getUsageHistory",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.quota_service.get_usage_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.factify_api_v1beta_get_usage_history_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_get_usage_history_response)"
+          },
+          {
+            "label": "getUsageHistory",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.usage.get_usage_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.factify_api_v1beta_get_usage_history_response is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_get_usage_history_response)"
+          }
         ]
       }
     },
@@ -5212,6 +5764,18 @@
         "summary": "Retrieve a version",
         "tags": [
           "Versions"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "getVersion",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versionService.get({\n    versionId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getVersion",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.version_service.get(version_id=\"\u003cid\u003e\")\n\n    assert res.factify_api_v1beta_version is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_version)"
+          }
         ],
         "x-speakeasy-name-override": "get"
       },
@@ -5293,6 +5857,18 @@
         "summary": "Update a version",
         "tags": [
           "Versions"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "updateVersion",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.versionService.update({\n    versionId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "updateVersion",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.version_service.update(version_id_param=\"\u003cvalue\u003e\")\n\n    assert res.factify_api_v1beta_version is not None\n\n    # Handle response\n    print(res.factify_api_v1beta_version)"
+          }
         ],
         "x-speakeasy-name-override": "update"
       }
