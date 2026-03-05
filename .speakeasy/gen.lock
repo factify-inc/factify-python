@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: dbf0866c886887b1a14b0e9f337d7924
+  docChecksum: d1e869f09fe34c3a9076ec5fcc5f46c3
   docVersion: 1.0.0
   speakeasyVersion: 1.741.6
   generationVersion: 2.849.8
-  releaseVersion: 0.7.1-rc.12
-  configChecksum: 3cd2cc24ae1621d829c46bb6cfdc97f8
+  releaseVersion: 0.7.1-rc.13
+  configChecksum: 4c596fcaefe0c740c5b9b6d6445815cb
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: c1c22524-85c7-404b-8cf9-33ee74bced19
-  pristine_commit_hash: 4a719dbedb83f6de5c121bb70632b8e167a22549
-  pristine_tree_hash: 1b58e192c220c18595e67fffe6760095625d1882
+  generation_id: 4e40a6c6-90c2-4b17-ae5b-9a4e04008fae
+  pristine_commit_hash: 7afc6f751a1f838c6d5a16dfd2e2939c3386d0a1
+  pristine_tree_hash: b076509cb1dd833d01491ca75aceaaed4dd7455b
 features:
   python:
     additionalDependencies: 1.0.0
@@ -359,18 +359,10 @@ trackedFiles:
     id: 3405bc0bb71e
     last_write_checksum: sha1:659886484b938f46df1318b50633d997b5a96325
     pristine_git_object: af7fb7bec6c324b89a0ae19a7badc2f5e65920b3
-  docs/models/listdocumentsaccesslevel.md:
-    id: 9f36d6352fe2
-    last_write_checksum: sha1:3778761ad2111b1be045d2fb29582125c0c68f16
-    pristine_git_object: 6bea5cca083b31c4790f03e081c6d24617f3d13f
-  docs/models/listdocumentsprocessingstatus.md:
-    id: 76cfaeae8ed2
-    last_write_checksum: sha1:fb536c0517f179bcddff12776f98a499cd4a41b6
-    pristine_git_object: d3df92e2b75728cb61dd5792e9336ef62a558c20
   docs/models/listdocumentsrequest.md:
     id: 36c8a1116534
-    last_write_checksum: sha1:bbd0eff1353a1471ea0f695ad87faa39f70d2c3c
-    pristine_git_object: 62546ee32b0bc08be5205f0f7d3e83201c176b18
+    last_write_checksum: sha1:053f6f8bc81aab89d67fbfd60088f8b2edeccd19
+    pristine_git_object: d99c1ae35f1153fcd735ed47f3a17adf7d3132fc
   docs/models/listdocumentsresponse.md:
     id: f2091cee0405
     last_write_checksum: sha1:9b078ac4e73a000ee47a54f492c490cd0a09a0d4
@@ -661,8 +653,8 @@ trackedFiles:
     pristine_git_object: 9dcb104087cc3a5c5dcac744af51a60e998b68f9
   docs/sdks/documents/README.md:
     id: 9758e88a0a9d
-    last_write_checksum: sha1:243cb518b7d252c1cba7a7ad8b7f1aabee74c2ae
-    pristine_git_object: 741ab59d19e59ae6856391d0808c493528fb2799
+    last_write_checksum: sha1:8bd4f7631c4a1fca7265ab58d7533aa967922c6d
+    pristine_git_object: 9f3f8cc7025cae1c13bd9c29441e9aaa3409c74d
   docs/sdks/entrypages/README.md:
     id: 7fec98293884
     last_write_checksum: sha1:c171abfb492af76519bbfc8c8d731c70d1839496
@@ -701,8 +693,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:2f719d396ba9bb8611f5cc04dfeee1d63bf46a99
-    pristine_git_object: 32143929e07af1e37a7c897d01842a8142db818f
+    last_write_checksum: sha1:89b49f7f6200a570c74f03b7bb3dfe674328123d
+    pristine_git_object: dde211e0d608ce68c0cbcd37899481399a53ad1b
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -729,8 +721,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:b1975f74254b4a1e80c5837c56362a4405b4ba7e
-    pristine_git_object: b83a76d44a04d75a954b87b6d0cc8f911615512e
+    last_write_checksum: sha1:641d25c6cf3cdfa00c016df605a77df14d3dc55a
+    pristine_git_object: e6fad7746a8b922f1cb499389071a7d3409baab2
   src/factify/api_keys.py:
     id: 10eb7ea2e1e3
     last_write_checksum: sha1:b5694f520576608f0aa62e06138dbd65c39e1958
@@ -741,8 +733,8 @@ trackedFiles:
     pristine_git_object: d12c57680f6d7c60f6f990c09bfdd91fc0be137b
   src/factify/documents.py:
     id: d7b8f9150d12
-    last_write_checksum: sha1:f4108074ad1153144eb314ad747e6d8440c84d2b
-    pristine_git_object: 3d949867cf44bc57eaa9630a4f1e685cef1696d5
+    last_write_checksum: sha1:fffc791df8e7a2db8ace35fd3cef6fa559ece0ca
+    pristine_git_object: 1123e3eb1719e6d4e0fb8543776b074146672e5a
   src/factify/entrypages.py:
     id: dd805ed9ee64
     last_write_checksum: sha1:bd9ff1743397225efb96f4f5aa204105bf2a17e4
@@ -781,8 +773,8 @@ trackedFiles:
     pristine_git_object: b53d2419032970dbd612ba982d8e00687cb11b3e
   src/factify/models/__init__.py:
     id: b45df6051cc0
-    last_write_checksum: sha1:f018b18949646daac04208e9754483c78374ee42
-    pristine_git_object: 874ccd8ec2f7858d3531df5c3da11e00a73c65b5
+    last_write_checksum: sha1:487cb1a38db3ee1e0756180d5cd8b89a36e7c117
+    pristine_git_object: b8a48c4ea7b2c29935cdca4bc5c286ee5affa97e
   src/factify/models/acceptorganizationinviteop.py:
     id: 90bc63055feb
     last_write_checksum: sha1:f20b151a408c61fc3f958393f751b2ee99ecd08d
@@ -989,8 +981,8 @@ trackedFiles:
     pristine_git_object: 7656a0951235a13d5eb7d118244edc85d2933ba2
   src/factify/models/listdocumentsop.py:
     id: ca850dba880e
-    last_write_checksum: sha1:a85946daaed7442f9b973f0408f2e81f3a55162e
-    pristine_git_object: 47efa44b5bf6000ce860b6aef4f835914df443b1
+    last_write_checksum: sha1:8c7cab710a225606a514d11e18d537a9e862aebc
+    pristine_git_object: c3e7fc2f88e51a4e15a9c0a7b645848de40cf8a5
   src/factify/models/listdocumentsresponse.py:
     id: 1c50e03b4cad
     last_write_checksum: sha1:c5cd01b34270769160e2a8ebc7c5faf1d2e1097e
@@ -2209,20 +2201,4 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `factify.documents.list()`:  `response.items[].created_by.type` **Changed** (Breaking ⚠️)
-  * `factify.documents.create()`:  `response.document.created_by.type` **Changed** (Breaking ⚠️)
-  * `factify.documents.get()`:  `response.document.created_by.type` **Changed** (Breaking ⚠️)
-  * `factify.documents.update()`:  `response.document.created_by.type` **Changed** (Breaking ⚠️)
-  * `factify.policies.list()`:  `response.items[].attached_by` **Removed** (Breaking ⚠️)
-  * `factify.policies.attach()`:  `response.attached_by` **Removed** (Breaking ⚠️)
-  * `factify.versions.list()`:  `response.items[].created_by.type` **Changed** (Breaking ⚠️)
-  * `factify.versions.create()`:  `response.created_by.type` **Changed** (Breaking ⚠️)
-  * `factify.versions.get()`:  `response.created_by.type` **Changed** (Breaking ⚠️)
-  * `factify.versions.update()`:  `response.created_by.type` **Changed** (Breaking ⚠️)
-  * `factify.organizations.resend_organization_invite()`:  `response.invite.accepted_by` **Changed** (Breaking ⚠️)
-  * `factify.organizations.revoke_organization_invite()`:  `response.invite.accepted_by` **Changed** (Breaking ⚠️)
-  * `factify.organizations.list_organization_members()`:  `response.items[]` **Changed** (Breaking ⚠️)
-  * `factify.organizations.add_organization_member()`:  `response.member` **Changed** (Breaking ⚠️)
-  * `factify.organizations.update_organization_member()`:  `response.member` **Changed** (Breaking ⚠️)
-  * `factify.organizations.invites.list()`:  `response.items[].accepted_by` **Changed** (Breaking ⚠️)
-  * `factify.organizations.invites.create()`:  `response.invite.accepted_by` **Changed** (Breaking ⚠️)
+  * `factify.documents.list()`:  `request` **Changed**

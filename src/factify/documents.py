@@ -19,8 +19,8 @@ class Documents(BaseSDK):
         page_token: Optional[str] = None,
         page_size: Optional[int] = None,
         created_by_id: Optional[List[str]] = None,
-        access_level: Optional[List[models.ListDocumentsAccessLevel]] = None,
-        processing_status: Optional[List[models.ListDocumentsProcessingStatus]] = None,
+        access_level: Optional[List[models.AccessLevel]] = None,
+        processing_status: Optional[List[models.ProcessingStatus]] = None,
         created_after: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -35,9 +35,12 @@ class Documents(BaseSDK):
             Pass next_page_token or prev_page_token from a previous response to continue pagination.
             Empty or omitted for the first page.
         :param page_size: Maximum number of items to return per page (1-100). Default: 50.
-        :param created_by_id: Filter by creator ID(s). Returns documents matching ANY of the specified IDs.
+        :param created_by_id: Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.
+            REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx&created_by_id=bot_yyy
         :param access_level: Filter by access level(s). Returns documents matching ANY of the specified levels.
+            REST: ?access_level=private or ?access_level=private&access_level=organization
         :param processing_status: Filter by processing status(es). Returns documents matching ANY of the specified statuses.
+            REST: ?processing_status=ready or ?processing_status=processing&processing_status=ready
         :param created_after: Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -160,8 +163,8 @@ class Documents(BaseSDK):
         page_token: Optional[str] = None,
         page_size: Optional[int] = None,
         created_by_id: Optional[List[str]] = None,
-        access_level: Optional[List[models.ListDocumentsAccessLevel]] = None,
-        processing_status: Optional[List[models.ListDocumentsProcessingStatus]] = None,
+        access_level: Optional[List[models.AccessLevel]] = None,
+        processing_status: Optional[List[models.ProcessingStatus]] = None,
         created_after: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -176,9 +179,12 @@ class Documents(BaseSDK):
             Pass next_page_token or prev_page_token from a previous response to continue pagination.
             Empty or omitted for the first page.
         :param page_size: Maximum number of items to return per page (1-100). Default: 50.
-        :param created_by_id: Filter by creator ID(s). Returns documents matching ANY of the specified IDs.
+        :param created_by_id: Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.
+            REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx&created_by_id=bot_yyy
         :param access_level: Filter by access level(s). Returns documents matching ANY of the specified levels.
+            REST: ?access_level=private or ?access_level=private&access_level=organization
         :param processing_status: Filter by processing status(es). Returns documents matching ANY of the specified statuses.
+            REST: ?processing_status=ready or ?processing_status=processing&processing_status=ready
         :param created_after: Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

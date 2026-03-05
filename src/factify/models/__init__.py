@@ -217,8 +217,6 @@ if TYPE_CHECKING:
         ListDocumentPoliciesResponseTypedDict,
     )
     from .listdocumentsop import (
-        ListDocumentsAccessLevel,
-        ListDocumentsProcessingStatus,
         ListDocumentsRequest,
         ListDocumentsRequestTypedDict,
         ListDocumentsResponseResponse,
@@ -555,8 +553,6 @@ __all__ = [
     "ListDocumentVersionsRequestTypedDict",
     "ListDocumentVersionsResponse",
     "ListDocumentVersionsResponseTypedDict",
-    "ListDocumentsAccessLevel",
-    "ListDocumentsProcessingStatus",
     "ListDocumentsRequest",
     "ListDocumentsRequestTypedDict",
     "ListDocumentsResponse",
@@ -840,8 +836,6 @@ _dynamic_imports: dict[str, str] = {
     "ListDocumentPoliciesResponseResponseTypedDict": ".listdocumentpoliciesop",
     "ListDocumentPoliciesResponse": ".listdocumentpoliciesresponse",
     "ListDocumentPoliciesResponseTypedDict": ".listdocumentpoliciesresponse",
-    "ListDocumentsAccessLevel": ".listdocumentsop",
-    "ListDocumentsProcessingStatus": ".listdocumentsop",
     "ListDocumentsRequest": ".listdocumentsop",
     "ListDocumentsRequestTypedDict": ".listdocumentsop",
     "ListDocumentsResponseResponse": ".listdocumentsop",
