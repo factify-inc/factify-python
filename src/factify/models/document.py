@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .accesslevel import AccessLevel
+from .documentpermissionset import DocumentPermissionSet, DocumentPermissionSetTypedDict
 from .processingstatus import ProcessingStatus
 from .subject import Subject, SubjectTypedDict
 from .versionref import VersionRef, VersionRefTypedDict
@@ -38,6 +39,25 @@ class DocumentTypedDict(TypedDict):
     r"""VersionRef is a lightweight reference to a version."""
     description: NotRequired[Nullable[str]]
     r"""Optional document description."""
+    general_access: NotRequired[AccessLevel]
+    last_viewed_at: NotRequired[datetime]
+    r"""Timestamp when the authenticated user last viewed this document.
+    Absent if the user has never viewed it.
+    """
+    permission_set: NotRequired[DocumentPermissionSetTypedDict]
+    r"""DocumentPermissionSet contains the permissions the authenticated user has on a document."""
+    shared_at: NotRequired[datetime]
+    r"""Timestamp when this document was last shared to the authenticated user.
+    Absent if the document was never shared to them.
+    """
+    thumbnail_url: NotRequired[str]
+    r"""URL of the document thumbnail image."""
+    trashed_at: NotRequired[datetime]
+    r"""Timestamp when the document was trashed, if applicable.
+    Absent if the document is not trashed.
+    """
+    updated_at: NotRequired[datetime]
+    r"""Timestamp when document was last updated."""
 
 
 class Document(BaseModel):
@@ -75,9 +95,47 @@ class Document(BaseModel):
     description: OptionalNullable[str] = UNSET
     r"""Optional document description."""
 
+    general_access: Optional[AccessLevel] = None
+
+    last_viewed_at: Optional[datetime] = None
+    r"""Timestamp when the authenticated user last viewed this document.
+    Absent if the user has never viewed it.
+    """
+
+    permission_set: Optional[DocumentPermissionSet] = None
+    r"""DocumentPermissionSet contains the permissions the authenticated user has on a document."""
+
+    shared_at: Optional[datetime] = None
+    r"""Timestamp when this document was last shared to the authenticated user.
+    Absent if the document was never shared to them.
+    """
+
+    thumbnail_url: Optional[str] = None
+    r"""URL of the document thumbnail image."""
+
+    trashed_at: Optional[datetime] = None
+    r"""Timestamp when the document was trashed, if applicable.
+    Absent if the document is not trashed.
+    """
+
+    updated_at: Optional[datetime] = None
+    r"""Timestamp when document was last updated."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["current_version", "description"])
+        optional_fields = set(
+            [
+                "current_version",
+                "description",
+                "general_access",
+                "last_viewed_at",
+                "permission_set",
+                "shared_at",
+                "thumbnail_url",
+                "trashed_at",
+                "updated_at",
+            ]
+        )
         nullable_fields = set(["description"])
         serialized = handler(self)
         m = {}

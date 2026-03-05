@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: d1e869f09fe34c3a9076ec5fcc5f46c3
+  docChecksum: 7733251bdaca54c45a30e69b91010c5e
   docVersion: 1.0.0
   speakeasyVersion: 1.741.6
   generationVersion: 2.849.8
-  releaseVersion: 0.7.1-rc.13
-  configChecksum: 4c596fcaefe0c740c5b9b6d6445815cb
+  releaseVersion: 0.7.1-rc.14
+  configChecksum: 952c910827b22426bc2eb4a5a86ab946
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: 4e40a6c6-90c2-4b17-ae5b-9a4e04008fae
-  pristine_commit_hash: 7afc6f751a1f838c6d5a16dfd2e2939c3386d0a1
-  pristine_tree_hash: b076509cb1dd833d01491ca75aceaaed4dd7455b
+  generation_id: 1318cafe-521c-4482-9d1d-f27e8013981f
+  pristine_commit_hash: 488617d9932af3c25f4f5ec19d221da411dee8e5
+  pristine_tree_hash: 0ad5613d1fbdc1ab5a6332e58b823765eaf751f8
 features:
   python:
     additionalDependencies: 1.0.0
@@ -237,12 +237,24 @@ trackedFiles:
     pristine_git_object: cbe8cd6448ee1a843211d6d1359a1535b0831583
   docs/models/document.md:
     id: cd1d2a444370
-    last_write_checksum: sha1:6eaa49f08b01eec06d4c2271f1dc17a326466397
-    pristine_git_object: 467a007d74018fd31e07fef3a1d29a92b10e2ed7
+    last_write_checksum: sha1:900f8148f511f85a1c5aa25c37606aeba78b204d
+    pristine_git_object: 3ef6bd0eee330e2960b8236cd9211def897bee4e
+  docs/models/documentownership.md:
+    id: 8887cc44bd1a
+    last_write_checksum: sha1:6741c06b07afea6637bbd4beb7f455f0d9e8b938
+    pristine_git_object: 97432c1025f5f1cc01bcf5b5f536a89919cc5b4f
+  docs/models/documentpermissionset.md:
+    id: 7ec455dd1dd7
+    last_write_checksum: sha1:ca84f75caf94a95122a7508500b66bba73d18e9c
+    pristine_git_object: a8678c52f6b9f3439cde2fd1b2718d55f76a83a0
   docs/models/documentpolicy.md:
     id: f15100c89302
     last_write_checksum: sha1:9f52db1f890f6f716f33fb32412bfb4604598949
     pristine_git_object: 74ff6e550d3bb6cb79ce5fe6c3cc1a05fa092bbc
+  docs/models/documenttrashstate.md:
+    id: 14243bb1ddef
+    last_write_checksum: sha1:ec7963be553bceeb6fb06ac8c0780fa68b287746
+    pristine_git_object: 81b4b8ebda2eb9cf66bbcbc167ad3fbc0db69315
   docs/models/empty.md:
     id: b557679773a6
     last_write_checksum: sha1:6d3dc785671bab2893660c7b20cdbc235652c5f5
@@ -361,8 +373,8 @@ trackedFiles:
     pristine_git_object: af7fb7bec6c324b89a0ae19a7badc2f5e65920b3
   docs/models/listdocumentsrequest.md:
     id: 36c8a1116534
-    last_write_checksum: sha1:053f6f8bc81aab89d67fbfd60088f8b2edeccd19
-    pristine_git_object: d99c1ae35f1153fcd735ed47f3a17adf7d3132fc
+    last_write_checksum: sha1:3a71f997bc5a613b7c2c4cbc0502fd90fe5e0722
+    pristine_git_object: 26fd22c8b5dace8cbc132542f13af7f880772d29
   docs/models/listdocumentsresponse.md:
     id: f2091cee0405
     last_write_checksum: sha1:9b078ac4e73a000ee47a54f492c490cd0a09a0d4
@@ -653,8 +665,8 @@ trackedFiles:
     pristine_git_object: 9dcb104087cc3a5c5dcac744af51a60e998b68f9
   docs/sdks/documents/README.md:
     id: 9758e88a0a9d
-    last_write_checksum: sha1:8bd4f7631c4a1fca7265ab58d7533aa967922c6d
-    pristine_git_object: 9f3f8cc7025cae1c13bd9c29441e9aaa3409c74d
+    last_write_checksum: sha1:d46d2a0f3470cd01bb12f00614e59360a2ba2c6c
+    pristine_git_object: 510efde92c700bfe8f048e962fff75ec632d8ebe
   docs/sdks/entrypages/README.md:
     id: 7fec98293884
     last_write_checksum: sha1:c171abfb492af76519bbfc8c8d731c70d1839496
@@ -693,8 +705,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:89b49f7f6200a570c74f03b7bb3dfe674328123d
-    pristine_git_object: dde211e0d608ce68c0cbcd37899481399a53ad1b
+    last_write_checksum: sha1:89e5ed56dfedbe5e6c8ed9e1cf5ac74c9ef1fcc0
+    pristine_git_object: 91d71b9afaed09f2d9c831ba0eed642854047279
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -721,8 +733,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:641d25c6cf3cdfa00c016df605a77df14d3dc55a
-    pristine_git_object: e6fad7746a8b922f1cb499389071a7d3409baab2
+    last_write_checksum: sha1:92a76f92c248ade3328fa0e95672090ca855c388
+    pristine_git_object: be8d3f2626bd6a2cbb9fc6cce364b569eca119fc
   src/factify/api_keys.py:
     id: 10eb7ea2e1e3
     last_write_checksum: sha1:b5694f520576608f0aa62e06138dbd65c39e1958
@@ -733,8 +745,8 @@ trackedFiles:
     pristine_git_object: d12c57680f6d7c60f6f990c09bfdd91fc0be137b
   src/factify/documents.py:
     id: d7b8f9150d12
-    last_write_checksum: sha1:fffc791df8e7a2db8ace35fd3cef6fa559ece0ca
-    pristine_git_object: 1123e3eb1719e6d4e0fb8543776b074146672e5a
+    last_write_checksum: sha1:7a274b4b4ca482bb0d3771932ca3247401bc5eea
+    pristine_git_object: 92879ede1df61ad35f92c44664c84beeb272739b
   src/factify/entrypages.py:
     id: dd805ed9ee64
     last_write_checksum: sha1:bd9ff1743397225efb96f4f5aa204105bf2a17e4
@@ -773,8 +785,8 @@ trackedFiles:
     pristine_git_object: b53d2419032970dbd612ba982d8e00687cb11b3e
   src/factify/models/__init__.py:
     id: b45df6051cc0
-    last_write_checksum: sha1:487cb1a38db3ee1e0756180d5cd8b89a36e7c117
-    pristine_git_object: b8a48c4ea7b2c29935cdca4bc5c286ee5affa97e
+    last_write_checksum: sha1:7e665e4538171122d9f69ee0150461dc41adfa89
+    pristine_git_object: bdd2cbc22550ef76c114f8de642c7405acc51946
   src/factify/models/acceptorganizationinviteop.py:
     id: 90bc63055feb
     last_write_checksum: sha1:f20b151a408c61fc3f958393f751b2ee99ecd08d
@@ -893,12 +905,24 @@ trackedFiles:
     pristine_git_object: 9f6bf9b78b262d0b94d07f399d3f2a0d2bcbf8c2
   src/factify/models/document.py:
     id: a1fadbc5e723
-    last_write_checksum: sha1:4bd1822652526627400a511c9bfc8712d5102c4c
-    pristine_git_object: 89d3c51437092503e79ca1d100dee1b330ecf4c8
+    last_write_checksum: sha1:11b29566311c5b9bdab3b72b2ca85bb9ef535438
+    pristine_git_object: 853271fe34ab5840829629c13c47d238c043260f
+  src/factify/models/documentownership.py:
+    id: 18fa97c46b49
+    last_write_checksum: sha1:2a3a727de7e34ee344cd5bb49a81a2da614c16c5
+    pristine_git_object: a851cda8c081bb95bef75b3d4bb00c3e572235d7
+  src/factify/models/documentpermissionset.py:
+    id: 3901c77132d3
+    last_write_checksum: sha1:9ebe756689e82ccf5655cba6a7ad6ecec7cf6aa9
+    pristine_git_object: f511147f5db39432772e96acd4a04a8ca31f1f9c
   src/factify/models/documentpolicy.py:
     id: d965235fde9b
     last_write_checksum: sha1:e1e07c290eb3774f353918041c5206053105ebf9
     pristine_git_object: 9add8e083cde394372c75630b06e34320e42982b
+  src/factify/models/documenttrashstate.py:
+    id: 9699a0a88b28
+    last_write_checksum: sha1:3659753b6ed7d51f64cf6f0cd1e3306f7e227124
+    pristine_git_object: 9353b8186a63644cfa255b6c155c6d3bb89d7761
   src/factify/models/empty.py:
     id: 8f2c7e3e13cf
     last_write_checksum: sha1:70e41156e18e51202fd4c3d44d6da36015b185c2
@@ -981,8 +1005,8 @@ trackedFiles:
     pristine_git_object: 7656a0951235a13d5eb7d118244edc85d2933ba2
   src/factify/models/listdocumentsop.py:
     id: ca850dba880e
-    last_write_checksum: sha1:8c7cab710a225606a514d11e18d537a9e862aebc
-    pristine_git_object: c3e7fc2f88e51a4e15a9c0a7b645848de40cf8a5
+    last_write_checksum: sha1:4e402f668def27b6bb280969e80339b6bc9101d5
+    pristine_git_object: 3f5a5ae70b48c411cc3a1e18e67df15a78b5f4e8
   src/factify/models/listdocumentsresponse.py:
     id: 1c50e03b4cad
     last_write_checksum: sha1:c5cd01b34270769160e2a8ebc7c5faf1d2e1097e
@@ -2199,6 +2223,4 @@ examples:
         "500":
           application/json: {"code": "unauthenticated", "message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `factify.documents.list()`:  `request` **Changed**
+releaseNotes: "## Python SDK Changes:\n* `factify.documents.list()`: \n  *  `request` **Changed**\n  *  `response.items[]` **Changed**\n* `factify.documents.create()`:  `response.document` **Changed**\n* `factify.documents.get()`:  `response.document` **Changed**\n* `factify.documents.update()`:  `response.document` **Changed**\n"

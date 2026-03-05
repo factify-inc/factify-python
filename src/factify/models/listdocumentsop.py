@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 from .accesslevel import AccessLevel
+from .documentownership import DocumentOwnership
+from .documenttrashstate import DocumentTrashState
 from .listdocumentsresponse import ListDocumentsResponse, ListDocumentsResponseTypedDict
 from .processingstatus import ProcessingStatus
 from datetime import datetime
@@ -32,6 +34,29 @@ class ListDocumentsRequestTypedDict(TypedDict):
     processing_status: NotRequired[List[ProcessingStatus]]
     r"""Filter by processing status(es). Returns documents matching ANY of the specified statuses.
     REST: ?processing_status=ready or ?processing_status=processing&processing_status=ready
+    """
+    sort: NotRequired[str]
+    r"""Sort field and direction. Prefix with `-` for descending order.
+    Allowed values: created_at, updated_at, name, last_viewed_at, last_shared_at.
+    Default (omitted): created_at descending.
+    REST: ?sort=last_viewed_at or ?sort=-name
+    """
+    query: NotRequired[str]
+    r"""Full-text search filter. Case-insensitive substring match on document name and description.
+    REST: ?query=budget
+    """
+    ownership: NotRequired[List[DocumentOwnership]]
+    r"""Ownership filter. Returns documents matching the specified ownership state.
+    REST: ?ownership=owned or ?ownership=not_owned
+    """
+    trash_state: NotRequired[List[DocumentTrashState]]
+    r"""Trash state filter. Returns documents matching the specified trash state.
+    REST: ?trash_state=active or ?trash_state=trashed or ?trash_state=active&trash_state=trashed
+    Default (omitted): active documents only.
+    """
+    organization_scope: NotRequired[bool]
+    r"""Organization scope filter. When true, restrict to documents within the user's organization.
+    REST: ?organization_scope=true
     """
     created_after: NotRequired[datetime]
     r"""Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)"""
@@ -77,6 +102,49 @@ class ListDocumentsRequest(BaseModel):
     REST: ?processing_status=ready or ?processing_status=processing&processing_status=ready
     """
 
+    sort: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Sort field and direction. Prefix with `-` for descending order.
+    Allowed values: created_at, updated_at, name, last_viewed_at, last_shared_at.
+    Default (omitted): created_at descending.
+    REST: ?sort=last_viewed_at or ?sort=-name
+    """
+
+    query: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Full-text search filter. Case-insensitive substring match on document name and description.
+    REST: ?query=budget
+    """
+
+    ownership: Annotated[
+        Optional[List[DocumentOwnership]],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Ownership filter. Returns documents matching the specified ownership state.
+    REST: ?ownership=owned or ?ownership=not_owned
+    """
+
+    trash_state: Annotated[
+        Optional[List[DocumentTrashState]],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Trash state filter. Returns documents matching the specified trash state.
+    REST: ?trash_state=active or ?trash_state=trashed or ?trash_state=active&trash_state=trashed
+    Default (omitted): active documents only.
+    """
+
+    organization_scope: Annotated[
+        Optional[bool],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Organization scope filter. When true, restrict to documents within the user's organization.
+    REST: ?organization_scope=true
+    """
+
     created_after: Annotated[
         Optional[datetime],
         pydantic.Field(alias="created.after"),
@@ -93,6 +161,11 @@ class ListDocumentsRequest(BaseModel):
                 "created_by_id",
                 "access_level",
                 "processing_status",
+                "sort",
+                "query",
+                "ownership",
+                "trash_state",
+                "organization_scope",
                 "created.after",
             ]
         )

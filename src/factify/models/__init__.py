@@ -132,7 +132,13 @@ if TYPE_CHECKING:
         DetachDocumentPolicyResponseTypedDict,
     )
     from .document import Document, DocumentTypedDict
+    from .documentownership import DocumentOwnership
+    from .documentpermissionset import (
+        DocumentPermissionSet,
+        DocumentPermissionSetTypedDict,
+    )
     from .documentpolicy import DocumentPolicy, DocumentPolicyTypedDict
+    from .documenttrashstate import DocumentTrashState
     from .empty import Empty, EmptyTypedDict
     from .errordetail import ErrorDetail, ErrorDetailTypedDict, Reason
     from .errorresponse import ErrorResponseCode
@@ -489,8 +495,12 @@ __all__ = [
     "DetachDocumentPolicyResponse",
     "DetachDocumentPolicyResponseTypedDict",
     "Document",
+    "DocumentOwnership",
+    "DocumentPermissionSet",
+    "DocumentPermissionSetTypedDict",
     "DocumentPolicy",
     "DocumentPolicyTypedDict",
+    "DocumentTrashState",
     "DocumentTypedDict",
     "Empty",
     "EmptyTypedDict",
@@ -776,8 +786,12 @@ _dynamic_imports: dict[str, str] = {
     "DetachDocumentPolicyResponseTypedDict": ".detachdocumentpolicyop",
     "Document": ".document",
     "DocumentTypedDict": ".document",
+    "DocumentOwnership": ".documentownership",
+    "DocumentPermissionSet": ".documentpermissionset",
+    "DocumentPermissionSetTypedDict": ".documentpermissionset",
     "DocumentPolicy": ".documentpolicy",
     "DocumentPolicyTypedDict": ".documentpolicy",
+    "DocumentTrashState": ".documenttrashstate",
     "Empty": ".empty",
     "EmptyTypedDict": ".empty",
     "ErrorDetail": ".errordetail",

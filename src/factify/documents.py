@@ -21,6 +21,11 @@ class Documents(BaseSDK):
         created_by_id: Optional[List[str]] = None,
         access_level: Optional[List[models.AccessLevel]] = None,
         processing_status: Optional[List[models.ProcessingStatus]] = None,
+        sort: Optional[str] = None,
+        query: Optional[str] = None,
+        ownership: Optional[List[models.DocumentOwnership]] = None,
+        trash_state: Optional[List[models.DocumentTrashState]] = None,
+        organization_scope: Optional[bool] = None,
         created_after: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -41,6 +46,19 @@ class Documents(BaseSDK):
             REST: ?access_level=private or ?access_level=private&access_level=organization
         :param processing_status: Filter by processing status(es). Returns documents matching ANY of the specified statuses.
             REST: ?processing_status=ready or ?processing_status=processing&processing_status=ready
+        :param sort: Sort field and direction. Prefix with `-` for descending order.
+            Allowed values: created_at, updated_at, name, last_viewed_at, last_shared_at.
+            Default (omitted): created_at descending.
+            REST: ?sort=last_viewed_at or ?sort=-name
+        :param query: Full-text search filter. Case-insensitive substring match on document name and description.
+            REST: ?query=budget
+        :param ownership: Ownership filter. Returns documents matching the specified ownership state.
+            REST: ?ownership=owned or ?ownership=not_owned
+        :param trash_state: Trash state filter. Returns documents matching the specified trash state.
+            REST: ?trash_state=active or ?trash_state=trashed or ?trash_state=active&trash_state=trashed
+            Default (omitted): active documents only.
+        :param organization_scope: Organization scope filter. When true, restrict to documents within the user's organization.
+            REST: ?organization_scope=true
         :param created_after: Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -63,6 +81,11 @@ class Documents(BaseSDK):
             created_by_id=created_by_id,
             access_level=access_level,
             processing_status=processing_status,
+            sort=sort,
+            query=query,
+            ownership=ownership,
+            trash_state=trash_state,
+            organization_scope=organization_scope,
             created_after=created_after,
         )
 
@@ -122,6 +145,11 @@ class Documents(BaseSDK):
                 created_by_id=created_by_id,
                 access_level=access_level,
                 processing_status=processing_status,
+                sort=sort,
+                query=query,
+                ownership=ownership,
+                trash_state=trash_state,
+                organization_scope=organization_scope,
                 created_after=created_after,
                 retries=retries,
             )
@@ -165,6 +193,11 @@ class Documents(BaseSDK):
         created_by_id: Optional[List[str]] = None,
         access_level: Optional[List[models.AccessLevel]] = None,
         processing_status: Optional[List[models.ProcessingStatus]] = None,
+        sort: Optional[str] = None,
+        query: Optional[str] = None,
+        ownership: Optional[List[models.DocumentOwnership]] = None,
+        trash_state: Optional[List[models.DocumentTrashState]] = None,
+        organization_scope: Optional[bool] = None,
         created_after: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -185,6 +218,19 @@ class Documents(BaseSDK):
             REST: ?access_level=private or ?access_level=private&access_level=organization
         :param processing_status: Filter by processing status(es). Returns documents matching ANY of the specified statuses.
             REST: ?processing_status=ready or ?processing_status=processing&processing_status=ready
+        :param sort: Sort field and direction. Prefix with `-` for descending order.
+            Allowed values: created_at, updated_at, name, last_viewed_at, last_shared_at.
+            Default (omitted): created_at descending.
+            REST: ?sort=last_viewed_at or ?sort=-name
+        :param query: Full-text search filter. Case-insensitive substring match on document name and description.
+            REST: ?query=budget
+        :param ownership: Ownership filter. Returns documents matching the specified ownership state.
+            REST: ?ownership=owned or ?ownership=not_owned
+        :param trash_state: Trash state filter. Returns documents matching the specified trash state.
+            REST: ?trash_state=active or ?trash_state=trashed or ?trash_state=active&trash_state=trashed
+            Default (omitted): active documents only.
+        :param organization_scope: Organization scope filter. When true, restrict to documents within the user's organization.
+            REST: ?organization_scope=true
         :param created_after: Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -207,6 +253,11 @@ class Documents(BaseSDK):
             created_by_id=created_by_id,
             access_level=access_level,
             processing_status=processing_status,
+            sort=sort,
+            query=query,
+            ownership=ownership,
+            trash_state=trash_state,
+            organization_scope=organization_scope,
             created_after=created_after,
         )
 
@@ -269,6 +320,11 @@ class Documents(BaseSDK):
                 created_by_id=created_by_id,
                 access_level=access_level,
                 processing_status=processing_status,
+                sort=sort,
+                query=query,
+                ownership=ownership,
+                trash_state=trash_state,
+                organization_scope=organization_scope,
                 created_after=created_after,
                 retries=retries,
             )
