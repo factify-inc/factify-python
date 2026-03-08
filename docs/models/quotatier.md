@@ -10,7 +10,5 @@ value: QuotaTier = "free"
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `FREE`   | free     |
-| `CUSTOM` | custom   |
+- `"free"`
+- `"custom"`

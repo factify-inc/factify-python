@@ -10,9 +10,7 @@ value: OrganizationInviteStatus = "pending"
 
 ## Values
 
-| Name       | Value      |
-| ---------- | ---------- |
-| `PENDING`  | pending    |
-| `ACCEPTED` | accepted   |
-| `EXPIRED`  | expired    |
-| `REVOKED`  | revoked    |
+- `"pending"`
+- `"accepted"`
+- `"expired"`
+- `"revoked"`

@@ -24,18 +24,16 @@ value: ErrorResponseCode = "unknown"
 
 ## Values
 
-| Name                  | Value                 |
-| --------------------- | --------------------- |
-| `UNKNOWN`             | unknown               |
-| `INVALID_ARGUMENT`    | invalid_argument      |
-| `UNAUTHENTICATED`     | unauthenticated       |
-| `PERMISSION_DENIED`   | permission_denied     |
-| `NOT_FOUND`           | not_found             |
-| `ALREADY_EXISTS`      | already_exists        |
-| `RESOURCE_EXHAUSTED`  | resource_exhausted    |
-| `FAILED_PRECONDITION` | failed_precondition   |
-| `INTERNAL`            | internal              |
-| `UNAVAILABLE`         | unavailable           |
-| `UNIMPLEMENTED`       | unimplemented         |
-| `CANCELED`            | canceled              |
-| `DEADLINE_EXCEEDED`   | deadline_exceeded     |
+- `"unknown"`
+- `"invalid_argument"`
+- `"unauthenticated"`
+- `"permission_denied"`
+- `"not_found"`
+- `"already_exists"`
+- `"resource_exhausted"`
+- `"failed_precondition"`
+- `"internal"`
+- `"unavailable"`
+- `"unimplemented"`
+- `"canceled"`
+- `"deadline_exceeded"`

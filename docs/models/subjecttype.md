@@ -10,7 +10,5 @@ value: SubjectType = "user"
 
 ## Values
 
-| Name   | Value  |
-| ------ | ------ |
-| `USER` | user   |
-| `BOT`  | bot    |
+- `"user"`
+- `"bot"`

@@ -10,7 +10,5 @@ value: DocumentOwnership = "owned"
 
 ## Values
 
-| Name        | Value       |
-| ----------- | ----------- |
-| `OWNED`     | owned       |
-| `NOT_OWNED` | not_owned   |
+- `"owned"`
+- `"not_owned"`

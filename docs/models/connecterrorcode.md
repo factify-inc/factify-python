@@ -12,21 +12,19 @@ value: ConnectErrorCode = "canceled"
 
 ## Values
 
-| Name                  | Value                 |
-| --------------------- | --------------------- |
-| `CANCELED`            | canceled              |
-| `UNKNOWN`             | unknown               |
-| `INVALID_ARGUMENT`    | invalid_argument      |
-| `DEADLINE_EXCEEDED`   | deadline_exceeded     |
-| `NOT_FOUND`           | not_found             |
-| `ALREADY_EXISTS`      | already_exists        |
-| `PERMISSION_DENIED`   | permission_denied     |
-| `RESOURCE_EXHAUSTED`  | resource_exhausted    |
-| `FAILED_PRECONDITION` | failed_precondition   |
-| `ABORTED`             | aborted               |
-| `OUT_OF_RANGE`        | out_of_range          |
-| `UNIMPLEMENTED`       | unimplemented         |
-| `INTERNAL`            | internal              |
-| `UNAVAILABLE`         | unavailable           |
-| `DATA_LOSS`           | data_loss             |
-| `UNAUTHENTICATED`     | unauthenticated       |
+- `"canceled"`
+- `"unknown"`
+- `"invalid_argument"`
+- `"deadline_exceeded"`
+- `"not_found"`
+- `"already_exists"`
+- `"permission_denied"`
+- `"resource_exhausted"`
+- `"failed_precondition"`
+- `"aborted"`
+- `"out_of_range"`
+- `"unimplemented"`
+- `"internal"`
+- `"unavailable"`
+- `"data_loss"`
+- `"unauthenticated"`

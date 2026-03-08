@@ -10,8 +10,6 @@ value: AccessLevel = "private"
 
 ## Values
 
-| Name           | Value          |
-| -------------- | -------------- |
-| `PRIVATE`      | private        |
-| `ORGANIZATION` | organization   |
-| `PUBLIC`       | public         |
+- `"private"`
+- `"organization"`
+- `"public"`

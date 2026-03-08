@@ -10,7 +10,5 @@ value: DocumentTrashState = "active"
 
 ## Values
 
-| Name      | Value     |
-| --------- | --------- |
-| `ACTIVE`  | active    |
-| `TRASHED` | trashed   |
+- `"active"`
+- `"trashed"`

@@ -10,8 +10,6 @@ value: OrganizationRole = "owner"
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `OWNER`  | owner    |
-| `ADMIN`  | admin    |
-| `MEMBER` | member   |
+- `"owner"`
+- `"admin"`
+- `"member"`
