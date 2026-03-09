@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: 7733251bdaca54c45a30e69b91010c5e
+  docChecksum: 2d7806490c86bbb76c2b976d9ea58bf9
   docVersion: 1.0.0
-  speakeasyVersion: 1.749.0
+  speakeasyVersion: 1.749.1
   generationVersion: 2.855.2
-  releaseVersion: 0.7.1
-  configChecksum: 9fbafb150c962c3c5f5ae7a939eda0db
+  releaseVersion: 0.7.2-rc.1
+  configChecksum: 2bb77057fecab290a118426a50552fde
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: 70613e03-6362-4094-b223-3b1ca45ed6a5
-  pristine_commit_hash: ecea71cbb0cb67aed1c916af42ae0432f062807c
-  pristine_tree_hash: 687f7a73757c6b99f258ec4018bcd2383f794b38
+  generation_id: bee96c0f-133d-499f-9ae4-c23e41e0625c
+  pristine_commit_hash: 6e1700a06505aa6628f6f21686e39ccdce46dccb
+  pristine_tree_hash: bb76bf5971c188d2f86fffaa91a55036d89e0637
 features:
   python:
     additionalDependencies: 1.0.0
@@ -705,8 +705,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:8d5aa390a0ddf743357baf3147696cdcf1d2542a
-    pristine_git_object: d33574b703484a1c5d0ac33b1cf199206b2fb34c
+    last_write_checksum: sha1:66dc7f157c13be9a6d22edca1cac4edd2aa36523
+    pristine_git_object: ddb7ad4b6b9edb309069c658ef067d86c09bee8d
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -733,8 +733,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:794349d0af719cb1701164c7ee504042ada112f7
-    pristine_git_object: 0f4b74aff9609beece5215b51897bb25732ebb7b
+    last_write_checksum: sha1:733c1aced21f517062cb957f990a7adda0dbaa1b
+    pristine_git_object: 2fe800223b03cd4e8088fe2fcefff49ce4590cbd
   src/factify/api_keys.py:
     id: 10eb7ea2e1e3
     last_write_checksum: sha1:b5694f520576608f0aa62e06138dbd65c39e1958
