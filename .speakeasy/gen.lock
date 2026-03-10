@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: 2d7806490c86bbb76c2b976d9ea58bf9
+  docChecksum: 92af20bfb193b5bf9e0ba23022f868d0
   docVersion: 1.0.0
-  speakeasyVersion: 1.749.1
-  generationVersion: 2.855.2
-  releaseVersion: 0.7.2-rc.1
-  configChecksum: 2bb77057fecab290a118426a50552fde
+  speakeasyVersion: 1.750.0
+  generationVersion: 2.856.1
+  releaseVersion: 0.7.2-rc.2
+  configChecksum: 25ee036f852a2e301008a0145d21d4e0
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: bee96c0f-133d-499f-9ae4-c23e41e0625c
-  pristine_commit_hash: 6e1700a06505aa6628f6f21686e39ccdce46dccb
-  pristine_tree_hash: bb76bf5971c188d2f86fffaa91a55036d89e0637
+  generation_id: 9eaee58f-d0ee-44ed-9cde-74895458f765
+  pristine_commit_hash: 75183fbdceb81d73ae517a02f8790020af7b5314
+  pristine_tree_hash: dca6a4d56ead49dd84c77ac813907dc92f96f386
 features:
   python:
     additionalDependencies: 1.0.0
@@ -327,6 +327,14 @@ trackedFiles:
     id: 180a5657552d
     last_write_checksum: sha1:e8b637a813d04e215f4acf4b84c2989a312b1e9f
     pristine_git_object: 08fcedda47a7636f39c22c6c9db48dbef51db734
+  docs/models/getuserpreferencesresponse.md:
+    id: ac8bdf7a64ca
+    last_write_checksum: sha1:5901338fdac678aeb53b2e1ed69019e8203241be
+    pristine_git_object: e475df4cfb389a3a012e8c29cb17b7815134c9c0
+  docs/models/getuserpreferencesresponseresponse.md:
+    id: 7b53891bb766
+    last_write_checksum: sha1:37641c1d5179832bcb53817069fa259223e7ffae
+    pristine_git_object: fa79f0cfaae12cbb5259e7c2fd93b24ee571ded0
   docs/models/getversionrequest.md:
     id: 98ccae9968d4
     last_write_checksum: sha1:c677ad8f6f51d78aaed7e879b72674ea07828376
@@ -691,6 +699,10 @@ trackedFiles:
     id: 631af2d7ce26
     last_write_checksum: sha1:0fb86bf15cec28df0eb79f9ed4c3ce1da7e5becb
     pristine_git_object: dcd5ef78825d9f860420e78f89e180169b51d557
+  docs/sdks/userpreferences/README.md:
+    id: c37855687dd1
+    last_write_checksum: sha1:7bff3d10448dcef45920d8eadc9db07ae1a2eb25
+    pristine_git_object: d4e925c0e1e9efb14ea9f84f095364bef87c30da
   docs/sdks/versions/README.md:
     id: 83ec5ed3804d
     last_write_checksum: sha1:2c83c0ebde65a4d11531a428bd651f478c427200
@@ -705,8 +717,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:66dc7f157c13be9a6d22edca1cac4edd2aa36523
-    pristine_git_object: ddb7ad4b6b9edb309069c658ef067d86c09bee8d
+    last_write_checksum: sha1:ae8d7232b2fab80458d8185ecc22d4489884fd37
+    pristine_git_object: 114f4f8326d0fd707977bb1b97381b905870ac0b
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -733,8 +745,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:733c1aced21f517062cb957f990a7adda0dbaa1b
-    pristine_git_object: 2fe800223b03cd4e8088fe2fcefff49ce4590cbd
+    last_write_checksum: sha1:3038fdb486ff6e8775eea56e26f53d6fb904f844
+    pristine_git_object: c9732969ab987e3abe0238ddce652330d9e4410b
   src/factify/api_keys.py:
     id: 10eb7ea2e1e3
     last_write_checksum: sha1:b5694f520576608f0aa62e06138dbd65c39e1958
@@ -785,8 +797,8 @@ trackedFiles:
     pristine_git_object: b53d2419032970dbd612ba982d8e00687cb11b3e
   src/factify/models/__init__.py:
     id: b45df6051cc0
-    last_write_checksum: sha1:7e665e4538171122d9f69ee0150461dc41adfa89
-    pristine_git_object: bdd2cbc22550ef76c114f8de642c7405acc51946
+    last_write_checksum: sha1:e8b54567ffcd7fc5f70fbdcc176133609ba7b720
+    pristine_git_object: 08f04ee7c34a18266ff949b1953786d63c39eb05
   src/factify/models/acceptorganizationinviteop.py:
     id: 90bc63055feb
     last_write_checksum: sha1:f20b151a408c61fc3f958393f751b2ee99ecd08d
@@ -975,6 +987,14 @@ trackedFiles:
     id: f7290b67cb5f
     last_write_checksum: sha1:2cb65a994ec91646235faaf06048022053f60b2a
     pristine_git_object: e3568b37a14464499a6c810e39e06fe7916d117b
+  src/factify/models/getuserpreferencesop.py:
+    id: c4e64d7d4651
+    last_write_checksum: sha1:3d73374d9e577b3d30f9e94eade3ae9b91bba77f
+    pristine_git_object: 761191b67cf38f8ea0dd69ef3d55608edb94f374
+  src/factify/models/getuserpreferencesresponse.py:
+    id: 8121d0faf063
+    last_write_checksum: sha1:be10df07ce99acd67dbe4eb6e78c5470db1827ac
+    pristine_git_object: 4bcc0e36372208b82b8d7ecad6df0bc84b77f606
   src/factify/models/getversionop.py:
     id: aa4d5dc5ba4a
     last_write_checksum: sha1:141801bd3fc8d061f542590cb6977c064744ab7a
@@ -1205,8 +1225,8 @@ trackedFiles:
     pristine_git_object: 5dec3af1c99a789a398eeea9834c38df915ac535
   src/factify/sdk.py:
     id: a71d663e8f75
-    last_write_checksum: sha1:5a5290bf2f7bec7a2f09c2235ade60d344dd14ac
-    pristine_git_object: 31be8cc097b1a44fa6129359db952edde14b1de6
+    last_write_checksum: sha1:31501ab38596e3de231377d1ba1dd77c47f6cb6a
+    pristine_git_object: d5e3918bbc7ed2c69406f217b33cf372a0f6ab83
   src/factify/sdkconfiguration.py:
     id: c36aff7bf3dc
     last_write_checksum: sha1:6aaf3c968d83ab19f91836b4d2be9274757a7df0
@@ -1223,6 +1243,10 @@ trackedFiles:
     id: 5d56e2f1ad70
     last_write_checksum: sha1:7f66eb09f951626652fb1e365e18ac5da1e7c007
     pristine_git_object: c9e2ede31462ce4561abda8c135a1fafadc123e0
+  src/factify/user_preferences.py:
+    id: ee6d5f71a0db
+    last_write_checksum: sha1:fbef1cd8e5cf10bc63493aaa1a4c59ea6a1ded2b
+    pristine_git_object: b92c7a0c4f510a625c048e379961d77f474d73c6
   src/factify/utils/__init__.py:
     id: e62abc30a143
     last_write_checksum: sha1:1970816f2234ecb8785798240b0edced961de971
@@ -2222,4 +2246,26 @@ examples:
           application/json: {"code": "unauthenticated", "message": "<value>"}
         "500":
           application/json: {"code": "unauthenticated", "message": "<value>"}
+  getUserPreferences:
+    validation_error:
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-get-user-preferences:
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "unknown", "message": "<value>"}
+        "429":
+          application/json: {"code": "unknown", "message": "<value>"}
+        "500":
+          application/json: {"code": "unknown", "message": "<value>"}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Python SDK Changes:
+  * `factify.user_preferences.get_user_preferences()`: **Added**

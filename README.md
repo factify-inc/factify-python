@@ -275,6 +275,10 @@ with Factify(
 * [set_api_key_quota](docs/sdks/usage/README.md#set_api_key_quota) - Set API key quota
 * [get_usage_history](docs/sdks/usage/README.md#get_usage_history) - Get usage history
 
+### [UserPreferences](docs/sdks/userpreferences/README.md)
+
+* [get_user_preferences](docs/sdks/userpreferences/README.md#get_user_preferences) - Get user preferences
+
 ### [Versions](docs/sdks/versions/README.md)
 
 * [list](docs/sdks/versions/README.md#list) - List document versions

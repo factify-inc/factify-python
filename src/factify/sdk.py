@@ -22,6 +22,7 @@ if TYPE_CHECKING:
     from factify.policies import Policies
     from factify.quotas import Quotas
     from factify.usage import Usage
+    from factify.user_preferences import UserPreferences
     from factify.versions import Versions
 
 
@@ -76,6 +77,7 @@ class Factify(BaseSDK):
     r"""Create and manage organizations and member invitations."""
     usage: "Usage"
     r"""Query API usage and quota information for your organization."""
+    user_preferences: "UserPreferences"
     _sub_sdk_map = {
         "quotas": ("factify.quotas", "Quotas"),
         "api_keys": ("factify.api_keys", "APIKeys"),
@@ -85,6 +87,7 @@ class Factify(BaseSDK):
         "versions": ("factify.versions", "Versions"),
         "organizations": ("factify.organizations", "Organizations"),
         "usage": ("factify.usage", "Usage"),
+        "user_preferences": ("factify.user_preferences", "UserPreferences"),
     }
 
     def __init__(

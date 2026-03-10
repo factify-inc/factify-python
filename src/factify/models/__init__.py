@@ -189,6 +189,14 @@ if TYPE_CHECKING:
         GetUsageHistoryResponse,
         GetUsageHistoryResponseTypedDict,
     )
+    from .getuserpreferencesop import (
+        GetUserPreferencesResponseResponse,
+        GetUserPreferencesResponseResponseTypedDict,
+    )
+    from .getuserpreferencesresponse import (
+        GetUserPreferencesResponse,
+        GetUserPreferencesResponseTypedDict,
+    )
     from .getversionop import (
         GetVersionRequest,
         GetVersionRequestTypedDict,
@@ -537,6 +545,10 @@ __all__ = [
     "GetUsageHistoryResponseResponse",
     "GetUsageHistoryResponseResponseTypedDict",
     "GetUsageHistoryResponseTypedDict",
+    "GetUserPreferencesResponse",
+    "GetUserPreferencesResponseResponse",
+    "GetUserPreferencesResponseResponseTypedDict",
+    "GetUserPreferencesResponseTypedDict",
     "GetVersionRequest",
     "GetVersionRequestTypedDict",
     "GetVersionResponse",
@@ -828,6 +840,10 @@ _dynamic_imports: dict[str, str] = {
     "GetUsageHistoryResponseResponseTypedDict": ".getusagehistoryop",
     "GetUsageHistoryResponse": ".getusagehistoryresponse",
     "GetUsageHistoryResponseTypedDict": ".getusagehistoryresponse",
+    "GetUserPreferencesResponseResponse": ".getuserpreferencesop",
+    "GetUserPreferencesResponseResponseTypedDict": ".getuserpreferencesop",
+    "GetUserPreferencesResponse": ".getuserpreferencesresponse",
+    "GetUserPreferencesResponseTypedDict": ".getuserpreferencesresponse",
     "GetVersionRequest": ".getversionop",
     "GetVersionRequestTypedDict": ".getversionop",
     "GetVersionResponse": ".getversionop",

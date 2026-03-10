@@ -275,6 +275,10 @@ with Factify(
 * [set_api_key_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#set_api_key_quota) - Set API key quota
 * [get_usage_history](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#get_usage_history) - Get usage history
 
+### [UserPreferences](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/userpreferences/README.md)
+
+* [get_user_preferences](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/userpreferences/README.md#get_user_preferences) - Get user preferences
+
 ### [Versions](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versions/README.md)
 
 * [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versions/README.md#list) - List document versions

@@ -195,6 +195,12 @@ actions:
         - "lang": "python"
           "label": "getUsageHistory"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.get_usage_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/user-preferences"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "getUserPreferences"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.user_preferences.get_user_preferences()\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/versions/{version_id}"]["get"]
     update:
       "x-codeSamples":
