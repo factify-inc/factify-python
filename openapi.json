@@ -1291,6 +1291,30 @@
         "title": "GetUsageHistoryResponse",
         "type": "object"
       },
+      "GetUserPreferencesRequest": {
+        "additionalProperties": false,
+        "description": "GetUserPreferencesRequest is empty — the caller is identified via auth context.",
+        "title": "GetUserPreferencesRequest",
+        "type": "object"
+      },
+      "GetUserPreferencesResponse": {
+        "additionalProperties": false,
+        "description": "GetUserPreferencesResponse contains the user's onboarding preferences.",
+        "properties": {
+          "has_completed_document_tour": {
+            "description": "Whether the user has completed the document tour.",
+            "title": "has_completed_document_tour",
+            "type": "boolean"
+          },
+          "has_completed_hub_onboarding": {
+            "description": "Whether the user has completed the hub onboarding flow.",
+            "title": "has_completed_hub_onboarding",
+            "type": "boolean"
+          }
+        },
+        "title": "GetUserPreferencesResponse",
+        "type": "object"
+      },
       "GetVersionRequest": {
         "additionalProperties": false,
         "description": "GetVersionRequest identifies a specific version to retrieve.",
@@ -5742,6 +5766,58 @@
             "label": "getUsageHistory",
             "lang": "python",
             "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.usage.get_usage_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_usage_history_response is not None\n\n    # Handle response\n    print(res.get_usage_history_response)"
+          }
+        ]
+      }
+    },
+    "/v1beta/user-preferences": {
+      "get": {
+        "description": "Returns the authenticated user's onboarding preferences. Only available for user accounts, not API keys.",
+        "operationId": "getUserPreferences",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserPreferencesResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Get user preferences",
+        "tags": [
+          "User Preferences"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "getUserPreferences",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.userPreferences.getUserPreferences();\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getUserPreferences",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.user_preferences.get_user_preferences()\n\n    assert res.get_user_preferences_response is not None\n\n    # Handle response\n    print(res.get_user_preferences_response)"
           }
         ]
       }
