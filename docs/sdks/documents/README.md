@@ -8,6 +8,7 @@ Create, retrieve, update, and manage documents.
 
 * [list](#list) - List documents
 * [create](#create) - Create a document
+* [get_document_quota](#get_document_quota) - Get document quota
 * [get](#get) - Retrieve a document
 * [update](#update) - Update a document
 
@@ -103,6 +104,47 @@ with Factify(
 ### Response
 
 **[models.CreateDocumentResponseResponse](../../models/createdocumentresponseresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## get_document_quota
+
+Returns the document quota status for the authenticated user's organization, including the number of documents used, the configured limit, and remaining capacity.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="getDocumentQuota" method="get" path="/v1beta/documents/quota" -->
+```python
+from factify import Factify
+
+
+with Factify(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+) as f_client:
+
+    res = f_client.documents.get_document_quota()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.GetDocumentQuotaResponseResponse](../../models/getdocumentquotaresponseresponse.md)**
 
 ### Errors
 

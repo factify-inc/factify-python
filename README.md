@@ -231,6 +231,7 @@ with Factify(
 
 * [list](docs/sdks/documents/README.md#list) - List documents
 * [create](docs/sdks/documents/README.md#create) - Create a document
+* [get_document_quota](docs/sdks/documents/README.md#get_document_quota) - Get document quota
 * [get](docs/sdks/documents/README.md#get) - Retrieve a document
 * [update](docs/sdks/documents/README.md#update) - Update a document
 

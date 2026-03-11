@@ -231,6 +231,7 @@ with Factify(
 
 * [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#list) - List documents
 * [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#create) - Create a document
+* [get_document_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#get_document_quota) - Get document quota
 * [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#get) - Retrieve a document
 * [update](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#update) - Update a document
 

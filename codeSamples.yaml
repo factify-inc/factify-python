@@ -45,6 +45,12 @@ actions:
         - "lang": "python"
           "label": "createDocument"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.create(payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    }, title=\"<value>\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/quota"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "getDocumentQuota"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.get_document_quota()\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/documents/{document_id}"]["get"]
     update:
       "x-codeSamples":

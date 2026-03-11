@@ -158,6 +158,14 @@ if TYPE_CHECKING:
         GetDocumentResponseResponse,
         GetDocumentResponseResponseTypedDict,
     )
+    from .getdocumentquotaop import (
+        GetDocumentQuotaResponseResponse,
+        GetDocumentQuotaResponseResponseTypedDict,
+    )
+    from .getdocumentquotaresponse import (
+        GetDocumentQuotaResponse,
+        GetDocumentQuotaResponseTypedDict,
+    )
     from .getdocumentresponse import GetDocumentResponse, GetDocumentResponseTypedDict
     from .getorganizationop import (
         GetOrganizationRequest,
@@ -521,6 +529,10 @@ __all__ = [
     "GenerateDocumentEntryPageResponseTypedDict",
     "GenerateEntryPageResponse",
     "GenerateEntryPageResponseTypedDict",
+    "GetDocumentQuotaResponse",
+    "GetDocumentQuotaResponseResponse",
+    "GetDocumentQuotaResponseResponseTypedDict",
+    "GetDocumentQuotaResponseTypedDict",
     "GetDocumentRequest",
     "GetDocumentRequestTypedDict",
     "GetDocumentResponse",
@@ -820,6 +832,10 @@ _dynamic_imports: dict[str, str] = {
     "GetDocumentRequestTypedDict": ".getdocumentop",
     "GetDocumentResponseResponse": ".getdocumentop",
     "GetDocumentResponseResponseTypedDict": ".getdocumentop",
+    "GetDocumentQuotaResponseResponse": ".getdocumentquotaop",
+    "GetDocumentQuotaResponseResponseTypedDict": ".getdocumentquotaop",
+    "GetDocumentQuotaResponse": ".getdocumentquotaresponse",
+    "GetDocumentQuotaResponseTypedDict": ".getdocumentquotaresponse",
     "GetDocumentResponse": ".getdocumentresponse",
     "GetDocumentResponseTypedDict": ".getdocumentresponse",
     "GetOrganizationRequest": ".getorganizationop",
