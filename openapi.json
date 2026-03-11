@@ -1147,6 +1147,38 @@
         "title": "GenerateEntryPageResponse",
         "type": "object"
       },
+      "GetDocumentQuotaRequest": {
+        "additionalProperties": false,
+        "description": "GetDocumentQuotaRequest retrieves the document quota for the authenticated user's organization.\n No fields needed; the organization is derived from the caller's auth context.",
+        "title": "GetDocumentQuotaRequest",
+        "type": "object"
+      },
+      "GetDocumentQuotaResponse": {
+        "additionalProperties": false,
+        "description": "GetDocumentQuotaResponse contains the document quota for the organization.",
+        "properties": {
+          "available": {
+            "description": "Remaining documents that can be created (limit minus used, floored at 0).\n When limit is 0 (unlimited), this field is 0 and should be ignored by clients.",
+            "format": "int32",
+            "title": "available",
+            "type": "integer"
+          },
+          "limit": {
+            "description": "Maximum documents allowed for this organization.\n 0 means unlimited (no quota enforced).",
+            "format": "int32",
+            "title": "limit",
+            "type": "integer"
+          },
+          "used": {
+            "description": "Number of documents counting against quota (excludes demo, includes trashed).",
+            "format": "int32",
+            "title": "used",
+            "type": "integer"
+          }
+        },
+        "title": "GetDocumentQuotaResponse",
+        "type": "object"
+      },
       "GetDocumentRequest": {
         "additionalProperties": false,
         "description": "GetDocumentRequest identifies a document to retrieve.",
@@ -3551,6 +3583,58 @@
           }
         ],
         "x-speakeasy-name-override": "create"
+      }
+    },
+    "/v1beta/documents/quota": {
+      "get": {
+        "description": "Returns the document quota status for the authenticated user's organization, including the number of documents used, the configured limit, and remaining capacity.",
+        "operationId": "getDocumentQuota",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDocumentQuotaResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Get document quota",
+        "tags": [
+          "Documents"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "getDocumentQuota",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.getDocumentQuota();\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getDocumentQuota",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.documents.get_document_quota()\n\n    assert res.get_document_quota_response is not None\n\n    # Handle response\n    print(res.get_document_quota_response)"
+          }
+        ]
       }
     },
     "/v1beta/documents/{document_id}": {
