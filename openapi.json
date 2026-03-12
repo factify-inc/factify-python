@@ -303,6 +303,100 @@
           "public"
         ]
       },
+      "AccessRequest": {
+        "additionalProperties": false,
+        "description": "AccessRequest represents a request for access to a document.",
+        "properties": {
+          "created_at": {
+            "description": "When the request was created.",
+            "format": "date-time",
+            "title": "created_at",
+            "type": "string"
+          },
+          "document_id": {
+            "description": "Document this request is for.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique ID for the access request.\n Pattern: acr_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "acr_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^acr_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "id",
+            "type": "string"
+          },
+          "message": {
+            "description": "Optional message from the requester.",
+            "maxLength": 1024,
+            "nullable": true,
+            "title": "message",
+            "type": "string"
+          },
+          "permission": {
+            "$ref": "#/components/schemas/AccessRequestPermission",
+            "description": "Permission level being requested.",
+            "not": {
+              "enum": [
+                0
+              ]
+            },
+            "title": "permission"
+          },
+          "request_status": {
+            "$ref": "#/components/schemas/AccessRequestStatus",
+            "description": "Current status of the request.\n Named request_status to avoid field name collision with invite status enum mappings.",
+            "not": {
+              "enum": [
+                0
+              ]
+            },
+            "title": "request_status"
+          },
+          "subject": {
+            "$ref": "#/components/schemas/Subject",
+            "description": "The user requesting access.",
+            "title": "subject"
+          },
+          "subject_email": {
+            "description": "Email of the requesting user. Denormalized for display convenience.",
+            "title": "subject_email",
+            "type": "string"
+          },
+          "updated_at": {
+            "description": "When the request was last updated.",
+            "format": "date-time",
+            "title": "updated_at",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "document_id",
+          "subject",
+          "permission",
+          "request_status",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "AccessRequest",
+        "type": "object"
+      },
+      "AccessRequestPermission": {
+        "enum": [
+          "view",
+          "edit",
+          "comment"
+        ]
+      },
+      "AccessRequestStatus": {
+        "enum": [
+          "pending",
+          "approved",
+          "denied"
+        ]
+      },
       "AddOrganizationMemberRequest": {
         "additionalProperties": false,
         "description": "AddOrganizationMemberRequest identifies a user to add as a member.",
@@ -425,6 +519,44 @@
         "title": "ApiKey",
         "type": "object"
       },
+      "ApproveAccessRequestRequest": {
+        "additionalProperties": false,
+        "description": "ApproveAccessRequestRequest approves an access request.",
+        "properties": {
+          "access_request_id": {
+            "description": "Access request ID to approve.",
+            "pattern": "^acr_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "access_request_id",
+            "type": "string"
+          },
+          "document_id": {
+            "description": "Document ID.",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "access_request_id"
+        ],
+        "title": "ApproveAccessRequestRequest",
+        "type": "object"
+      },
+      "ApproveAccessRequestResponse": {
+        "additionalProperties": false,
+        "description": "ApproveAccessRequestResponse contains the approved access request.",
+        "properties": {
+          "access_request": {
+            "$ref": "#/components/schemas/AccessRequest",
+            "title": "access_request"
+          }
+        },
+        "required": [
+          "access_request"
+        ],
+        "title": "ApproveAccessRequestResponse",
+        "type": "object"
+      },
       "AttachPolicyRequest": {
         "additionalProperties": false,
         "description": "AttachPolicyRequest specifies a policy to attach to a document.",
@@ -446,6 +578,81 @@
           "policy_id"
         ],
         "title": "AttachPolicyRequest",
+        "type": "object"
+      },
+      "CheckAccessRequestStatusRequest": {
+        "additionalProperties": false,
+        "description": "CheckAccessRequestStatusRequest checks for a pending access request.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          }
+        },
+        "title": "CheckAccessRequestStatusRequest",
+        "type": "object"
+      },
+      "CheckAccessRequestStatusResponse": {
+        "additionalProperties": false,
+        "description": "CheckAccessRequestStatusResponse returns whether the caller has a pending request.",
+        "properties": {
+          "has_pending_request": {
+            "title": "has_pending_request",
+            "type": "boolean"
+          }
+        },
+        "title": "CheckAccessRequestStatusResponse",
+        "type": "object"
+      },
+      "CreateAccessRequestRequest": {
+        "additionalProperties": false,
+        "description": "CreateAccessRequestRequest creates a new access request.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "message": {
+            "description": "Optional message from the requester.",
+            "maxLength": 1024,
+            "nullable": true,
+            "title": "message",
+            "type": "string"
+          },
+          "permission": {
+            "$ref": "#/components/schemas/AccessRequestPermission",
+            "description": "Permission level being requested.",
+            "not": {
+              "enum": [
+                0
+              ]
+            },
+            "title": "permission"
+          }
+        },
+        "required": [
+          "permission"
+        ],
+        "title": "CreateAccessRequestRequest",
+        "type": "object"
+      },
+      "CreateAccessRequestResponse": {
+        "additionalProperties": false,
+        "description": "CreateAccessRequestResponse contains the created access request.",
+        "properties": {
+          "access_request": {
+            "$ref": "#/components/schemas/AccessRequest",
+            "title": "access_request"
+          }
+        },
+        "required": [
+          "access_request"
+        ],
+        "title": "CreateAccessRequestResponse",
         "type": "object"
       },
       "CreateApiKeyRequest": {
@@ -782,6 +989,44 @@
         "additionalProperties": false,
         "description": "DeleteOrganizationQuotaResponse confirms deletion. Empty response - success indicated by no error.",
         "title": "DeleteOrganizationQuotaResponse",
+        "type": "object"
+      },
+      "DenyAccessRequestRequest": {
+        "additionalProperties": false,
+        "description": "DenyAccessRequestRequest denies an access request.",
+        "properties": {
+          "access_request_id": {
+            "description": "Access request ID to deny.",
+            "pattern": "^acr_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "access_request_id",
+            "type": "string"
+          },
+          "document_id": {
+            "description": "Document ID.",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "access_request_id"
+        ],
+        "title": "DenyAccessRequestRequest",
+        "type": "object"
+      },
+      "DenyAccessRequestResponse": {
+        "additionalProperties": false,
+        "description": "DenyAccessRequestResponse contains the denied access request.",
+        "properties": {
+          "access_request": {
+            "$ref": "#/components/schemas/AccessRequest",
+            "title": "access_request"
+          }
+        },
+        "required": [
+          "access_request"
+        ],
+        "title": "DenyAccessRequestResponse",
         "type": "object"
       },
       "DetachPolicyRequest": {
@@ -1361,6 +1606,38 @@
         "title": "GetVersionRequest",
         "type": "object"
       },
+      "InspectAccessRequest": {
+        "additionalProperties": false,
+        "description": "InspectAccessRequest requests the caller's permissions on a document.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          }
+        },
+        "title": "InspectAccessRequest",
+        "type": "object"
+      },
+      "InspectAccessResponse": {
+        "additionalProperties": false,
+        "description": "InspectAccessResponse contains the caller's permissions.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "title": "document_id",
+            "type": "string"
+          },
+          "permission_set": {
+            "$ref": "#/components/schemas/DocumentPermissionSet",
+            "description": "Boolean permission set for the caller.",
+            "title": "permission_set"
+          }
+        },
+        "title": "InspectAccessResponse",
+        "type": "object"
+      },
       "ListAPIKeyQuotasRequest": {
         "additionalProperties": false,
         "description": "ListAPIKeyQuotasRequest lists all key-level quotas for an organization.",
@@ -1391,6 +1668,39 @@
           }
         },
         "title": "ListAPIKeyQuotasResponse",
+        "type": "object"
+      },
+      "ListAccessRequestsRequest": {
+        "additionalProperties": false,
+        "description": "ListAccessRequestsRequest lists access requests for a document.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          }
+        },
+        "title": "ListAccessRequestsRequest",
+        "type": "object"
+      },
+      "ListAccessRequestsResponse": {
+        "additionalProperties": false,
+        "description": "ListAccessRequestsResponse contains the list of access requests.",
+        "properties": {
+          "has_more": {
+            "title": "has_more",
+            "type": "boolean"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AccessRequest"
+            },
+            "title": "items",
+            "type": "array"
+          }
+        },
+        "title": "ListAccessRequestsResponse",
         "type": "object"
       },
       "ListApiKeysRequest": {
@@ -3797,6 +4107,489 @@
           }
         ],
         "x-speakeasy-name-override": "update"
+      }
+    },
+    "/v1beta/documents/{document_id}/access": {
+      "get": {
+        "description": "Returns the caller's permissions and any access policies on a document.",
+        "operationId": "inspectDocumentAccess",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InspectAccessResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Inspect document access",
+        "tags": [
+          "Access Requests"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "inspectDocumentAccess",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.inspectDocumentAccess({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "inspectDocumentAccess",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.inspect_document_access(document_id=\"\u003cid\u003e\")\n\n    assert res.inspect_access_response is not None\n\n    # Handle response\n    print(res.inspect_access_response)"
+          }
+        ]
+      }
+    },
+    "/v1beta/documents/{document_id}/access-requests": {
+      "get": {
+        "description": "Lists pending access requests for the specified document.",
+        "operationId": "listAccessRequests",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListAccessRequestsResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "List access requests",
+        "tags": [
+          "Access Requests"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "listAccessRequests",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.listAccessRequests({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listAccessRequests",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.list_access_requests(document_id=\"\u003cid\u003e\")\n\n    assert res.list_access_requests_response is not None\n\n    # Handle response\n    print(res.list_access_requests_response)"
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates a new access request for the specified document.",
+        "operationId": "createAccessRequest",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "CreateAccessRequestRequest creates a new access request.",
+                "properties": {
+                  "message": {
+                    "description": "Optional message from the requester.",
+                    "maxLength": 1024,
+                    "nullable": true,
+                    "title": "message",
+                    "type": "string"
+                  },
+                  "permission": {
+                    "$ref": "#/components/schemas/AccessRequestPermission",
+                    "description": "Permission level being requested.",
+                    "not": {
+                      "enum": [
+                        0
+                      ]
+                    },
+                    "title": "permission"
+                  }
+                },
+                "required": [
+                  "permission"
+                ],
+                "title": "CreateAccessRequestRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAccessRequestResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Create an access request",
+        "tags": [
+          "Access Requests"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "createAccessRequest",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.createAccessRequest({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      permission: \"view\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "createAccessRequest",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.create_access_request(document_id=\"\u003cid\u003e\", permission=\"view\")\n\n    assert res.create_access_request_response is not None\n\n    # Handle response\n    print(res.create_access_request_response)"
+          }
+        ]
+      }
+    },
+    "/v1beta/documents/{document_id}/access-requests/status": {
+      "get": {
+        "description": "Returns whether the caller has a pending access request for the document.",
+        "operationId": "checkAccessRequestStatus",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckAccessRequestStatusResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Check access request status",
+        "tags": [
+          "Access Requests"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "checkAccessRequestStatus",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.checkAccessRequestStatus({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "checkAccessRequestStatus",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.check_access_request_status(document_id=\"\u003cid\u003e\")\n\n    assert res.check_access_request_status_response is not None\n\n    # Handle response\n    print(res.check_access_request_status_response)"
+          }
+        ]
+      }
+    },
+    "/v1beta/documents/{document_id}/access-requests/{access_request_id}/approve": {
+      "post": {
+        "description": "Approve an access request.",
+        "operationId": "approveAccessRequest",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Access request ID to approve.",
+            "in": "path",
+            "name": "access_request_id",
+            "required": true,
+            "schema": {
+              "description": "Access request ID to approve.",
+              "pattern": "^acr_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "access_request_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "ApproveAccessRequestRequest approves an access request.",
+                "properties": {},
+                "required": [],
+                "title": "ApproveAccessRequestRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApproveAccessRequestResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Approve an access request",
+        "tags": [
+          "Access Requests"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "approveAccessRequest",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.approveAccessRequest({\n    documentId: \"\u003cid\u003e\",\n    accessRequestId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "approveAccessRequest",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.approve_access_request(document_id=\"\u003cid\u003e\", access_request_id=\"\u003cid\u003e\", body={})\n\n    assert res.approve_access_request_response is not None\n\n    # Handle response\n    print(res.approve_access_request_response)"
+          }
+        ]
+      }
+    },
+    "/v1beta/documents/{document_id}/access-requests/{access_request_id}/deny": {
+      "post": {
+        "description": "Deny an access request.",
+        "operationId": "denyAccessRequest",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Access request ID to deny.",
+            "in": "path",
+            "name": "access_request_id",
+            "required": true,
+            "schema": {
+              "description": "Access request ID to deny.",
+              "pattern": "^acr_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "access_request_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "DenyAccessRequestRequest denies an access request.",
+                "properties": {},
+                "required": [],
+                "title": "DenyAccessRequestRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DenyAccessRequestResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Deny an access request",
+        "tags": [
+          "Access Requests"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "denyAccessRequest",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.denyAccessRequest({\n    documentId: \"\u003cid\u003e\",\n    accessRequestId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "denyAccessRequest",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.deny_access_request(document_id=\"\u003cid\u003e\", access_request_id=\"\u003cid\u003e\", body={})\n\n    assert res.deny_access_request_response is not None\n\n    # Handle response\n    print(res.deny_access_request_response)"
+          }
+        ]
       }
     },
     "/v1beta/documents/{document_id}/entry_page": {
