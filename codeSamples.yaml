@@ -63,6 +63,42 @@ actions:
         - "lang": "python"
           "label": "updateDocument"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.update(document_id=\"<id>\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/access"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "inspectDocumentAccess"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.inspect_document_access(document_id=\"<id>\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/access-requests"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "listAccessRequests"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.list_access_requests(document_id=\"<id>\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/access-requests"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "createAccessRequest"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.create_access_request(document_id=\"<id>\", permission=\"view\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/access-requests/status"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "checkAccessRequestStatus"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.check_access_request_status(document_id=\"<id>\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/access-requests/{access_request_id}/approve"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "approveAccessRequest"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.approve_access_request(document_id=\"<id>\", access_request_id=\"<id>\", body={})\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/access-requests/{access_request_id}/deny"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "denyAccessRequest"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.deny_access_request(document_id=\"<id>\", access_request_id=\"<id>\", body={})\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/documents/{document_id}/entry_page"]["post"]
     update:
       "x-codeSamples":

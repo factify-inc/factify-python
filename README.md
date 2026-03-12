@@ -221,6 +221,15 @@ with Factify(
 <details open>
 <summary>Available methods</summary>
 
+### [AccessRequests](docs/sdks/accessrequests/README.md)
+
+* [inspect_document_access](docs/sdks/accessrequests/README.md#inspect_document_access) - Inspect document access
+* [list_access_requests](docs/sdks/accessrequests/README.md#list_access_requests) - List access requests
+* [create_access_request](docs/sdks/accessrequests/README.md#create_access_request) - Create an access request
+* [check_access_request_status](docs/sdks/accessrequests/README.md#check_access_request_status) - Check access request status
+* [approve_access_request](docs/sdks/accessrequests/README.md#approve_access_request) - Approve an access request
+* [deny_access_request](docs/sdks/accessrequests/README.md#deny_access_request) - Deny an access request
+
 ### [APIKeys](docs/sdks/apikeys/README.md)
 
 * [list](docs/sdks/apikeys/README.md#list) - List API keys

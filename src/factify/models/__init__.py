@@ -18,6 +18,9 @@ if TYPE_CHECKING:
         AcceptOrganizationInviteResponseTypedDict,
     )
     from .accesslevel import AccessLevel
+    from .accessrequest import AccessRequest, AccessRequestTypedDict
+    from .accessrequestpermission import AccessRequestPermission
+    from .accessrequeststatus import AccessRequestStatus
     from .addorganizationmemberop import (
         AddOrganizationMemberAddOrganizationMemberRequest,
         AddOrganizationMemberAddOrganizationMemberRequestTypedDict,
@@ -32,6 +35,18 @@ if TYPE_CHECKING:
     )
     from .apikey import APIKey, APIKeyTypedDict
     from .apikeyquota import APIKeyQuota, APIKeyQuotaTypedDict
+    from .approveaccessrequestop import (
+        ApproveAccessRequestApproveAccessRequestRequest,
+        ApproveAccessRequestApproveAccessRequestRequestTypedDict,
+        ApproveAccessRequestRequest,
+        ApproveAccessRequestRequestTypedDict,
+        ApproveAccessRequestResponseResponse,
+        ApproveAccessRequestResponseResponseTypedDict,
+    )
+    from .approveaccessrequestresponse import (
+        ApproveAccessRequestResponse,
+        ApproveAccessRequestResponseTypedDict,
+    )
     from .attachdocumentpolicyop import (
         AttachDocumentPolicyRequest,
         AttachDocumentPolicyRequestTypedDict,
@@ -40,12 +55,34 @@ if TYPE_CHECKING:
         AttachPolicyRequest,
         AttachPolicyRequestTypedDict,
     )
+    from .checkaccessrequeststatusop import (
+        CheckAccessRequestStatusRequest,
+        CheckAccessRequestStatusRequestTypedDict,
+        CheckAccessRequestStatusResponseResponse,
+        CheckAccessRequestStatusResponseResponseTypedDict,
+    )
+    from .checkaccessrequeststatusresponse import (
+        CheckAccessRequestStatusResponse,
+        CheckAccessRequestStatusResponseTypedDict,
+    )
     from .connect_error import ConnectError, ConnectErrorCode, ConnectErrorTypedDict
     from .connect_error_details_any import (
         ConnectErrorDetailsAny,
         ConnectErrorDetailsAnyTypedDict,
         Debug,
         DebugTypedDict,
+    )
+    from .createaccessrequestop import (
+        CreateAccessRequestCreateAccessRequestRequest,
+        CreateAccessRequestCreateAccessRequestRequestTypedDict,
+        CreateAccessRequestRequest,
+        CreateAccessRequestRequestTypedDict,
+        CreateAccessRequestResponseResponse,
+        CreateAccessRequestResponseResponseTypedDict,
+    )
+    from .createaccessrequestresponse import (
+        CreateAccessRequestResponse,
+        CreateAccessRequestResponseTypedDict,
     )
     from .createapikeyop import (
         CreateAPIKeyResponseResponse,
@@ -124,6 +161,18 @@ if TYPE_CHECKING:
     from .deleteorganizationquotaresponse import (
         DeleteOrganizationQuotaResponse,
         DeleteOrganizationQuotaResponseTypedDict,
+    )
+    from .denyaccessrequestop import (
+        DenyAccessRequestDenyAccessRequestRequest,
+        DenyAccessRequestDenyAccessRequestRequestTypedDict,
+        DenyAccessRequestRequest,
+        DenyAccessRequestRequestTypedDict,
+        DenyAccessRequestResponseResponse,
+        DenyAccessRequestResponseResponseTypedDict,
+    )
+    from .denyaccessrequestresponse import (
+        DenyAccessRequestResponse,
+        DenyAccessRequestResponseTypedDict,
     )
     from .detachdocumentpolicyop import (
         DetachDocumentPolicyRequest,
@@ -210,6 +259,26 @@ if TYPE_CHECKING:
         GetVersionRequestTypedDict,
         GetVersionResponse,
         GetVersionResponseTypedDict,
+    )
+    from .inspectaccessresponse import (
+        InspectAccessResponse,
+        InspectAccessResponseTypedDict,
+    )
+    from .inspectdocumentaccessop import (
+        InspectDocumentAccessRequest,
+        InspectDocumentAccessRequestTypedDict,
+        InspectDocumentAccessResponse,
+        InspectDocumentAccessResponseTypedDict,
+    )
+    from .listaccessrequestsop import (
+        ListAccessRequestsRequest,
+        ListAccessRequestsRequestTypedDict,
+        ListAccessRequestsResponseResponse,
+        ListAccessRequestsResponseResponseTypedDict,
+    )
+    from .listaccessrequestsresponse import (
+        ListAccessRequestsResponse,
+        ListAccessRequestsResponseTypedDict,
     )
     from .listapikeyquotasop import (
         ListAPIKeyQuotasRequest,
@@ -437,6 +506,10 @@ __all__ = [
     "AcceptOrganizationInviteResponseResponseTypedDict",
     "AcceptOrganizationInviteResponseTypedDict",
     "AccessLevel",
+    "AccessRequest",
+    "AccessRequestPermission",
+    "AccessRequestStatus",
+    "AccessRequestTypedDict",
     "AddOrganizationMemberAddOrganizationMemberRequest",
     "AddOrganizationMemberAddOrganizationMemberRequestTypedDict",
     "AddOrganizationMemberRequest",
@@ -445,12 +518,26 @@ __all__ = [
     "AddOrganizationMemberResponseResponse",
     "AddOrganizationMemberResponseResponseTypedDict",
     "AddOrganizationMemberResponseTypedDict",
+    "ApproveAccessRequestApproveAccessRequestRequest",
+    "ApproveAccessRequestApproveAccessRequestRequestTypedDict",
+    "ApproveAccessRequestRequest",
+    "ApproveAccessRequestRequestTypedDict",
+    "ApproveAccessRequestResponse",
+    "ApproveAccessRequestResponseResponse",
+    "ApproveAccessRequestResponseResponseTypedDict",
+    "ApproveAccessRequestResponseTypedDict",
     "AttachDocumentPolicyRequest",
     "AttachDocumentPolicyRequestTypedDict",
     "AttachDocumentPolicyResponse",
     "AttachDocumentPolicyResponseTypedDict",
     "AttachPolicyRequest",
     "AttachPolicyRequestTypedDict",
+    "CheckAccessRequestStatusRequest",
+    "CheckAccessRequestStatusRequestTypedDict",
+    "CheckAccessRequestStatusResponse",
+    "CheckAccessRequestStatusResponseResponse",
+    "CheckAccessRequestStatusResponseResponseTypedDict",
+    "CheckAccessRequestStatusResponseTypedDict",
     "ConnectError",
     "ConnectErrorCode",
     "ConnectErrorDetailsAny",
@@ -462,6 +549,14 @@ __all__ = [
     "CreateAPIKeyResponseResponse",
     "CreateAPIKeyResponseResponseTypedDict",
     "CreateAPIKeyResponseTypedDict",
+    "CreateAccessRequestCreateAccessRequestRequest",
+    "CreateAccessRequestCreateAccessRequestRequestTypedDict",
+    "CreateAccessRequestRequest",
+    "CreateAccessRequestRequestTypedDict",
+    "CreateAccessRequestResponse",
+    "CreateAccessRequestResponseResponse",
+    "CreateAccessRequestResponseResponseTypedDict",
+    "CreateAccessRequestResponseTypedDict",
     "CreateDocumentRequest",
     "CreateDocumentRequestPayload",
     "CreateDocumentRequestPayloadTypedDict",
@@ -506,6 +601,14 @@ __all__ = [
     "DeleteOrganizationQuotaRequestTypedDict",
     "DeleteOrganizationQuotaResponse",
     "DeleteOrganizationQuotaResponseTypedDict",
+    "DenyAccessRequestDenyAccessRequestRequest",
+    "DenyAccessRequestDenyAccessRequestRequestTypedDict",
+    "DenyAccessRequestRequest",
+    "DenyAccessRequestRequestTypedDict",
+    "DenyAccessRequestResponse",
+    "DenyAccessRequestResponseResponse",
+    "DenyAccessRequestResponseResponseTypedDict",
+    "DenyAccessRequestResponseTypedDict",
     "DetachDocumentPolicyRequest",
     "DetachDocumentPolicyRequestTypedDict",
     "DetachDocumentPolicyResponse",
@@ -565,6 +668,12 @@ __all__ = [
     "GetVersionRequestTypedDict",
     "GetVersionResponse",
     "GetVersionResponseTypedDict",
+    "InspectAccessResponse",
+    "InspectAccessResponseTypedDict",
+    "InspectDocumentAccessRequest",
+    "InspectDocumentAccessRequestTypedDict",
+    "InspectDocumentAccessResponse",
+    "InspectDocumentAccessResponseTypedDict",
     "ListAPIKeyQuotasRequest",
     "ListAPIKeyQuotasRequestTypedDict",
     "ListAPIKeyQuotasResponse",
@@ -577,6 +686,12 @@ __all__ = [
     "ListAPIKeysResponseResponse",
     "ListAPIKeysResponseResponseTypedDict",
     "ListAPIKeysResponseTypedDict",
+    "ListAccessRequestsRequest",
+    "ListAccessRequestsRequestTypedDict",
+    "ListAccessRequestsResponse",
+    "ListAccessRequestsResponseResponse",
+    "ListAccessRequestsResponseResponseTypedDict",
+    "ListAccessRequestsResponseTypedDict",
     "ListDocumentPoliciesRequest",
     "ListDocumentPoliciesRequestTypedDict",
     "ListDocumentPoliciesResponse",
@@ -731,6 +846,10 @@ _dynamic_imports: dict[str, str] = {
     "AcceptOrganizationInviteResponse": ".acceptorganizationinviteresponse",
     "AcceptOrganizationInviteResponseTypedDict": ".acceptorganizationinviteresponse",
     "AccessLevel": ".accesslevel",
+    "AccessRequest": ".accessrequest",
+    "AccessRequestTypedDict": ".accessrequest",
+    "AccessRequestPermission": ".accessrequestpermission",
+    "AccessRequestStatus": ".accessrequeststatus",
     "AddOrganizationMemberAddOrganizationMemberRequest": ".addorganizationmemberop",
     "AddOrganizationMemberAddOrganizationMemberRequestTypedDict": ".addorganizationmemberop",
     "AddOrganizationMemberRequest": ".addorganizationmemberop",
@@ -743,12 +862,26 @@ _dynamic_imports: dict[str, str] = {
     "APIKeyTypedDict": ".apikey",
     "APIKeyQuota": ".apikeyquota",
     "APIKeyQuotaTypedDict": ".apikeyquota",
+    "ApproveAccessRequestApproveAccessRequestRequest": ".approveaccessrequestop",
+    "ApproveAccessRequestApproveAccessRequestRequestTypedDict": ".approveaccessrequestop",
+    "ApproveAccessRequestRequest": ".approveaccessrequestop",
+    "ApproveAccessRequestRequestTypedDict": ".approveaccessrequestop",
+    "ApproveAccessRequestResponseResponse": ".approveaccessrequestop",
+    "ApproveAccessRequestResponseResponseTypedDict": ".approveaccessrequestop",
+    "ApproveAccessRequestResponse": ".approveaccessrequestresponse",
+    "ApproveAccessRequestResponseTypedDict": ".approveaccessrequestresponse",
     "AttachDocumentPolicyRequest": ".attachdocumentpolicyop",
     "AttachDocumentPolicyRequestTypedDict": ".attachdocumentpolicyop",
     "AttachDocumentPolicyResponse": ".attachdocumentpolicyop",
     "AttachDocumentPolicyResponseTypedDict": ".attachdocumentpolicyop",
     "AttachPolicyRequest": ".attachdocumentpolicyop",
     "AttachPolicyRequestTypedDict": ".attachdocumentpolicyop",
+    "CheckAccessRequestStatusRequest": ".checkaccessrequeststatusop",
+    "CheckAccessRequestStatusRequestTypedDict": ".checkaccessrequeststatusop",
+    "CheckAccessRequestStatusResponseResponse": ".checkaccessrequeststatusop",
+    "CheckAccessRequestStatusResponseResponseTypedDict": ".checkaccessrequeststatusop",
+    "CheckAccessRequestStatusResponse": ".checkaccessrequeststatusresponse",
+    "CheckAccessRequestStatusResponseTypedDict": ".checkaccessrequeststatusresponse",
     "ConnectError": ".connect_error",
     "ConnectErrorCode": ".connect_error",
     "ConnectErrorTypedDict": ".connect_error",
@@ -756,6 +889,14 @@ _dynamic_imports: dict[str, str] = {
     "ConnectErrorDetailsAnyTypedDict": ".connect_error_details_any",
     "Debug": ".connect_error_details_any",
     "DebugTypedDict": ".connect_error_details_any",
+    "CreateAccessRequestCreateAccessRequestRequest": ".createaccessrequestop",
+    "CreateAccessRequestCreateAccessRequestRequestTypedDict": ".createaccessrequestop",
+    "CreateAccessRequestRequest": ".createaccessrequestop",
+    "CreateAccessRequestRequestTypedDict": ".createaccessrequestop",
+    "CreateAccessRequestResponseResponse": ".createaccessrequestop",
+    "CreateAccessRequestResponseResponseTypedDict": ".createaccessrequestop",
+    "CreateAccessRequestResponse": ".createaccessrequestresponse",
+    "CreateAccessRequestResponseTypedDict": ".createaccessrequestresponse",
     "CreateAPIKeyResponseResponse": ".createapikeyop",
     "CreateAPIKeyResponseResponseTypedDict": ".createapikeyop",
     "CreateAPIKeyRequest": ".createapikeyrequest",
@@ -804,6 +945,14 @@ _dynamic_imports: dict[str, str] = {
     "DeleteOrganizationQuotaRequestTypedDict": ".deleteorganizationquotarequest",
     "DeleteOrganizationQuotaResponse": ".deleteorganizationquotaresponse",
     "DeleteOrganizationQuotaResponseTypedDict": ".deleteorganizationquotaresponse",
+    "DenyAccessRequestDenyAccessRequestRequest": ".denyaccessrequestop",
+    "DenyAccessRequestDenyAccessRequestRequestTypedDict": ".denyaccessrequestop",
+    "DenyAccessRequestRequest": ".denyaccessrequestop",
+    "DenyAccessRequestRequestTypedDict": ".denyaccessrequestop",
+    "DenyAccessRequestResponseResponse": ".denyaccessrequestop",
+    "DenyAccessRequestResponseResponseTypedDict": ".denyaccessrequestop",
+    "DenyAccessRequestResponse": ".denyaccessrequestresponse",
+    "DenyAccessRequestResponseTypedDict": ".denyaccessrequestresponse",
     "DetachDocumentPolicyRequest": ".detachdocumentpolicyop",
     "DetachDocumentPolicyRequestTypedDict": ".detachdocumentpolicyop",
     "DetachDocumentPolicyResponse": ".detachdocumentpolicyop",
@@ -864,6 +1013,18 @@ _dynamic_imports: dict[str, str] = {
     "GetVersionRequestTypedDict": ".getversionop",
     "GetVersionResponse": ".getversionop",
     "GetVersionResponseTypedDict": ".getversionop",
+    "InspectAccessResponse": ".inspectaccessresponse",
+    "InspectAccessResponseTypedDict": ".inspectaccessresponse",
+    "InspectDocumentAccessRequest": ".inspectdocumentaccessop",
+    "InspectDocumentAccessRequestTypedDict": ".inspectdocumentaccessop",
+    "InspectDocumentAccessResponse": ".inspectdocumentaccessop",
+    "InspectDocumentAccessResponseTypedDict": ".inspectdocumentaccessop",
+    "ListAccessRequestsRequest": ".listaccessrequestsop",
+    "ListAccessRequestsRequestTypedDict": ".listaccessrequestsop",
+    "ListAccessRequestsResponseResponse": ".listaccessrequestsop",
+    "ListAccessRequestsResponseResponseTypedDict": ".listaccessrequestsop",
+    "ListAccessRequestsResponse": ".listaccessrequestsresponse",
+    "ListAccessRequestsResponseTypedDict": ".listaccessrequestsresponse",
     "ListAPIKeyQuotasRequest": ".listapikeyquotasop",
     "ListAPIKeyQuotasRequestTypedDict": ".listapikeyquotasop",
     "ListAPIKeyQuotasResponseResponse": ".listapikeyquotasop",

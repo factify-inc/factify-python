@@ -15,6 +15,7 @@ from typing import Any, Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
 
 if TYPE_CHECKING:
+    from factify.access_requests import AccessRequests
     from factify.api_keys import APIKeys
     from factify.documents import Documents
     from factify.entrypages import EntryPages
@@ -68,6 +69,7 @@ class Factify(BaseSDK):
     r"""Generate and manage API keys for authentication."""
     documents: "Documents"
     r"""Create, retrieve, update, and manage documents."""
+    access_requests: "AccessRequests"
     entry_pages: "EntryPages"
     policies: "Policies"
     r"""Attach and manage access policies for documents."""
@@ -82,6 +84,7 @@ class Factify(BaseSDK):
         "quotas": ("factify.quotas", "Quotas"),
         "api_keys": ("factify.api_keys", "APIKeys"),
         "documents": ("factify.documents", "Documents"),
+        "access_requests": ("factify.access_requests", "AccessRequests"),
         "entry_pages": ("factify.entrypages", "EntryPages"),
         "policies": ("factify.policies", "Policies"),
         "versions": ("factify.versions", "Versions"),
