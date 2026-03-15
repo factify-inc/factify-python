@@ -1095,6 +1095,11 @@
             "title": "id",
             "type": "string"
           },
+          "is_demo": {
+            "description": "Whether this document is a demo document created during FTUE onboarding.",
+            "title": "is_demo",
+            "type": "boolean"
+          },
           "last_viewed_at": {
             "description": "Timestamp when the authenticated user last viewed this document.\n Absent if the user has never viewed it.",
             "format": "date-time",
