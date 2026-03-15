@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: e68bbaee5756c23a2b4b583ff8a4e0bb
+  docChecksum: c75e1c7163b23a51f6f2f94409443cb0
   docVersion: 1.0.0
-  speakeasyVersion: 1.752.0
-  generationVersion: 2.859.2
-  releaseVersion: 0.7.2-rc.4
-  configChecksum: 605ec0077d54de1022c7feb6daaccb04
+  speakeasyVersion: 1.755.0
+  generationVersion: 2.865.2
+  releaseVersion: 0.7.2-rc.5
+  configChecksum: d6de79d2e272648205fe49106954c0e0
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: 50df36a4-5287-4030-91b6-85e21a1f6113
-  pristine_commit_hash: a3bf5b6bc6bd9c5f545d15969adea572886bf5ec
-  pristine_tree_hash: 66aca4c3873cf95dc6e464d1de3c262ca48df22c
+  generation_id: 6e111ea9-b7fa-49ed-aeeb-2c2c6567b4e8
+  pristine_commit_hash: 4ea3230a31f20528287cd3b36015dcf83adce134
+  pristine_tree_hash: ab5ceec35ea79ff0ffbb7467a709d3a6bca29b0d
 features:
   python:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.7
-    core: 6.0.16
+    core: 6.0.18
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.1
     envVarSecurityUsage: 0.3.2
@@ -309,8 +309,8 @@ trackedFiles:
     pristine_git_object: cbe8cd6448ee1a843211d6d1359a1535b0831583
   docs/models/document.md:
     id: cd1d2a444370
-    last_write_checksum: sha1:900f8148f511f85a1c5aa25c37606aeba78b204d
-    pristine_git_object: 3ef6bd0eee330e2960b8236cd9211def897bee4e
+    last_write_checksum: sha1:062461588990418387bdddbf60351e90bc8f588a
+    pristine_git_object: 3806fbefcc9413efaefcb28f78d35863f489620f
   docs/models/documentownership.md:
     id: 8887cc44bd1a
     last_write_checksum: sha1:9aca5e5ac1816baa235ff7c4e6b3cd50ae48f4b8
@@ -825,8 +825,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:1957377b37d04253e66b9b5b260347c88af20271
-    pristine_git_object: a1c56d400186cc36050b4071d14a78419d41a9cc
+    last_write_checksum: sha1:d92dfee307c1816f309e3a4ce1394f679f33d957
+    pristine_git_object: 29aaef24f3d5b28fd236d5602c4fcee29ae2aee4
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -853,8 +853,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:c8cbcdca9c9b1f4f3a8a46fa647a7587160b1ebe
-    pristine_git_object: 386d2c0748fa8ce3299c1be8b64b663c6859d226
+    last_write_checksum: sha1:110fffd03ecb17a31aec605e931a6029e33e67c5
+    pristine_git_object: 548a452ab5f5626c7971348874bcc69c688d4c58
   src/factify/access_requests.py:
     id: fc0f742de0b3
     last_write_checksum: sha1:8e4a6de23c44ca24820085a2bbab1099d73cfb3a
@@ -1073,8 +1073,8 @@ trackedFiles:
     pristine_git_object: 9f6bf9b78b262d0b94d07f399d3f2a0d2bcbf8c2
   src/factify/models/document.py:
     id: a1fadbc5e723
-    last_write_checksum: sha1:e6c19084e1ff16dcfd4ebfc2d8e108cafe94d293
-    pristine_git_object: b999637fe8f6beb013ac33ea5455a725f5a0f364
+    last_write_checksum: sha1:d5c9e0dbd8495f70daeb42f358d391bae909a9ef
+    pristine_git_object: 36b084c52b65d972fabe4f99b806e820ac133bc4
   src/factify/models/documentownership.py:
     id: 18fa97c46b49
     last_write_checksum: sha1:2a3a727de7e34ee344cd5bb49a81a2da614c16c5
@@ -2633,9 +2633,7 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `factify.access_requests.inspect_document_access()`: **Added**
-  * `factify.access_requests.list_access_requests()`: **Added**
-  * `factify.access_requests.create_access_request()`: **Added**
-  * `factify.access_requests.check_access_request_status()`: **Added**
-  * `factify.access_requests.approve_access_request()`: **Added**
-  * `factify.access_requests.deny_access_request()`: **Added**
+  * `factify.documents.list()`:  `response.items[].is_demo` **Added**
+  * `factify.documents.create()`:  `response.document.is_demo` **Added**
+  * `factify.documents.get()`:  `response.document.is_demo` **Added**
+  * `factify.documents.update()`:  `response.document.is_demo` **Added**

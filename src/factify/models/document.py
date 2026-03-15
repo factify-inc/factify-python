@@ -40,6 +40,8 @@ class DocumentTypedDict(TypedDict):
     description: NotRequired[Nullable[str]]
     r"""Optional document description."""
     general_access: NotRequired[AccessLevel]
+    is_demo: NotRequired[bool]
+    r"""Whether this document is a demo document created during FTUE onboarding."""
     last_viewed_at: NotRequired[datetime]
     r"""Timestamp when the authenticated user last viewed this document.
     Absent if the user has never viewed it.
@@ -97,6 +99,9 @@ class Document(BaseModel):
 
     general_access: Optional[AccessLevel] = None
 
+    is_demo: Optional[bool] = None
+    r"""Whether this document is a demo document created during FTUE onboarding."""
+
     last_viewed_at: Optional[datetime] = None
     r"""Timestamp when the authenticated user last viewed this document.
     Absent if the user has never viewed it.
@@ -128,6 +133,7 @@ class Document(BaseModel):
                 "current_version",
                 "description",
                 "general_access",
+                "is_demo",
                 "last_viewed_at",
                 "permission_set",
                 "shared_at",
