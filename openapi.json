@@ -296,6 +296,29 @@
         "title": "AcceptOrganizationInviteResponse",
         "type": "object"
       },
+      "AccessGrantResult": {
+        "additionalProperties": false,
+        "description": "AccessGrantResult contains the outcome of granting access to one recipient.",
+        "properties": {
+          "error": {
+            "description": "Error message if the grant failed.",
+            "title": "error",
+            "type": "string"
+          },
+          "recipient": {
+            "description": "The recipient that was granted access.",
+            "title": "recipient",
+            "type": "string"
+          },
+          "success": {
+            "description": "Whether the grant succeeded.",
+            "title": "success",
+            "type": "boolean"
+          }
+        },
+        "title": "AccessGrantResult",
+        "type": "object"
+      },
       "AccessLevel": {
         "enum": [
           "private",
@@ -878,6 +901,39 @@
         "title": "CreateOrganizationResponse",
         "type": "object"
       },
+      "CreateShareLinkRequest": {
+        "additionalProperties": false,
+        "description": "CreateShareLinkRequest creates a share link for a document.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          }
+        },
+        "title": "CreateShareLinkRequest",
+        "type": "object"
+      },
+      "CreateShareLinkResponse": {
+        "additionalProperties": false,
+        "description": "CreateShareLinkResponse contains the created share link.",
+        "properties": {
+          "share_link": {
+            "$ref": "#/components/schemas/ShareLink",
+            "description": "The created share link.",
+            "title": "share_link"
+          },
+          "short_url": {
+            "description": "Shortened URL for the share link (if available).",
+            "nullable": true,
+            "title": "short_url",
+            "type": "string"
+          }
+        },
+        "title": "CreateShareLinkResponse",
+        "type": "object"
+      },
       "CreateVersionRequest": {
         "additionalProperties": false,
         "description": "CreateVersionRequest contains the file and metadata for creating a version.",
@@ -1276,6 +1332,15 @@
         "title": "DocumentPolicy",
         "type": "object"
       },
+      "DocumentRole": {
+        "enum": [
+          "viewer",
+          "commenter",
+          "collaborator",
+          "admin",
+          "owner"
+        ]
+      },
       "DocumentTrashState": {
         "enum": [
           "active",
@@ -1364,6 +1429,13 @@
           "message"
         ],
         "type": "object"
+      },
+      "GeneralAccessLevel": {
+        "enum": [
+          "restricted",
+          "organization",
+          "anyone_with_link"
+        ]
       },
       "GenerateEntryPageRequest": {
         "additionalProperties": false,
@@ -1457,6 +1529,38 @@
           "document"
         ],
         "title": "GetDocumentResponse",
+        "type": "object"
+      },
+      "GetGeneralAccessRequest": {
+        "additionalProperties": false,
+        "description": "GetGeneralAccessRequest retrieves the general access level.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          }
+        },
+        "title": "GetGeneralAccessRequest",
+        "type": "object"
+      },
+      "GetGeneralAccessResponse": {
+        "additionalProperties": false,
+        "description": "GetGeneralAccessResponse contains the current general access level.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "title": "document_id",
+            "type": "string"
+          },
+          "general_access_level": {
+            "$ref": "#/components/schemas/GeneralAccessLevel",
+            "description": "Current general access level.",
+            "title": "general_access_level"
+          }
+        },
+        "title": "GetGeneralAccessResponse",
         "type": "object"
       },
       "GetOrganizationQuotaRequest": {
@@ -1609,6 +1713,78 @@
           }
         },
         "title": "GetVersionRequest",
+        "type": "object"
+      },
+      "GrantDocumentAccessRequest": {
+        "additionalProperties": false,
+        "description": "GrantDocumentAccessRequest grants access to one or more recipients.",
+        "properties": {
+          "custom_message": {
+            "description": "Custom message to include in the notification email.",
+            "nullable": true,
+            "title": "custom_message",
+            "type": "string"
+          },
+          "document_id": {
+            "description": "Document ID.",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "recipients": {
+            "description": "Recipients to grant access to (1-50).",
+            "items": {
+              "$ref": "#/components/schemas/RecipientGrant"
+            },
+            "maxItems": 50,
+            "minItems": 1,
+            "title": "recipients",
+            "type": "array"
+          },
+          "should_send_notification": {
+            "description": "Whether to send email notifications.",
+            "nullable": true,
+            "title": "should_send_notification",
+            "type": "boolean"
+          }
+        },
+        "title": "GrantDocumentAccessRequest",
+        "type": "object"
+      },
+      "GrantDocumentAccessResponse": {
+        "additionalProperties": false,
+        "description": "GrantDocumentAccessResponse contains the results of granting access.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "title": "document_id",
+            "type": "string"
+          },
+          "failed": {
+            "description": "Number of failed grants.",
+            "title": "failed",
+            "type": "integer"
+          },
+          "results": {
+            "description": "Results for each recipient.",
+            "items": {
+              "$ref": "#/components/schemas/AccessGrantResult"
+            },
+            "title": "results",
+            "type": "array"
+          },
+          "successful": {
+            "description": "Number of successful grants.",
+            "title": "successful",
+            "type": "integer"
+          },
+          "total": {
+            "description": "Total number of recipients processed.",
+            "title": "total",
+            "type": "integer"
+          }
+        },
+        "title": "GrantDocumentAccessResponse",
         "type": "object"
       },
       "InspectAccessRequest": {
@@ -1766,6 +1942,46 @@
           "pagination"
         ],
         "title": "ListApiKeysResponse",
+        "type": "object"
+      },
+      "ListDocumentAccessRequest": {
+        "additionalProperties": false,
+        "description": "ListDocumentAccessRequest lists all recipients with access.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          }
+        },
+        "title": "ListDocumentAccessRequest",
+        "type": "object"
+      },
+      "ListDocumentAccessResponse": {
+        "additionalProperties": false,
+        "description": "ListDocumentAccessResponse contains the access list and general access level.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "title": "document_id",
+            "type": "string"
+          },
+          "general_access_level": {
+            "$ref": "#/components/schemas/GeneralAccessLevel",
+            "description": "Current general access level.",
+            "title": "general_access_level"
+          },
+          "recipients": {
+            "description": "Recipients with access.",
+            "items": {
+              "$ref": "#/components/schemas/Recipient"
+            },
+            "title": "recipients",
+            "type": "array"
+          }
+        },
+        "title": "ListDocumentAccessResponse",
         "type": "object"
       },
       "ListDocumentPoliciesRequest": {
@@ -2523,6 +2739,79 @@
           "custom"
         ]
       },
+      "Recipient": {
+        "additionalProperties": false,
+        "description": "Recipient represents an entity with access to a document.",
+        "properties": {
+          "document_role": {
+            "$ref": "#/components/schemas/DocumentRole",
+            "description": "Role on the document.",
+            "title": "document_role"
+          },
+          "email": {
+            "description": "Email (only for user recipients).",
+            "title": "email",
+            "type": "string"
+          },
+          "id": {
+            "description": "Recipient ID (TypeID: user_xxx, bot_xxx, or org_xxx).",
+            "title": "id",
+            "type": "string"
+          },
+          "name": {
+            "description": "Display name.",
+            "title": "name",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/RecipientType",
+            "description": "Type of recipient.",
+            "title": "type"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "document_role"
+        ],
+        "title": "Recipient",
+        "type": "object"
+      },
+      "RecipientGrant": {
+        "additionalProperties": false,
+        "description": "RecipientGrant specifies a recipient and role for granting access.",
+        "properties": {
+          "recipient": {
+            "description": "Recipient email address or TypeID (user_xxx, bot_xxx).",
+            "maxLength": 320,
+            "minLength": 1,
+            "title": "recipient",
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/DocumentRole",
+            "description": "Role to grant.",
+            "not": {
+              "enum": [
+                0
+              ]
+            },
+            "title": "role"
+          }
+        },
+        "required": [
+          "role"
+        ],
+        "title": "RecipientGrant",
+        "type": "object"
+      },
+      "RecipientType": {
+        "enum": [
+          "user",
+          "bot",
+          "organization"
+        ]
+      },
       "RemoveOrganizationMemberRequest": {
         "additionalProperties": false,
         "description": "RemoveOrganizationMemberRequest identifies a member to remove.",
@@ -2634,6 +2923,44 @@
         "title": "RevokeApiKeyResponse",
         "type": "object"
       },
+      "RevokeDocumentAccessRequest": {
+        "additionalProperties": false,
+        "description": "RevokeDocumentAccessRequest revokes access from a single recipient.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "recipient_id": {
+            "description": "Recipient ID (TypeID: user_xxx or bot_xxx).",
+            "pattern": "^(user|bot)_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "recipient_id",
+            "type": "string"
+          }
+        },
+        "title": "RevokeDocumentAccessRequest",
+        "type": "object"
+      },
+      "RevokeDocumentAccessResponse": {
+        "additionalProperties": false,
+        "description": "RevokeDocumentAccessResponse contains the result of revoking access.",
+        "properties": {
+          "error": {
+            "description": "Error message if the revocation failed.",
+            "title": "error",
+            "type": "string"
+          },
+          "success": {
+            "description": "Whether the revocation succeeded.",
+            "title": "success",
+            "type": "boolean"
+          }
+        },
+        "title": "RevokeDocumentAccessResponse",
+        "type": "object"
+      },
       "RevokeOrganizationInviteRequest": {
         "additionalProperties": false,
         "description": "RevokeOrganizationInviteRequest identifies an invitation to revoke.",
@@ -2718,6 +3045,51 @@
         "title": "SetAPIKeyQuotaResponse",
         "type": "object"
       },
+      "SetGeneralAccessRequest": {
+        "additionalProperties": false,
+        "description": "SetGeneralAccessRequest sets the general access level.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "general_access_level": {
+            "$ref": "#/components/schemas/GeneralAccessLevel",
+            "description": "General access level to set.",
+            "not": {
+              "enum": [
+                0
+              ]
+            },
+            "title": "general_access_level"
+          }
+        },
+        "required": [
+          "general_access_level"
+        ],
+        "title": "SetGeneralAccessRequest",
+        "type": "object"
+      },
+      "SetGeneralAccessResponse": {
+        "additionalProperties": false,
+        "description": "SetGeneralAccessResponse contains the updated general access level.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "title": "document_id",
+            "type": "string"
+          },
+          "general_access_level": {
+            "$ref": "#/components/schemas/GeneralAccessLevel",
+            "description": "The applied general access level.",
+            "title": "general_access_level"
+          }
+        },
+        "title": "SetGeneralAccessResponse",
+        "type": "object"
+      },
       "SetOrganizationQuotaRequest": {
         "additionalProperties": false,
         "description": "SetOrganizationQuotaRequest is a request to set quota configuration.",
@@ -2762,6 +3134,35 @@
           }
         },
         "title": "SetOrganizationQuotaResponse",
+        "type": "object"
+      },
+      "ShareLink": {
+        "additionalProperties": false,
+        "description": "ShareLink represents a shareable link for a document.",
+        "properties": {
+          "created_at": {
+            "description": "When the link was created.",
+            "format": "date-time",
+            "title": "created_at",
+            "type": "string"
+          },
+          "creator_id": {
+            "description": "ID of the user who created this link.",
+            "title": "creator_id",
+            "type": "string"
+          },
+          "document_id": {
+            "description": "Document ID this link belongs to.",
+            "title": "document_id",
+            "type": "string"
+          },
+          "id": {
+            "description": "Share link ID.",
+            "title": "id",
+            "type": "string"
+          }
+        },
+        "title": "ShareLink",
         "type": "object"
       },
       "StringFilter": {
@@ -2844,6 +3245,57 @@
           }
         },
         "title": "TimestampFilter",
+        "type": "object"
+      },
+      "UpdateDocumentAccessRequest": {
+        "additionalProperties": false,
+        "description": "UpdateDocumentAccessRequest updates a single recipient's role.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "document_role": {
+            "$ref": "#/components/schemas/DocumentRole",
+            "description": "New role to assign.",
+            "not": {
+              "enum": [
+                0
+              ]
+            },
+            "title": "document_role"
+          },
+          "recipient_id": {
+            "description": "Recipient ID (TypeID: user_xxx or bot_xxx).",
+            "pattern": "^(user|bot)_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "recipient_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "document_role"
+        ],
+        "title": "UpdateDocumentAccessRequest",
+        "type": "object"
+      },
+      "UpdateDocumentAccessResponse": {
+        "additionalProperties": false,
+        "description": "UpdateDocumentAccessResponse contains the result of updating access.",
+        "properties": {
+          "error": {
+            "description": "Error message if the update failed.",
+            "title": "error",
+            "type": "string"
+          },
+          "success": {
+            "description": "Whether the update succeeded.",
+            "title": "success",
+            "type": "boolean"
+          }
+        },
+        "title": "UpdateDocumentAccessResponse",
         "type": "object"
       },
       "UpdateDocumentRequest": {
@@ -4170,14 +4622,16 @@
           {
             "label": "inspectDocumentAccess",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.inspectDocumentAccess({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.inspect({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "inspectDocumentAccess",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.inspect_document_access(document_id=\"\u003cid\u003e\")\n\n    assert res.inspect_access_response is not None\n\n    # Handle response\n    print(res.inspect_access_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.inspect(document_id=\"\u003cid\u003e\")\n\n    assert res.inspect_access_response is not None\n\n    # Handle response\n    print(res.inspect_access_response)"
           }
-        ]
+        ],
+        "x-speakeasy-group": "accessRequests",
+        "x-speakeasy-name-override": "inspect"
       }
     },
     "/v1beta/documents/{document_id}/access-requests": {
@@ -4236,14 +4690,16 @@
           {
             "label": "listAccessRequests",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.listAccessRequests({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.list({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "listAccessRequests",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.list_access_requests(document_id=\"\u003cid\u003e\")\n\n    assert res.list_access_requests_response is not None\n\n    # Handle response\n    print(res.list_access_requests_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.list(document_id=\"\u003cid\u003e\")\n\n    assert res.list_access_requests_response is not None\n\n    # Handle response\n    print(res.list_access_requests_response)"
           }
-        ]
+        ],
+        "x-speakeasy-group": "accessRequests",
+        "x-speakeasy-name-override": "list"
       },
       "post": {
         "description": "Creates a new access request for the specified document.",
@@ -4335,14 +4791,16 @@
           {
             "label": "createAccessRequest",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.createAccessRequest({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      permission: \"view\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.create({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      permission: \"view\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "createAccessRequest",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.create_access_request(document_id=\"\u003cid\u003e\", permission=\"view\")\n\n    assert res.create_access_request_response is not None\n\n    # Handle response\n    print(res.create_access_request_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.create(document_id=\"\u003cid\u003e\", permission=\"view\")\n\n    assert res.create_access_request_response is not None\n\n    # Handle response\n    print(res.create_access_request_response)"
           }
-        ]
+        ],
+        "x-speakeasy-group": "accessRequests",
+        "x-speakeasy-name-override": "create"
       }
     },
     "/v1beta/documents/{document_id}/access-requests/status": {
@@ -4401,14 +4859,16 @@
           {
             "label": "checkAccessRequestStatus",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.checkAccessRequestStatus({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.checkStatus({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "checkAccessRequestStatus",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.check_access_request_status(document_id=\"\u003cid\u003e\")\n\n    assert res.check_access_request_status_response is not None\n\n    # Handle response\n    print(res.check_access_request_status_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.check_status(document_id=\"\u003cid\u003e\")\n\n    assert res.check_access_request_status_response is not None\n\n    # Handle response\n    print(res.check_access_request_status_response)"
           }
-        ]
+        ],
+        "x-speakeasy-group": "accessRequests",
+        "x-speakeasy-name-override": "checkStatus"
       }
     },
     "/v1beta/documents/{document_id}/access-requests/{access_request_id}/approve": {
@@ -4494,14 +4954,16 @@
           {
             "label": "approveAccessRequest",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.approveAccessRequest({\n    documentId: \"\u003cid\u003e\",\n    accessRequestId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.approve({\n    documentId: \"\u003cid\u003e\",\n    accessRequestId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "approveAccessRequest",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.approve_access_request(document_id=\"\u003cid\u003e\", access_request_id=\"\u003cid\u003e\", body={})\n\n    assert res.approve_access_request_response is not None\n\n    # Handle response\n    print(res.approve_access_request_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.approve(document_id=\"\u003cid\u003e\", access_request_id=\"\u003cid\u003e\", body={})\n\n    assert res.approve_access_request_response is not None\n\n    # Handle response\n    print(res.approve_access_request_response)"
           }
-        ]
+        ],
+        "x-speakeasy-group": "accessRequests",
+        "x-speakeasy-name-override": "approve"
       }
     },
     "/v1beta/documents/{document_id}/access-requests/{access_request_id}/deny": {
@@ -4587,14 +5049,16 @@
           {
             "label": "denyAccessRequest",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.denyAccessRequest({\n    documentId: \"\u003cid\u003e\",\n    accessRequestId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.deny({\n    documentId: \"\u003cid\u003e\",\n    accessRequestId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "denyAccessRequest",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.deny_access_request(document_id=\"\u003cid\u003e\", access_request_id=\"\u003cid\u003e\", body={})\n\n    assert res.deny_access_request_response is not None\n\n    # Handle response\n    print(res.deny_access_request_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.access_requests.deny(document_id=\"\u003cid\u003e\", access_request_id=\"\u003cid\u003e\", body={})\n\n    assert res.deny_access_request_response is not None\n\n    # Handle response\n    print(res.deny_access_request_response)"
           }
-        ]
+        ],
+        "x-speakeasy-group": "accessRequests",
+        "x-speakeasy-name-override": "deny"
       }
     },
     "/v1beta/documents/{document_id}/entry_page": {
@@ -4663,6 +5127,168 @@
         ],
         "x-speakeasy-group": "entryPages",
         "x-speakeasy-name-override": "generate"
+      }
+    },
+    "/v1beta/documents/{document_id}/general-access": {
+      "get": {
+        "description": "Get general access level for a document.",
+        "operationId": "getGeneralAccess",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGeneralAccessResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Get general access",
+        "tags": [
+          "Sharings"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "getGeneralAccess",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.sharing.getGeneralAccess({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getGeneralAccess",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.sharing.get_general_access(document_id=\"\u003cid\u003e\")\n\n    assert res.get_general_access_response is not None\n\n    # Handle response\n    print(res.get_general_access_response)"
+          }
+        ],
+        "x-speakeasy-group": "sharing",
+        "x-speakeasy-name-override": "getGeneralAccess"
+      },
+      "put": {
+        "description": "Set general access level for a document.",
+        "operationId": "setGeneralAccess",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "SetGeneralAccessRequest sets the general access level.",
+                "properties": {
+                  "general_access_level": {
+                    "$ref": "#/components/schemas/GeneralAccessLevel",
+                    "description": "General access level to set.",
+                    "not": {
+                      "enum": [
+                        0
+                      ]
+                    },
+                    "title": "general_access_level"
+                  }
+                },
+                "required": [
+                  "general_access_level"
+                ],
+                "title": "SetGeneralAccessRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetGeneralAccessResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Set general access",
+        "tags": [
+          "Sharings"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "setGeneralAccess",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.sharing.setGeneralAccess({\n    documentId: \"\u003cid\u003e\",\n    body: {\n      generalAccessLevel: \"organization\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "setGeneralAccess",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.sharing.set_general_access(document_id=\"\u003cid\u003e\", general_access_level=\"organization\")\n\n    assert res.set_general_access_response is not None\n\n    # Handle response\n    print(res.set_general_access_response)"
+          }
+        ],
+        "x-speakeasy-group": "sharing",
+        "x-speakeasy-name-override": "setGeneralAccess"
       }
     },
     "/v1beta/documents/{document_id}/policies": {
@@ -4935,6 +5561,445 @@
           }
         ],
         "x-speakeasy-name-override": "detach"
+      }
+    },
+    "/v1beta/documents/{document_id}/share": {
+      "get": {
+        "description": "List all recipients with access to a document.",
+        "operationId": "listDocumentAccess",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListDocumentAccessResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "List document access",
+        "tags": [
+          "Sharings"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "listDocumentAccess",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.sharing.list({\n    documentId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listDocumentAccess",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.sharing.list(document_id=\"\u003cid\u003e\")\n\n    assert res.list_document_access_response is not None\n\n    # Handle response\n    print(res.list_document_access_response)"
+          }
+        ],
+        "x-speakeasy-group": "sharing",
+        "x-speakeasy-name-override": "list"
+      },
+      "post": {
+        "description": "Grant access to one or more recipients.",
+        "operationId": "grantDocumentAccess",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "GrantDocumentAccessRequest grants access to one or more recipients.",
+                "properties": {
+                  "custom_message": {
+                    "description": "Custom message to include in the notification email.",
+                    "nullable": true,
+                    "title": "custom_message",
+                    "type": "string"
+                  },
+                  "recipients": {
+                    "description": "Recipients to grant access to (1-50).",
+                    "items": {
+                      "$ref": "#/components/schemas/RecipientGrant"
+                    },
+                    "maxItems": 50,
+                    "minItems": 1,
+                    "title": "recipients",
+                    "type": "array"
+                  },
+                  "should_send_notification": {
+                    "description": "Whether to send email notifications.",
+                    "nullable": true,
+                    "title": "should_send_notification",
+                    "type": "boolean"
+                  }
+                },
+                "title": "GrantDocumentAccessRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrantDocumentAccessResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Grant document access",
+        "tags": [
+          "Sharings"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "grantDocumentAccess",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.sharing.grant({\n    documentId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "grantDocumentAccess",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.sharing.grant(document_id=\"\u003cid\u003e\")\n\n    assert res.grant_document_access_response is not None\n\n    # Handle response\n    print(res.grant_document_access_response)"
+          }
+        ],
+        "x-speakeasy-group": "sharing",
+        "x-speakeasy-name-override": "grant"
+      }
+    },
+    "/v1beta/documents/{document_id}/share-links": {
+      "post": {
+        "description": "Create a share link for a document.",
+        "operationId": "createShareLink",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "CreateShareLinkRequest creates a share link for a document.",
+                "properties": {},
+                "title": "CreateShareLinkRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateShareLinkResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Create share link",
+        "tags": [
+          "Sharings"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "createShareLink",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.sharing.createShareLink({\n    documentId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "createShareLink",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.sharing.create_share_link(document_id=\"\u003cid\u003e\", body={})\n\n    assert res.create_share_link_response is not None\n\n    # Handle response\n    print(res.create_share_link_response)"
+          }
+        ],
+        "x-speakeasy-group": "sharing",
+        "x-speakeasy-name-override": "createShareLink"
+      }
+    },
+    "/v1beta/documents/{document_id}/share/{recipient_id}": {
+      "delete": {
+        "description": "Revoke access from a recipient.",
+        "operationId": "revokeDocumentAccess",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Recipient ID (TypeID: user_xxx or bot_xxx).",
+            "in": "path",
+            "name": "recipient_id",
+            "required": true,
+            "schema": {
+              "description": "Recipient ID (TypeID: user_xxx or bot_xxx).",
+              "pattern": "^(user|bot)_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "recipient_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevokeDocumentAccessResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Revoke document access",
+        "tags": [
+          "Sharings"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "revokeDocumentAccess",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.sharing.revoke({\n    documentId: \"\u003cid\u003e\",\n    recipientId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "revokeDocumentAccess",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.sharing.revoke(document_id=\"\u003cid\u003e\", recipient_id=\"\u003cid\u003e\")\n\n    assert res.revoke_document_access_response is not None\n\n    # Handle response\n    print(res.revoke_document_access_response)"
+          }
+        ],
+        "x-speakeasy-group": "sharing",
+        "x-speakeasy-name-override": "revoke"
+      },
+      "patch": {
+        "description": "Update a recipient's role.",
+        "operationId": "updateDocumentAccess",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Recipient ID (TypeID: user_xxx or bot_xxx).",
+            "in": "path",
+            "name": "recipient_id",
+            "required": true,
+            "schema": {
+              "description": "Recipient ID (TypeID: user_xxx or bot_xxx).",
+              "pattern": "^(user|bot)_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "recipient_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "UpdateDocumentAccessRequest updates a single recipient's role.",
+                "properties": {
+                  "document_role": {
+                    "$ref": "#/components/schemas/DocumentRole",
+                    "description": "New role to assign.",
+                    "not": {
+                      "enum": [
+                        0
+                      ]
+                    },
+                    "title": "document_role"
+                  }
+                },
+                "required": [
+                  "document_role"
+                ],
+                "title": "UpdateDocumentAccessRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateDocumentAccessResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Update document access",
+        "tags": [
+          "Sharings"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "updateDocumentAccess",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.sharing.update({\n    documentId: \"\u003cid\u003e\",\n    recipientId: \"\u003cid\u003e\",\n    body: {\n      documentRole: \"admin\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "updateDocumentAccess",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.sharing.update(document_id=\"\u003cid\u003e\", recipient_id=\"\u003cid\u003e\", document_role=\"admin\")\n\n    assert res.update_document_access_response is not None\n\n    # Handle response\n    print(res.update_document_access_response)"
+          }
+        ],
+        "x-speakeasy-group": "sharing",
+        "x-speakeasy-name-override": "update"
       }
     },
     "/v1beta/documents/{document_id}/versions": {
