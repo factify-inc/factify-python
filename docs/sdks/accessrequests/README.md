@@ -4,14 +4,14 @@
 
 ### Available Operations
 
-* [inspect_document_access](#inspect_document_access) - Inspect document access
-* [list_access_requests](#list_access_requests) - List access requests
-* [create_access_request](#create_access_request) - Create an access request
-* [check_access_request_status](#check_access_request_status) - Check access request status
-* [approve_access_request](#approve_access_request) - Approve an access request
-* [deny_access_request](#deny_access_request) - Deny an access request
+* [inspect](#inspect) - Inspect document access
+* [list](#list) - List access requests
+* [create](#create) - Create an access request
+* [check_status](#check_status) - Check access request status
+* [approve](#approve) - Approve an access request
+* [deny](#deny) - Deny an access request
 
-## inspect_document_access
+## inspect
 
 Returns the caller's permissions and any access policies on a document.
 
@@ -26,7 +26,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.access_requests.inspect_document_access(document_id="<id>")
+    res = f_client.access_requests.inspect(document_id="<id>")
 
     # Handle response
     print(res)
@@ -53,7 +53,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## list_access_requests
+## list
 
 Lists pending access requests for the specified document.
 
@@ -68,7 +68,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.access_requests.list_access_requests(document_id="<id>")
+    res = f_client.access_requests.list(document_id="<id>")
 
     # Handle response
     print(res)
@@ -95,7 +95,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## create_access_request
+## create
 
 Creates a new access request for the specified document.
 
@@ -110,7 +110,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.access_requests.create_access_request(document_id="<id>", permission="view")
+    res = f_client.access_requests.create(document_id="<id>", permission="view")
 
     # Handle response
     print(res)
@@ -139,7 +139,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## check_access_request_status
+## check_status
 
 Returns whether the caller has a pending access request for the document.
 
@@ -154,7 +154,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.access_requests.check_access_request_status(document_id="<id>")
+    res = f_client.access_requests.check_status(document_id="<id>")
 
     # Handle response
     print(res)
@@ -181,7 +181,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## approve_access_request
+## approve
 
 Approve an access request.
 
@@ -196,7 +196,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.access_requests.approve_access_request(document_id="<id>", access_request_id="<id>", body={})
+    res = f_client.access_requests.approve(document_id="<id>", access_request_id="<id>", body={})
 
     # Handle response
     print(res)
@@ -225,7 +225,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## deny_access_request
+## deny
 
 Deny an access request.
 
@@ -240,7 +240,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.access_requests.deny_access_request(document_id="<id>", access_request_id="<id>", body={})
+    res = f_client.access_requests.deny(document_id="<id>", access_request_id="<id>", body={})
 
     # Handle response
     print(res)

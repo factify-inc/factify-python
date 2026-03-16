@@ -15,13 +15,14 @@ from typing import Any, Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
 
 if TYPE_CHECKING:
-    from factify.access_requests import AccessRequests
+    from factify.accessrequests import AccessRequests
     from factify.api_keys import APIKeys
     from factify.documents import Documents
     from factify.entrypages import EntryPages
     from factify.organizations import Organizations
     from factify.policies import Policies
     from factify.quotas import Quotas
+    from factify.sharing import Sharing
     from factify.usage import Usage
     from factify.user_preferences import UserPreferences
     from factify.versions import Versions
@@ -71,6 +72,7 @@ class Factify(BaseSDK):
     r"""Create, retrieve, update, and manage documents."""
     access_requests: "AccessRequests"
     entry_pages: "EntryPages"
+    sharing: "Sharing"
     policies: "Policies"
     r"""Attach and manage access policies for documents."""
     versions: "Versions"
@@ -84,8 +86,9 @@ class Factify(BaseSDK):
         "quotas": ("factify.quotas", "Quotas"),
         "api_keys": ("factify.api_keys", "APIKeys"),
         "documents": ("factify.documents", "Documents"),
-        "access_requests": ("factify.access_requests", "AccessRequests"),
+        "access_requests": ("factify.accessrequests", "AccessRequests"),
         "entry_pages": ("factify.entrypages", "EntryPages"),
+        "sharing": ("factify.sharing", "Sharing"),
         "policies": ("factify.policies", "Policies"),
         "versions": ("factify.versions", "Versions"),
         "organizations": ("factify.organizations", "Organizations"),

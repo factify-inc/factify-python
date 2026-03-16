@@ -223,12 +223,12 @@ with Factify(
 
 ### [AccessRequests](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/accessrequests/README.md)
 
-* [inspect_document_access](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/accessrequests/README.md#inspect_document_access) - Inspect document access
-* [list_access_requests](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/accessrequests/README.md#list_access_requests) - List access requests
-* [create_access_request](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/accessrequests/README.md#create_access_request) - Create an access request
-* [check_access_request_status](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/accessrequests/README.md#check_access_request_status) - Check access request status
-* [approve_access_request](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/accessrequests/README.md#approve_access_request) - Approve an access request
-* [deny_access_request](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/accessrequests/README.md#deny_access_request) - Deny an access request
+* [inspect](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/accessrequests/README.md#inspect) - Inspect document access
+* [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/accessrequests/README.md#list) - List access requests
+* [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/accessrequests/README.md#create) - Create an access request
+* [check_status](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/accessrequests/README.md#check_status) - Check access request status
+* [approve](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/accessrequests/README.md#approve) - Approve an access request
+* [deny](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/accessrequests/README.md#deny) - Deny an access request
 
 ### [APIKeys](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/apikeys/README.md)
 
@@ -276,6 +276,16 @@ with Factify(
 
 * [quota_service_delete_organization_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quotas/README.md#quota_service_delete_organization_quota) - DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
 * [quota_service_set_organization_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quotas/README.md#quota_service_set_organization_quota) - SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+
+### [Sharing](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharing/README.md)
+
+* [get_general_access](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharing/README.md#get_general_access) - Get general access
+* [set_general_access](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharing/README.md#set_general_access) - Set general access
+* [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharing/README.md#list) - List document access
+* [grant](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharing/README.md#grant) - Grant document access
+* [create_share_link](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharing/README.md#create_share_link) - Create share link
+* [revoke](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharing/README.md#revoke) - Revoke document access
+* [update](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharing/README.md#update) - Update document access
 
 ### [Usage](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md)
 

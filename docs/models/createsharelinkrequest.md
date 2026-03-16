@@ -1,0 +1,9 @@
+# CreateShareLinkRequest
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `document_id`                                                                                      | *str*                                                                                              | :heavy_check_mark:                                                                                 | Document ID.                                                                                       |
+| `body`                                                                                             | [models.CreateShareLinkCreateShareLinkRequest](../models/createsharelinkcreatesharelinkrequest.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |

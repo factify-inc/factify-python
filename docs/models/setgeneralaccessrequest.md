@@ -1,0 +1,9 @@
+# SetGeneralAccessRequest
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `document_id`                                                                                          | *str*                                                                                                  | :heavy_check_mark:                                                                                     | Document ID.                                                                                           |
+| `body`                                                                                                 | [models.SetGeneralAccessSetGeneralAccessRequest](../models/setgeneralaccesssetgeneralaccessrequest.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |

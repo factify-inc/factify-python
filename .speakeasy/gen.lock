@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: c75e1c7163b23a51f6f2f94409443cb0
+  docChecksum: 8c08d8b1eaa9eabaa13296c6f42e05df
   docVersion: 1.0.0
   speakeasyVersion: 1.755.0
   generationVersion: 2.865.2
-  releaseVersion: 0.7.2-rc.5
-  configChecksum: d6de79d2e272648205fe49106954c0e0
+  releaseVersion: 0.7.2-rc.6
+  configChecksum: 59b03ce5601a3d4bedb57489dd957a14
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: 6e111ea9-b7fa-49ed-aeeb-2c2c6567b4e8
-  pristine_commit_hash: 4ea3230a31f20528287cd3b36015dcf83adce134
-  pristine_tree_hash: ab5ceec35ea79ff0ffbb7467a709d3a6bca29b0d
+  generation_id: bad64f90-fb64-4bef-b711-22ac29abef13
+  pristine_commit_hash: 918e97291d68dcc3afc39fdbb1e47e8524f85e28
+  pristine_tree_hash: 1006b08e5ff79b09b3ca9cb83289af349e591152
 features:
   python:
     additionalDependencies: 1.0.0
@@ -75,6 +75,10 @@ trackedFiles:
     id: c1e8ddbc0355
     last_write_checksum: sha1:42e1033be0b57e8e69a8223172806aeb400c7077
     pristine_git_object: 9d50af2e0bd74b9e0c0f24da4314cc675dcca2ee
+  docs/models/accessgrantresult.md:
+    id: 19ce1de2a0a4
+    last_write_checksum: sha1:d52469ec756c1060b09509a9379d663b8ea81af7
+    pristine_git_object: 7f26e498ee0309aa2e68c5268d886fc7db6c58ee
   docs/models/accesslevel.md:
     id: 42855991af11
     last_write_checksum: sha1:2da5eda47c12dd063406a8149bcd49fba094f0ba
@@ -247,6 +251,22 @@ trackedFiles:
     id: 1d9a91f4b77f
     last_write_checksum: sha1:341824fff105d8eeda74ae8dbff5c545bf1765be
     pristine_git_object: 06cf7b7e3b20f67e0a0056d921443df0e0359b84
+  docs/models/createsharelinkcreatesharelinkrequest.md:
+    id: b7503345e2f7
+    last_write_checksum: sha1:9a28a7faadcb5886311765114a3c31f83f18d130
+    pristine_git_object: 83d107d04e4b532ccc321480f5f52b530d84f685
+  docs/models/createsharelinkrequest.md:
+    id: 96f6e7828908
+    last_write_checksum: sha1:8a21865247c1ef4648e652b5b25b0c32d2949577
+    pristine_git_object: a52cc07597ce43d772a5ef9bd30f88559f49d0f9
+  docs/models/createsharelinkresponse.md:
+    id: d13cd9bf2136
+    last_write_checksum: sha1:63496c079dc24b73766ed4f1c1909966644e9385
+    pristine_git_object: 3e5bac6a655b67b035f006dd801e4b4ebf294bc7
+  docs/models/createsharelinkresponseresponse.md:
+    id: 3bb2b1ea2457
+    last_write_checksum: sha1:b697c655eebd423bf71d66d5a66861e54c991e76
+    pristine_git_object: ffaa78177cf73311f0d5e59f55c43a4d8dca737a
   docs/models/createversionrequest.md:
     id: 815730f5fd3e
     last_write_checksum: sha1:3b84f578a449590d6d3a6cfa1b97e6f3ff1d2b0b
@@ -323,6 +343,10 @@ trackedFiles:
     id: f15100c89302
     last_write_checksum: sha1:9f52db1f890f6f716f33fb32412bfb4604598949
     pristine_git_object: 74ff6e550d3bb6cb79ce5fe6c3cc1a05fa092bbc
+  docs/models/documentrole.md:
+    id: 7728e521ca11
+    last_write_checksum: sha1:f7a879bfae3516b249873e6747a1da21cfe4990e
+    pristine_git_object: 1de06fdff4e2f1c3fef98f87f338af1c3279531b
   docs/models/documenttrashstate.md:
     id: 14243bb1ddef
     last_write_checksum: sha1:0258345a79850cb6f226bb17feb1071e87700d29
@@ -339,6 +363,10 @@ trackedFiles:
     id: efb5019826be
     last_write_checksum: sha1:2e9940e6d995a2bef0b63f06ff3700a7e39e4fbc
     pristine_git_object: 25417ff0c2a5772bf755f612989c4c0f0ebb7e77
+  docs/models/generalaccesslevel.md:
+    id: e450d0bb5875
+    last_write_checksum: sha1:bcbc8d68579efd1157d6e537eb055052ccc839c3
+    pristine_git_object: 1fe905fff820b884b1e61f8e4f73d65a9b4ae339
   docs/models/generatedocumententrypagerequest.md:
     id: 29b54169b01e
     last_write_checksum: sha1:32e59431f7ad06a925c0a989f0f8e8f72660892f
@@ -371,6 +399,18 @@ trackedFiles:
     id: c1666391315a
     last_write_checksum: sha1:a57294e19ef5fc487081258c74722a4d2a143d68
     pristine_git_object: 4b4dbcdddd2d33af18641ac7cf404ccb525685ca
+  docs/models/getgeneralaccessrequest.md:
+    id: 6374f176617e
+    last_write_checksum: sha1:e12079d7c0fd6df78143f4030277066b04a885d3
+    pristine_git_object: 473a2596718386662613f5b561a7dd25a751011c
+  docs/models/getgeneralaccessresponse.md:
+    id: 35df121932fd
+    last_write_checksum: sha1:b27dc7761ee78bb3a4c70950c47b133a731c61ff
+    pristine_git_object: 6c54f005b891439286f72b3717270581d7e39079
+  docs/models/getgeneralaccessresponseresponse.md:
+    id: 1c6c95e03416
+    last_write_checksum: sha1:760aa8e61eee3c638c4bb995a8e085709bf10595
+    pristine_git_object: d35ad5a18ccf6ae3f88534e6a1f0034aa4824df4
   docs/models/getorganizationquotarequest.md:
     id: 16d60976578a
     last_write_checksum: sha1:ea9dcdb283654c1c706b41ad2932aab4fb1d6d61
@@ -423,6 +463,22 @@ trackedFiles:
     id: 09cbe1a72eae
     last_write_checksum: sha1:a6999baa263f24ffc9b38a26458817d51b759e42
     pristine_git_object: 83ebd2b4ca96980d762bebc45030e11345b910fd
+  docs/models/grantdocumentaccessgrantdocumentaccessrequest.md:
+    id: 063258670d65
+    last_write_checksum: sha1:eeb902f8499d446860b01acc52cc61ea1d5ac2e5
+    pristine_git_object: 0d2283ada9a2bd1db9cecbcf2c57310cf929324b
+  docs/models/grantdocumentaccessrequest.md:
+    id: 2329ed488746
+    last_write_checksum: sha1:c0ebe38dce7c7fc936b60c1c66d2b12b52dad1e2
+    pristine_git_object: 784f13ce3b12c820bba513fe8fdef0dbd157a23f
+  docs/models/grantdocumentaccessresponse.md:
+    id: d1508fe6ced2
+    last_write_checksum: sha1:0c603589f7fd9901099ffb561271580a3065270b
+    pristine_git_object: 05c22b861520517b6b31043637ab7baec59b793e
+  docs/models/grantdocumentaccessresponseresponse.md:
+    id: 3cf7d186ecd0
+    last_write_checksum: sha1:51f6cb43e18f58f84f3474947465413da5eab8f9
+    pristine_git_object: 0baa663f9f54a54cc768d0769a8db23d5a9ff364
   docs/models/inspectaccessresponse.md:
     id: a4f0c55909a2
     last_write_checksum: sha1:2d6413d9d881430821ba6c65177340d4e9b26e2b
@@ -471,6 +527,18 @@ trackedFiles:
     id: 4113ca7222d0
     last_write_checksum: sha1:7fdca4ce7ec07aee85bf411d2524c8ecff11a778
     pristine_git_object: 68f9b4b7634dc8574cfcbdd89850f634bec24cca
+  docs/models/listdocumentaccessrequest.md:
+    id: 665152f784fc
+    last_write_checksum: sha1:711a1fa293f462e8cdae14bf53c39540eae664c4
+    pristine_git_object: 3435518615fc6c78ca912569cf2ff27b1d444988
+  docs/models/listdocumentaccessresponse.md:
+    id: e0feeea53006
+    last_write_checksum: sha1:39a1cc76601e8ffa51032fb801fceb01ba44cf7e
+    pristine_git_object: a4b2a2285da67e3776e63daeabcc0f004ec556dc
+  docs/models/listdocumentaccessresponseresponse.md:
+    id: d2b9bb73567a
+    last_write_checksum: sha1:cb7c93cc370b5281623d9ebd14f7f4c623098c2e
+    pristine_git_object: b263be746668324d03783265b787a3f0762d6256
   docs/models/listdocumentpoliciesrequest.md:
     id: 1634feba7129
     last_write_checksum: sha1:acd9821033918ed9d038e5acfff9c3dad85b001d
@@ -615,6 +683,18 @@ trackedFiles:
     id: 087688da6fd4
     last_write_checksum: sha1:21cb75b6d54fca5c7bf68e0b4d35753eb88de1b4
     pristine_git_object: 097316b877a5b54d8ba207e9bd1178a8bc183a8c
+  docs/models/recipient.md:
+    id: 135fcc028099
+    last_write_checksum: sha1:afaedff0130f104b9fa64c066e18e66bd2460787
+    pristine_git_object: dbf7fb1dd14d9e673f16298093797d411cf2f8a7
+  docs/models/recipientgrant.md:
+    id: d989010cc242
+    last_write_checksum: sha1:317f91409003bad4252952c26b9e4a5e76cedd0a
+    pristine_git_object: a11d60e8e77423962b3e1601e2ab8f6e46886ecd
+  docs/models/recipienttype.md:
+    id: b9e6e2cb9285
+    last_write_checksum: sha1:a257b90b58f6eeea0fd5bd27192a47a71377b429
+    pristine_git_object: 5f3bfe445fc6a8550369bcb6a3112d06b03f13af
   docs/models/removeorganizationmemberrequest.md:
     id: aecf70500da7
     last_write_checksum: sha1:2a66d74e6e3a8c11ff098a2e2f4b25e3e0ec696a
@@ -659,6 +739,18 @@ trackedFiles:
     id: 6ed327c59625
     last_write_checksum: sha1:388f58c80dac8154502d75f7ff99f8d71e9b0bcb
     pristine_git_object: b911b342f862b1330335e7b43f9df592b642967a
+  docs/models/revokedocumentaccessrequest.md:
+    id: 16562bb26e61
+    last_write_checksum: sha1:6e27951ac49746177feabcbaf8baeb01c05e9323
+    pristine_git_object: 9a7b828a3f2e322a7e55137bf4fa753b84209b69
+  docs/models/revokedocumentaccessresponse.md:
+    id: 8187bbaf98ba
+    last_write_checksum: sha1:b8e04e122fcce73d3cd62256369c0e231394f373
+    pristine_git_object: 7a27787b2505b036db71b7554b1021152def560e
+  docs/models/revokedocumentaccessresponseresponse.md:
+    id: 2303d740cab1
+    last_write_checksum: sha1:31fecee2660e1dd151d93888c6dcbe71dc970ee2
+    pristine_git_object: 6811a8d34b2d2fe47a4bf4b3a36183ab76f476e7
   docs/models/revokeorganizationinviterequest.md:
     id: 01ee9c6cffb8
     last_write_checksum: sha1:be0efee4fced884be9a20ca2af8b6c47dc9db745
@@ -695,6 +787,22 @@ trackedFiles:
     id: 5246b934e2f5
     last_write_checksum: sha1:103ee4b8f39bff637c2a855fecf62cbe3ec618e0
     pristine_git_object: 78d235c58de04a0a6d9b3732b054dfb4efdaf956
+  docs/models/setgeneralaccessrequest.md:
+    id: 15517307af07
+    last_write_checksum: sha1:eb266f6fd0148a3410b7c187f31c1a397374b90b
+    pristine_git_object: 36e150174f6fc8987f00f8c1011a9d411dfc56e5
+  docs/models/setgeneralaccessresponse.md:
+    id: 0af19529a4cd
+    last_write_checksum: sha1:d9bfb2031db24cdb73ae936e275d4e50f10df4e7
+    pristine_git_object: 28a8a47253a2fe686513abd1899d89aa95a4d61a
+  docs/models/setgeneralaccessresponseresponse.md:
+    id: 3404b3569940
+    last_write_checksum: sha1:394582b0fe4e040389a6990721951bb1ad8aa251
+    pristine_git_object: c4c92dfd2731905f05ffb2e7b4c0958c63484e53
+  docs/models/setgeneralaccesssetgeneralaccessrequest.md:
+    id: e7367521cba8
+    last_write_checksum: sha1:95dc0b73c95bb487915ab03364eb12e2b972fac5
+    pristine_git_object: 03ddaefb860d35e974da9774993947f613b05952
   docs/models/setorganizationquotarequest.md:
     id: b539a4bcedbf
     last_write_checksum: sha1:489f224a444566101cbb21e16d4bb7d380a5aadb
@@ -703,6 +811,10 @@ trackedFiles:
     id: 09810953fa92
     last_write_checksum: sha1:ff92c940c6422f6691edcdc918e7322965bb288d
     pristine_git_object: ec299a1e41be8f44c97d92842fd6a7f420af28d6
+  docs/models/sharelink.md:
+    id: ea7e5b87275f
+    last_write_checksum: sha1:aa1775f642c45a4bf6d8e37ac64b10c2b207beb3
+    pristine_git_object: 0068238775035943485826a1e2a14400a20e480d
   docs/models/subject.md:
     id: 962f05560630
     last_write_checksum: sha1:6b23521a0dbf12f31f76a44d4e8bb7c4ae5ac0f4
@@ -711,6 +823,22 @@ trackedFiles:
     id: 946d44f38117
     last_write_checksum: sha1:8f4c070bdaae2274f650dadf3d8bdeea6c5cdb04
     pristine_git_object: eaaf31e339dbabb232f9b30fd4dcba4148ee6cc6
+  docs/models/updatedocumentaccessrequest.md:
+    id: d069c1b5ab6c
+    last_write_checksum: sha1:0bf8c56b134e50e1a7fa45d00fb9d63cc12a75cf
+    pristine_git_object: 6d6d8a9edf2466e2eaf1c978908dc6bbe34e73b0
+  docs/models/updatedocumentaccessresponse.md:
+    id: 7a3422a7273e
+    last_write_checksum: sha1:99cb965803736442b70361374cf14fb573d87462
+    pristine_git_object: e3b416d907e855c7a965c77e2ab3a75511bee245
+  docs/models/updatedocumentaccessresponseresponse.md:
+    id: 3b829d4708f4
+    last_write_checksum: sha1:b3c7f14d7659f07baaa3975409ae595e53ce71ed
+    pristine_git_object: ad90f6624334a5e257f491a1f50f87ad411784a6
+  docs/models/updatedocumentaccessupdatedocumentaccessrequest.md:
+    id: 0428e2ccf24f
+    last_write_checksum: sha1:2a59169d730400c82da86fcb0ded3ee682152e23
+    pristine_git_object: 17947e7d667e2446a226c7c3408b9bb79a6547e2
   docs/models/updatedocumentrequest.md:
     id: ee4e094a6aa7
     last_write_checksum: sha1:9ad72d59301a8ee43bdbd2ead72d42756411d5a4
@@ -773,8 +901,8 @@ trackedFiles:
     pristine_git_object: 1b5e5aaa7d439cd2dede2249b576025252561c7b
   docs/sdks/accessrequests/README.md:
     id: c40c46f39dcf
-    last_write_checksum: sha1:19f440fb6f6c5e78315fd86322b0e9783ceeebc9
-    pristine_git_object: d9ffef89248419a5c1a25509d2cdf3753e8a4c16
+    last_write_checksum: sha1:db56318f1f36d82a2312d97ec1a4e9f01d01c45a
+    pristine_git_object: 1ebd4ebae704ea5a2e9636e50ee509cbbc43b4f6
   docs/sdks/apikeys/README.md:
     id: e2bd25998427
     last_write_checksum: sha1:833826b8eecf1b64f597994f3985ef584409dc6f
@@ -803,6 +931,10 @@ trackedFiles:
     id: 688e75141996
     last_write_checksum: sha1:133c6f77d6b54bf3b46976e38c5d225d77f35a64
     pristine_git_object: 2187234950b5801091e3e19632b1980397f62303
+  docs/sdks/sharing/README.md:
+    id: b7142786849e
+    last_write_checksum: sha1:c4fdd807e6f322c0e29caca6e5c5f42b7cb763e8
+    pristine_git_object: 3b265990a4d3fc878edbc777deccf3c032006db0
   docs/sdks/usage/README.md:
     id: 631af2d7ce26
     last_write_checksum: sha1:0fb86bf15cec28df0eb79f9ed4c3ce1da7e5becb
@@ -825,8 +957,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:d92dfee307c1816f309e3a4ce1394f679f33d957
-    pristine_git_object: 29aaef24f3d5b28fd236d5602c4fcee29ae2aee4
+    last_write_checksum: sha1:ad51493816002a05718e4e7f48f5a40b6c541298
+    pristine_git_object: c5ed84a54396c5fb8642db951114608b96d78219
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -853,12 +985,12 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:110fffd03ecb17a31aec605e931a6029e33e67c5
-    pristine_git_object: 548a452ab5f5626c7971348874bcc69c688d4c58
-  src/factify/access_requests.py:
-    id: fc0f742de0b3
-    last_write_checksum: sha1:8e4a6de23c44ca24820085a2bbab1099d73cfb3a
-    pristine_git_object: 7eb54099830da672b37be209cd08823be07c73fe
+    last_write_checksum: sha1:756ff67345a6d204208f7e94a2e30da87730cb06
+    pristine_git_object: 458c2ac31ebaa3240e1d1e02138e03387d5316ec
+  src/factify/accessrequests.py:
+    id: 31a20ba0373b
+    last_write_checksum: sha1:2ae2764fb41d3e303510aa968e9d2d31a9b4861b
+    pristine_git_object: dbc89ab12f358f8d5f1ce7f95fc51f3e56d2b034
   src/factify/api_keys.py:
     id: 10eb7ea2e1e3
     last_write_checksum: sha1:b5694f520576608f0aa62e06138dbd65c39e1958
@@ -909,8 +1041,8 @@ trackedFiles:
     pristine_git_object: b53d2419032970dbd612ba982d8e00687cb11b3e
   src/factify/models/__init__.py:
     id: b45df6051cc0
-    last_write_checksum: sha1:face78721bfe2c63c8b57026a41153796030e6d2
-    pristine_git_object: 754f03984c1bb827432f30b289d39b779119b5f7
+    last_write_checksum: sha1:4631330ed85773cd3344e1da3eac253158d57b76
+    pristine_git_object: a92634009cddd45cb1ec028c96a18742bd078207
   src/factify/models/acceptorganizationinviteop.py:
     id: 90bc63055feb
     last_write_checksum: sha1:f20b151a408c61fc3f958393f751b2ee99ecd08d
@@ -919,6 +1051,10 @@ trackedFiles:
     id: b9f9c49cea5d
     last_write_checksum: sha1:d928265bf99e27078c1712ca66395fbb6b519d3e
     pristine_git_object: f2924710cc0f5059eef118c23f9370a8e840ca23
+  src/factify/models/accessgrantresult.py:
+    id: c66dad06cb93
+    last_write_checksum: sha1:b045d37d9fccd6025c380838e0c5a847612af177
+    pristine_git_object: 115d0e08a322143b92c29b911b895a8d4de4e5be
   src/factify/models/accesslevel.py:
     id: 2ee86a3c7ac2
     last_write_checksum: sha1:fdc343cf46aeed7a3930b65261b30869bc4a23a3
@@ -1035,6 +1171,14 @@ trackedFiles:
     id: fca526f478ae
     last_write_checksum: sha1:3823879169c9fb9d87695ef4e5ac4051c40add0c
     pristine_git_object: 95872eaece2b55ac12f734afc3a1aa14431cc899
+  src/factify/models/createsharelinkop.py:
+    id: f45a9f15c58d
+    last_write_checksum: sha1:01fc5f626f54675489db0463ed7cd0b0378e1afa
+    pristine_git_object: 1a8c46cc5641e4563fce506f7f84df408c00e32d
+  src/factify/models/createsharelinkresponse.py:
+    id: fb8fb01f0e89
+    last_write_checksum: sha1:7d6d647aae3a26f586d37a7aa1bb8a6f78b7ae43
+    pristine_git_object: d4a369938654d59c2f70ffcab176247d2aae8a46
   src/factify/models/createversionrequest.py:
     id: b9292f2b3c9e
     last_write_checksum: sha1:41500cba391af764f45d52b568e41d4c87a3c5b1
@@ -1087,6 +1231,10 @@ trackedFiles:
     id: d965235fde9b
     last_write_checksum: sha1:e1e07c290eb3774f353918041c5206053105ebf9
     pristine_git_object: 9add8e083cde394372c75630b06e34320e42982b
+  src/factify/models/documentrole.py:
+    id: 6b224e062e45
+    last_write_checksum: sha1:787a4eabe0df2939137988b12642cf0f20cded7e
+    pristine_git_object: 576d44e437843595bd8741b3d2aa796c6ed2a7f2
   src/factify/models/documenttrashstate.py:
     id: 9699a0a88b28
     last_write_checksum: sha1:3659753b6ed7d51f64cf6f0cd1e3306f7e227124
@@ -1103,6 +1251,10 @@ trackedFiles:
     id: 003520b9cd8b
     last_write_checksum: sha1:505ec649a30976530243bb46b50041b12654c86f
     pristine_git_object: e251fb42bcab0f46ea79802cbfb23eab7451bb72
+  src/factify/models/generalaccesslevel.py:
+    id: ecf2a6e503bc
+    last_write_checksum: sha1:cf2cce20cfd9e675668adab55c7aeddd03e3de66
+    pristine_git_object: b70d31ee934ea4d46fe0fbb1e804c1b018722363
   src/factify/models/generatedocumententrypageop.py:
     id: 461623b8b2df
     last_write_checksum: sha1:c78b6ca6f4b2688079375a0d7ae27e3d116e3183
@@ -1127,6 +1279,14 @@ trackedFiles:
     id: c0cb0f4c077b
     last_write_checksum: sha1:13a939ebd251950d3d81ffb4e43d2eb6ee809ad1
     pristine_git_object: 10180f2459824fa17bf98cb8e6640f086fa1f61f
+  src/factify/models/getgeneralaccessop.py:
+    id: 9747a592914c
+    last_write_checksum: sha1:ee8282eafc9967915b63c2f758ccfb1271528700
+    pristine_git_object: 288ddc99f8593c96e54e55ef0d0d0ac863e4a20e
+  src/factify/models/getgeneralaccessresponse.py:
+    id: c7d345adc1f5
+    last_write_checksum: sha1:1403d196255c94fef9cf5a9ba62bb3d81660537f
+    pristine_git_object: e2ca1e06445c5e3314f7cf246a321dc518f249ca
   src/factify/models/getorganizationop.py:
     id: 476d76a24c34
     last_write_checksum: sha1:67e8a7d0374ec728a0b2429409ae2ead1bc34afe
@@ -1163,6 +1323,14 @@ trackedFiles:
     id: aa4d5dc5ba4a
     last_write_checksum: sha1:141801bd3fc8d061f542590cb6977c064744ab7a
     pristine_git_object: 44e888f52a03884b0b101576cc588f6940773b6a
+  src/factify/models/grantdocumentaccessop.py:
+    id: 97394c776381
+    last_write_checksum: sha1:9a7f6d1df2d2301c57178c068b5fdea93d510ad8
+    pristine_git_object: 5cda33cfaa51e7a87e568f5556e73f103f1f955f
+  src/factify/models/grantdocumentaccessresponse.py:
+    id: b89955ad4710
+    last_write_checksum: sha1:11d17a659df58e23b8a1f783e566d146bdd73ba2
+    pristine_git_object: 876bbc50531ac893aa78b1f331bfda5289123c15
   src/factify/models/inspectaccessresponse.py:
     id: b7635babde7a
     last_write_checksum: sha1:d2de82062669e45eebcc05de3d90edf69c990f5c
@@ -1195,6 +1363,14 @@ trackedFiles:
     id: 0ab19b58d0e1
     last_write_checksum: sha1:200871538df0b4f554311071ca65fb0fb077ef7d
     pristine_git_object: 9ff1142685408f182a0925103e7f9c1dd0be5cbd
+  src/factify/models/listdocumentaccessop.py:
+    id: c012fd8d7cfa
+    last_write_checksum: sha1:b108b6865ed3240be9110fc374ba74daf5d474cd
+    pristine_git_object: 06d74616878faf484bf959ae80d661af835d2be0
+  src/factify/models/listdocumentaccessresponse.py:
+    id: 645b17a66d6f
+    last_write_checksum: sha1:62d81cad5ffc7cb9bac5b254de42a5f62ce5d513
+    pristine_git_object: 56ff1024f3b8bb6282729c86b661c4c1cd9c349c
   src/factify/models/listdocumentpoliciesop.py:
     id: 619b79954bbc
     last_write_checksum: sha1:3052884db99bd29fa3571c6bc2cc44035771da27
@@ -1295,6 +1471,18 @@ trackedFiles:
     id: a4904ad2fdca
     last_write_checksum: sha1:9817547f9fd377d552abe3a99763a69be9266479
     pristine_git_object: 39793c5ecfc12bdf2bb441da5630d9a5d1d72962
+  src/factify/models/recipient.py:
+    id: 41513bdccf71
+    last_write_checksum: sha1:af378d240f74530a2a1f44f617a3996bbbf4953b
+    pristine_git_object: c96a52c1e272fb2361188c5f95b353928069b05a
+  src/factify/models/recipientgrant.py:
+    id: da55d820bdf5
+    last_write_checksum: sha1:59b14c2c8767e8d9d721ee4845df779ecaa3dca6
+    pristine_git_object: 62fa57746db3adaea77bb4242f43222ccdb62c25
+  src/factify/models/recipienttype.py:
+    id: 2f0657baa814
+    last_write_checksum: sha1:9337a256c5daf1f14cb4679ad9f73dbc3e76e042
+    pristine_git_object: 4410965914d27879d6c3a245322716edd73c6286
   src/factify/models/removeorganizationmemberop.py:
     id: b96c5c024513
     last_write_checksum: sha1:f6a9677c5bdf4f6b9cf48bc4d43d460e1c5f2062
@@ -1319,6 +1507,14 @@ trackedFiles:
     id: 931ff788f9f6
     last_write_checksum: sha1:7b4d3c288bdac1621a6c3c4dff1f0b3337a00400
     pristine_git_object: 7a25dcd9cd3c3f7b868e52ecb3df22427c5f3998
+  src/factify/models/revokedocumentaccessop.py:
+    id: 08e36b1f1a6d
+    last_write_checksum: sha1:c7ec394bd09fc0f9f7e5864ad9a5ff4380702410
+    pristine_git_object: c6a7b37979537bec8647b4cf1686cf763bad4ed0
+  src/factify/models/revokedocumentaccessresponse.py:
+    id: 74e3fb098c2b
+    last_write_checksum: sha1:a37a4d7723b6092c1b46e8e88ea8bee92e727331
+    pristine_git_object: f620af91b8c3700d10c680ea6799939b65040dac
   src/factify/models/revokeorganizationinviteop.py:
     id: 0ccf226a2a86
     last_write_checksum: sha1:8831f1d26cf94678df736148e7b7061559674274
@@ -1339,6 +1535,14 @@ trackedFiles:
     id: 776fc227530b
     last_write_checksum: sha1:3ededcb3b970c4caac6be3d409d9237566bed236
     pristine_git_object: 8719c226864278f61890fc0c7f9527b7d4f65fd6
+  src/factify/models/setgeneralaccessop.py:
+    id: d4b48c6930fb
+    last_write_checksum: sha1:32e9869fa0ec56149e6903d6b113d40dadc22698
+    pristine_git_object: 56978d75050811f1a54a1897224ba0487047c143
+  src/factify/models/setgeneralaccessresponse.py:
+    id: e131ac3e7d81
+    last_write_checksum: sha1:118c447e3bfca25dfd0718874531d3e7020cb896
+    pristine_git_object: b6f46deb1d6e24ae19e57bb1d6ab5acaba410a40
   src/factify/models/setorganizationquotarequest.py:
     id: 1a86169ea4c9
     last_write_checksum: sha1:bcabe5a2e1ff8a81f1527a8c85154debb255c9b9
@@ -1347,6 +1551,10 @@ trackedFiles:
     id: e2c4dc9f9847
     last_write_checksum: sha1:8a4d84fc745390d2ea9425ad71394e25dd16f570
     pristine_git_object: 94412435db94901717b84dd157c77db5a4efb26f
+  src/factify/models/sharelink.py:
+    id: 88f9c5e0dfb6
+    last_write_checksum: sha1:adc9dfa03af33c7683f5dff7c8f4593628619673
+    pristine_git_object: aaacb674907e198b96c0ca5bc7d6e07fad9b6a4e
   src/factify/models/subject.py:
     id: 92c98460df3f
     last_write_checksum: sha1:8103f070498025a31a0aeb14a6d41336609491b4
@@ -1355,6 +1563,14 @@ trackedFiles:
     id: 45dc458f98ac
     last_write_checksum: sha1:d4283004406097404ceb7117f4e3222aa8180887
     pristine_git_object: 43ef5a41345270469f46b6ddd60248452d53b9a0
+  src/factify/models/updatedocumentaccessop.py:
+    id: d71f633b4eac
+    last_write_checksum: sha1:70c87dcd4f3ab03af24b07682884c8d2b134febb
+    pristine_git_object: 2d049c034ca77c16ed1c3d905c772445519bd52d
+  src/factify/models/updatedocumentaccessresponse.py:
+    id: ec9b638f8ad2
+    last_write_checksum: sha1:00e184a70019e29b10e30a9553d37fa15921a342
+    pristine_git_object: 960ebaefc7e691c52bbf5e1f5a65f445265e34a8
   src/factify/models/updatedocumentop.py:
     id: 5f43cea1006c
     last_write_checksum: sha1:08612154ee527da8c74e8114590a95033027d4c1
@@ -1405,12 +1621,16 @@ trackedFiles:
     pristine_git_object: 5dec3af1c99a789a398eeea9834c38df915ac535
   src/factify/sdk.py:
     id: a71d663e8f75
-    last_write_checksum: sha1:65ec19e1c1eb21869b6943fbfc1132e78715e5f3
-    pristine_git_object: 20a027114e6f08eacf13e70ba6ccb7ea778185cd
+    last_write_checksum: sha1:046c73e5976ffd80fce8f9295dc91c5fc6eb53a6
+    pristine_git_object: 47394c3d8c17a5f91eaeb47693e13d940098b0ce
   src/factify/sdkconfiguration.py:
     id: c36aff7bf3dc
     last_write_checksum: sha1:6aaf3c968d83ab19f91836b4d2be9274757a7df0
     pristine_git_object: 56dff612a139ca06691766f5d45cac9e94657c3b
+  src/factify/sharing.py:
+    id: 2adc1faf0021
+    last_write_checksum: sha1:d6cdc5dbd9c514550fedca3893730c12b36668e0
+    pristine_git_object: 7213b073c204213e6d5b91207e4805e96b9f75d3
   src/factify/types/__init__.py:
     id: 30e88f6c9a1a
     last_write_checksum: sha1:140ebdd01a46f92ffc710c52c958c4eba3cf68ed
@@ -2630,10 +2850,220 @@ examples:
           application/json: {"code": "permission_denied", "message": "<value>"}
         "500":
           application/json: {"code": "permission_denied", "message": "<value>"}
+  getGeneralAccess:
+    validation_error:
+      parameters:
+        path:
+          document_id: "<id>"
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-get-general-access:
+      parameters:
+        path:
+          document_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "deadline_exceeded", "message": "<value>"}
+        "429":
+          application/json: {"code": "deadline_exceeded", "message": "<value>"}
+        "500":
+          application/json: {"code": "deadline_exceeded", "message": "<value>"}
+  setGeneralAccess:
+    validation_error:
+      parameters:
+        path:
+          document_id: "<id>"
+      requestBody:
+        application/json: {"general_access_level": "organization"}
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-set-general-access:
+      parameters:
+        path:
+          document_id: "<id>"
+      requestBody:
+        application/json: {"general_access_level": "organization"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "unknown", "message": "<value>"}
+        "429":
+          application/json: {"code": "unknown", "message": "<value>"}
+        "500":
+          application/json: {"code": "unknown", "message": "<value>"}
+  listDocumentAccess:
+    validation_error:
+      parameters:
+        path:
+          document_id: "<id>"
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-list-document-access:
+      parameters:
+        path:
+          document_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "deadline_exceeded", "message": "<value>"}
+        "429":
+          application/json: {"code": "deadline_exceeded", "message": "<value>"}
+        "500":
+          application/json: {"code": "deadline_exceeded", "message": "<value>"}
+  grantDocumentAccess:
+    validation_error:
+      parameters:
+        path:
+          document_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-grant-document-access:
+      parameters:
+        path:
+          document_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "failed_precondition", "message": "<value>"}
+        "429":
+          application/json: {"code": "failed_precondition", "message": "<value>"}
+        "500":
+          application/json: {"code": "failed_precondition", "message": "<value>"}
+  createShareLink:
+    validation_error:
+      parameters:
+        path:
+          document_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-create-share-link:
+      parameters:
+        path:
+          document_id: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "not_found", "message": "<value>"}
+        "429":
+          application/json: {"code": "not_found", "message": "<value>"}
+        "500":
+          application/json: {"code": "not_found", "message": "<value>"}
+  revokeDocumentAccess:
+    validation_error:
+      parameters:
+        path:
+          document_id: "<id>"
+          recipient_id: "<id>"
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-revoke-document-access:
+      parameters:
+        path:
+          document_id: "<id>"
+          recipient_id: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "failed_precondition", "message": "<value>"}
+        "429":
+          application/json: {"code": "failed_precondition", "message": "<value>"}
+        "500":
+          application/json: {"code": "failed_precondition", "message": "<value>"}
+  updateDocumentAccess:
+    validation_error:
+      parameters:
+        path:
+          document_id: "<id>"
+          recipient_id: "<id>"
+      requestBody:
+        application/json: {"document_role": "admin"}
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-update-document-access:
+      parameters:
+        path:
+          document_id: "<id>"
+          recipient_id: "<id>"
+      requestBody:
+        application/json: {"document_role": "admin"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "unimplemented", "message": "<value>"}
+        "429":
+          application/json: {"code": "unimplemented", "message": "<value>"}
+        "500":
+          application/json: {"code": "unimplemented", "message": "<value>"}
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `factify.documents.list()`:  `response.items[].is_demo` **Added**
-  * `factify.documents.create()`:  `response.document.is_demo` **Added**
-  * `factify.documents.get()`:  `response.document.is_demo` **Added**
-  * `factify.documents.update()`:  `response.document.is_demo` **Added**
+  * `factify.access_requests.inspect()`: **Added**
+  * `factify.access_requests.list()`: **Added**
+  * `factify.access_requests.create()`: **Added**
+  * `factify.access_requests.check_status()`: **Added**
+  * `factify.access_requests.approve()`: **Added**
+  * `factify.access_requests.deny()`: **Added**
+  * `factify.sharing.get_general_access()`: **Added**
+  * `factify.sharing.set_general_access()`: **Added**
+  * `factify.sharing.list()`: **Added**
+  * `factify.sharing.grant()`: **Added**
+  * `factify.sharing.create_share_link()`: **Added**
+  * `factify.sharing.revoke()`: **Added**
+  * `factify.sharing.update()`: **Added**
+  * `factify.access_requests.inspect_document_access()`: **Removed** (Breaking ⚠️)
+  * `factify.access_requests.list_access_requests()`: **Removed** (Breaking ⚠️)
+  * `factify.access_requests.create_access_request()`: **Removed** (Breaking ⚠️)
+  * `factify.access_requests.check_access_request_status()`: **Removed** (Breaking ⚠️)
+  * `factify.access_requests.approve_access_request()`: **Removed** (Breaking ⚠️)
+  * `factify.access_requests.deny_access_request()`: **Removed** (Breaking ⚠️)

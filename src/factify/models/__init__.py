@@ -17,6 +17,7 @@ if TYPE_CHECKING:
         AcceptOrganizationInviteResponse,
         AcceptOrganizationInviteResponseTypedDict,
     )
+    from .accessgrantresult import AccessGrantResult, AccessGrantResultTypedDict
     from .accesslevel import AccessLevel
     from .accessrequest import AccessRequest, AccessRequestTypedDict
     from .accessrequestpermission import AccessRequestPermission
@@ -137,6 +138,18 @@ if TYPE_CHECKING:
         CreateOrganizationResponse,
         CreateOrganizationResponseTypedDict,
     )
+    from .createsharelinkop import (
+        CreateShareLinkCreateShareLinkRequest,
+        CreateShareLinkCreateShareLinkRequestTypedDict,
+        CreateShareLinkRequest,
+        CreateShareLinkRequestTypedDict,
+        CreateShareLinkResponseResponse,
+        CreateShareLinkResponseResponseTypedDict,
+    )
+    from .createsharelinkresponse import (
+        CreateShareLinkResponse,
+        CreateShareLinkResponseTypedDict,
+    )
     from .createversionrequest import (
         CreateVersionRequest,
         CreateVersionRequestPayload,
@@ -187,10 +200,12 @@ if TYPE_CHECKING:
         DocumentPermissionSetTypedDict,
     )
     from .documentpolicy import DocumentPolicy, DocumentPolicyTypedDict
+    from .documentrole import DocumentRole
     from .documenttrashstate import DocumentTrashState
     from .empty import Empty, EmptyTypedDict
     from .errordetail import ErrorDetail, ErrorDetailTypedDict, Reason
     from .errorresponse import ErrorResponseCode
+    from .generalaccesslevel import GeneralAccessLevel
     from .generatedocumententrypageop import (
         GenerateDocumentEntryPageRequest,
         GenerateDocumentEntryPageRequestTypedDict,
@@ -216,6 +231,16 @@ if TYPE_CHECKING:
         GetDocumentQuotaResponseTypedDict,
     )
     from .getdocumentresponse import GetDocumentResponse, GetDocumentResponseTypedDict
+    from .getgeneralaccessop import (
+        GetGeneralAccessRequest,
+        GetGeneralAccessRequestTypedDict,
+        GetGeneralAccessResponseResponse,
+        GetGeneralAccessResponseResponseTypedDict,
+    )
+    from .getgeneralaccessresponse import (
+        GetGeneralAccessResponse,
+        GetGeneralAccessResponseTypedDict,
+    )
     from .getorganizationop import (
         GetOrganizationRequest,
         GetOrganizationRequestTypedDict,
@@ -260,6 +285,18 @@ if TYPE_CHECKING:
         GetVersionResponse,
         GetVersionResponseTypedDict,
     )
+    from .grantdocumentaccessop import (
+        GrantDocumentAccessGrantDocumentAccessRequest,
+        GrantDocumentAccessGrantDocumentAccessRequestTypedDict,
+        GrantDocumentAccessRequest,
+        GrantDocumentAccessRequestTypedDict,
+        GrantDocumentAccessResponseResponse,
+        GrantDocumentAccessResponseResponseTypedDict,
+    )
+    from .grantdocumentaccessresponse import (
+        GrantDocumentAccessResponse,
+        GrantDocumentAccessResponseTypedDict,
+    )
     from .inspectaccessresponse import (
         InspectAccessResponse,
         InspectAccessResponseTypedDict,
@@ -297,6 +334,16 @@ if TYPE_CHECKING:
         ListAPIKeysResponseResponseTypedDict,
     )
     from .listapikeysresponse import ListAPIKeysResponse, ListAPIKeysResponseTypedDict
+    from .listdocumentaccessop import (
+        ListDocumentAccessRequest,
+        ListDocumentAccessRequestTypedDict,
+        ListDocumentAccessResponseResponse,
+        ListDocumentAccessResponseResponseTypedDict,
+    )
+    from .listdocumentaccessresponse import (
+        ListDocumentAccessResponse,
+        ListDocumentAccessResponseTypedDict,
+    )
     from .listdocumentpoliciesop import (
         ListDocumentPoliciesRequest,
         ListDocumentPoliciesRequestTypedDict,
@@ -387,6 +434,9 @@ if TYPE_CHECKING:
         QuotaServiceSetOrganizationQuotaResponseTypedDict,
     )
     from .quotatier import QuotaTier
+    from .recipient import Recipient, RecipientTypedDict
+    from .recipientgrant import RecipientGrant, RecipientGrantTypedDict
+    from .recipienttype import RecipientType
     from .removeorganizationmemberop import (
         RemoveOrganizationMemberRequest,
         RemoveOrganizationMemberRequestTypedDict,
@@ -421,6 +471,16 @@ if TYPE_CHECKING:
         RevokeAPIKeyResponse,
         RevokeAPIKeyResponseTypedDict,
     )
+    from .revokedocumentaccessop import (
+        RevokeDocumentAccessRequest,
+        RevokeDocumentAccessRequestTypedDict,
+        RevokeDocumentAccessResponseResponse,
+        RevokeDocumentAccessResponseResponseTypedDict,
+    )
+    from .revokedocumentaccessresponse import (
+        RevokeDocumentAccessResponse,
+        RevokeDocumentAccessResponseTypedDict,
+    )
     from .revokeorganizationinviteop import (
         RevokeOrganizationInviteRequest,
         RevokeOrganizationInviteRequestTypedDict,
@@ -446,6 +506,18 @@ if TYPE_CHECKING:
         SetAPIKeyQuotaResponse,
         SetAPIKeyQuotaResponseTypedDict,
     )
+    from .setgeneralaccessop import (
+        SetGeneralAccessRequest,
+        SetGeneralAccessRequestTypedDict,
+        SetGeneralAccessResponseResponse,
+        SetGeneralAccessResponseResponseTypedDict,
+        SetGeneralAccessSetGeneralAccessRequest,
+        SetGeneralAccessSetGeneralAccessRequestTypedDict,
+    )
+    from .setgeneralaccessresponse import (
+        SetGeneralAccessResponse,
+        SetGeneralAccessResponseTypedDict,
+    )
     from .setorganizationquotarequest import (
         SetOrganizationQuotaRequest,
         SetOrganizationQuotaRequestTypedDict,
@@ -454,8 +526,21 @@ if TYPE_CHECKING:
         SetOrganizationQuotaResponse,
         SetOrganizationQuotaResponseTypedDict,
     )
+    from .sharelink import ShareLink, ShareLinkTypedDict
     from .subject import Subject, SubjectTypedDict
     from .subjecttype import SubjectType
+    from .updatedocumentaccessop import (
+        UpdateDocumentAccessRequest,
+        UpdateDocumentAccessRequestTypedDict,
+        UpdateDocumentAccessResponseResponse,
+        UpdateDocumentAccessResponseResponseTypedDict,
+        UpdateDocumentAccessUpdateDocumentAccessRequest,
+        UpdateDocumentAccessUpdateDocumentAccessRequestTypedDict,
+    )
+    from .updatedocumentaccessresponse import (
+        UpdateDocumentAccessResponse,
+        UpdateDocumentAccessResponseTypedDict,
+    )
     from .updatedocumentop import (
         UpdateDocumentRequest,
         UpdateDocumentRequestTypedDict,
@@ -505,6 +590,8 @@ __all__ = [
     "AcceptOrganizationInviteResponseResponse",
     "AcceptOrganizationInviteResponseResponseTypedDict",
     "AcceptOrganizationInviteResponseTypedDict",
+    "AccessGrantResult",
+    "AccessGrantResultTypedDict",
     "AccessLevel",
     "AccessRequest",
     "AccessRequestPermission",
@@ -583,6 +670,14 @@ __all__ = [
     "CreateOrganizationResponseResponse",
     "CreateOrganizationResponseResponseTypedDict",
     "CreateOrganizationResponseTypedDict",
+    "CreateShareLinkCreateShareLinkRequest",
+    "CreateShareLinkCreateShareLinkRequestTypedDict",
+    "CreateShareLinkRequest",
+    "CreateShareLinkRequestTypedDict",
+    "CreateShareLinkResponse",
+    "CreateShareLinkResponseResponse",
+    "CreateShareLinkResponseResponseTypedDict",
+    "CreateShareLinkResponseTypedDict",
     "CreateVersionRequest",
     "CreateVersionRequestPayload",
     "CreateVersionRequestPayloadTypedDict",
@@ -619,6 +714,7 @@ __all__ = [
     "DocumentPermissionSetTypedDict",
     "DocumentPolicy",
     "DocumentPolicyTypedDict",
+    "DocumentRole",
     "DocumentTrashState",
     "DocumentTypedDict",
     "Empty",
@@ -626,6 +722,7 @@ __all__ = [
     "ErrorDetail",
     "ErrorDetailTypedDict",
     "ErrorResponseCode",
+    "GeneralAccessLevel",
     "GenerateDocumentEntryPageRequest",
     "GenerateDocumentEntryPageRequestTypedDict",
     "GenerateDocumentEntryPageResponse",
@@ -642,6 +739,12 @@ __all__ = [
     "GetDocumentResponseResponse",
     "GetDocumentResponseResponseTypedDict",
     "GetDocumentResponseTypedDict",
+    "GetGeneralAccessRequest",
+    "GetGeneralAccessRequestTypedDict",
+    "GetGeneralAccessResponse",
+    "GetGeneralAccessResponseResponse",
+    "GetGeneralAccessResponseResponseTypedDict",
+    "GetGeneralAccessResponseTypedDict",
     "GetOrganizationQuotaRequest",
     "GetOrganizationQuotaRequestTypedDict",
     "GetOrganizationQuotaResponse",
@@ -668,6 +771,14 @@ __all__ = [
     "GetVersionRequestTypedDict",
     "GetVersionResponse",
     "GetVersionResponseTypedDict",
+    "GrantDocumentAccessGrantDocumentAccessRequest",
+    "GrantDocumentAccessGrantDocumentAccessRequestTypedDict",
+    "GrantDocumentAccessRequest",
+    "GrantDocumentAccessRequestTypedDict",
+    "GrantDocumentAccessResponse",
+    "GrantDocumentAccessResponseResponse",
+    "GrantDocumentAccessResponseResponseTypedDict",
+    "GrantDocumentAccessResponseTypedDict",
     "InspectAccessResponse",
     "InspectAccessResponseTypedDict",
     "InspectDocumentAccessRequest",
@@ -692,6 +803,12 @@ __all__ = [
     "ListAccessRequestsResponseResponse",
     "ListAccessRequestsResponseResponseTypedDict",
     "ListAccessRequestsResponseTypedDict",
+    "ListDocumentAccessRequest",
+    "ListDocumentAccessRequestTypedDict",
+    "ListDocumentAccessResponse",
+    "ListDocumentAccessResponseResponse",
+    "ListDocumentAccessResponseResponseTypedDict",
+    "ListDocumentAccessResponseTypedDict",
     "ListDocumentPoliciesRequest",
     "ListDocumentPoliciesRequestTypedDict",
     "ListDocumentPoliciesResponse",
@@ -759,6 +876,11 @@ __all__ = [
     "QuotaServiceSetOrganizationQuotaResponseTypedDict",
     "QuotaTier",
     "Reason",
+    "Recipient",
+    "RecipientGrant",
+    "RecipientGrantTypedDict",
+    "RecipientType",
+    "RecipientTypedDict",
     "RemoveOrganizationMemberRequest",
     "RemoveOrganizationMemberRequestTypedDict",
     "RemoveOrganizationMemberResponse",
@@ -781,6 +903,12 @@ __all__ = [
     "RevokeAPIKeyResponseTypedDict",
     "RevokeAPIKeyRevokeAPIKeyRequest",
     "RevokeAPIKeyRevokeAPIKeyRequestTypedDict",
+    "RevokeDocumentAccessRequest",
+    "RevokeDocumentAccessRequestTypedDict",
+    "RevokeDocumentAccessResponse",
+    "RevokeDocumentAccessResponseResponse",
+    "RevokeDocumentAccessResponseResponseTypedDict",
+    "RevokeDocumentAccessResponseTypedDict",
     "RevokeOrganizationInviteRequest",
     "RevokeOrganizationInviteRequestTypedDict",
     "RevokeOrganizationInviteResponse",
@@ -799,13 +927,31 @@ __all__ = [
     "SetAPIKeyQuotaResponseTypedDict",
     "SetAPIKeyQuotaSetAPIKeyQuotaRequest",
     "SetAPIKeyQuotaSetAPIKeyQuotaRequestTypedDict",
+    "SetGeneralAccessRequest",
+    "SetGeneralAccessRequestTypedDict",
+    "SetGeneralAccessResponse",
+    "SetGeneralAccessResponseResponse",
+    "SetGeneralAccessResponseResponseTypedDict",
+    "SetGeneralAccessResponseTypedDict",
+    "SetGeneralAccessSetGeneralAccessRequest",
+    "SetGeneralAccessSetGeneralAccessRequestTypedDict",
     "SetOrganizationQuotaRequest",
     "SetOrganizationQuotaRequestTypedDict",
     "SetOrganizationQuotaResponse",
     "SetOrganizationQuotaResponseTypedDict",
+    "ShareLink",
+    "ShareLinkTypedDict",
     "Subject",
     "SubjectType",
     "SubjectTypedDict",
+    "UpdateDocumentAccessRequest",
+    "UpdateDocumentAccessRequestTypedDict",
+    "UpdateDocumentAccessResponse",
+    "UpdateDocumentAccessResponseResponse",
+    "UpdateDocumentAccessResponseResponseTypedDict",
+    "UpdateDocumentAccessResponseTypedDict",
+    "UpdateDocumentAccessUpdateDocumentAccessRequest",
+    "UpdateDocumentAccessUpdateDocumentAccessRequestTypedDict",
     "UpdateDocumentRequest",
     "UpdateDocumentRequestTypedDict",
     "UpdateDocumentResponse",
@@ -845,6 +991,8 @@ _dynamic_imports: dict[str, str] = {
     "AcceptOrganizationInviteResponseResponseTypedDict": ".acceptorganizationinviteop",
     "AcceptOrganizationInviteResponse": ".acceptorganizationinviteresponse",
     "AcceptOrganizationInviteResponseTypedDict": ".acceptorganizationinviteresponse",
+    "AccessGrantResult": ".accessgrantresult",
+    "AccessGrantResultTypedDict": ".accessgrantresult",
     "AccessLevel": ".accesslevel",
     "AccessRequest": ".accessrequest",
     "AccessRequestTypedDict": ".accessrequest",
@@ -929,6 +1077,14 @@ _dynamic_imports: dict[str, str] = {
     "CreateOrganizationRequestTypedDict": ".createorganizationrequest",
     "CreateOrganizationResponse": ".createorganizationresponse",
     "CreateOrganizationResponseTypedDict": ".createorganizationresponse",
+    "CreateShareLinkCreateShareLinkRequest": ".createsharelinkop",
+    "CreateShareLinkCreateShareLinkRequestTypedDict": ".createsharelinkop",
+    "CreateShareLinkRequest": ".createsharelinkop",
+    "CreateShareLinkRequestTypedDict": ".createsharelinkop",
+    "CreateShareLinkResponseResponse": ".createsharelinkop",
+    "CreateShareLinkResponseResponseTypedDict": ".createsharelinkop",
+    "CreateShareLinkResponse": ".createsharelinkresponse",
+    "CreateShareLinkResponseTypedDict": ".createsharelinkresponse",
     "CreateVersionRequest": ".createversionrequest",
     "CreateVersionRequestPayload": ".createversionrequest",
     "CreateVersionRequestPayloadTypedDict": ".createversionrequest",
@@ -964,6 +1120,7 @@ _dynamic_imports: dict[str, str] = {
     "DocumentPermissionSetTypedDict": ".documentpermissionset",
     "DocumentPolicy": ".documentpolicy",
     "DocumentPolicyTypedDict": ".documentpolicy",
+    "DocumentRole": ".documentrole",
     "DocumentTrashState": ".documenttrashstate",
     "Empty": ".empty",
     "EmptyTypedDict": ".empty",
@@ -971,6 +1128,7 @@ _dynamic_imports: dict[str, str] = {
     "ErrorDetailTypedDict": ".errordetail",
     "Reason": ".errordetail",
     "ErrorResponseCode": ".errorresponse",
+    "GeneralAccessLevel": ".generalaccesslevel",
     "GenerateDocumentEntryPageRequest": ".generatedocumententrypageop",
     "GenerateDocumentEntryPageRequestTypedDict": ".generatedocumententrypageop",
     "GenerateDocumentEntryPageResponse": ".generatedocumententrypageop",
@@ -987,6 +1145,12 @@ _dynamic_imports: dict[str, str] = {
     "GetDocumentQuotaResponseTypedDict": ".getdocumentquotaresponse",
     "GetDocumentResponse": ".getdocumentresponse",
     "GetDocumentResponseTypedDict": ".getdocumentresponse",
+    "GetGeneralAccessRequest": ".getgeneralaccessop",
+    "GetGeneralAccessRequestTypedDict": ".getgeneralaccessop",
+    "GetGeneralAccessResponseResponse": ".getgeneralaccessop",
+    "GetGeneralAccessResponseResponseTypedDict": ".getgeneralaccessop",
+    "GetGeneralAccessResponse": ".getgeneralaccessresponse",
+    "GetGeneralAccessResponseTypedDict": ".getgeneralaccessresponse",
     "GetOrganizationRequest": ".getorganizationop",
     "GetOrganizationRequestTypedDict": ".getorganizationop",
     "GetOrganizationResponseResponse": ".getorganizationop",
@@ -1013,6 +1177,14 @@ _dynamic_imports: dict[str, str] = {
     "GetVersionRequestTypedDict": ".getversionop",
     "GetVersionResponse": ".getversionop",
     "GetVersionResponseTypedDict": ".getversionop",
+    "GrantDocumentAccessGrantDocumentAccessRequest": ".grantdocumentaccessop",
+    "GrantDocumentAccessGrantDocumentAccessRequestTypedDict": ".grantdocumentaccessop",
+    "GrantDocumentAccessRequest": ".grantdocumentaccessop",
+    "GrantDocumentAccessRequestTypedDict": ".grantdocumentaccessop",
+    "GrantDocumentAccessResponseResponse": ".grantdocumentaccessop",
+    "GrantDocumentAccessResponseResponseTypedDict": ".grantdocumentaccessop",
+    "GrantDocumentAccessResponse": ".grantdocumentaccessresponse",
+    "GrantDocumentAccessResponseTypedDict": ".grantdocumentaccessresponse",
     "InspectAccessResponse": ".inspectaccessresponse",
     "InspectAccessResponseTypedDict": ".inspectaccessresponse",
     "InspectDocumentAccessRequest": ".inspectdocumentaccessop",
@@ -1037,6 +1209,12 @@ _dynamic_imports: dict[str, str] = {
     "ListAPIKeysResponseResponseTypedDict": ".listapikeysop",
     "ListAPIKeysResponse": ".listapikeysresponse",
     "ListAPIKeysResponseTypedDict": ".listapikeysresponse",
+    "ListDocumentAccessRequest": ".listdocumentaccessop",
+    "ListDocumentAccessRequestTypedDict": ".listdocumentaccessop",
+    "ListDocumentAccessResponseResponse": ".listdocumentaccessop",
+    "ListDocumentAccessResponseResponseTypedDict": ".listdocumentaccessop",
+    "ListDocumentAccessResponse": ".listdocumentaccessresponse",
+    "ListDocumentAccessResponseTypedDict": ".listdocumentaccessresponse",
     "ListDocumentPoliciesRequest": ".listdocumentpoliciesop",
     "ListDocumentPoliciesRequestTypedDict": ".listdocumentpoliciesop",
     "ListDocumentPoliciesResponseResponse": ".listdocumentpoliciesop",
@@ -1103,6 +1281,11 @@ _dynamic_imports: dict[str, str] = {
     "QuotaServiceSetOrganizationQuotaResponseResultTypedDict": ".quotaservice_setorganizationquotaop",
     "QuotaServiceSetOrganizationQuotaResponseTypedDict": ".quotaservice_setorganizationquotaop",
     "QuotaTier": ".quotatier",
+    "Recipient": ".recipient",
+    "RecipientTypedDict": ".recipient",
+    "RecipientGrant": ".recipientgrant",
+    "RecipientGrantTypedDict": ".recipientgrant",
+    "RecipientType": ".recipienttype",
     "RemoveOrganizationMemberRequest": ".removeorganizationmemberop",
     "RemoveOrganizationMemberRequestTypedDict": ".removeorganizationmemberop",
     "RemoveOrganizationMemberResponseResponse": ".removeorganizationmemberop",
@@ -1125,6 +1308,12 @@ _dynamic_imports: dict[str, str] = {
     "RevokeAPIKeyRevokeAPIKeyRequestTypedDict": ".revokeapikeyop",
     "RevokeAPIKeyResponse": ".revokeapikeyresponse",
     "RevokeAPIKeyResponseTypedDict": ".revokeapikeyresponse",
+    "RevokeDocumentAccessRequest": ".revokedocumentaccessop",
+    "RevokeDocumentAccessRequestTypedDict": ".revokedocumentaccessop",
+    "RevokeDocumentAccessResponseResponse": ".revokedocumentaccessop",
+    "RevokeDocumentAccessResponseResponseTypedDict": ".revokedocumentaccessop",
+    "RevokeDocumentAccessResponse": ".revokedocumentaccessresponse",
+    "RevokeDocumentAccessResponseTypedDict": ".revokedocumentaccessresponse",
     "RevokeOrganizationInviteRequest": ".revokeorganizationinviteop",
     "RevokeOrganizationInviteRequestTypedDict": ".revokeorganizationinviteop",
     "RevokeOrganizationInviteResponseResponse": ".revokeorganizationinviteop",
@@ -1143,13 +1332,31 @@ _dynamic_imports: dict[str, str] = {
     "SetAPIKeyQuotaSetAPIKeyQuotaRequestTypedDict": ".setapikeyquotaop",
     "SetAPIKeyQuotaResponse": ".setapikeyquotaresponse",
     "SetAPIKeyQuotaResponseTypedDict": ".setapikeyquotaresponse",
+    "SetGeneralAccessRequest": ".setgeneralaccessop",
+    "SetGeneralAccessRequestTypedDict": ".setgeneralaccessop",
+    "SetGeneralAccessResponseResponse": ".setgeneralaccessop",
+    "SetGeneralAccessResponseResponseTypedDict": ".setgeneralaccessop",
+    "SetGeneralAccessSetGeneralAccessRequest": ".setgeneralaccessop",
+    "SetGeneralAccessSetGeneralAccessRequestTypedDict": ".setgeneralaccessop",
+    "SetGeneralAccessResponse": ".setgeneralaccessresponse",
+    "SetGeneralAccessResponseTypedDict": ".setgeneralaccessresponse",
     "SetOrganizationQuotaRequest": ".setorganizationquotarequest",
     "SetOrganizationQuotaRequestTypedDict": ".setorganizationquotarequest",
     "SetOrganizationQuotaResponse": ".setorganizationquotaresponse",
     "SetOrganizationQuotaResponseTypedDict": ".setorganizationquotaresponse",
+    "ShareLink": ".sharelink",
+    "ShareLinkTypedDict": ".sharelink",
     "Subject": ".subject",
     "SubjectTypedDict": ".subject",
     "SubjectType": ".subjecttype",
+    "UpdateDocumentAccessRequest": ".updatedocumentaccessop",
+    "UpdateDocumentAccessRequestTypedDict": ".updatedocumentaccessop",
+    "UpdateDocumentAccessResponseResponse": ".updatedocumentaccessop",
+    "UpdateDocumentAccessResponseResponseTypedDict": ".updatedocumentaccessop",
+    "UpdateDocumentAccessUpdateDocumentAccessRequest": ".updatedocumentaccessop",
+    "UpdateDocumentAccessUpdateDocumentAccessRequestTypedDict": ".updatedocumentaccessop",
+    "UpdateDocumentAccessResponse": ".updatedocumentaccessresponse",
+    "UpdateDocumentAccessResponseTypedDict": ".updatedocumentaccessresponse",
     "UpdateDocumentRequest": ".updatedocumentop",
     "UpdateDocumentRequestTypedDict": ".updatedocumentop",
     "UpdateDocumentResponseResponse": ".updatedocumentop",

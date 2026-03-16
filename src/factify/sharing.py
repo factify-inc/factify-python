@@ -5,11 +5,11 @@ from factify import errors, models, utils
 from factify._hooks import HookContext
 from factify.types import OptionalNullable, UNSET
 from factify.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from typing import Any, List, Mapping, Optional, Union
 
 
-class AccessRequests(BaseSDK):
-    def inspect_document_access(
+class Sharing(BaseSDK):
+    def get_general_access(
         self,
         *,
         document_id: str,
@@ -17,10 +17,10 @@ class AccessRequests(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.InspectDocumentAccessResponse:
-        r"""Inspect document access
+    ) -> models.GetGeneralAccessResponseResponse:
+        r"""Get general access
 
-        Returns the caller's permissions and any access policies on a document.
+        Get general access level for a document.
 
         :param document_id: Document ID.
         :param retries: Override the default retry configuration for this method
@@ -38,13 +38,13 @@ class AccessRequests(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.InspectDocumentAccessRequest(
+        request = models.GetGeneralAccessRequest(
             document_id=document_id,
         )
 
         req = self._build_request(
             method="GET",
-            path="/v1beta/documents/{document_id}/access",
+            path="/v1beta/documents/{document_id}/general-access",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -71,7 +71,7 @@ class AccessRequests(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="inspectDocumentAccess",
+                operation_id="getGeneralAccess",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -82,211 +82,9 @@ class AccessRequests(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.InspectDocumentAccessResponse(
-                result=unmarshal_json_response(models.InspectAccessResponse, http_res),
-                headers={},
-            )
-        if utils.match_response(
-            http_res, ["400", "401", "403", "404"], "application/json"
-        ):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "429", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.FactifyDefaultError(
-                "API error occurred", http_res, http_res_text
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.FactifyDefaultError(
-                "API error occurred", http_res, http_res_text
-            )
-
-        raise errors.FactifyDefaultError("Unexpected response received", http_res)
-
-    async def inspect_document_access_async(
-        self,
-        *,
-        document_id: str,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.InspectDocumentAccessResponse:
-        r"""Inspect document access
-
-        Returns the caller's permissions and any access policies on a document.
-
-        :param document_id: Document ID.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.InspectDocumentAccessRequest(
-            document_id=document_id,
-        )
-
-        req = self._build_request_async(
-            method="GET",
-            path="/v1beta/documents/{document_id}/access",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="inspectDocumentAccess",
-                oauth2_scopes=None,
-                security_source=self.sdk_configuration.security,
-            ),
-            request=req,
-            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return models.InspectDocumentAccessResponse(
-                result=unmarshal_json_response(models.InspectAccessResponse, http_res),
-                headers={},
-            )
-        if utils.match_response(
-            http_res, ["400", "401", "403", "404"], "application/json"
-        ):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "429", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.FactifyDefaultError(
-                "API error occurred", http_res, http_res_text
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.FactifyDefaultError(
-                "API error occurred", http_res, http_res_text
-            )
-
-        raise errors.FactifyDefaultError("Unexpected response received", http_res)
-
-    def list_access_requests(
-        self,
-        *,
-        document_id: str,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListAccessRequestsResponseResponse:
-        r"""List access requests
-
-        Lists pending access requests for the specified document.
-
-        :param document_id: Document ID.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.ListAccessRequestsRequest(
-            document_id=document_id,
-        )
-
-        req = self._build_request(
-            method="GET",
-            path="/v1beta/documents/{document_id}/access-requests",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="listAccessRequests",
-                oauth2_scopes=None,
-                security_source=self.sdk_configuration.security,
-            ),
-            request=req,
-            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return models.ListAccessRequestsResponseResponse(
+            return models.GetGeneralAccessResponseResponse(
                 result=unmarshal_json_response(
-                    models.ListAccessRequestsResponse, http_res
+                    models.GetGeneralAccessResponse, http_res
                 ),
                 headers={},
             )
@@ -314,7 +112,7 @@ class AccessRequests(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def list_access_requests_async(
+    async def get_general_access_async(
         self,
         *,
         document_id: str,
@@ -322,10 +120,10 @@ class AccessRequests(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListAccessRequestsResponseResponse:
-        r"""List access requests
+    ) -> models.GetGeneralAccessResponseResponse:
+        r"""Get general access
 
-        Lists pending access requests for the specified document.
+        Get general access level for a document.
 
         :param document_id: Document ID.
         :param retries: Override the default retry configuration for this method
@@ -343,13 +141,13 @@ class AccessRequests(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListAccessRequestsRequest(
+        request = models.GetGeneralAccessRequest(
             document_id=document_id,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/v1beta/documents/{document_id}/access-requests",
+            path="/v1beta/documents/{document_id}/general-access",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -376,7 +174,7 @@ class AccessRequests(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listAccessRequests",
+                operation_id="getGeneralAccess",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -387,9 +185,9 @@ class AccessRequests(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.ListAccessRequestsResponseResponse(
+            return models.GetGeneralAccessResponseResponse(
                 result=unmarshal_json_response(
-                    models.ListAccessRequestsResponse, http_res
+                    models.GetGeneralAccessResponse, http_res
                 ),
                 headers={},
             )
@@ -417,24 +215,22 @@ class AccessRequests(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def create_access_request(
+    def set_general_access(
         self,
         *,
         document_id: str,
-        permission: models.AccessRequestPermission,
-        message: OptionalNullable[str] = UNSET,
+        general_access_level: models.GeneralAccessLevel,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CreateAccessRequestResponseResponse:
-        r"""Create an access request
+    ) -> models.SetGeneralAccessResponseResponse:
+        r"""Set general access
 
-        Creates a new access request for the specified document.
+        Set general access level for a document.
 
         :param document_id: Document ID.
-        :param permission:
-        :param message: Optional message from the requester.
+        :param general_access_level:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -450,17 +246,16 @@ class AccessRequests(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CreateAccessRequestRequest(
+        request = models.SetGeneralAccessRequest(
             document_id=document_id,
-            body=models.CreateAccessRequestCreateAccessRequestRequest(
-                message=message,
-                permission=permission,
+            body=models.SetGeneralAccessSetGeneralAccessRequest(
+                general_access_level=general_access_level,
             ),
         )
 
         req = self._build_request(
-            method="POST",
-            path="/v1beta/documents/{document_id}/access-requests",
+            method="PUT",
+            path="/v1beta/documents/{document_id}/general-access",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -476,7 +271,7 @@ class AccessRequests(BaseSDK):
                 False,
                 False,
                 "json",
-                models.CreateAccessRequestCreateAccessRequestRequest,
+                models.SetGeneralAccessSetGeneralAccessRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -494,7 +289,7 @@ class AccessRequests(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createAccessRequest",
+                operation_id="setGeneralAccess",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -505,9 +300,9 @@ class AccessRequests(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.CreateAccessRequestResponseResponse(
+            return models.SetGeneralAccessResponseResponse(
                 result=unmarshal_json_response(
-                    models.CreateAccessRequestResponse, http_res
+                    models.SetGeneralAccessResponse, http_res
                 ),
                 headers={},
             )
@@ -535,24 +330,22 @@ class AccessRequests(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def create_access_request_async(
+    async def set_general_access_async(
         self,
         *,
         document_id: str,
-        permission: models.AccessRequestPermission,
-        message: OptionalNullable[str] = UNSET,
+        general_access_level: models.GeneralAccessLevel,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CreateAccessRequestResponseResponse:
-        r"""Create an access request
+    ) -> models.SetGeneralAccessResponseResponse:
+        r"""Set general access
 
-        Creates a new access request for the specified document.
+        Set general access level for a document.
 
         :param document_id: Document ID.
-        :param permission:
-        :param message: Optional message from the requester.
+        :param general_access_level:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -568,17 +361,16 @@ class AccessRequests(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CreateAccessRequestRequest(
+        request = models.SetGeneralAccessRequest(
             document_id=document_id,
-            body=models.CreateAccessRequestCreateAccessRequestRequest(
-                message=message,
-                permission=permission,
+            body=models.SetGeneralAccessSetGeneralAccessRequest(
+                general_access_level=general_access_level,
             ),
         )
 
         req = self._build_request_async(
-            method="POST",
-            path="/v1beta/documents/{document_id}/access-requests",
+            method="PUT",
+            path="/v1beta/documents/{document_id}/general-access",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -594,7 +386,7 @@ class AccessRequests(BaseSDK):
                 False,
                 False,
                 "json",
-                models.CreateAccessRequestCreateAccessRequestRequest,
+                models.SetGeneralAccessSetGeneralAccessRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -612,7 +404,7 @@ class AccessRequests(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createAccessRequest",
+                operation_id="setGeneralAccess",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -623,9 +415,9 @@ class AccessRequests(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.CreateAccessRequestResponseResponse(
+            return models.SetGeneralAccessResponseResponse(
                 result=unmarshal_json_response(
-                    models.CreateAccessRequestResponse, http_res
+                    models.SetGeneralAccessResponse, http_res
                 ),
                 headers={},
             )
@@ -653,7 +445,7 @@ class AccessRequests(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def check_access_request_status(
+    def list(
         self,
         *,
         document_id: str,
@@ -661,10 +453,10 @@ class AccessRequests(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CheckAccessRequestStatusResponseResponse:
-        r"""Check access request status
+    ) -> models.ListDocumentAccessResponseResponse:
+        r"""List document access
 
-        Returns whether the caller has a pending access request for the document.
+        List all recipients with access to a document.
 
         :param document_id: Document ID.
         :param retries: Override the default retry configuration for this method
@@ -682,13 +474,13 @@ class AccessRequests(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CheckAccessRequestStatusRequest(
+        request = models.ListDocumentAccessRequest(
             document_id=document_id,
         )
 
         req = self._build_request(
             method="GET",
-            path="/v1beta/documents/{document_id}/access-requests/status",
+            path="/v1beta/documents/{document_id}/share",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -715,7 +507,7 @@ class AccessRequests(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="checkAccessRequestStatus",
+                operation_id="listDocumentAccess",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -726,9 +518,9 @@ class AccessRequests(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.CheckAccessRequestStatusResponseResponse(
+            return models.ListDocumentAccessResponseResponse(
                 result=unmarshal_json_response(
-                    models.CheckAccessRequestStatusResponse, http_res
+                    models.ListDocumentAccessResponse, http_res
                 ),
                 headers={},
             )
@@ -756,7 +548,7 @@ class AccessRequests(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def check_access_request_status_async(
+    async def list_async(
         self,
         *,
         document_id: str,
@@ -764,10 +556,10 @@ class AccessRequests(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CheckAccessRequestStatusResponseResponse:
-        r"""Check access request status
+    ) -> models.ListDocumentAccessResponseResponse:
+        r"""List document access
 
-        Returns whether the caller has a pending access request for the document.
+        List all recipients with access to a document.
 
         :param document_id: Document ID.
         :param retries: Override the default retry configuration for this method
@@ -785,13 +577,13 @@ class AccessRequests(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CheckAccessRequestStatusRequest(
+        request = models.ListDocumentAccessRequest(
             document_id=document_id,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/v1beta/documents/{document_id}/access-requests/status",
+            path="/v1beta/documents/{document_id}/share",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -818,7 +610,7 @@ class AccessRequests(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="checkAccessRequestStatus",
+                operation_id="listDocumentAccess",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -829,9 +621,9 @@ class AccessRequests(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.CheckAccessRequestStatusResponseResponse(
+            return models.ListDocumentAccessResponseResponse(
                 result=unmarshal_json_response(
-                    models.CheckAccessRequestStatusResponse, http_res
+                    models.ListDocumentAccessResponse, http_res
                 ),
                 headers={},
             )
@@ -859,26 +651,274 @@ class AccessRequests(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def approve_access_request(
+    def grant(
         self,
         *,
         document_id: str,
-        access_request_id: str,
+        custom_message: OptionalNullable[str] = UNSET,
+        recipients: Optional[
+            Union[List[models.RecipientGrant], List[models.RecipientGrantTypedDict]]
+        ] = None,
+        should_send_notification: OptionalNullable[bool] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.GrantDocumentAccessResponseResponse:
+        r"""Grant document access
+
+        Grant access to one or more recipients.
+
+        :param document_id: Document ID.
+        :param custom_message: Custom message to include in the notification email.
+        :param recipients: Recipients to grant access to (1-50).
+        :param should_send_notification: Whether to send email notifications.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GrantDocumentAccessRequest(
+            document_id=document_id,
+            body=models.GrantDocumentAccessGrantDocumentAccessRequest(
+                custom_message=custom_message,
+                recipients=utils.get_pydantic_model(
+                    recipients, Optional[List[models.RecipientGrant]]
+                ),
+                should_send_notification=should_send_notification,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/v1beta/documents/{document_id}/share",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                False,
+                "json",
+                models.GrantDocumentAccessGrantDocumentAccessRequest,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="grantDocumentAccess",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.GrantDocumentAccessResponseResponse(
+                result=unmarshal_json_response(
+                    models.GrantDocumentAccessResponse, http_res
+                ),
+                headers={},
+            )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.FactifyDefaultError("Unexpected response received", http_res)
+
+    async def grant_async(
+        self,
+        *,
+        document_id: str,
+        custom_message: OptionalNullable[str] = UNSET,
+        recipients: Optional[
+            Union[List[models.RecipientGrant], List[models.RecipientGrantTypedDict]]
+        ] = None,
+        should_send_notification: OptionalNullable[bool] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.GrantDocumentAccessResponseResponse:
+        r"""Grant document access
+
+        Grant access to one or more recipients.
+
+        :param document_id: Document ID.
+        :param custom_message: Custom message to include in the notification email.
+        :param recipients: Recipients to grant access to (1-50).
+        :param should_send_notification: Whether to send email notifications.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GrantDocumentAccessRequest(
+            document_id=document_id,
+            body=models.GrantDocumentAccessGrantDocumentAccessRequest(
+                custom_message=custom_message,
+                recipients=utils.get_pydantic_model(
+                    recipients, Optional[List[models.RecipientGrant]]
+                ),
+                should_send_notification=should_send_notification,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/v1beta/documents/{document_id}/share",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                False,
+                "json",
+                models.GrantDocumentAccessGrantDocumentAccessRequest,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="grantDocumentAccess",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.GrantDocumentAccessResponseResponse(
+                result=unmarshal_json_response(
+                    models.GrantDocumentAccessResponse, http_res
+                ),
+                headers={},
+            )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.FactifyDefaultError("Unexpected response received", http_res)
+
+    def create_share_link(
+        self,
+        *,
+        document_id: str,
         body: Union[
-            models.ApproveAccessRequestApproveAccessRequestRequest,
-            models.ApproveAccessRequestApproveAccessRequestRequestTypedDict,
+            models.CreateShareLinkCreateShareLinkRequest,
+            models.CreateShareLinkCreateShareLinkRequestTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ApproveAccessRequestResponseResponse:
-        r"""Approve an access request
+    ) -> models.CreateShareLinkResponseResponse:
+        r"""Create share link
 
-        Approve an access request.
+        Create a share link for a document.
 
         :param document_id: Document ID.
-        :param access_request_id: Access request ID to approve.
         :param body:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -895,17 +935,16 @@ class AccessRequests(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ApproveAccessRequestRequest(
+        request = models.CreateShareLinkRequest(
             document_id=document_id,
-            access_request_id=access_request_id,
             body=utils.get_pydantic_model(
-                body, models.ApproveAccessRequestApproveAccessRequestRequest
+                body, models.CreateShareLinkCreateShareLinkRequest
             ),
         )
 
         req = self._build_request(
             method="POST",
-            path="/v1beta/documents/{document_id}/access-requests/{access_request_id}/approve",
+            path="/v1beta/documents/{document_id}/share-links",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -921,7 +960,7 @@ class AccessRequests(BaseSDK):
                 False,
                 False,
                 "json",
-                models.ApproveAccessRequestApproveAccessRequestRequest,
+                models.CreateShareLinkCreateShareLinkRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -939,7 +978,7 @@ class AccessRequests(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="approveAccessRequest",
+                operation_id="createShareLink",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -950,9 +989,9 @@ class AccessRequests(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.ApproveAccessRequestResponseResponse(
+            return models.CreateShareLinkResponseResponse(
                 result=unmarshal_json_response(
-                    models.ApproveAccessRequestResponse, http_res
+                    models.CreateShareLinkResponse, http_res
                 ),
                 headers={},
             )
@@ -980,26 +1019,24 @@ class AccessRequests(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def approve_access_request_async(
+    async def create_share_link_async(
         self,
         *,
         document_id: str,
-        access_request_id: str,
         body: Union[
-            models.ApproveAccessRequestApproveAccessRequestRequest,
-            models.ApproveAccessRequestApproveAccessRequestRequestTypedDict,
+            models.CreateShareLinkCreateShareLinkRequest,
+            models.CreateShareLinkCreateShareLinkRequestTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ApproveAccessRequestResponseResponse:
-        r"""Approve an access request
+    ) -> models.CreateShareLinkResponseResponse:
+        r"""Create share link
 
-        Approve an access request.
+        Create a share link for a document.
 
         :param document_id: Document ID.
-        :param access_request_id: Access request ID to approve.
         :param body:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1016,17 +1053,16 @@ class AccessRequests(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ApproveAccessRequestRequest(
+        request = models.CreateShareLinkRequest(
             document_id=document_id,
-            access_request_id=access_request_id,
             body=utils.get_pydantic_model(
-                body, models.ApproveAccessRequestApproveAccessRequestRequest
+                body, models.CreateShareLinkCreateShareLinkRequest
             ),
         )
 
         req = self._build_request_async(
             method="POST",
-            path="/v1beta/documents/{document_id}/access-requests/{access_request_id}/approve",
+            path="/v1beta/documents/{document_id}/share-links",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1042,7 +1078,7 @@ class AccessRequests(BaseSDK):
                 False,
                 False,
                 "json",
-                models.ApproveAccessRequestApproveAccessRequestRequest,
+                models.CreateShareLinkCreateShareLinkRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1060,7 +1096,7 @@ class AccessRequests(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="approveAccessRequest",
+                operation_id="createShareLink",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1071,9 +1107,9 @@ class AccessRequests(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.ApproveAccessRequestResponseResponse(
+            return models.CreateShareLinkResponseResponse(
                 result=unmarshal_json_response(
-                    models.ApproveAccessRequestResponse, http_res
+                    models.CreateShareLinkResponse, http_res
                 ),
                 headers={},
             )
@@ -1101,27 +1137,22 @@ class AccessRequests(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def deny_access_request(
+    def revoke(
         self,
         *,
         document_id: str,
-        access_request_id: str,
-        body: Union[
-            models.DenyAccessRequestDenyAccessRequestRequest,
-            models.DenyAccessRequestDenyAccessRequestRequestTypedDict,
-        ],
+        recipient_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DenyAccessRequestResponseResponse:
-        r"""Deny an access request
+    ) -> models.RevokeDocumentAccessResponseResponse:
+        r"""Revoke document access
 
-        Deny an access request.
+        Revoke access from a recipient.
 
         :param document_id: Document ID.
-        :param access_request_id: Access request ID to deny.
-        :param body:
+        :param recipient_id: Recipient ID (TypeID: user_xxx or bot_xxx).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1137,34 +1168,24 @@ class AccessRequests(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DenyAccessRequestRequest(
+        request = models.RevokeDocumentAccessRequest(
             document_id=document_id,
-            access_request_id=access_request_id,
-            body=utils.get_pydantic_model(
-                body, models.DenyAccessRequestDenyAccessRequestRequest
-            ),
+            recipient_id=recipient_id,
         )
 
         req = self._build_request(
-            method="POST",
-            path="/v1beta/documents/{document_id}/access-requests/{access_request_id}/deny",
+            method="DELETE",
+            path="/v1beta/documents/{document_id}/share/{recipient_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=True,
+            request_body_required=False,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.body,
-                False,
-                False,
-                "json",
-                models.DenyAccessRequestDenyAccessRequestRequest,
-            ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1181,7 +1202,7 @@ class AccessRequests(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="denyAccessRequest",
+                operation_id="revokeDocumentAccess",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1192,9 +1213,9 @@ class AccessRequests(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.DenyAccessRequestResponseResponse(
+            return models.RevokeDocumentAccessResponseResponse(
                 result=unmarshal_json_response(
-                    models.DenyAccessRequestResponse, http_res
+                    models.RevokeDocumentAccessResponse, http_res
                 ),
                 headers={},
             )
@@ -1222,27 +1243,22 @@ class AccessRequests(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def deny_access_request_async(
+    async def revoke_async(
         self,
         *,
         document_id: str,
-        access_request_id: str,
-        body: Union[
-            models.DenyAccessRequestDenyAccessRequestRequest,
-            models.DenyAccessRequestDenyAccessRequestRequestTypedDict,
-        ],
+        recipient_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DenyAccessRequestResponseResponse:
-        r"""Deny an access request
+    ) -> models.RevokeDocumentAccessResponseResponse:
+        r"""Revoke document access
 
-        Deny an access request.
+        Revoke access from a recipient.
 
         :param document_id: Document ID.
-        :param access_request_id: Access request ID to deny.
-        :param body:
+        :param recipient_id: Recipient ID (TypeID: user_xxx or bot_xxx).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1258,17 +1274,125 @@ class AccessRequests(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DenyAccessRequestRequest(
+        request = models.RevokeDocumentAccessRequest(
             document_id=document_id,
-            access_request_id=access_request_id,
-            body=utils.get_pydantic_model(
-                body, models.DenyAccessRequestDenyAccessRequestRequest
-            ),
+            recipient_id=recipient_id,
         )
 
         req = self._build_request_async(
-            method="POST",
-            path="/v1beta/documents/{document_id}/access-requests/{access_request_id}/deny",
+            method="DELETE",
+            path="/v1beta/documents/{document_id}/share/{recipient_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="revokeDocumentAccess",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.RevokeDocumentAccessResponseResponse(
+                result=unmarshal_json_response(
+                    models.RevokeDocumentAccessResponse, http_res
+                ),
+                headers={},
+            )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.FactifyDefaultError("Unexpected response received", http_res)
+
+    def update(
+        self,
+        *,
+        document_id: str,
+        recipient_id: str,
+        document_role: models.DocumentRole,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdateDocumentAccessResponseResponse:
+        r"""Update document access
+
+        Update a recipient's role.
+
+        :param document_id: Document ID.
+        :param recipient_id: Recipient ID (TypeID: user_xxx or bot_xxx).
+        :param document_role:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateDocumentAccessRequest(
+            document_id=document_id,
+            recipient_id=recipient_id,
+            body=models.UpdateDocumentAccessUpdateDocumentAccessRequest(
+                document_role=document_role,
+            ),
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/v1beta/documents/{document_id}/share/{recipient_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1284,7 +1408,125 @@ class AccessRequests(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DenyAccessRequestDenyAccessRequestRequest,
+                models.UpdateDocumentAccessUpdateDocumentAccessRequest,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updateDocumentAccess",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.UpdateDocumentAccessResponseResponse(
+                result=unmarshal_json_response(
+                    models.UpdateDocumentAccessResponse, http_res
+                ),
+                headers={},
+            )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.FactifyDefaultError("Unexpected response received", http_res)
+
+    async def update_async(
+        self,
+        *,
+        document_id: str,
+        recipient_id: str,
+        document_role: models.DocumentRole,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdateDocumentAccessResponseResponse:
+        r"""Update document access
+
+        Update a recipient's role.
+
+        :param document_id: Document ID.
+        :param recipient_id: Recipient ID (TypeID: user_xxx or bot_xxx).
+        :param document_role:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateDocumentAccessRequest(
+            document_id=document_id,
+            recipient_id=recipient_id,
+            body=models.UpdateDocumentAccessUpdateDocumentAccessRequest(
+                document_role=document_role,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/v1beta/documents/{document_id}/share/{recipient_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.body,
+                False,
+                False,
+                "json",
+                models.UpdateDocumentAccessUpdateDocumentAccessRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1302,7 +1544,7 @@ class AccessRequests(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="denyAccessRequest",
+                operation_id="updateDocumentAccess",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -1313,9 +1555,9 @@ class AccessRequests(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.DenyAccessRequestResponseResponse(
+            return models.UpdateDocumentAccessResponseResponse(
                 result=unmarshal_json_response(
-                    models.DenyAccessRequestResponse, http_res
+                    models.UpdateDocumentAccessResponse, http_res
                 ),
                 headers={},
             )
