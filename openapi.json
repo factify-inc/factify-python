@@ -242,9 +242,11 @@
             "description": "The configured limit for this key. Not set means no explicit key limit.",
             "exclusiveMinimum": 0,
             "format": "int32",
-            "nullable": true,
             "title": "limit",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "remaining": {
             "description": "Remaining requests for this key. Only meaningful when limit is set.",
@@ -353,28 +355,20 @@
           "message": {
             "description": "Optional message from the requester.",
             "maxLength": 1024,
-            "nullable": true,
             "title": "message",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "permission": {
             "$ref": "#/components/schemas/AccessRequestPermission",
             "description": "Permission level being requested.",
-            "not": {
-              "enum": [
-                0
-              ]
-            },
             "title": "permission"
           },
           "request_status": {
             "$ref": "#/components/schemas/AccessRequestStatus",
             "description": "Current status of the request.\n Named request_status to avoid field name collision with invite status enum mappings.",
-            "not": {
-              "enum": [
-                0
-              ]
-            },
             "title": "request_status"
           },
           "subject": {
@@ -642,18 +636,15 @@
           "message": {
             "description": "Optional message from the requester.",
             "maxLength": 1024,
-            "nullable": true,
             "title": "message",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "permission": {
             "$ref": "#/components/schemas/AccessRequestPermission",
             "description": "Permission level being requested.",
-            "not": {
-              "enum": [
-                0
-              ]
-            },
             "title": "permission"
           }
         },
@@ -739,17 +730,25 @@
         "description": "CreateDocumentRequest contains the file and metadata for creating a document.",
         "properties": {
           "access_level": {
-            "$ref": "#/components/schemas/AccessLevel",
             "description": "Document access level. Defaults to organization if user belongs to an org, otherwise private.",
-            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AccessLevel"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "access_level"
           },
           "description": {
             "description": "Optional document description.",
             "maxLength": 2000,
-            "nullable": true,
             "title": "description",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "document_id": {
             "description": "Pre-generated document ID (set by server)",
@@ -819,16 +818,20 @@
           "idempotency_key": {
             "description": "Reserved for future use. Currently, idempotency is based on email matching:\n if a PENDING invitation exists for the same email in this organization,\n that invitation is resent rather than creating a duplicate.",
             "maxLength": 255,
-            "nullable": true,
             "title": "idempotency_key",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "message": {
             "description": "Optional custom message from the sender (max 2000 bytes to support ~500 multibyte characters).",
             "maxLength": 2000,
-            "nullable": true,
             "title": "message",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "organization_id": {
             "description": "Organization to invite the user to.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
@@ -873,10 +876,12 @@
           },
           "owner_user_id": {
             "description": "Owner user ID. If not provided, the authenticated user becomes the owner.\n Authorization: Specifying a different user requires system maintainer role.\n Required when the caller is a service account (service accounts cannot own organizations).\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
-            "nullable": true,
             "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "owner_user_id",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "required": [
@@ -940,9 +945,11 @@
         "properties": {
           "description": {
             "description": "Description of changes in this version.",
-            "nullable": true,
             "title": "description",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "payload": {
             "description": "PDF file for new version",
@@ -959,9 +966,11 @@
           "title": {
             "description": "Optional version title.",
             "maxLength": 255,
-            "nullable": true,
             "title": "title",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "version_id": {
             "description": "Pre-generated version ID (set by server)",
@@ -1011,10 +1020,12 @@
           "organization_id": {
             "description": "Optional: organization ID. If not provided, uses the caller's organization.",
             "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
-            "nullable": true,
             "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "organization_id",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "title": "DeleteAPIKeyQuotaRequest",
@@ -1126,18 +1137,26 @@
             "title": "created_by"
           },
           "current_version": {
-            "$ref": "#/components/schemas/VersionRef",
             "description": "Reference to the current version, if any.",
-            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/VersionRef"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "current_version"
           },
           "description": {
             "description": "Optional document description.",
             "example": "Quarterly financial report for Q4 2024",
             "maxLength": 2000,
-            "nullable": true,
             "title": "description",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "general_access": {
             "$ref": "#/components/schemas/AccessLevel",
@@ -1570,10 +1589,12 @@
           "organization_id": {
             "description": "Optional: organization ID to query. If not provided, uses the caller's organization.\n Only admins can query other organizations.",
             "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
-            "nullable": true,
             "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "organization_id",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "title": "GetOrganizationQuotaRequest",
@@ -1631,18 +1652,26 @@
         "properties": {
           "date": {
             "description": "Filter by date range.\n REST: ?date.after=2026-01-01T00:00:00Z\u0026date.before=2026-02-01T00:00:00Z",
-            "format": "date-time",
-            "nullable": true,
-            "title": "date",
-            "type": "string"
+            "oneOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "date"
           },
           "organization_id": {
             "description": "Optional: organization ID to query. If not provided, uses the caller's organization.",
             "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
-            "nullable": true,
             "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "organization_id",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "title": "GetUsageHistoryRequest",
@@ -1826,10 +1855,12 @@
           "organization_id": {
             "description": "Optional: organization ID. If not provided, uses the caller's organization.",
             "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
-            "nullable": true,
             "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "organization_id",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "title": "ListAPIKeyQuotasRequest",
@@ -1904,9 +1935,11 @@
             "format": "int32",
             "maximum": 100,
             "minimum": 1,
-            "nullable": true,
             "title": "page_size",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "page_token": {
             "description": "Opaque pagination token from a previous response.",
@@ -1999,9 +2032,11 @@
             "format": "int32",
             "maximum": 100,
             "minimum": 1,
-            "nullable": true,
             "title": "page_size",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "page_token": {
             "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
@@ -2051,10 +2086,16 @@
           },
           "created": {
             "description": "Filter by creation time range.\n REST: ?created.after=2024-01-01T00:00:00Z\u0026created.before=2024-12-31T23:59:59Z",
-            "format": "date-time",
-            "nullable": true,
-            "title": "created",
-            "type": "string"
+            "oneOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "created"
           },
           "created_by_id": {
             "description": "Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.\n REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx\u0026created_by_id=bot_yyy",
@@ -2067,9 +2108,11 @@
           },
           "organization_scope": {
             "description": "Organization scope filter. When true, restrict to documents within the user's organization.\n REST: ?organization_scope=true",
-            "nullable": true,
             "title": "organization_scope",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           },
           "ownership": {
             "description": "Ownership filter. Returns documents matching the specified ownership state.\n REST: ?ownership=owned or ?ownership=not_owned",
@@ -2084,9 +2127,11 @@
             "format": "int32",
             "maximum": 100,
             "minimum": 1,
-            "nullable": true,
             "title": "page_size",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "page_token": {
             "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
@@ -2104,15 +2149,19 @@
           },
           "query": {
             "description": "Full-text search filter. Case-insensitive substring match on document name and description.\n REST: ?query=budget",
-            "nullable": true,
             "title": "query",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "sort": {
             "description": "Sort field and direction. Prefix with `-` for descending order.\n Allowed values: created_at, updated_at, name, last_viewed_at, last_shared_at.\n Default (omitted): created_at descending.\n REST: ?sort=last_viewed_at or ?sort=-name",
-            "nullable": true,
             "title": "sort",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "trash_state": {
             "description": "Trash state filter. Returns documents matching the specified trash state.\n REST: ?trash_state=active or ?trash_state=trashed or ?trash_state=active\u0026trash_state=trashed\n Default (omitted): active documents only.",
@@ -2156,23 +2205,41 @@
         "properties": {
           "created": {
             "description": "Filter by creation time range.\n REST: ?created.after=2024-01-01T00:00:00Z\u0026created.before=2024-12-31T23:59:59Z",
-            "format": "date-time",
-            "nullable": true,
-            "title": "created",
-            "type": "string"
+            "oneOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "created"
           },
           "email": {
-            "$ref": "#/components/schemas/StringFilter",
             "description": "Filter by email address.\n REST: ?email.contains=dwight or ?email.exact=dwight@dundermifflin.com",
-            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/StringFilter"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "email"
           },
           "expires": {
             "description": "Filter by expiration time range.\n Useful for finding invitations expiring soon (expires.before) or still valid beyond a date (expires.after).\n REST: ?expires.after=2024-01-01T00:00:00Z\u0026expires.before=2024-01-31T23:59:59Z",
-            "format": "date-time",
-            "nullable": true,
-            "title": "expires",
-            "type": "string"
+            "oneOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "expires"
           },
           "organization_id": {
             "description": "Organization to list invitations for.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
@@ -2185,9 +2252,11 @@
             "format": "int32",
             "maximum": 100,
             "minimum": 1,
-            "nullable": true,
             "title": "page_size",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "page_token": {
             "description": "Opaque pagination token from a previous response.",
@@ -2196,10 +2265,12 @@
           },
           "sender_id": {
             "description": "Filter by sender. Only returns invitations sent by this user.\n REST: ?sender_id=user_01h2xcejqtf2nbrexx3vqjhp41\n Pattern: user_[0-9a-hjkmnp-tv-z]{26}",
-            "nullable": true,
             "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "sender_id",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "status": {
             "description": "Filter by invitation status.\n If empty, returns all invitations.\n REST: ?status=pending or ?status=pending\u0026status=expired",
@@ -2255,9 +2326,11 @@
             "format": "int32",
             "maximum": 100,
             "minimum": 1,
-            "nullable": true,
             "title": "page_size",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "page_token": {
             "description": "Opaque pagination token from a previous response.",
@@ -2304,9 +2377,11 @@
             "format": "int32",
             "maximum": 100,
             "minimum": 1,
-            "nullable": true,
             "title": "page_size",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "page_token": {
             "description": "Opaque pagination token from a previous response.",
@@ -2364,9 +2439,11 @@
             "format": "int32",
             "maximum": 100,
             "minimum": 1,
-            "nullable": true,
             "title": "page_size",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "page_token": {
             "description": "Opaque pagination token from a previous response.\n Pass next_page_token or prev_page_token from a previous response to continue pagination.\n Empty or omitted for the first page.",
@@ -2480,9 +2557,11 @@
           "message": {
             "description": "Custom message from sender to recipient (if provided).\n Max 2000 bytes to support ~500 multibyte characters.",
             "maxLength": 2000,
-            "nullable": true,
             "title": "message",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "organization_id": {
             "description": "Organization the invitation is for.",
@@ -2535,11 +2614,6 @@
           "role": {
             "$ref": "#/components/schemas/OrganizationRole",
             "description": "Role of the member within the organization.",
-            "not": {
-              "enum": [
-                0
-              ]
-            },
             "title": "role"
           },
           "user": {
@@ -2637,9 +2711,11 @@
             "description": "Optional limit override. If not set, uses the configured tier default.",
             "exclusiveMinimum": 0,
             "format": "int32",
-            "nullable": true,
             "title": "limit",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "organization_id": {
             "description": "The organization ID.",
@@ -2896,9 +2972,11 @@
             "description": "Optional reason for revocation (for audit purposes).\n The revoking user's identity and timestamp are captured in audit logs separately.",
             "maxLength": 500,
             "minLength": 1,
-            "nullable": true,
             "title": "reason",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "required": [
@@ -3016,17 +3094,21 @@
             "description": "The limit for this key. Must be \u003e 0.",
             "exclusiveMinimum": 0,
             "format": "int32",
-            "nullable": true,
             "title": "limit",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "organization_id": {
             "description": "Optional: organization ID. If not provided, uses the caller's organization.",
             "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
-            "nullable": true,
             "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "organization_id",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "title": "SetAPIKeyQuotaRequest",
@@ -3098,9 +3180,11 @@
             "description": "Optional limit override. If not set, uses the configured tier default.\n Must be \u003e 0 when set. Use a very high value (e.g., 999999999) for unlimited.",
             "exclusiveMinimum": 0,
             "format": "int32",
-            "nullable": true,
             "title": "limit",
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ]
           },
           "organization_id": {
             "description": "The organization ID (required).",
@@ -3112,11 +3196,6 @@
           "tier": {
             "$ref": "#/components/schemas/QuotaTier",
             "description": "The quota tier to set.",
-            "not": {
-              "enum": [
-                0
-              ]
-            },
             "title": "tier"
           }
         },
@@ -3171,15 +3250,19 @@
         "properties": {
           "contains": {
             "description": "Case-insensitive substring match.\n REST: ?field.contains=value",
-            "nullable": true,
             "title": "contains",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "exact": {
             "description": "Exact match (case-sensitive).\n REST: ?field.exact=value",
-            "nullable": true,
             "title": "exact",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "title": "StringFilter",
@@ -3231,17 +3314,29 @@
         "properties": {
           "after": {
             "description": "Return results after this timestamp (inclusive).",
-            "format": "date-time",
-            "nullable": true,
-            "title": "after",
-            "type": "string"
+            "oneOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "after"
           },
           "before": {
             "description": "Return results before this timestamp (inclusive).",
-            "format": "date-time",
-            "nullable": true,
-            "title": "before",
-            "type": "string"
+            "oneOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "before"
           }
         },
         "title": "TimestampFilter",
@@ -3305,9 +3400,11 @@
           "description": {
             "description": "New description (max 2000 characters).",
             "maxLength": 2000,
-            "nullable": true,
             "title": "description",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "document_id": {
             "description": "Document ID to update.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
@@ -3319,9 +3416,11 @@
             "description": "New title (1-255 characters).",
             "maxLength": 255,
             "minLength": 1,
-            "nullable": true,
             "title": "title",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "title": "UpdateDocumentRequest",
@@ -3356,12 +3455,6 @@
           "role": {
             "$ref": "#/components/schemas/OrganizationRole",
             "description": "New role for the member. Cannot be UNSPECIFIED or OWNER.\n OWNER transfer is not supported — the owner is set at organization creation.",
-            "not": {
-              "enum": [
-                0,
-                1
-              ]
-            },
             "title": "role"
           },
           "user_id": {
@@ -3401,16 +3494,20 @@
         "properties": {
           "description": {
             "description": "New description.",
-            "nullable": true,
             "title": "description",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "title": {
             "description": "New title (max 255 characters).",
             "maxLength": 255,
-            "nullable": true,
             "title": "title",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "version_id": {
             "description": "Version ID to update.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
@@ -3469,9 +3566,11 @@
           },
           "description": {
             "description": "Description of changes in this version.",
-            "nullable": true,
             "title": "description",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "document_id": {
             "description": "Parent document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
@@ -3496,9 +3595,11 @@
             "description": "Optional version title.",
             "example": "Version 2.0",
             "maxLength": 255,
-            "nullable": true,
             "title": "title",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "url": {
             "description": "URL for accessing this version on Factify.",
@@ -3721,7 +3822,7 @@
             "description": "Error"
           }
         },
-        "summary": "DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).",
+        "summary": "DeleteOrganizationQuota",
         "tags": [
           "Quotas"
         ],
@@ -3810,7 +3911,7 @@
             "description": "Error"
           }
         },
-        "summary": "SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).",
+        "summary": "SetOrganizationQuota",
         "tags": [
           "Quotas"
         ],
@@ -4031,9 +4132,11 @@
                     "description": "Optional reason for revocation (for audit purposes).\n The revoking user's identity and timestamp are captured in audit logs separately.",
                     "maxLength": 500,
                     "minLength": 1,
-                    "nullable": true,
                     "title": "reason",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "required": [],
@@ -4120,6 +4223,28 @@
               "minimum": 1,
               "title": "page_size",
               "type": "integer"
+            }
+          },
+          {
+            "description": "Return results after this timestamp (inclusive).",
+            "in": "query",
+            "name": "created.after",
+            "schema": {
+              "description": "A Timestamp represents a point in time independent of any time zone or local\n calendar, encoded as a count of seconds and fractions of seconds at\n nanosecond resolution. The count is relative to an epoch at UTC midnight on\n January 1, 1970, in the proleptic Gregorian calendar which extends the\n Gregorian calendar backwards to year one.\n\n All minutes are 60 seconds long. Leap seconds are \"smeared\" so that no leap\n second table is needed for interpretation, using a [24-hour linear\n smear](https://developers.google.com/time/smear).\n\n The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By\n restricting to that range, we ensure that we can convert to and from [RFC\n 3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.\n\n # Examples\n\n Example 1: Compute Timestamp from POSIX `time()`.\n\n     Timestamp timestamp;\n     timestamp.set_seconds(time(NULL));\n     timestamp.set_nanos(0);\n\n Example 2: Compute Timestamp from POSIX `gettimeofday()`.\n\n     struct timeval tv;\n     gettimeofday(\u0026tv, NULL);\n\n     Timestamp timestamp;\n     timestamp.set_seconds(tv.tv_sec);\n     timestamp.set_nanos(tv.tv_usec * 1000);\n\n Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.\n\n     FILETIME ft;\n     GetSystemTimeAsFileTime(\u0026ft);\n     UINT64 ticks = (((UINT64)ft.dwHighDateTime) \u003c\u003c 32) | ft.dwLowDateTime;\n\n     // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z\n     // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.\n     Timestamp timestamp;\n     timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));\n     timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));\n\n Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.\n\n     long millis = System.currentTimeMillis();\n\n     Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)\n         .setNanos((int) ((millis % 1000) * 1000000)).build();\n\n Example 5: Compute Timestamp from Java `Instant.now()`.\n\n     Instant now = Instant.now();\n\n     Timestamp timestamp =\n         Timestamp.newBuilder().setSeconds(now.getEpochSecond())\n             .setNanos(now.getNano()).build();\n\n Example 6: Compute Timestamp from current time in Python.\n\n     timestamp = Timestamp()\n     timestamp.GetCurrentTime()\n\n # JSON Mapping\n\n In JSON format, the Timestamp type is encoded as a string in the\n [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the\n format is \"{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z\"\n where {year} is always expressed using four digits while {month}, {day},\n {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional\n seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),\n are optional. The \"Z\" suffix indicates the timezone (\"UTC\"); the timezone\n is required. A proto3 JSON serializer should always use UTC (as indicated by\n \"Z\") when printing the Timestamp type and a proto3 JSON parser should be\n able to accept both UTC and other timezones (as indicated by an offset).\n\n For example, \"2017-01-15T01:30:15.01Z\" encodes 15.01 seconds past\n 01:30 UTC on January 15, 2017.\n\n In JavaScript, one can convert a Date object to this format using the\n standard\n [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)\n method. In Python, a standard `datetime.datetime` object can be converted\n to this format using\n [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with\n the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use\n the Joda Time's [`ISODateTimeFormat.dateTime()`](\n http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()\n ) to obtain a formatter capable of generating timestamps in this format.",
+              "example": "2023-01-15T01:30:15.01Z",
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Return results before this timestamp (inclusive).",
+            "in": "query",
+            "name": "created.before",
+            "schema": {
+              "description": "A Timestamp represents a point in time independent of any time zone or local\n calendar, encoded as a count of seconds and fractions of seconds at\n nanosecond resolution. The count is relative to an epoch at UTC midnight on\n January 1, 1970, in the proleptic Gregorian calendar which extends the\n Gregorian calendar backwards to year one.\n\n All minutes are 60 seconds long. Leap seconds are \"smeared\" so that no leap\n second table is needed for interpretation, using a [24-hour linear\n smear](https://developers.google.com/time/smear).\n\n The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By\n restricting to that range, we ensure that we can convert to and from [RFC\n 3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.\n\n # Examples\n\n Example 1: Compute Timestamp from POSIX `time()`.\n\n     Timestamp timestamp;\n     timestamp.set_seconds(time(NULL));\n     timestamp.set_nanos(0);\n\n Example 2: Compute Timestamp from POSIX `gettimeofday()`.\n\n     struct timeval tv;\n     gettimeofday(\u0026tv, NULL);\n\n     Timestamp timestamp;\n     timestamp.set_seconds(tv.tv_sec);\n     timestamp.set_nanos(tv.tv_usec * 1000);\n\n Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.\n\n     FILETIME ft;\n     GetSystemTimeAsFileTime(\u0026ft);\n     UINT64 ticks = (((UINT64)ft.dwHighDateTime) \u003c\u003c 32) | ft.dwLowDateTime;\n\n     // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z\n     // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.\n     Timestamp timestamp;\n     timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));\n     timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));\n\n Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.\n\n     long millis = System.currentTimeMillis();\n\n     Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)\n         .setNanos((int) ((millis % 1000) * 1000000)).build();\n\n Example 5: Compute Timestamp from Java `Instant.now()`.\n\n     Instant now = Instant.now();\n\n     Timestamp timestamp =\n         Timestamp.newBuilder().setSeconds(now.getEpochSecond())\n             .setNanos(now.getNano()).build();\n\n Example 6: Compute Timestamp from current time in Python.\n\n     timestamp = Timestamp()\n     timestamp.GetCurrentTime()\n\n # JSON Mapping\n\n In JSON format, the Timestamp type is encoded as a string in the\n [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the\n format is \"{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z\"\n where {year} is always expressed using four digits while {month}, {day},\n {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional\n seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),\n are optional. The \"Z\" suffix indicates the timezone (\"UTC\"); the timezone\n is required. A proto3 JSON serializer should always use UTC (as indicated by\n \"Z\") when printing the Timestamp type and a proto3 JSON parser should be\n able to accept both UTC and other timezones (as indicated by an offset).\n\n For example, \"2017-01-15T01:30:15.01Z\" encodes 15.01 seconds past\n 01:30 UTC on January 15, 2017.\n\n In JavaScript, one can convert a Date object to this format using the\n standard\n [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)\n method. In Python, a standard `datetime.datetime` object can be converted\n to this format using\n [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with\n the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use\n the Joda Time's [`ISODateTimeFormat.dateTime()`](\n http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()\n ) to obtain a formatter capable of generating timestamps in this format.",
+              "example": "2023-01-15T01:30:15.01Z",
+              "format": "date-time",
+              "type": "string"
             }
           },
           {
@@ -4217,15 +4342,6 @@
               "title": "organization_scope",
               "type": "boolean"
             }
-          },
-          {
-            "description": "Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)",
-            "in": "query",
-            "name": "created.after",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -4266,12 +4382,12 @@
           {
             "label": "listDocuments",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.list({\n    pageToken: \"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.documents.list({\n    pageToken: \"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\",\n    createdAfter: new Date(\"2023-01-15T01:30:15.01Z\"),\n    createdBefore: new Date(\"2023-01-15T01:30:15.01Z\"),\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
           },
           {
             "label": "listDocuments",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.documents.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+            "source": "from factify import Factify\nfrom factify.utils import parse_datetime\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.documents.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\", created_after=parse_datetime(\"2023-01-15T01:30:15.01Z\"), created_before=parse_datetime(\"2023-01-15T01:30:15.01Z\"))\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
           }
         ],
         "x-speakeasy-name-override": "list",
@@ -4497,17 +4613,21 @@
                   "description": {
                     "description": "New description (max 2000 characters).",
                     "maxLength": 2000,
-                    "nullable": true,
                     "title": "description",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "title": {
                     "description": "New title (1-255 characters).",
                     "maxLength": 255,
                     "minLength": 1,
-                    "nullable": true,
                     "title": "title",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "title": "UpdateDocumentRequest",
@@ -4728,18 +4848,15 @@
                   "message": {
                     "description": "Optional message from the requester.",
                     "maxLength": 1024,
-                    "nullable": true,
                     "title": "message",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "permission": {
                     "$ref": "#/components/schemas/AccessRequestPermission",
                     "description": "Permission level being requested.",
-                    "not": {
-                      "enum": [
-                        0
-                      ]
-                    },
                     "title": "permission"
                   }
                 },
@@ -6498,10 +6615,23 @@
             }
           },
           {
-            "description": "Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)",
+            "description": "Return results after this timestamp (inclusive).",
             "in": "query",
             "name": "created.after",
             "schema": {
+              "description": "A Timestamp represents a point in time independent of any time zone or local\n calendar, encoded as a count of seconds and fractions of seconds at\n nanosecond resolution. The count is relative to an epoch at UTC midnight on\n January 1, 1970, in the proleptic Gregorian calendar which extends the\n Gregorian calendar backwards to year one.\n\n All minutes are 60 seconds long. Leap seconds are \"smeared\" so that no leap\n second table is needed for interpretation, using a [24-hour linear\n smear](https://developers.google.com/time/smear).\n\n The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By\n restricting to that range, we ensure that we can convert to and from [RFC\n 3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.\n\n # Examples\n\n Example 1: Compute Timestamp from POSIX `time()`.\n\n     Timestamp timestamp;\n     timestamp.set_seconds(time(NULL));\n     timestamp.set_nanos(0);\n\n Example 2: Compute Timestamp from POSIX `gettimeofday()`.\n\n     struct timeval tv;\n     gettimeofday(\u0026tv, NULL);\n\n     Timestamp timestamp;\n     timestamp.set_seconds(tv.tv_sec);\n     timestamp.set_nanos(tv.tv_usec * 1000);\n\n Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.\n\n     FILETIME ft;\n     GetSystemTimeAsFileTime(\u0026ft);\n     UINT64 ticks = (((UINT64)ft.dwHighDateTime) \u003c\u003c 32) | ft.dwLowDateTime;\n\n     // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z\n     // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.\n     Timestamp timestamp;\n     timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));\n     timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));\n\n Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.\n\n     long millis = System.currentTimeMillis();\n\n     Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)\n         .setNanos((int) ((millis % 1000) * 1000000)).build();\n\n Example 5: Compute Timestamp from Java `Instant.now()`.\n\n     Instant now = Instant.now();\n\n     Timestamp timestamp =\n         Timestamp.newBuilder().setSeconds(now.getEpochSecond())\n             .setNanos(now.getNano()).build();\n\n Example 6: Compute Timestamp from current time in Python.\n\n     timestamp = Timestamp()\n     timestamp.GetCurrentTime()\n\n # JSON Mapping\n\n In JSON format, the Timestamp type is encoded as a string in the\n [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the\n format is \"{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z\"\n where {year} is always expressed using four digits while {month}, {day},\n {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional\n seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),\n are optional. The \"Z\" suffix indicates the timezone (\"UTC\"); the timezone\n is required. A proto3 JSON serializer should always use UTC (as indicated by\n \"Z\") when printing the Timestamp type and a proto3 JSON parser should be\n able to accept both UTC and other timezones (as indicated by an offset).\n\n For example, \"2017-01-15T01:30:15.01Z\" encodes 15.01 seconds past\n 01:30 UTC on January 15, 2017.\n\n In JavaScript, one can convert a Date object to this format using the\n standard\n [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)\n method. In Python, a standard `datetime.datetime` object can be converted\n to this format using\n [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with\n the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use\n the Joda Time's [`ISODateTimeFormat.dateTime()`](\n http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()\n ) to obtain a formatter capable of generating timestamps in this format.",
+              "example": "2023-01-15T01:30:15.01Z",
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Return results before this timestamp (inclusive).",
+            "in": "query",
+            "name": "created.before",
+            "schema": {
+              "description": "A Timestamp represents a point in time independent of any time zone or local\n calendar, encoded as a count of seconds and fractions of seconds at\n nanosecond resolution. The count is relative to an epoch at UTC midnight on\n January 1, 1970, in the proleptic Gregorian calendar which extends the\n Gregorian calendar backwards to year one.\n\n All minutes are 60 seconds long. Leap seconds are \"smeared\" so that no leap\n second table is needed for interpretation, using a [24-hour linear\n smear](https://developers.google.com/time/smear).\n\n The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By\n restricting to that range, we ensure that we can convert to and from [RFC\n 3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.\n\n # Examples\n\n Example 1: Compute Timestamp from POSIX `time()`.\n\n     Timestamp timestamp;\n     timestamp.set_seconds(time(NULL));\n     timestamp.set_nanos(0);\n\n Example 2: Compute Timestamp from POSIX `gettimeofday()`.\n\n     struct timeval tv;\n     gettimeofday(\u0026tv, NULL);\n\n     Timestamp timestamp;\n     timestamp.set_seconds(tv.tv_sec);\n     timestamp.set_nanos(tv.tv_usec * 1000);\n\n Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.\n\n     FILETIME ft;\n     GetSystemTimeAsFileTime(\u0026ft);\n     UINT64 ticks = (((UINT64)ft.dwHighDateTime) \u003c\u003c 32) | ft.dwLowDateTime;\n\n     // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z\n     // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.\n     Timestamp timestamp;\n     timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));\n     timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));\n\n Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.\n\n     long millis = System.currentTimeMillis();\n\n     Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)\n         .setNanos((int) ((millis % 1000) * 1000000)).build();\n\n Example 5: Compute Timestamp from Java `Instant.now()`.\n\n     Instant now = Instant.now();\n\n     Timestamp timestamp =\n         Timestamp.newBuilder().setSeconds(now.getEpochSecond())\n             .setNanos(now.getNano()).build();\n\n Example 6: Compute Timestamp from current time in Python.\n\n     timestamp = Timestamp()\n     timestamp.GetCurrentTime()\n\n # JSON Mapping\n\n In JSON format, the Timestamp type is encoded as a string in the\n [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the\n format is \"{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z\"\n where {year} is always expressed using four digits while {month}, {day},\n {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional\n seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),\n are optional. The \"Z\" suffix indicates the timezone (\"UTC\"); the timezone\n is required. A proto3 JSON serializer should always use UTC (as indicated by\n \"Z\") when printing the Timestamp type and a proto3 JSON parser should be\n able to accept both UTC and other timezones (as indicated by an offset).\n\n For example, \"2017-01-15T01:30:15.01Z\" encodes 15.01 seconds past\n 01:30 UTC on January 15, 2017.\n\n In JavaScript, one can convert a Date object to this format using the\n standard\n [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)\n method. In Python, a standard `datetime.datetime` object can be converted\n to this format using\n [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with\n the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use\n the Joda Time's [`ISODateTimeFormat.dateTime()`](\n http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()\n ) to obtain a formatter capable of generating timestamps in this format.",
+              "example": "2023-01-15T01:30:15.01Z",
               "format": "date-time",
               "type": "string"
             }
@@ -6545,12 +6675,12 @@
           {
             "label": "listOrganizationInvites",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.list({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.invites.list({\n    organizationId: \"\u003cid\u003e\",\n    createdAfter: new Date(\"2023-01-15T01:30:15.01Z\"),\n    createdBefore: new Date(\"2023-01-15T01:30:15.01Z\"),\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
           },
           {
             "label": "listOrganizationInvites",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.invites.list(organization_id=\"\u003cid\u003e\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+            "source": "from factify import Factify\nfrom factify.utils import parse_datetime\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.invites.list(organization_id=\"\u003cid\u003e\", created_after=parse_datetime(\"2023-01-15T01:30:15.01Z\"), created_before=parse_datetime(\"2023-01-15T01:30:15.01Z\"))\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
           }
         ],
         "x-speakeasy-group": "organizations.invites",
@@ -6602,16 +6732,20 @@
                   "idempotency_key": {
                     "description": "Reserved for future use. Currently, idempotency is based on email matching:\n if a PENDING invitation exists for the same email in this organization,\n that invitation is resent rather than creating a duplicate.",
                     "maxLength": 255,
-                    "nullable": true,
                     "title": "idempotency_key",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "message": {
                     "description": "Optional custom message from the sender (max 2000 bytes to support ~500 multibyte characters).",
                     "maxLength": 2000,
-                    "nullable": true,
                     "title": "message",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "required": [
@@ -7078,12 +7212,6 @@
                   "role": {
                     "$ref": "#/components/schemas/OrganizationRole",
                     "description": "Role for the new member. Cannot be UNSPECIFIED or OWNER.",
-                    "not": {
-                      "enum": [
-                        0,
-                        1
-                      ]
-                    },
                     "title": "role"
                   },
                   "user_id": {
@@ -7268,12 +7396,6 @@
                   "role": {
                     "$ref": "#/components/schemas/OrganizationRole",
                     "description": "New role for the member. Cannot be UNSPECIFIED or OWNER.\n OWNER transfer is not supported — the owner is set at organization creation.",
-                    "not": {
-                      "enum": [
-                        0,
-                        1
-                      ]
-                    },
                     "title": "role"
                   }
                 },
@@ -7574,17 +7696,21 @@
                     "description": "The limit for this key. Must be \u003e 0.",
                     "exclusiveMinimum": 0,
                     "format": "int32",
-                    "nullable": true,
                     "title": "limit",
-                    "type": "integer"
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
                   },
                   "organization_id": {
                     "description": "Optional: organization ID. If not provided, uses the caller's organization.",
                     "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
-                    "nullable": true,
                     "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
                     "title": "organization_id",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "title": "SetAPIKeyQuotaRequest",
@@ -7660,10 +7786,23 @@
             }
           },
           {
-            "description": "Filter by date.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)",
+            "description": "Return results after this timestamp (inclusive).",
             "in": "query",
             "name": "date.after",
             "schema": {
+              "description": "A Timestamp represents a point in time independent of any time zone or local\n calendar, encoded as a count of seconds and fractions of seconds at\n nanosecond resolution. The count is relative to an epoch at UTC midnight on\n January 1, 1970, in the proleptic Gregorian calendar which extends the\n Gregorian calendar backwards to year one.\n\n All minutes are 60 seconds long. Leap seconds are \"smeared\" so that no leap\n second table is needed for interpretation, using a [24-hour linear\n smear](https://developers.google.com/time/smear).\n\n The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By\n restricting to that range, we ensure that we can convert to and from [RFC\n 3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.\n\n # Examples\n\n Example 1: Compute Timestamp from POSIX `time()`.\n\n     Timestamp timestamp;\n     timestamp.set_seconds(time(NULL));\n     timestamp.set_nanos(0);\n\n Example 2: Compute Timestamp from POSIX `gettimeofday()`.\n\n     struct timeval tv;\n     gettimeofday(\u0026tv, NULL);\n\n     Timestamp timestamp;\n     timestamp.set_seconds(tv.tv_sec);\n     timestamp.set_nanos(tv.tv_usec * 1000);\n\n Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.\n\n     FILETIME ft;\n     GetSystemTimeAsFileTime(\u0026ft);\n     UINT64 ticks = (((UINT64)ft.dwHighDateTime) \u003c\u003c 32) | ft.dwLowDateTime;\n\n     // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z\n     // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.\n     Timestamp timestamp;\n     timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));\n     timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));\n\n Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.\n\n     long millis = System.currentTimeMillis();\n\n     Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)\n         .setNanos((int) ((millis % 1000) * 1000000)).build();\n\n Example 5: Compute Timestamp from Java `Instant.now()`.\n\n     Instant now = Instant.now();\n\n     Timestamp timestamp =\n         Timestamp.newBuilder().setSeconds(now.getEpochSecond())\n             .setNanos(now.getNano()).build();\n\n Example 6: Compute Timestamp from current time in Python.\n\n     timestamp = Timestamp()\n     timestamp.GetCurrentTime()\n\n # JSON Mapping\n\n In JSON format, the Timestamp type is encoded as a string in the\n [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the\n format is \"{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z\"\n where {year} is always expressed using four digits while {month}, {day},\n {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional\n seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),\n are optional. The \"Z\" suffix indicates the timezone (\"UTC\"); the timezone\n is required. A proto3 JSON serializer should always use UTC (as indicated by\n \"Z\") when printing the Timestamp type and a proto3 JSON parser should be\n able to accept both UTC and other timezones (as indicated by an offset).\n\n For example, \"2017-01-15T01:30:15.01Z\" encodes 15.01 seconds past\n 01:30 UTC on January 15, 2017.\n\n In JavaScript, one can convert a Date object to this format using the\n standard\n [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)\n method. In Python, a standard `datetime.datetime` object can be converted\n to this format using\n [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with\n the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use\n the Joda Time's [`ISODateTimeFormat.dateTime()`](\n http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()\n ) to obtain a formatter capable of generating timestamps in this format.",
+              "example": "2023-01-15T01:30:15.01Z",
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Return results before this timestamp (inclusive).",
+            "in": "query",
+            "name": "date.before",
+            "schema": {
+              "description": "A Timestamp represents a point in time independent of any time zone or local\n calendar, encoded as a count of seconds and fractions of seconds at\n nanosecond resolution. The count is relative to an epoch at UTC midnight on\n January 1, 1970, in the proleptic Gregorian calendar which extends the\n Gregorian calendar backwards to year one.\n\n All minutes are 60 seconds long. Leap seconds are \"smeared\" so that no leap\n second table is needed for interpretation, using a [24-hour linear\n smear](https://developers.google.com/time/smear).\n\n The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By\n restricting to that range, we ensure that we can convert to and from [RFC\n 3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.\n\n # Examples\n\n Example 1: Compute Timestamp from POSIX `time()`.\n\n     Timestamp timestamp;\n     timestamp.set_seconds(time(NULL));\n     timestamp.set_nanos(0);\n\n Example 2: Compute Timestamp from POSIX `gettimeofday()`.\n\n     struct timeval tv;\n     gettimeofday(\u0026tv, NULL);\n\n     Timestamp timestamp;\n     timestamp.set_seconds(tv.tv_sec);\n     timestamp.set_nanos(tv.tv_usec * 1000);\n\n Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.\n\n     FILETIME ft;\n     GetSystemTimeAsFileTime(\u0026ft);\n     UINT64 ticks = (((UINT64)ft.dwHighDateTime) \u003c\u003c 32) | ft.dwLowDateTime;\n\n     // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z\n     // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.\n     Timestamp timestamp;\n     timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));\n     timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));\n\n Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.\n\n     long millis = System.currentTimeMillis();\n\n     Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)\n         .setNanos((int) ((millis % 1000) * 1000000)).build();\n\n Example 5: Compute Timestamp from Java `Instant.now()`.\n\n     Instant now = Instant.now();\n\n     Timestamp timestamp =\n         Timestamp.newBuilder().setSeconds(now.getEpochSecond())\n             .setNanos(now.getNano()).build();\n\n Example 6: Compute Timestamp from current time in Python.\n\n     timestamp = Timestamp()\n     timestamp.GetCurrentTime()\n\n # JSON Mapping\n\n In JSON format, the Timestamp type is encoded as a string in the\n [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the\n format is \"{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z\"\n where {year} is always expressed using four digits while {month}, {day},\n {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional\n seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),\n are optional. The \"Z\" suffix indicates the timezone (\"UTC\"); the timezone\n is required. A proto3 JSON serializer should always use UTC (as indicated by\n \"Z\") when printing the Timestamp type and a proto3 JSON parser should be\n able to accept both UTC and other timezones (as indicated by an offset).\n\n For example, \"2017-01-15T01:30:15.01Z\" encodes 15.01 seconds past\n 01:30 UTC on January 15, 2017.\n\n In JavaScript, one can convert a Date object to this format using the\n standard\n [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)\n method. In Python, a standard `datetime.datetime` object can be converted\n to this format using\n [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with\n the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use\n the Joda Time's [`ISODateTimeFormat.dateTime()`](\n http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()\n ) to obtain a formatter capable of generating timestamps in this format.",
+              "example": "2023-01-15T01:30:15.01Z",
               "format": "date-time",
               "type": "string"
             }
@@ -7707,12 +7846,12 @@
           {
             "label": "getUsageHistory",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.usage.getUsageHistory({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.usage.getUsageHistory({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n    dateAfter: new Date(\"2023-01-15T01:30:15.01Z\"),\n    dateBefore: new Date(\"2023-01-15T01:30:15.01Z\"),\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "getUsageHistory",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.usage.get_usage_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_usage_history_response is not None\n\n    # Handle response\n    print(res.get_usage_history_response)"
+            "source": "from factify import Factify\nfrom factify.utils import parse_datetime\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.usage.get_usage_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\", date_after=parse_datetime(\"2023-01-15T01:30:15.01Z\"), date_before=parse_datetime(\"2023-01-15T01:30:15.01Z\"))\n\n    assert res.get_usage_history_response is not None\n\n    # Handle response\n    print(res.get_usage_history_response)"
           }
         ]
       }
@@ -7861,16 +8000,20 @@
                 "properties": {
                   "description": {
                     "description": "New description.",
-                    "nullable": true,
                     "title": "description",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "title": {
                     "description": "New title (max 255 characters).",
                     "maxLength": 255,
-                    "nullable": true,
                     "title": "title",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   }
                 },
                 "title": "UpdateVersionRequest",
@@ -7947,15 +8090,15 @@
   ],
   "tags": [
     {
-      "description": "Create, retrieve, update, and manage documents.",
+      "description": "Create and manage legally-binding documents.",
       "name": "Documents"
     },
     {
-      "description": "Manage document versions and version history.",
+      "description": "Document version tracking and management.",
       "name": "Versions"
     },
     {
-      "description": "Create and manage organizations and member invitations.",
+      "description": "Create and manage organizations.",
       "name": "Organizations"
     },
     {
