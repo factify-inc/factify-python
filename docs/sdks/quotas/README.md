@@ -4,8 +4,8 @@
 
 ### Available Operations
 
-* [quota_service_delete_organization_quota](#quota_service_delete_organization_quota) - DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
-* [quota_service_set_organization_quota](#quota_service_set_organization_quota) - SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+* [quota_service_delete_organization_quota](#quota_service_delete_organization_quota) - DeleteOrganizationQuota
+* [quota_service_set_organization_quota](#quota_service_set_organization_quota) - SetOrganizationQuota
 
 ## quota_service_delete_organization_quota
 

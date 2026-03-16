@@ -11,13 +11,15 @@ from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
 
 
 class Documents(BaseSDK):
-    r"""Create, retrieve, update, and manage documents."""
+    r"""Create and manage legally-binding documents."""
 
     def list(
         self,
         *,
         page_token: Optional[str] = None,
         page_size: Optional[int] = None,
+        created_after: Optional[datetime] = None,
+        created_before: Optional[datetime] = None,
         created_by_id: Optional[List[str]] = None,
         access_level: Optional[List[models.AccessLevel]] = None,
         processing_status: Optional[List[models.ProcessingStatus]] = None,
@@ -26,7 +28,6 @@ class Documents(BaseSDK):
         ownership: Optional[List[models.DocumentOwnership]] = None,
         trash_state: Optional[List[models.DocumentTrashState]] = None,
         organization_scope: Optional[bool] = None,
-        created_after: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -40,6 +41,8 @@ class Documents(BaseSDK):
             Pass next_page_token or prev_page_token from a previous response to continue pagination.
             Empty or omitted for the first page.
         :param page_size: Maximum number of items to return per page (1-100). Default: 50.
+        :param created_after: Return results after this timestamp (inclusive).
+        :param created_before: Return results before this timestamp (inclusive).
         :param created_by_id: Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.
             REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx&created_by_id=bot_yyy
         :param access_level: Filter by access level(s). Returns documents matching ANY of the specified levels.
@@ -59,7 +62,6 @@ class Documents(BaseSDK):
             Default (omitted): active documents only.
         :param organization_scope: Organization scope filter. When true, restrict to documents within the user's organization.
             REST: ?organization_scope=true
-        :param created_after: Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -78,6 +80,8 @@ class Documents(BaseSDK):
         request = models.ListDocumentsRequest(
             page_token=page_token,
             page_size=page_size,
+            created_after=created_after,
+            created_before=created_before,
             created_by_id=created_by_id,
             access_level=access_level,
             processing_status=processing_status,
@@ -86,7 +90,6 @@ class Documents(BaseSDK):
             ownership=ownership,
             trash_state=trash_state,
             organization_scope=organization_scope,
-            created_after=created_after,
         )
 
         req = self._build_request(
@@ -142,6 +145,8 @@ class Documents(BaseSDK):
             return self.list(
                 page_token=next_cursor,
                 page_size=page_size,
+                created_after=created_after,
+                created_before=created_before,
                 created_by_id=created_by_id,
                 access_level=access_level,
                 processing_status=processing_status,
@@ -150,7 +155,6 @@ class Documents(BaseSDK):
                 ownership=ownership,
                 trash_state=trash_state,
                 organization_scope=organization_scope,
-                created_after=created_after,
                 retries=retries,
             )
 
@@ -190,6 +194,8 @@ class Documents(BaseSDK):
         *,
         page_token: Optional[str] = None,
         page_size: Optional[int] = None,
+        created_after: Optional[datetime] = None,
+        created_before: Optional[datetime] = None,
         created_by_id: Optional[List[str]] = None,
         access_level: Optional[List[models.AccessLevel]] = None,
         processing_status: Optional[List[models.ProcessingStatus]] = None,
@@ -198,7 +204,6 @@ class Documents(BaseSDK):
         ownership: Optional[List[models.DocumentOwnership]] = None,
         trash_state: Optional[List[models.DocumentTrashState]] = None,
         organization_scope: Optional[bool] = None,
-        created_after: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -212,6 +217,8 @@ class Documents(BaseSDK):
             Pass next_page_token or prev_page_token from a previous response to continue pagination.
             Empty or omitted for the first page.
         :param page_size: Maximum number of items to return per page (1-100). Default: 50.
+        :param created_after: Return results after this timestamp (inclusive).
+        :param created_before: Return results before this timestamp (inclusive).
         :param created_by_id: Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.
             REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx&created_by_id=bot_yyy
         :param access_level: Filter by access level(s). Returns documents matching ANY of the specified levels.
@@ -231,7 +238,6 @@ class Documents(BaseSDK):
             Default (omitted): active documents only.
         :param organization_scope: Organization scope filter. When true, restrict to documents within the user's organization.
             REST: ?organization_scope=true
-        :param created_after: Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -250,6 +256,8 @@ class Documents(BaseSDK):
         request = models.ListDocumentsRequest(
             page_token=page_token,
             page_size=page_size,
+            created_after=created_after,
+            created_before=created_before,
             created_by_id=created_by_id,
             access_level=access_level,
             processing_status=processing_status,
@@ -258,7 +266,6 @@ class Documents(BaseSDK):
             ownership=ownership,
             trash_state=trash_state,
             organization_scope=organization_scope,
-            created_after=created_after,
         )
 
         req = self._build_request_async(
@@ -317,6 +324,8 @@ class Documents(BaseSDK):
             return self.list_async(
                 page_token=next_cursor,
                 page_size=page_size,
+                created_after=created_after,
+                created_before=created_before,
                 created_by_id=created_by_id,
                 access_level=access_level,
                 processing_status=processing_status,
@@ -325,7 +334,6 @@ class Documents(BaseSDK):
                 ownership=ownership,
                 trash_state=trash_state,
                 organization_scope=organization_scope,
-                created_after=created_after,
                 retries=retries,
             )
 
@@ -368,7 +376,7 @@ class Documents(BaseSDK):
             models.CreateDocumentRequestPayloadTypedDict,
         ],
         title: str,
-        access_level: Optional[models.AccessLevel] = None,
+        access_level: OptionalNullable[models.AccessLevel] = UNSET,
         description: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -381,7 +389,7 @@ class Documents(BaseSDK):
 
         :param payload: PDF file to upload
         :param title: Document title.
-        :param access_level:
+        :param access_level: Document access level. Defaults to organization if user belongs to an org, otherwise private.
         :param description: Optional document description.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -486,7 +494,7 @@ class Documents(BaseSDK):
             models.CreateDocumentRequestPayloadTypedDict,
         ],
         title: str,
-        access_level: Optional[models.AccessLevel] = None,
+        access_level: OptionalNullable[models.AccessLevel] = UNSET,
         description: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -499,7 +507,7 @@ class Documents(BaseSDK):
 
         :param payload: PDF file to upload
         :param title: Document title.
-        :param access_level:
+        :param access_level: Document access level. Defaults to organization if user belongs to an org, otherwise private.
         :param description: Optional document description.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

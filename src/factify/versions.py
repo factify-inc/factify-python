@@ -10,7 +10,7 @@ from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
 
 
 class Versions(BaseSDK):
-    r"""Manage document versions and version history."""
+    r"""Document version tracking and management."""
 
     def list(
         self,

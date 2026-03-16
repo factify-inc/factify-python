@@ -875,6 +875,7 @@ class Usage(BaseSDK):
         *,
         organization_id: Optional[str] = None,
         date_after: Optional[datetime] = None,
+        date_before: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -885,7 +886,8 @@ class Usage(BaseSDK):
         Returns daily usage records for an organization within a specified date range.
 
         :param organization_id: Optional: organization ID to query. If not provided, uses the caller's organization.
-        :param date_after: Filter by date.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
+        :param date_after: Return results after this timestamp (inclusive).
+        :param date_before: Return results before this timestamp (inclusive).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -904,6 +906,7 @@ class Usage(BaseSDK):
         request = models.GetUsageHistoryRequest(
             organization_id=organization_id,
             date_after=date_after,
+            date_before=date_before,
         )
 
         req = self._build_request(
@@ -981,6 +984,7 @@ class Usage(BaseSDK):
         *,
         organization_id: Optional[str] = None,
         date_after: Optional[datetime] = None,
+        date_before: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -991,7 +995,8 @@ class Usage(BaseSDK):
         Returns daily usage records for an organization within a specified date range.
 
         :param organization_id: Optional: organization ID to query. If not provided, uses the caller's organization.
-        :param date_after: Filter by date.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
+        :param date_after: Return results after this timestamp (inclusive).
+        :param date_before: Return results before this timestamp (inclusive).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1010,6 +1015,7 @@ class Usage(BaseSDK):
         request = models.GetUsageHistoryRequest(
             organization_id=organization_id,
             date_after=date_after,
+            date_before=date_before,
         )
 
         req = self._build_request_async(

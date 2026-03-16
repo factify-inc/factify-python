@@ -18,7 +18,9 @@ class GetUsageHistoryRequestTypedDict(TypedDict):
     organization_id: NotRequired[str]
     r"""Optional: organization ID to query. If not provided, uses the caller's organization."""
     date_after: NotRequired[datetime]
-    r"""Filter by date.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)"""
+    r"""Return results after this timestamp (inclusive)."""
+    date_before: NotRequired[datetime]
+    r"""Return results before this timestamp (inclusive)."""
 
 
 class GetUsageHistoryRequest(BaseModel):
@@ -33,11 +35,18 @@ class GetUsageHistoryRequest(BaseModel):
         pydantic.Field(alias="date.after"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter by date.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)"""
+    r"""Return results after this timestamp (inclusive)."""
+
+    date_before: Annotated[
+        Optional[datetime],
+        pydantic.Field(alias="date.before"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Return results before this timestamp (inclusive)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["organization_id", "date.after"])
+        optional_fields = set(["organization_id", "date.after", "date.before"])
         serialized = handler(self)
         m = {}
 

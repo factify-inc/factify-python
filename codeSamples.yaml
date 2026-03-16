@@ -38,7 +38,7 @@ actions:
       "x-codeSamples":
         - "lang": "python"
           "label": "listDocuments"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+          "source": "from factify import Factify\nfrom factify.utils import parse_datetime\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\", created_after=parse_datetime(\"2023-01-15T01:30:15.01Z\"), created_before=parse_datetime(\"2023-01-15T01:30:15.01Z\"))\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
   - target: $["paths"]["/v1beta/documents"]["post"]
     update:
       "x-codeSamples":
@@ -200,7 +200,7 @@ actions:
       "x-codeSamples":
         - "lang": "python"
           "label": "listOrganizationInvites"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.invites.list(organization_id=\"<id>\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+          "source": "from factify import Factify\nfrom factify.utils import parse_datetime\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.invites.list(organization_id=\"<id>\", created_after=parse_datetime(\"2023-01-15T01:30:15.01Z\"), created_before=parse_datetime(\"2023-01-15T01:30:15.01Z\"))\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/invites"]["post"]
     update:
       "x-codeSamples":
@@ -278,7 +278,7 @@ actions:
       "x-codeSamples":
         - "lang": "python"
           "label": "getUsageHistory"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.get_usage_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
+          "source": "from factify import Factify\nfrom factify.utils import parse_datetime\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.get_usage_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\", date_after=parse_datetime(\"2023-01-15T01:30:15.01Z\"), date_before=parse_datetime(\"2023-01-15T01:30:15.01Z\"))\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/user-preferences"]["get"]
     update:
       "x-codeSamples":

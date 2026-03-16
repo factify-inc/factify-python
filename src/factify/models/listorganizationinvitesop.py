@@ -43,7 +43,9 @@ class ListOrganizationInvitesRequestTypedDict(TypedDict):
     Pattern: user_[0-9a-hjkmnp-tv-z]{26}
     """
     created_after: NotRequired[datetime]
-    r"""Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)"""
+    r"""Return results after this timestamp (inclusive)."""
+    created_before: NotRequired[datetime]
+    r"""Return results before this timestamp (inclusive)."""
 
 
 class ListOrganizationInvitesRequest(BaseModel):
@@ -107,7 +109,14 @@ class ListOrganizationInvitesRequest(BaseModel):
         pydantic.Field(alias="created.after"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)"""
+    r"""Return results after this timestamp (inclusive)."""
+
+    created_before: Annotated[
+        Optional[datetime],
+        pydantic.Field(alias="created.before"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Return results before this timestamp (inclusive)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -120,6 +129,7 @@ class ListOrganizationInvitesRequest(BaseModel):
                 "email.exact",
                 "sender_id",
                 "created.after",
+                "created.before",
             ]
         )
         serialized = handler(self)

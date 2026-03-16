@@ -2,7 +2,7 @@
 
 ## Overview
 
-Manage document versions and version history.
+Document version tracking and management.
 
 ### Available Operations
 

@@ -22,6 +22,7 @@ class Invites(BaseSDK):
         email_exact: Optional[str] = None,
         sender_id: Optional[str] = None,
         created_after: Optional[datetime] = None,
+        created_before: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -45,7 +46,8 @@ class Invites(BaseSDK):
         :param sender_id: Filter by sender. Only returns invitations sent by this user.
             REST: ?sender_id=user_01h2xcejqtf2nbrexx3vqjhp41
             Pattern: user_[0-9a-hjkmnp-tv-z]{26}
-        :param created_after: Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
+        :param created_after: Return results after this timestamp (inclusive).
+        :param created_before: Return results before this timestamp (inclusive).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -70,6 +72,7 @@ class Invites(BaseSDK):
             email_exact=email_exact,
             sender_id=sender_id,
             created_after=created_after,
+            created_before=created_before,
         )
 
         req = self._build_request(
@@ -131,6 +134,7 @@ class Invites(BaseSDK):
                 email_exact=email_exact,
                 sender_id=sender_id,
                 created_after=created_after,
+                created_before=created_before,
                 retries=retries,
             )
 
@@ -178,6 +182,7 @@ class Invites(BaseSDK):
         email_exact: Optional[str] = None,
         sender_id: Optional[str] = None,
         created_after: Optional[datetime] = None,
+        created_before: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -201,7 +206,8 @@ class Invites(BaseSDK):
         :param sender_id: Filter by sender. Only returns invitations sent by this user.
             REST: ?sender_id=user_01h2xcejqtf2nbrexx3vqjhp41
             Pattern: user_[0-9a-hjkmnp-tv-z]{26}
-        :param created_after: Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)
+        :param created_after: Return results after this timestamp (inclusive).
+        :param created_before: Return results before this timestamp (inclusive).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -226,6 +232,7 @@ class Invites(BaseSDK):
             email_exact=email_exact,
             sender_id=sender_id,
             created_after=created_after,
+            created_before=created_before,
         )
 
         req = self._build_request_async(
@@ -292,6 +299,7 @@ class Invites(BaseSDK):
                 email_exact=email_exact,
                 sender_id=sender_id,
                 created_after=created_after,
+                created_before=created_before,
                 retries=retries,
             )
 

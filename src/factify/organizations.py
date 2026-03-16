@@ -12,7 +12,7 @@ from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
 
 
 class Organizations(BaseSDK):
-    r"""Create and manage organizations and member invitations."""
+    r"""Create and manage organizations."""
 
     invites: Invites
 

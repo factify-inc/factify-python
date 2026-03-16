@@ -23,6 +23,10 @@ class ListDocumentsRequestTypedDict(TypedDict):
     """
     page_size: NotRequired[int]
     r"""Maximum number of items to return per page (1-100). Default: 50."""
+    created_after: NotRequired[datetime]
+    r"""Return results after this timestamp (inclusive)."""
+    created_before: NotRequired[datetime]
+    r"""Return results before this timestamp (inclusive)."""
     created_by_id: NotRequired[List[str]]
     r"""Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.
     REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx&created_by_id=bot_yyy
@@ -58,8 +62,6 @@ class ListDocumentsRequestTypedDict(TypedDict):
     r"""Organization scope filter. When true, restrict to documents within the user's organization.
     REST: ?organization_scope=true
     """
-    created_after: NotRequired[datetime]
-    r"""Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)"""
 
 
 class ListDocumentsRequest(BaseModel):
@@ -77,6 +79,20 @@ class ListDocumentsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Maximum number of items to return per page (1-100). Default: 50."""
+
+    created_after: Annotated[
+        Optional[datetime],
+        pydantic.Field(alias="created.after"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Return results after this timestamp (inclusive)."""
+
+    created_before: Annotated[
+        Optional[datetime],
+        pydantic.Field(alias="created.before"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Return results before this timestamp (inclusive)."""
 
     created_by_id: Annotated[
         Optional[List[str]],
@@ -145,19 +161,14 @@ class ListDocumentsRequest(BaseModel):
     REST: ?organization_scope=true
     """
 
-    created_after: Annotated[
-        Optional[datetime],
-        pydantic.Field(alias="created.after"),
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""Filter by created.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)"""
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
             [
                 "page_token",
                 "page_size",
+                "created.after",
+                "created.before",
                 "created_by_id",
                 "access_level",
                 "processing_status",
@@ -166,7 +177,6 @@ class ListDocumentsRequest(BaseModel):
                 "ownership",
                 "trash_state",
                 "organization_scope",
-                "created.after",
             ]
         )
         serialized = handler(self)

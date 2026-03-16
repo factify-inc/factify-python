@@ -35,8 +35,8 @@ class DocumentTypedDict(TypedDict):
     r"""Document title."""
     url: str
     r"""URL for accessing the document on Factify."""
-    current_version: NotRequired[VersionRefTypedDict]
-    r"""VersionRef is a lightweight reference to a version."""
+    current_version: NotRequired[Nullable[VersionRefTypedDict]]
+    r"""Reference to the current version, if any."""
     description: NotRequired[Nullable[str]]
     r"""Optional document description."""
     general_access: NotRequired[AccessLevel]
@@ -91,8 +91,8 @@ class Document(BaseModel):
     url: str
     r"""URL for accessing the document on Factify."""
 
-    current_version: Optional[VersionRef] = None
-    r"""VersionRef is a lightweight reference to a version."""
+    current_version: OptionalNullable[VersionRef] = UNSET
+    r"""Reference to the current version, if any."""
 
     description: OptionalNullable[str] = UNSET
     r"""Optional document description."""
@@ -142,7 +142,7 @@ class Document(BaseModel):
                 "updated_at",
             ]
         )
-        nullable_fields = set(["description"])
+        nullable_fields = set(["current_version", "description"])
         serialized = handler(self)
         m = {}
 

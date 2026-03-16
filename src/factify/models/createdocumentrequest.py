@@ -58,7 +58,8 @@ class CreateDocumentRequestTypedDict(TypedDict):
     r"""PDF file to upload"""
     title: str
     r"""Document title."""
-    access_level: NotRequired[AccessLevel]
+    access_level: NotRequired[Nullable[AccessLevel]]
+    r"""Document access level. Defaults to organization if user belongs to an org, otherwise private."""
     description: NotRequired[Nullable[str]]
     r"""Optional document description."""
 
@@ -75,7 +76,10 @@ class CreateDocumentRequest(BaseModel):
     title: Annotated[str, FieldMetadata(multipart=True)]
     r"""Document title."""
 
-    access_level: Annotated[Optional[AccessLevel], FieldMetadata(multipart=True)] = None
+    access_level: Annotated[
+        OptionalNullable[AccessLevel], FieldMetadata(multipart=True)
+    ] = UNSET
+    r"""Document access level. Defaults to organization if user belongs to an org, otherwise private."""
 
     description: Annotated[OptionalNullable[str], FieldMetadata(multipart=True)] = UNSET
     r"""Optional document description."""
@@ -83,7 +87,7 @@ class CreateDocumentRequest(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["access_level", "description"])
-        nullable_fields = set(["description"])
+        nullable_fields = set(["access_level", "description"])
         serialized = handler(self)
         m = {}
 

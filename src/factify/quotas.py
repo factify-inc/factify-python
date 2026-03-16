@@ -19,7 +19,7 @@ class Quotas(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.QuotaServiceDeleteOrganizationQuotaResponse:
-        r"""DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+        r"""DeleteOrganizationQuota
 
         DeleteOrganizationQuota removes quota configuration for an organization.
         The organization will fall back to default free tier limits.
@@ -141,7 +141,7 @@ class Quotas(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.QuotaServiceDeleteOrganizationQuotaResponse:
-        r"""DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+        r"""DeleteOrganizationQuota
 
         DeleteOrganizationQuota removes quota configuration for an organization.
         The organization will fall back to default free tier limits.
@@ -265,7 +265,7 @@ class Quotas(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.QuotaServiceSetOrganizationQuotaResponse:
-        r"""SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+        r"""SetOrganizationQuota
 
         SetOrganizationQuota creates or updates quota configuration for an organization.
         Requires platform admin permission. ConnectRPC only (not exposed via REST).
@@ -389,7 +389,7 @@ class Quotas(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.QuotaServiceSetOrganizationQuotaResponse:
-        r"""SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+        r"""SetOrganizationQuota
 
         SetOrganizationQuota creates or updates quota configuration for an organization.
         Requires platform admin permission. ConnectRPC only (not exposed via REST).

@@ -192,13 +192,14 @@ Returns daily usage records for an organization within a specified date range.
 <!-- UsageSnippet language="python" operationID="getUsageHistory" method="get" path="/v1beta/quota/usage" -->
 ```python
 from factify import Factify
+from factify.utils import parse_datetime
 
 
 with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.usage.get_usage_history(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
+    res = f_client.usage.get_usage_history(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41", date_after=parse_datetime("2023-01-15T01:30:15.01Z"), date_before=parse_datetime("2023-01-15T01:30:15.01Z"))
 
     # Handle response
     print(res)
@@ -210,7 +211,8 @@ with Factify(
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `organization_id`                                                                    | *Optional[str]*                                                                      | :heavy_minus_sign:                                                                   | Optional: organization ID to query. If not provided, uses the caller's organization. | org_01h2xcejqtf2nbrexx3vqjhp41                                                       |
-| `date_after`                                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects)                 | :heavy_minus_sign:                                                                   | Filter by date.after (RFC 3339 format, e.g., 2024-01-15T09:30:00Z)                   |                                                                                      |
+| `date_after`                                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects)                 | :heavy_minus_sign:                                                                   | Return results after this timestamp (inclusive).                                     | 2023-01-15T01:30:15.01Z                                                              |
+| `date_before`                                                                        | [date](https://docs.python.org/3/library/datetime.html#date-objects)                 | :heavy_minus_sign:                                                                   | Return results before this timestamp (inclusive).                                    | 2023-01-15T01:30:15.01Z                                                              |
 | `retries`                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                     | :heavy_minus_sign:                                                                   | Configuration to override the default retry behavior of the client.                  |                                                                                      |
 
 ### Response

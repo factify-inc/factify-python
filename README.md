@@ -147,13 +147,14 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 ```python
 # Synchronous Example
 from factify import Factify
+from factify.utils import parse_datetime
 
 
 with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.documents.list(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0")
+    res = f_client.documents.list(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", created_after=parse_datetime("2023-01-15T01:30:15.01Z"), created_before=parse_datetime("2023-01-15T01:30:15.01Z"))
 
     while res is not None:
         # Handle items
@@ -169,6 +170,7 @@ The same SDK client can also be used to make asynchronous requests by importing 
 # Asynchronous Example
 import asyncio
 from factify import Factify
+from factify.utils import parse_datetime
 
 async def main():
 
@@ -176,7 +178,7 @@ async def main():
         bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
     ) as f_client:
 
-        res = await f_client.documents.list_async(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0")
+        res = await f_client.documents.list_async(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", created_after=parse_datetime("2023-01-15T01:30:15.01Z"), created_before=parse_datetime("2023-01-15T01:30:15.01Z"))
 
         while res is not None:
             # Handle items
@@ -274,8 +276,8 @@ with Factify(
 
 ### [Quotas](docs/sdks/quotas/README.md)
 
-* [quota_service_delete_organization_quota](docs/sdks/quotas/README.md#quota_service_delete_organization_quota) - DeleteOrganizationQuota removes quota configuration for an organization.  The organization will fall back to default free tier limits.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
-* [quota_service_set_organization_quota](docs/sdks/quotas/README.md#quota_service_set_organization_quota) - SetOrganizationQuota creates or updates quota configuration for an organization.  Requires platform admin permission. ConnectRPC only (not exposed via REST).
+* [quota_service_delete_organization_quota](docs/sdks/quotas/README.md#quota_service_delete_organization_quota) - DeleteOrganizationQuota
+* [quota_service_set_organization_quota](docs/sdks/quotas/README.md#quota_service_set_organization_quota) - SetOrganizationQuota
 
 ### [Sharing](docs/sdks/sharing/README.md)
 
