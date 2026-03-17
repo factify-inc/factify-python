@@ -3,6 +3,6 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `document_id`      | *str*              | :heavy_check_mark: | Document ID.       |
+| Field                          | Type                           | Required                       | Description                    | Example                        |
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| `document_id`                  | *str*                          | :heavy_check_mark:             | Document ID.                   | doc_01h2xcejqtf2nbrexx3vqjhp41 |

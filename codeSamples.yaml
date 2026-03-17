@@ -80,7 +80,7 @@ actions:
       "x-codeSamples":
         - "lang": "python"
           "label": "createAccessRequest"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.create(document_id=\"<id>\", permission=\"view\")\n\n    # Handle response\n    print(res)"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.create(document_id=\"<id>\", permission=\"view\", message=\"Need access for quarterly review\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/documents/{document_id}/access-requests/status"]["get"]
     update:
       "x-codeSamples":
