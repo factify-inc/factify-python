@@ -24,7 +24,7 @@ generation:
   schemas:
     allOfMergeStrategy: deepMerge
   requestBodyFieldName: body
-  versioningStrategy: automatic
+  versioningStrategy: manual
   persistentEdits:
     enabled: "false"
   tests:
