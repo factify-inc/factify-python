@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: fe0f6fe975d7ed6d121ccafd7d9353a3
+  docChecksum: 543c53afa25509bdc1daec8ce4ae8ba1
   docVersion: 1.0.0
   speakeasyVersion: 1.755.1
   generationVersion: 2.865.2
-  releaseVersion: 0.7.2-rc.8
-  configChecksum: 0840968069bfcac2f801a5ea2ea1413d
+  releaseVersion: 0.7.2-rc.9
+  configChecksum: 61f121e6e32faff551bc534d9aed9ea6
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: 10f5c611-8b77-41f5-8ca8-a0ee1ab382be
-  pristine_commit_hash: a65c07f27bf002fdff9654e00dcc607bc0ba0d29
-  pristine_tree_hash: a608b79f38db171ba0f9819a878a35570ef3fa62
+  generation_id: 5d8feabc-d9c6-4f09-a752-c0d274bec9fc
+  pristine_commit_hash: 99e9ad445154655c6a27fa59dda55390915e2aea
+  pristine_tree_hash: c1f0540d08cdf6dfa59f2e15b9338cfb4c2c36d8
 features:
   python:
     additionalDependencies: 1.0.0
@@ -957,8 +957,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:1080542bb155b6351bd8e5fb1c00fb8170e52c88
-    pristine_git_object: cbd7a48a92059f99d9d56ffec4d622f869f8a63b
+    last_write_checksum: sha1:22aa23da0b8b3bd5933ea87dc5394e337dc9bdb8
+    pristine_git_object: d5e8e528bb528fcc2fd16dc1aff96cc694621512
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -985,8 +985,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:28bb12e5b87d916d97100f2d593d07751f6d99a0
-    pristine_git_object: 217c5060d56b6dab1b76da6c6633a6c3ff9caed7
+    last_write_checksum: sha1:c79a874e2c7f6de5560ae65afb5d4e6a7d5ef17b
+    pristine_git_object: 69a205f3cbb0035ceb6de100ea277289bd841fd6
   src/factify/accessrequests.py:
     id: 31a20ba0373b
     last_write_checksum: sha1:2ae2764fb41d3e303510aa968e9d2d31a9b4861b
