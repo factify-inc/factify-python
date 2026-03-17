@@ -938,9 +938,11 @@
           },
           "short_url": {
             "description": "Shortened URL for the share link (if available).",
-            "nullable": true,
             "title": "short_url",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "title": "CreateShareLinkResponse",
@@ -1759,9 +1761,11 @@
         "properties": {
           "custom_message": {
             "description": "Custom message to include in the notification email.",
-            "nullable": true,
             "title": "custom_message",
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "document_id": {
             "description": "Document ID.",
@@ -1781,9 +1785,11 @@
           },
           "should_send_notification": {
             "description": "Whether to send email notifications.",
-            "nullable": true,
             "title": "should_send_notification",
-            "type": "boolean"
+            "type": [
+              "boolean",
+              "null"
+            ]
           }
         },
         "title": "GrantDocumentAccessRequest",
@@ -2878,11 +2884,6 @@
           "role": {
             "$ref": "#/components/schemas/DocumentRole",
             "description": "Role to grant.",
-            "not": {
-              "enum": [
-                0
-              ]
-            },
             "title": "role"
           }
         },
@@ -3151,11 +3152,6 @@
           "general_access_level": {
             "$ref": "#/components/schemas/GeneralAccessLevel",
             "description": "General access level to set.",
-            "not": {
-              "enum": [
-                0
-              ]
-            },
             "title": "general_access_level"
           }
         },
@@ -3366,11 +3362,6 @@
           "document_role": {
             "$ref": "#/components/schemas/DocumentRole",
             "description": "New role to assign.",
-            "not": {
-              "enum": [
-                0
-              ]
-            },
             "title": "document_role"
           },
           "recipient_id": {
@@ -5360,11 +5351,6 @@
                   "general_access_level": {
                     "$ref": "#/components/schemas/GeneralAccessLevel",
                     "description": "General access level to set.",
-                    "not": {
-                      "enum": [
-                        0
-                      ]
-                    },
                     "title": "general_access_level"
                   }
                 },
@@ -5793,9 +5779,11 @@
                 "properties": {
                   "custom_message": {
                     "description": "Custom message to include in the notification email.",
-                    "nullable": true,
                     "title": "custom_message",
-                    "type": "string"
+                    "type": [
+                      "string",
+                      "null"
+                    ]
                   },
                   "recipients": {
                     "description": "Recipients to grant access to (1-50).",
@@ -5809,9 +5797,11 @@
                   },
                   "should_send_notification": {
                     "description": "Whether to send email notifications.",
-                    "nullable": true,
                     "title": "should_send_notification",
-                    "type": "boolean"
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
                   }
                 },
                 "title": "GrantDocumentAccessRequest",
@@ -6071,11 +6061,6 @@
                   "document_role": {
                     "$ref": "#/components/schemas/DocumentRole",
                     "description": "New role to assign.",
-                    "not": {
-                      "enum": [
-                        0
-                      ]
-                    },
                     "title": "document_role"
                   }
                 },
