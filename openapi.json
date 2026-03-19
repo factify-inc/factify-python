@@ -1593,6 +1593,36 @@
         "title": "GetGeneralAccessResponse",
         "type": "object"
       },
+      "GetMeRequest": {
+        "additionalProperties": false,
+        "description": "GetMeRequest is empty — the caller is identified via auth context.",
+        "title": "GetMeRequest",
+        "type": "object"
+      },
+      "GetMeResponse": {
+        "additionalProperties": false,
+        "description": "GetMeResponse contains the authenticated user's profile.",
+        "properties": {
+          "organizations": {
+            "description": "Organizations the user is a member of.",
+            "items": {
+              "$ref": "#/components/schemas/Organization"
+            },
+            "title": "organizations",
+            "type": "array"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User",
+            "description": "The authenticated user.",
+            "title": "user"
+          }
+        },
+        "required": [
+          "user"
+        ],
+        "title": "GetMeResponse",
+        "type": "object"
+      },
       "GetOrganizationQuotaRequest": {
         "additionalProperties": false,
         "description": "GetOrganizationQuotaRequest is a request to get quota status.",
@@ -2591,6 +2621,14 @@
             "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "id",
             "type": "string"
+          },
+          "logo_image_url": {
+            "description": "Optional — organizations may not have a logo.",
+            "title": "logo_image_url",
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "name": {
             "description": "Human-readable organization name.",
@@ -3648,6 +3686,48 @@
         "title": "UpdateOrganizationMemberResponse",
         "type": "object"
       },
+      "UpdateOrganizationRequest": {
+        "additionalProperties": false,
+        "description": "UpdateOrganizationRequest contains the fields to update on an organization.",
+        "properties": {
+          "name": {
+            "description": "Optional new display name. nil = no change. Minimum 1 character.",
+            "minLength": 1,
+            "title": "name",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "organization_id": {
+            "description": "Organization ID.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "organization_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization_id"
+        ],
+        "title": "UpdateOrganizationRequest",
+        "type": "object"
+      },
+      "UpdateOrganizationResponse": {
+        "additionalProperties": false,
+        "description": "UpdateOrganizationResponse contains the updated organization.",
+        "properties": {
+          "organization": {
+            "$ref": "#/components/schemas/Organization",
+            "description": "The updated organization.",
+            "title": "organization"
+          }
+        },
+        "required": [
+          "organization"
+        ],
+        "title": "UpdateOrganizationResponse",
+        "type": "object"
+      },
       "UpdateVersionRequest": {
         "additionalProperties": false,
         "description": "UpdateVersionRequest specifies fields to update on a version.",
@@ -3688,6 +3768,24 @@
             "title": "email",
             "type": "string"
           },
+          "family_name": {
+            "description": "Family name (last name) of the user.",
+            "maxLength": 255,
+            "title": "family_name",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "given_name": {
+            "description": "Given name (first name) of the user.",
+            "maxLength": 255,
+            "title": "given_name",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "id": {
             "example": "user_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
@@ -3699,6 +3797,15 @@
             "minLength": 1,
             "title": "name",
             "type": "string"
+          },
+          "profile_image_url": {
+            "description": "URL of the user's profile image.",
+            "maxLength": 2048,
+            "title": "profile_image_url",
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "required": [
@@ -6569,6 +6676,58 @@
         "x-speakeasy-name-override": "create"
       }
     },
+    "/v1beta/me": {
+      "get": {
+        "description": "Returns the authenticated user's profile and organization memberships. Only available for user accounts (JWT auth), not API keys.",
+        "operationId": "getMe",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMeResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Get current user",
+        "tags": [
+          "Users"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "getMe",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.users.getMe();\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getMe",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.users.get_me()\n\n    assert res.get_me_response is not None\n\n    # Handle response\n    print(res.get_me_response)"
+          }
+        ]
+      }
+    },
     "/v1beta/organizations": {
       "get": {
         "description": "List organizations the caller has access to.",
@@ -6719,18 +6878,8 @@
         "tags": [
           "Organizations"
         ],
-        "x-codeSamples": [
-          {
-            "label": "createOrganization",
-            "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.create({\n    name: \"\u003cvalue\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "label": "createOrganization",
-            "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.create(name=\"\u003cvalue\u003e\")\n\n    assert res.create_organization_response is not None\n\n    # Handle response\n    print(res.create_organization_response)"
-          }
-        ],
+        "x-internal": true,
+        "x-speakeasy-ignore": true,
         "x-speakeasy-name-override": "create"
       }
     },
@@ -6799,6 +6948,95 @@
           }
         ],
         "x-speakeasy-name-override": "get"
+      },
+      "patch": {
+        "description": "Update an organization's display name.\n Authorization: Requires organization#administer permission (owner or admin).",
+        "operationId": "updateOrganization",
+        "parameters": [
+          {
+            "description": "Organization ID.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "organization_id",
+            "required": true,
+            "schema": {
+              "description": "Organization ID.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "organization_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "UpdateOrganizationRequest contains the fields to update on an organization.",
+                "properties": {
+                  "name": {
+                    "description": "Optional new display name. nil = no change. Minimum 1 character.",
+                    "minLength": 1,
+                    "title": "name",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [],
+                "title": "UpdateOrganizationRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateOrganizationResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Update an organization",
+        "tags": [
+          "Organizations"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "updateOrganization",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.updateOrganization({\n    organizationId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "updateOrganization",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.update_organization(organization_id=\"\u003cid\u003e\")\n\n    assert res.update_organization_response is not None\n\n    # Handle response\n    print(res.update_organization_response)"
+          }
+        ]
       }
     },
     "/v1beta/organizations/{organization_id}/invites": {
@@ -6940,7 +7178,7 @@
         },
         "summary": "List organization invitations",
         "tags": [
-          "Organizations"
+          "Invites"
         ],
         "x-codeSamples": [
           {
@@ -7061,7 +7299,7 @@
         },
         "summary": "Invite a user to join an organization",
         "tags": [
-          "Organizations"
+          "Invites"
         ],
         "x-codeSamples": [
           {
@@ -7153,18 +7391,18 @@
         },
         "summary": "Accept an invitation",
         "tags": [
-          "Organizations"
+          "Invites"
         ],
         "x-codeSamples": [
           {
             "label": "acceptOrganizationInvite",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.acceptOrganizationInvite({\n    organizationId: \"\u003cid\u003e\",\n    body: {\n      token: \"\u003cvalue\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.invites.acceptOrganizationInvite({\n    organizationId: \"\u003cid\u003e\",\n    body: {\n      token: \"\u003cvalue\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "acceptOrganizationInvite",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.accept_organization_invite(organization_id=\"\u003cid\u003e\", token=\"\u003cvalue\u003e\")\n\n    assert res.accept_organization_invite_response is not None\n\n    # Handle response\n    print(res.accept_organization_invite_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.invites.accept_organization_invite(organization_id=\"\u003cid\u003e\", token=\"\u003cvalue\u003e\")\n\n    assert res.accept_organization_invite_response is not None\n\n    # Handle response\n    print(res.accept_organization_invite_response)"
           }
         ]
       }
@@ -7246,18 +7484,18 @@
         },
         "summary": "Resend an invitation email",
         "tags": [
-          "Organizations"
+          "Invites"
         ],
         "x-codeSamples": [
           {
             "label": "resendOrganizationInvite",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.resendOrganizationInvite({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.invites.resendOrganizationInvite({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "resendOrganizationInvite",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.resend_organization_invite(organization_id=\"\u003cid\u003e\", invite_id=\"\u003cid\u003e\", body={})\n\n    assert res.resend_organization_invite_response is not None\n\n    # Handle response\n    print(res.resend_organization_invite_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.invites.resend_organization_invite(organization_id=\"\u003cid\u003e\", invite_id=\"\u003cid\u003e\", body={})\n\n    assert res.resend_organization_invite_response is not None\n\n    # Handle response\n    print(res.resend_organization_invite_response)"
           }
         ]
       }
@@ -7339,18 +7577,18 @@
         },
         "summary": "Revoke an invitation",
         "tags": [
-          "Organizations"
+          "Invites"
         ],
         "x-codeSamples": [
           {
             "label": "revokeOrganizationInvite",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.revokeOrganizationInvite({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.invites.revokeOrganizationInvite({\n    organizationId: \"\u003cid\u003e\",\n    inviteId: \"\u003cid\u003e\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "revokeOrganizationInvite",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.revoke_organization_invite(organization_id=\"\u003cid\u003e\", invite_id=\"\u003cid\u003e\", body={})\n\n    assert res.revoke_organization_invite_response is not None\n\n    # Handle response\n    print(res.revoke_organization_invite_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.invites.revoke_organization_invite(organization_id=\"\u003cid\u003e\", invite_id=\"\u003cid\u003e\", body={})\n\n    assert res.revoke_organization_invite_response is not None\n\n    # Handle response\n    print(res.revoke_organization_invite_response)"
           }
         ]
       }
@@ -7428,18 +7666,18 @@
         },
         "summary": "List organization members",
         "tags": [
-          "Organizations"
+          "Members"
         ],
         "x-codeSamples": [
           {
             "label": "listOrganizationMembers",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.listOrganizationMembers({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.members.listOrganizationMembers({\n    organizationId: \"\u003cid\u003e\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
           },
           {
             "label": "listOrganizationMembers",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.list_organization_members(organization_id=\"\u003cid\u003e\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.members.list_organization_members(organization_id=\"\u003cid\u003e\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
           }
         ],
         "x-speakeasy-pagination": {
@@ -7535,18 +7773,18 @@
         },
         "summary": "Add a member to an organization",
         "tags": [
-          "Organizations"
+          "Members"
         ],
         "x-codeSamples": [
           {
             "label": "addOrganizationMember",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.addOrganizationMember({\n    organizationId: \"\u003cid\u003e\",\n    body: {\n      role: \"member\",\n      userId: \"\u003cid\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.members.addOrganizationMember({\n    organizationId: \"\u003cid\u003e\",\n    body: {\n      role: \"member\",\n      userId: \"\u003cid\u003e\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "addOrganizationMember",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.add_organization_member(organization_id=\"\u003cid\u003e\", role=\"member\", user_id=\"\u003cid\u003e\")\n\n    assert res.add_organization_member_response is not None\n\n    # Handle response\n    print(res.add_organization_member_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.members.add_organization_member(organization_id=\"\u003cid\u003e\", role=\"member\", user_id=\"\u003cid\u003e\")\n\n    assert res.add_organization_member_response is not None\n\n    # Handle response\n    print(res.add_organization_member_response)"
           }
         ]
       }
@@ -7613,18 +7851,18 @@
         },
         "summary": "Remove an organization member",
         "tags": [
-          "Organizations"
+          "Members"
         ],
         "x-codeSamples": [
           {
             "label": "removeOrganizationMember",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.removeOrganizationMember({\n    organizationId: \"\u003cid\u003e\",\n    userId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.members.removeOrganizationMember({\n    organizationId: \"\u003cid\u003e\",\n    userId: \"\u003cid\u003e\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "removeOrganizationMember",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.remove_organization_member(organization_id=\"\u003cid\u003e\", user_id=\"\u003cid\u003e\")\n\n    assert res.remove_organization_member_response is not None\n\n    # Handle response\n    print(res.remove_organization_member_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.members.remove_organization_member(organization_id=\"\u003cid\u003e\", user_id=\"\u003cid\u003e\")\n\n    assert res.remove_organization_member_response is not None\n\n    # Handle response\n    print(res.remove_organization_member_response)"
           }
         ]
       },
@@ -7712,18 +7950,18 @@
         },
         "summary": "Update an organization member",
         "tags": [
-          "Organizations"
+          "Members"
         ],
         "x-codeSamples": [
           {
             "label": "updateOrganizationMember",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.organizations.updateOrganizationMember({\n    organizationId: \"\u003cid\u003e\",\n    userId: \"\u003cid\u003e\",\n    body: {\n      role: \"member\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.members.updateOrganizationMember({\n    organizationId: \"\u003cid\u003e\",\n    userId: \"\u003cid\u003e\",\n    body: {\n      role: \"member\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "updateOrganizationMember",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.organizations.update_organization_member(organization_id=\"\u003cid\u003e\", user_id=\"\u003cid\u003e\", role=\"member\")\n\n    assert res.update_organization_member_response is not None\n\n    # Handle response\n    print(res.update_organization_member_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.members.update_organization_member(organization_id=\"\u003cid\u003e\", user_id=\"\u003cid\u003e\", role=\"member\")\n\n    assert res.update_organization_member_response is not None\n\n    # Handle response\n    print(res.update_organization_member_response)"
           }
         ]
       }
@@ -8387,6 +8625,18 @@
     {
       "description": "Generate shareable entry pages for documents.",
       "name": "Sharing \u0026 Distribution"
+    },
+    {
+      "description": "User profile and account information.",
+      "name": "Users"
+    },
+    {
+      "description": "Manage organization members and their roles.",
+      "name": "Members"
+    },
+    {
+      "description": "Invite users to join an organization.",
+      "name": "Invites"
     }
   ]
 }
