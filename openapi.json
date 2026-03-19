@@ -1657,6 +1657,61 @@
         "title": "GetOrganizationResponse",
         "type": "object"
       },
+      "GetTimelineRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "cursor": {
+            "title": "cursor",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "document_id": {
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "page_size": {
+            "format": "int32",
+            "maximum": 100,
+            "minimum": 1,
+            "title": "page_size",
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "title": "GetTimelineRequest",
+        "type": "object"
+      },
+      "GetTimelineResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/TimelineEvent"
+            },
+            "title": "events",
+            "type": "array"
+          },
+          "has_more": {
+            "title": "has_more",
+            "type": "boolean"
+          },
+          "next_cursor": {
+            "title": "next_cursor",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "title": "GetTimelineResponse",
+        "type": "object"
+      },
       "GetUsageHistoryRequest": {
         "additionalProperties": false,
         "description": "GetUsageHistoryRequest is a request to get usage history.\ndate_range_valid // date.before must be after date.after\n",
@@ -2441,6 +2496,22 @@
         "title": "ListOrganizationsResponse",
         "type": "object"
       },
+      "ListValue": {
+        "additionalProperties": false,
+        "description": "`ListValue` is a wrapper around a repeated field of values.\n\n The JSON representation for `ListValue` is JSON array.",
+        "properties": {
+          "values": {
+            "description": "Repeated field of dynamically typed values.",
+            "items": {
+              "$ref": "#/components/schemas/Value"
+            },
+            "title": "values",
+            "type": "array"
+          }
+        },
+        "title": "ListValue",
+        "type": "object"
+      },
       "ListVersionsRequest": {
         "additionalProperties": false,
         "description": "ListVersionsRequest specifies filters and pagination for listing versions.\n Follows Google AIP-158 for pagination field naming.",
@@ -2495,6 +2566,14 @@
         ],
         "title": "ListVersionsResponse",
         "type": "object"
+      },
+      "NullValue": {
+        "description": "`NullValue` is a singleton enumeration to represent the null value for the\n `Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.",
+        "enum": [
+          "NULL_VALUE"
+        ],
+        "title": "NullValue",
+        "type": "string"
       },
       "Organization": {
         "additionalProperties": false,
@@ -3275,6 +3354,28 @@
         "title": "StringFilter",
         "type": "object"
       },
+      "Struct": {
+        "additionalProperties": {
+          "$ref": "#/components/schemas/Value"
+        },
+        "description": "`Struct` represents a structured data value, consisting of fields\n which map to dynamically typed values. In some languages, `Struct`\n might be supported by a native representation. For example, in\n scripting languages like JS a struct is represented as an\n object. The details of that representation are described together\n with the proto support for the language.\n\n The JSON representation for `Struct` is JSON object.",
+        "type": "object"
+      },
+      "Struct.FieldsEntry": {
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "title": "key",
+            "type": "string"
+          },
+          "value": {
+            "$ref": "#/components/schemas/Value",
+            "title": "value"
+          }
+        },
+        "title": "FieldsEntry",
+        "type": "object"
+      },
       "Subject": {
         "additionalProperties": false,
         "description": "Subject is a lightweight reference to either a user or a bot.\n Used in embedded fields like created_by.\n For full details, call GetUser or GetBot with the subject's id.\nsubject_type_matches_id_prefix // id prefix must match type (user_ for user, bot_ for bot)\n",
@@ -3314,6 +3415,63 @@
           "user",
           "bot"
         ]
+      },
+      "TimelineEvent": {
+        "additionalProperties": false,
+        "properties": {
+          "event_id": {
+            "example": "550e8400-e29b-41d4-a716-446655440000",
+            "format": "uuid",
+            "title": "event_id",
+            "type": "string"
+          },
+          "event_type": {
+            "$ref": "#/components/schemas/TimelineEventType",
+            "title": "event_type"
+          },
+          "occurred_at": {
+            "format": "date-time",
+            "title": "occurred_at",
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/Struct",
+            "title": "payload"
+          }
+        },
+        "title": "TimelineEvent",
+        "type": "object"
+      },
+      "TimelineEventType": {
+        "enum": [
+          "TIMELINE_EVENT_TYPE_UNSPECIFIED",
+          "TIMELINE_EVENT_TYPE_COMMENT_CREATED",
+          "TIMELINE_EVENT_TYPE_COMMENT_UPDATED",
+          "TIMELINE_EVENT_TYPE_THREAD_CREATED",
+          "TIMELINE_EVENT_TYPE_THREAD_UPDATED",
+          "TIMELINE_EVENT_TYPE_APPROVAL_VOTED",
+          "TIMELINE_EVENT_TYPE_APPROVAL_STARTED",
+          "TIMELINE_EVENT_TYPE_APPROVAL_TERMINATED",
+          "TIMELINE_EVENT_TYPE_DOCUMENT_LOADED",
+          "TIMELINE_EVENT_TYPE_APPROVAL_READY",
+          "TIMELINE_EVENT_TYPE_APPROVAL_SUBMITTED",
+          "TIMELINE_EVENT_TYPE_APPROVAL_SKIP_DISSEMINATION",
+          "TIMELINE_EVENT_TYPE_DOCUMENT_CREATED",
+          "TIMELINE_EVENT_TYPE_DOCUMENT_UPDATED",
+          "TIMELINE_EVENT_TYPE_COMMENT_DELETED",
+          "TIMELINE_EVENT_TYPE_DOCUMENT_USER_ACCESS_GRANTED",
+          "TIMELINE_EVENT_TYPE_DOCUMENT_USER_ACCESS_REVOKED",
+          "TIMELINE_EVENT_TYPE_DOCUMENT_ENTRY_PAGE_DOWNLOADED",
+          "TIMELINE_EVENT_TYPE_DOCUMENT_VERSION_UPLOADED",
+          "TIMELINE_EVENT_TYPE_DOCUMENT_PRINTED",
+          "TIMELINE_EVENT_TYPE_DOCUMENT_SETTINGS_ACCESS_CHANGED",
+          "TIMELINE_EVENT_TYPE_ANNOTATION_ADDED",
+          "TIMELINE_EVENT_TYPE_ANNOTATION_EDITED",
+          "TIMELINE_EVENT_TYPE_ANNOTATION_DELETED",
+          "TIMELINE_EVENT_TYPE_ANNOTATION_RESOLVED"
+        ],
+        "title": "TimelineEventType",
+        "type": "string"
       },
       "TimestampFilter": {
         "additionalProperties": false,
@@ -3550,6 +3708,30 @@
         ],
         "title": "User",
         "type": "object"
+      },
+      "Value": {
+        "description": "`Value` represents a dynamically typed value which can be either\n null, a number, a string, a boolean, a recursive struct value, or a\n list of values. A producer of value is expected to set one of these\n variants. Absence of any variant indicates an error.\n\n The JSON representation for `Value` is JSON value.",
+        "oneOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "array"
+          },
+          {
+            "additionalProperties": true,
+            "type": "object"
+          }
+        ]
       },
       "Version": {
         "additionalProperties": false,
@@ -6122,6 +6304,90 @@
         ],
         "x-speakeasy-group": "sharing",
         "x-speakeasy-name-override": "update"
+      }
+    },
+    "/v1beta/documents/{document_id}/timeline": {
+      "get": {
+        "description": "Retrieves timeline events for a document. Admins see all events; viewers see only their own.",
+        "operationId": "getDocumentTimeline",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "title": "cursor",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "format": "int32",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "page_size",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTimelineResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Get document timeline",
+        "tags": [
+          "Timelines"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "getDocumentTimeline",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n});\n\nasync function run() {\n  const result = await factify.timelines.getDocumentTimeline({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getDocumentTimeline",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"\u003cYOUR_BEARER_TOKEN_HERE\u003e\",\n) as f_client:\n\n    res = f_client.timelines.get_document_timeline(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_timeline_response is not None\n\n    # Handle response\n    print(res.get_timeline_response)"
+          }
+        ]
       }
     },
     "/v1beta/documents/{document_id}/versions": {
