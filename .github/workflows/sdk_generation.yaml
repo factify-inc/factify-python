@@ -29,4 +29,3 @@ jobs:
     secrets:
       github_access_token: ${{ secrets.SDK_PUBLISH_GH_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
-      pypi_token: ${{ secrets.pypi_token }}
