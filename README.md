@@ -245,6 +245,12 @@ with Factify(
 * [get_document_quota](docs/sdks/documents/README.md#get_document_quota) - Get document quota
 * [get](docs/sdks/documents/README.md#get) - Retrieve a document
 * [update](docs/sdks/documents/README.md#update) - Update a document
+* [list_duplicates](docs/sdks/documents/README.md#list_duplicates) - List duplicate documents
+* [export](docs/sdks/documents/README.md#export) - Export a document
+* [process](docs/sdks/documents/README.md#process) - Process a document
+* [transfer_ownership](docs/sdks/documents/README.md#transfer_ownership) - Transfer document ownership
+* [trash](docs/sdks/documents/README.md#trash) - Trash a document
+* [untrash](docs/sdks/documents/README.md#untrash) - Restore a document from trash
 
 ### [EntryPages](docs/sdks/entrypages/README.md)
 

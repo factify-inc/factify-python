@@ -10,18 +10,14 @@ from typing_extensions import Annotated, TypedDict
 
 class GetDocumentRequestTypedDict(TypedDict):
     document_id: str
-    r"""Document ID.
-    Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
-    """
+    r"""Document ID."""
 
 
 class GetDocumentRequest(BaseModel):
     document_id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
-    r"""Document ID.
-    Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
-    """
+    r"""Document ID."""
 
 
 class GetDocumentResponseResponseTypedDict(TypedDict):

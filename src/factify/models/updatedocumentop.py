@@ -58,9 +58,7 @@ class UpdateDocumentUpdateDocumentRequest(BaseModel):
 
 class UpdateDocumentRequestTypedDict(TypedDict):
     document_id: str
-    r"""Document ID to update.
-    Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
-    """
+    r"""Document ID to update."""
     body: UpdateDocumentUpdateDocumentRequestTypedDict
 
 
@@ -68,9 +66,7 @@ class UpdateDocumentRequest(BaseModel):
     document_id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
-    r"""Document ID to update.
-    Pattern: doc_[0-9a-hjkmnp-tv-z]{26}
-    """
+    r"""Document ID to update."""
 
     body: Annotated[
         UpdateDocumentUpdateDocumentRequest,

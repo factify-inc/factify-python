@@ -46,6 +46,10 @@ class DocumentTypedDict(TypedDict):
     r"""Timestamp when the authenticated user last viewed this document.
     Absent if the user has never viewed it.
     """
+    owner_organization_id: NotRequired[str]
+    r"""Organization that owns this document (via the document creator).
+    Empty if the owner's organization could not be resolved.
+    """
     permission_set: NotRequired[DocumentPermissionSetTypedDict]
     r"""DocumentPermissionSet contains the permissions the authenticated user has on a document."""
     shared_at: NotRequired[datetime]
@@ -107,6 +111,11 @@ class Document(BaseModel):
     Absent if the user has never viewed it.
     """
 
+    owner_organization_id: Optional[str] = None
+    r"""Organization that owns this document (via the document creator).
+    Empty if the owner's organization could not be resolved.
+    """
+
     permission_set: Optional[DocumentPermissionSet] = None
     r"""DocumentPermissionSet contains the permissions the authenticated user has on a document."""
 
@@ -135,6 +144,7 @@ class Document(BaseModel):
                 "general_access",
                 "is_demo",
                 "last_viewed_at",
+                "owner_organization_id",
                 "permission_set",
                 "shared_at",
                 "thumbnail_url",

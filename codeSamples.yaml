@@ -99,12 +99,24 @@ actions:
         - "lang": "python"
           "label": "denyAccessRequest"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.deny(document_id=\"<id>\", access_request_id=\"<id>\", body={})\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/duplicates"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "listDocumentDuplicates"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.list_duplicates(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/documents/{document_id}/entry_page"]["post"]
     update:
       "x-codeSamples":
         - "lang": "python"
           "label": "generateDocumentEntryPage"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.entry_pages.generate(document_id=\"<id>\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/export"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "exportDocument"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.export(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", version_id=\"ver_01h2abcd1234efgh5678jkmnpt\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/documents/{document_id}/general-access"]["get"]
     update:
       "x-codeSamples":
@@ -135,6 +147,12 @@ actions:
         - "lang": "python"
           "label": "detachDocumentPolicy"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.policies.detach(document_id=\"<id>\", policy_id=\"<id>\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/process"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "processDocument"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.process(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", version_id=\"ver_01h2abcd1234efgh5678jkmnpt\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/documents/{document_id}/share"]["get"]
     update:
       "x-codeSamples":
@@ -171,6 +189,24 @@ actions:
         - "lang": "python"
           "label": "getDocumentTimeline"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.timelines.get_document_timeline(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/transfer"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "transferDocumentOwnership"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.transfer_ownership(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", new_owner_id=\"user_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/trash"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "trashDocument"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.trash(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", body={})\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/untrash"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "untrashDocument"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.untrash(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", body={})\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/documents/{document_id}/versions"]["get"]
     update:
       "x-codeSamples":

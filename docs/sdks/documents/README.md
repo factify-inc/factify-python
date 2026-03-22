@@ -11,6 +11,12 @@ Create and manage legally-binding documents.
 * [get_document_quota](#get_document_quota) - Get document quota
 * [get](#get) - Retrieve a document
 * [update](#update) - Update a document
+* [list_duplicates](#list_duplicates) - List duplicate documents
+* [export](#export) - Export a document
+* [process](#process) - Process a document
+* [transfer_ownership](#transfer_ownership) - Transfer document ownership
+* [trash](#trash) - Trash a document
+* [untrash](#untrash) - Restore a document from trash
 
 ## list
 
@@ -181,10 +187,10 @@ with Factify(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `document_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Document ID.<br/> Pattern: doc_[0-9a-hjkmnp-tv-z]{26}               |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `document_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Document ID.                                                        | doc_01h2xcejqtf2nbrexx3vqjhp41                                      |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
 
 ### Response
 
@@ -223,16 +229,275 @@ with Factify(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `document_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Document ID to update.<br/> Pattern: doc_[0-9a-hjkmnp-tv-z]{26}     |
-| `description`                                                       | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | New description (max 2000 characters).                              |
-| `title`                                                             | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | New title (1-255 characters).                                       |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `document_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Document ID to update.                                              | doc_01h2xcejqtf2nbrexx3vqjhp41                                      |
+| `description`                                                       | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | New description (max 2000 characters).                              |                                                                     |
+| `title`                                                             | *OptionalNullable[str]*                                             | :heavy_minus_sign:                                                  | New title (1-255 characters).                                       |                                                                     |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
 
 ### Response
 
 **[models.UpdateDocumentResponseResponse](../../models/updatedocumentresponseresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## list_duplicates
+
+Finds documents that are visual duplicates of the specified document using perceptual hashing.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="listDocumentDuplicates" method="get" path="/v1beta/documents/{document_id}/duplicates" -->
+```python
+from factify import Factify
+
+
+with Factify(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+) as f_client:
+
+    res = f_client.documents.list_duplicates(document_id="doc_01h2xcejqtf2nbrexx3vqjhp41")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          | Example                                                              |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `document_id`                                                        | *str*                                                                | :heavy_check_mark:                                                   | Document ID to check for duplicates.                                 | doc_01h2xcejqtf2nbrexx3vqjhp41                                       |
+| `file_contents_hash`                                                 | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | SHA256 hash of the document's visual content for duplicate matching. |                                                                      |
+| `retries`                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)     | :heavy_minus_sign:                                                   | Configuration to override the default retry behavior of the client.  |                                                                      |
+
+### Response
+
+**[models.ListDocumentDuplicatesResponseResponse](../../models/listdocumentduplicatesresponseresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## export
+
+Generates a time-limited download URL for the document PDF.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="exportDocument" method="get" path="/v1beta/documents/{document_id}/export" -->
+```python
+from factify import Factify
+
+
+with Factify(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+) as f_client:
+
+    res = f_client.documents.export(document_id="doc_01h2xcejqtf2nbrexx3vqjhp41", version_id="ver_01h2abcd1234efgh5678jkmnpt")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `document_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Document ID.                                                        | doc_01h2xcejqtf2nbrexx3vqjhp41                                      |
+| `version_id`                                                        | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Optional version ID. If omitted, exports the current version.       | ver_01h2abcd1234efgh5678jkmnpt                                      |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
+
+### Response
+
+**[models.ExportDocumentResponseResponse](../../models/exportdocumentresponseresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## process
+
+Triggers the AI processing pipeline (extraction and summarization) for the document's current or specified version.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="processDocument" method="post" path="/v1beta/documents/{document_id}/process" example="validation_error" -->
+```python
+from factify import Factify
+
+
+with Factify(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+) as f_client:
+
+    res = f_client.documents.process(document_id="doc_01h2xcejqtf2nbrexx3vqjhp41", version_id="ver_01h2abcd1234efgh5678jkmnpt")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              | Example                                                                  |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `document_id`                                                            | *str*                                                                    | :heavy_check_mark:                                                       | Document ID.                                                             | doc_01h2xcejqtf2nbrexx3vqjhp41                                           |
+| `async_`                                                                 | *Optional[bool]*                                                         | :heavy_minus_sign:                                                       | If true, returns immediately without waiting for processing to complete. |                                                                          |
+| `version_id`                                                             | *OptionalNullable[str]*                                                  | :heavy_minus_sign:                                                       | Optional version ID. If omitted, processes the current version.          | ver_01h2abcd1234efgh5678jkmnpt                                           |
+| `retries`                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)         | :heavy_minus_sign:                                                       | Configuration to override the default retry behavior of the client.      |                                                                          |
+
+### Response
+
+**[models.ProcessDocumentResponseResponse](../../models/processdocumentresponseresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## transfer_ownership
+
+Transfers ownership of a document to another user in the organization.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="transferDocumentOwnership" method="post" path="/v1beta/documents/{document_id}/transfer" example="validation_error" -->
+```python
+from factify import Factify
+
+
+with Factify(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+) as f_client:
+
+    res = f_client.documents.transfer_ownership(document_id="doc_01h2xcejqtf2nbrexx3vqjhp41", new_owner_id="user_01h2xcejqtf2nbrexx3vqjhp41")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `document_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Document ID.                                                        | doc_01h2xcejqtf2nbrexx3vqjhp41                                      |
+| `new_owner_id`                                                      | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | User ID of the new owner.                                           | user_01h2xcejqtf2nbrexx3vqjhp41                                     |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
+
+### Response
+
+**[models.TransferDocumentOwnershipResponseResponse](../../models/transferdocumentownershipresponseresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## trash
+
+Moves a document to trash and revokes all non-owner access.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="trashDocument" method="post" path="/v1beta/documents/{document_id}/trash" example="validation_error" -->
+```python
+from factify import Factify
+
+
+with Factify(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+) as f_client:
+
+    res = f_client.documents.trash(document_id="doc_01h2xcejqtf2nbrexx3vqjhp41", body={})
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `document_id`                                                                                 | *str*                                                                                         | :heavy_check_mark:                                                                            | Document ID.                                                                                  | doc_01h2xcejqtf2nbrexx3vqjhp41                                                                |
+| `body`                                                                                        | [models.TrashDocumentTrashDocumentRequest](../../models/trashdocumenttrashdocumentrequest.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
+| `retries`                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                              | :heavy_minus_sign:                                                                            | Configuration to override the default retry behavior of the client.                           |                                                                                               |
+
+### Response
+
+**[models.TrashDocumentResponseResponse](../../models/trashdocumentresponseresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## untrash
+
+Restores a document from trash. Previous sharing and access permissions are NOT restored.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="untrashDocument" method="post" path="/v1beta/documents/{document_id}/untrash" example="validation_error" -->
+```python
+from factify import Factify
+
+
+with Factify(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+) as f_client:
+
+    res = f_client.documents.untrash(document_id="doc_01h2xcejqtf2nbrexx3vqjhp41", body={})
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `document_id`                                                                                         | *str*                                                                                                 | :heavy_check_mark:                                                                                    | Document ID.                                                                                          | doc_01h2xcejqtf2nbrexx3vqjhp41                                                                        |
+| `body`                                                                                                | [models.UntrashDocumentUntrashDocumentRequest](../../models/untrashdocumentuntrashdocumentrequest.md) | :heavy_check_mark:                                                                                    | N/A                                                                                                   |                                                                                                       |
+| `retries`                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                      | :heavy_minus_sign:                                                                                    | Configuration to override the default retry behavior of the client.                                   |                                                                                                       |
+
+### Response
+
+**[models.UntrashDocumentResponseResponse](../../models/untrashdocumentresponseresponse.md)**
 
 ### Errors
 

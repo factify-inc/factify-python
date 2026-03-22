@@ -190,9 +190,20 @@ if TYPE_CHECKING:
     from .documentpolicy import DocumentPolicy, DocumentPolicyTypedDict
     from .documentrole import DocumentRole
     from .documenttrashstate import DocumentTrashState
+    from .duplicatedocument import DuplicateDocument, DuplicateDocumentTypedDict
     from .empty import Empty, EmptyTypedDict
     from .errordetail import ErrorDetail, ErrorDetailTypedDict, Reason
     from .errorresponse import ErrorResponseCode
+    from .exportdocumentop import (
+        ExportDocumentRequest,
+        ExportDocumentRequestTypedDict,
+        ExportDocumentResponseResponse,
+        ExportDocumentResponseResponseTypedDict,
+    )
+    from .exportdocumentresponse import (
+        ExportDocumentResponse,
+        ExportDocumentResponseTypedDict,
+    )
     from .generalaccesslevel import GeneralAccessLevel
     from .generatedocumententrypageop import (
         GenerateDocumentEntryPageRequest,
@@ -341,6 +352,16 @@ if TYPE_CHECKING:
         ListDocumentAccessResponse,
         ListDocumentAccessResponseTypedDict,
     )
+    from .listdocumentduplicatesop import (
+        ListDocumentDuplicatesRequest,
+        ListDocumentDuplicatesRequestTypedDict,
+        ListDocumentDuplicatesResponseResponse,
+        ListDocumentDuplicatesResponseResponseTypedDict,
+    )
+    from .listdocumentduplicatesresponse import (
+        ListDocumentDuplicatesResponse,
+        ListDocumentDuplicatesResponseTypedDict,
+    )
     from .listdocumentpoliciesop import (
         ListDocumentPoliciesRequest,
         ListDocumentPoliciesRequestTypedDict,
@@ -413,6 +434,19 @@ if TYPE_CHECKING:
     from .organizationrole import OrganizationRole
     from .pagination import Pagination, PaginationTypedDict
     from .policy import Policy, PolicyTypedDict
+    from .processdocumentop import (
+        ProcessDocumentProcessDocumentRequest,
+        ProcessDocumentProcessDocumentRequestTypedDict,
+        ProcessDocumentRequest,
+        ProcessDocumentRequestTypedDict,
+        ProcessDocumentResponseResponse,
+        ProcessDocumentResponseResponseTypedDict,
+    )
+    from .processdocumentresponse import (
+        ProcessDocumentResponse,
+        ProcessDocumentResponseTypedDict,
+    )
+    from .processingoutcome import ProcessingOutcome
     from .processingstatus import ProcessingStatus
     from .quotaservice_deleteorganizationquotaop import (
         QuotaServiceDeleteOrganizationQuotaRequest,
@@ -528,6 +562,42 @@ if TYPE_CHECKING:
     from .subjecttype import SubjectType
     from .timelineevent import TimelineEvent, TimelineEventTypedDict
     from .timelineeventtype import TimelineEventType
+    from .transferdocumentownershipop import (
+        TransferDocumentOwnershipRequest,
+        TransferDocumentOwnershipRequestTypedDict,
+        TransferDocumentOwnershipResponseResponse,
+        TransferDocumentOwnershipResponseResponseTypedDict,
+        TransferDocumentOwnershipTransferDocumentOwnershipRequest,
+        TransferDocumentOwnershipTransferDocumentOwnershipRequestTypedDict,
+    )
+    from .transferdocumentownershipresponse import (
+        TransferDocumentOwnershipResponse,
+        TransferDocumentOwnershipResponseTypedDict,
+    )
+    from .trashdocumentop import (
+        TrashDocumentRequest,
+        TrashDocumentRequestTypedDict,
+        TrashDocumentResponseResponse,
+        TrashDocumentResponseResponseTypedDict,
+        TrashDocumentTrashDocumentRequest,
+        TrashDocumentTrashDocumentRequestTypedDict,
+    )
+    from .trashdocumentresponse import (
+        TrashDocumentResponse,
+        TrashDocumentResponseTypedDict,
+    )
+    from .untrashdocumentop import (
+        UntrashDocumentRequest,
+        UntrashDocumentRequestTypedDict,
+        UntrashDocumentResponseResponse,
+        UntrashDocumentResponseResponseTypedDict,
+        UntrashDocumentUntrashDocumentRequest,
+        UntrashDocumentUntrashDocumentRequestTypedDict,
+    )
+    from .untrashdocumentresponse import (
+        UntrashDocumentResponse,
+        UntrashDocumentResponseTypedDict,
+    )
     from .updatedocumentaccessop import (
         UpdateDocumentAccessRequest,
         UpdateDocumentAccessRequestTypedDict,
@@ -723,11 +793,19 @@ __all__ = [
     "DocumentRole",
     "DocumentTrashState",
     "DocumentTypedDict",
+    "DuplicateDocument",
+    "DuplicateDocumentTypedDict",
     "Empty",
     "EmptyTypedDict",
     "ErrorDetail",
     "ErrorDetailTypedDict",
     "ErrorResponseCode",
+    "ExportDocumentRequest",
+    "ExportDocumentRequestTypedDict",
+    "ExportDocumentResponse",
+    "ExportDocumentResponseResponse",
+    "ExportDocumentResponseResponseTypedDict",
+    "ExportDocumentResponseTypedDict",
     "GeneralAccessLevel",
     "GenerateDocumentEntryPageRequest",
     "GenerateDocumentEntryPageRequestTypedDict",
@@ -825,6 +903,12 @@ __all__ = [
     "ListDocumentAccessResponseResponse",
     "ListDocumentAccessResponseResponseTypedDict",
     "ListDocumentAccessResponseTypedDict",
+    "ListDocumentDuplicatesRequest",
+    "ListDocumentDuplicatesRequestTypedDict",
+    "ListDocumentDuplicatesResponse",
+    "ListDocumentDuplicatesResponseResponse",
+    "ListDocumentDuplicatesResponseResponseTypedDict",
+    "ListDocumentDuplicatesResponseTypedDict",
     "ListDocumentPoliciesRequest",
     "ListDocumentPoliciesRequestTypedDict",
     "ListDocumentPoliciesResponse",
@@ -877,6 +961,15 @@ __all__ = [
     "PaginationTypedDict",
     "Policy",
     "PolicyTypedDict",
+    "ProcessDocumentProcessDocumentRequest",
+    "ProcessDocumentProcessDocumentRequestTypedDict",
+    "ProcessDocumentRequest",
+    "ProcessDocumentRequestTypedDict",
+    "ProcessDocumentResponse",
+    "ProcessDocumentResponseResponse",
+    "ProcessDocumentResponseResponseTypedDict",
+    "ProcessDocumentResponseTypedDict",
+    "ProcessingOutcome",
     "ProcessingStatus",
     "QuotaServiceDeleteOrganizationQuotaRequest",
     "QuotaServiceDeleteOrganizationQuotaRequestTypedDict",
@@ -963,6 +1056,30 @@ __all__ = [
     "TimelineEvent",
     "TimelineEventType",
     "TimelineEventTypedDict",
+    "TransferDocumentOwnershipRequest",
+    "TransferDocumentOwnershipRequestTypedDict",
+    "TransferDocumentOwnershipResponse",
+    "TransferDocumentOwnershipResponseResponse",
+    "TransferDocumentOwnershipResponseResponseTypedDict",
+    "TransferDocumentOwnershipResponseTypedDict",
+    "TransferDocumentOwnershipTransferDocumentOwnershipRequest",
+    "TransferDocumentOwnershipTransferDocumentOwnershipRequestTypedDict",
+    "TrashDocumentRequest",
+    "TrashDocumentRequestTypedDict",
+    "TrashDocumentResponse",
+    "TrashDocumentResponseResponse",
+    "TrashDocumentResponseResponseTypedDict",
+    "TrashDocumentResponseTypedDict",
+    "TrashDocumentTrashDocumentRequest",
+    "TrashDocumentTrashDocumentRequestTypedDict",
+    "UntrashDocumentRequest",
+    "UntrashDocumentRequestTypedDict",
+    "UntrashDocumentResponse",
+    "UntrashDocumentResponseResponse",
+    "UntrashDocumentResponseResponseTypedDict",
+    "UntrashDocumentResponseTypedDict",
+    "UntrashDocumentUntrashDocumentRequest",
+    "UntrashDocumentUntrashDocumentRequestTypedDict",
     "UpdateDocumentAccessRequest",
     "UpdateDocumentAccessRequestTypedDict",
     "UpdateDocumentAccessResponse",
@@ -1145,12 +1262,20 @@ _dynamic_imports: dict[str, str] = {
     "DocumentPolicyTypedDict": ".documentpolicy",
     "DocumentRole": ".documentrole",
     "DocumentTrashState": ".documenttrashstate",
+    "DuplicateDocument": ".duplicatedocument",
+    "DuplicateDocumentTypedDict": ".duplicatedocument",
     "Empty": ".empty",
     "EmptyTypedDict": ".empty",
     "ErrorDetail": ".errordetail",
     "ErrorDetailTypedDict": ".errordetail",
     "Reason": ".errordetail",
     "ErrorResponseCode": ".errorresponse",
+    "ExportDocumentRequest": ".exportdocumentop",
+    "ExportDocumentRequestTypedDict": ".exportdocumentop",
+    "ExportDocumentResponseResponse": ".exportdocumentop",
+    "ExportDocumentResponseResponseTypedDict": ".exportdocumentop",
+    "ExportDocumentResponse": ".exportdocumentresponse",
+    "ExportDocumentResponseTypedDict": ".exportdocumentresponse",
     "GeneralAccessLevel": ".generalaccesslevel",
     "GenerateDocumentEntryPageRequest": ".generatedocumententrypageop",
     "GenerateDocumentEntryPageRequestTypedDict": ".generatedocumententrypageop",
@@ -1248,6 +1373,12 @@ _dynamic_imports: dict[str, str] = {
     "ListDocumentAccessResponseResponseTypedDict": ".listdocumentaccessop",
     "ListDocumentAccessResponse": ".listdocumentaccessresponse",
     "ListDocumentAccessResponseTypedDict": ".listdocumentaccessresponse",
+    "ListDocumentDuplicatesRequest": ".listdocumentduplicatesop",
+    "ListDocumentDuplicatesRequestTypedDict": ".listdocumentduplicatesop",
+    "ListDocumentDuplicatesResponseResponse": ".listdocumentduplicatesop",
+    "ListDocumentDuplicatesResponseResponseTypedDict": ".listdocumentduplicatesop",
+    "ListDocumentDuplicatesResponse": ".listdocumentduplicatesresponse",
+    "ListDocumentDuplicatesResponseTypedDict": ".listdocumentduplicatesresponse",
     "ListDocumentPoliciesRequest": ".listdocumentpoliciesop",
     "ListDocumentPoliciesRequestTypedDict": ".listdocumentpoliciesop",
     "ListDocumentPoliciesResponseResponse": ".listdocumentpoliciesop",
@@ -1300,6 +1431,15 @@ _dynamic_imports: dict[str, str] = {
     "PaginationTypedDict": ".pagination",
     "Policy": ".policy",
     "PolicyTypedDict": ".policy",
+    "ProcessDocumentProcessDocumentRequest": ".processdocumentop",
+    "ProcessDocumentProcessDocumentRequestTypedDict": ".processdocumentop",
+    "ProcessDocumentRequest": ".processdocumentop",
+    "ProcessDocumentRequestTypedDict": ".processdocumentop",
+    "ProcessDocumentResponseResponse": ".processdocumentop",
+    "ProcessDocumentResponseResponseTypedDict": ".processdocumentop",
+    "ProcessDocumentResponse": ".processdocumentresponse",
+    "ProcessDocumentResponseTypedDict": ".processdocumentresponse",
+    "ProcessingOutcome": ".processingoutcome",
     "ProcessingStatus": ".processingstatus",
     "QuotaServiceDeleteOrganizationQuotaRequest": ".quotaservice_deleteorganizationquotaop",
     "QuotaServiceDeleteOrganizationQuotaRequestTypedDict": ".quotaservice_deleteorganizationquotaop",
@@ -1385,6 +1525,30 @@ _dynamic_imports: dict[str, str] = {
     "TimelineEvent": ".timelineevent",
     "TimelineEventTypedDict": ".timelineevent",
     "TimelineEventType": ".timelineeventtype",
+    "TransferDocumentOwnershipRequest": ".transferdocumentownershipop",
+    "TransferDocumentOwnershipRequestTypedDict": ".transferdocumentownershipop",
+    "TransferDocumentOwnershipResponseResponse": ".transferdocumentownershipop",
+    "TransferDocumentOwnershipResponseResponseTypedDict": ".transferdocumentownershipop",
+    "TransferDocumentOwnershipTransferDocumentOwnershipRequest": ".transferdocumentownershipop",
+    "TransferDocumentOwnershipTransferDocumentOwnershipRequestTypedDict": ".transferdocumentownershipop",
+    "TransferDocumentOwnershipResponse": ".transferdocumentownershipresponse",
+    "TransferDocumentOwnershipResponseTypedDict": ".transferdocumentownershipresponse",
+    "TrashDocumentRequest": ".trashdocumentop",
+    "TrashDocumentRequestTypedDict": ".trashdocumentop",
+    "TrashDocumentResponseResponse": ".trashdocumentop",
+    "TrashDocumentResponseResponseTypedDict": ".trashdocumentop",
+    "TrashDocumentTrashDocumentRequest": ".trashdocumentop",
+    "TrashDocumentTrashDocumentRequestTypedDict": ".trashdocumentop",
+    "TrashDocumentResponse": ".trashdocumentresponse",
+    "TrashDocumentResponseTypedDict": ".trashdocumentresponse",
+    "UntrashDocumentRequest": ".untrashdocumentop",
+    "UntrashDocumentRequestTypedDict": ".untrashdocumentop",
+    "UntrashDocumentResponseResponse": ".untrashdocumentop",
+    "UntrashDocumentResponseResponseTypedDict": ".untrashdocumentop",
+    "UntrashDocumentUntrashDocumentRequest": ".untrashdocumentop",
+    "UntrashDocumentUntrashDocumentRequestTypedDict": ".untrashdocumentop",
+    "UntrashDocumentResponse": ".untrashdocumentresponse",
+    "UntrashDocumentResponseTypedDict": ".untrashdocumentresponse",
     "UpdateDocumentAccessRequest": ".updatedocumentaccessop",
     "UpdateDocumentAccessRequestTypedDict": ".updatedocumentaccessop",
     "UpdateDocumentAccessResponseResponse": ".updatedocumentaccessop",

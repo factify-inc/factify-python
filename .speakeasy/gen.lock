@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: ae413d09d2aabb0f3ce37c06d4ed8be7
-  docVersion: 1.1.0-rc.2
+  docChecksum: fb5da352f313ccd9e0ad590c517252bc
+  docVersion: 1.2.0-rc.1
   speakeasyVersion: 1.759.0
   generationVersion: 2.869.3
-  releaseVersion: 1.1.0
-  configChecksum: f35fc290d4e454cd80d65365e33d8574
+  releaseVersion: 1.2.0-rc.1
+  configChecksum: 4a89311d7904a4603a446445aec759dc
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: a07cb280-4aff-4b8d-a300-b5b32df37006
-  pristine_commit_hash: e2cd0b0a725171e2dce7a0a2a9cc9de1175368b1
-  pristine_tree_hash: 321e9f379d2c0a39d3e092d1eb157d0ed54fe7fd
+  generation_id: abc34556-5454-4dd7-b24a-efd7cab16d5a
+  pristine_commit_hash: f106643f99f2713cbaa4966b14a2cca849896ff8
+  pristine_tree_hash: 7aa5d234e4558ada02af72bee5cc39194a19c370
 features:
   python:
     additionalDependencies: 1.0.0
@@ -318,8 +318,8 @@ trackedFiles:
     pristine_git_object: cbe8cd6448ee1a843211d6d1359a1535b0831583
   docs/models/document.md:
     id: cd1d2a444370
-    last_write_checksum: sha1:45f7811f165286446e5d54c12c29a12be642f1a7
-    pristine_git_object: 51732364654b5985b68f4eb31006d6d7f089ec18
+    last_write_checksum: sha1:348a439e172977aece5b9322bb42ab7201883aa1
+    pristine_git_object: 48d738dace7a301d656418bd4f1832faff488e59
   docs/models/documentownership.md:
     id: 8887cc44bd1a
     last_write_checksum: sha1:9aca5e5ac1816baa235ff7c4e6b3cd50ae48f4b8
@@ -340,6 +340,10 @@ trackedFiles:
     id: 14243bb1ddef
     last_write_checksum: sha1:0258345a79850cb6f226bb17feb1071e87700d29
     pristine_git_object: ee840497b7b7b86e1332bb6da08c1b47bdac19b5
+  docs/models/duplicatedocument.md:
+    id: baa71b2e340a
+    last_write_checksum: sha1:4132531ae4a184621a4f26ee60d7704f1c9ac1cb
+    pristine_git_object: fce249c60eb1affdbe0ca4c29edc1dda33e612ab
   docs/models/empty.md:
     id: b557679773a6
     last_write_checksum: sha1:6d3dc785671bab2893660c7b20cdbc235652c5f5
@@ -352,6 +356,18 @@ trackedFiles:
     id: efb5019826be
     last_write_checksum: sha1:2e9940e6d995a2bef0b63f06ff3700a7e39e4fbc
     pristine_git_object: 25417ff0c2a5772bf755f612989c4c0f0ebb7e77
+  docs/models/exportdocumentrequest.md:
+    id: d014361cf344
+    last_write_checksum: sha1:e701171d7c297da54952a32793a6a99dbb96b618
+    pristine_git_object: 86ca431af0b0c1975728b950f0bfd2d3f2ecceb7
+  docs/models/exportdocumentresponse.md:
+    id: b57ee8e05015
+    last_write_checksum: sha1:96d7168c9442f26745545bf0e875986847380b2f
+    pristine_git_object: 43b6349305023ab52c24b8b5973dd609583ab895
+  docs/models/exportdocumentresponseresponse.md:
+    id: d115a420224a
+    last_write_checksum: sha1:11365a6adce378f0a244c8012d8421f3652e4492
+    pristine_git_object: 3e30b753f56454af7554c15217101d1fd155bf11
   docs/models/generalaccesslevel.md:
     id: e450d0bb5875
     last_write_checksum: sha1:bcbc8d68579efd1157d6e537eb055052ccc839c3
@@ -378,8 +394,8 @@ trackedFiles:
     pristine_git_object: 575435db9ad4c23a60d6d84a16fcc9d5222fca3f
   docs/models/getdocumentrequest.md:
     id: 4208f9b571b3
-    last_write_checksum: sha1:87f69a382729188af8b82912701a0e8896c8ee3a
-    pristine_git_object: 7a2c6a7dce136e3871d1dc2a7a98771b60f63178
+    last_write_checksum: sha1:bdfdf1e9490dc29c5965ac17aa104b426fe191d2
+    pristine_git_object: 7cfd4f6fb08665f837bf9103be20aefaea7a42db
   docs/models/getdocumentresponse.md:
     id: cbd0df7573fe
     last_write_checksum: sha1:a4898dfa7fa97975148c51b8f4f4133cda3212d0
@@ -548,6 +564,18 @@ trackedFiles:
     id: d2b9bb73567a
     last_write_checksum: sha1:cb7c93cc370b5281623d9ebd14f7f4c623098c2e
     pristine_git_object: b263be746668324d03783265b787a3f0762d6256
+  docs/models/listdocumentduplicatesrequest.md:
+    id: be3dcdfe61a3
+    last_write_checksum: sha1:65f9ba18d0dc89be72852867b25438436295162b
+    pristine_git_object: 21650bb9893cbf33818bdcee6d266b08ee6c1064
+  docs/models/listdocumentduplicatesresponse.md:
+    id: d60da5b11db7
+    last_write_checksum: sha1:899b160715391a12b158e32b02c07fa9d13cfb6a
+    pristine_git_object: b2f48b9485cb748737bacda086ed718629a853c8
+  docs/models/listdocumentduplicatesresponseresponse.md:
+    id: 604ed78f00a3
+    last_write_checksum: sha1:cad28a6c716ad9343291d1ff356601ae67cbc43f
+    pristine_git_object: 4b9a2dda72da742098840b98537b6c771ff564d9
   docs/models/listdocumentpoliciesrequest.md:
     id: 1634feba7129
     last_write_checksum: sha1:acd9821033918ed9d038e5acfff9c3dad85b001d
@@ -656,6 +684,26 @@ trackedFiles:
     id: c32c4f30cd71
     last_write_checksum: sha1:f7d0835170e7a4823ee119ca6fb9489c1a6c233f
     pristine_git_object: a6b070076a4458f1f24ca0847cd36aa3cf30cbc1
+  docs/models/processdocumentprocessdocumentrequest.md:
+    id: 3c9f02a0a27d
+    last_write_checksum: sha1:6167a70a1fa9ebeb189be7f0e697df2acb255715
+    pristine_git_object: fbbc0a2f4b00a4a2d1b744dde3eb2f7d1aa0b7f3
+  docs/models/processdocumentrequest.md:
+    id: 131c443b3ed7
+    last_write_checksum: sha1:e6cda06e812f672a7684f081fb0762c4f5a17b07
+    pristine_git_object: 473276d266e4fb46e4a89f784e8d082afa2407ee
+  docs/models/processdocumentresponse.md:
+    id: f099ffaea7fa
+    last_write_checksum: sha1:9b3fdd6176394dd19c809a9c405fe51be9285ad8
+    pristine_git_object: efe32fb6b755d8e8c90a67d3bddaefd63493a524
+  docs/models/processdocumentresponseresponse.md:
+    id: cc73f9b55192
+    last_write_checksum: sha1:16e207bd134157b4c8ee1e487bd1308c1c1122b7
+    pristine_git_object: 2b777e14715da50bb591b66ef0974fa534207416
+  docs/models/processingoutcome.md:
+    id: d45db7008b02
+    last_write_checksum: sha1:ce57c5e7ec7b8d2c6fa4ca60ded900a890b931aa
+    pristine_git_object: 90720a96b160c8ed28f1476e439021f27c3ff60f
   docs/models/processingstatus.md:
     id: 06047222d2ff
     last_write_checksum: sha1:b1b18b1f2277a8a42524d83d9f3644f505104e12
@@ -840,6 +888,54 @@ trackedFiles:
     id: a21edff51a74
     last_write_checksum: sha1:9b84c4482e5cb055971a6f0678a9a9fd3677ab65
     pristine_git_object: 0a7676c6612d29e8f28047f098e1f33201fda3db
+  docs/models/transferdocumentownershiprequest.md:
+    id: 0cc7b3594df6
+    last_write_checksum: sha1:f259577c5223918824888e337f2a8bae5fb3ddc0
+    pristine_git_object: 3841953ffe2ffaee8bb01bf5675f0e801525b754
+  docs/models/transferdocumentownershipresponse.md:
+    id: d3e31226e295
+    last_write_checksum: sha1:15ad97df9a21bbccb86600829b584f8a6dbe81d4
+    pristine_git_object: 2d23b7d79e7a25f93d904cb6578ed714d623af91
+  docs/models/transferdocumentownershipresponseresponse.md:
+    id: 40a040bcd460
+    last_write_checksum: sha1:18f50cebee67d6e938e040e6a7229191bb03c702
+    pristine_git_object: a07f03b0279b9d4c174f0f384669900ce6834403
+  docs/models/transferdocumentownershiptransferdocumentownershiprequest.md:
+    id: f5f3ce1988bf
+    last_write_checksum: sha1:a6e4625803891e15ce873dc71837fef1d3837321
+    pristine_git_object: 25d27d72f811ba524cd7878c2bcee2697c097182
+  docs/models/trashdocumentrequest.md:
+    id: 6080f960dce5
+    last_write_checksum: sha1:0791b6c917609d0f9ead0526f9cf7e62ea8107c4
+    pristine_git_object: 33684ddc5254b0a6c2a59394bbfb568799aa1057
+  docs/models/trashdocumentresponse.md:
+    id: 74661bc9c4ca
+    last_write_checksum: sha1:5e524cf2987ad135e35317533187026e495a6502
+    pristine_git_object: c9dade494d441e2f1caa1d54669cfffe99227a29
+  docs/models/trashdocumentresponseresponse.md:
+    id: 01d5e3e79dbd
+    last_write_checksum: sha1:ad077d8e8ad7fb6b6e6027179472b4507db81655
+    pristine_git_object: bf7be518e71922b5a43243c951e9243cda5aaa0a
+  docs/models/trashdocumenttrashdocumentrequest.md:
+    id: 8627501ab990
+    last_write_checksum: sha1:c9808cfbfdc1dce6fbe83b54fdff533166e2a6b9
+    pristine_git_object: 8db94c5a22285e9255763dd87b83cd47f408428e
+  docs/models/untrashdocumentrequest.md:
+    id: 3ef25ed6b37a
+    last_write_checksum: sha1:8d5e91ca3a221b62019042e787ed3f3368d1766a
+    pristine_git_object: c3a8d3d1a5f9d7961b8b8f3d92e1f404dc6d0c81
+  docs/models/untrashdocumentresponse.md:
+    id: 7d0ed57e0c81
+    last_write_checksum: sha1:4181f9e68c9e3c7de4ed8da17df4c627618e63ed
+    pristine_git_object: bde00647d740aaa6304fad29916d5c54c47e889e
+  docs/models/untrashdocumentresponseresponse.md:
+    id: b78bee3aa1ac
+    last_write_checksum: sha1:2642c7b9afe411cb68eeca18ee0676d80773e7ed
+    pristine_git_object: 61ea6c68bac05a24122775eacc3b1d0456ae11ef
+  docs/models/untrashdocumentuntrashdocumentrequest.md:
+    id: 75cc157fe6f7
+    last_write_checksum: sha1:2d3a75a393ae14b202832bb5b6fe9d06abbff9a6
+    pristine_git_object: c68a1a8765cc1955a06c947336ea95545fd14a1b
   docs/models/updatedocumentaccessrequest.md:
     id: d069c1b5ab6c
     last_write_checksum: sha1:0bf8c56b134e50e1a7fa45d00fb9d63cc12a75cf
@@ -858,8 +954,8 @@ trackedFiles:
     pristine_git_object: 17947e7d667e2446a226c7c3408b9bb79a6547e2
   docs/models/updatedocumentrequest.md:
     id: ee4e094a6aa7
-    last_write_checksum: sha1:9ad72d59301a8ee43bdbd2ead72d42756411d5a4
-    pristine_git_object: e0eaf505cef773eb01bd57d545102b6e0fd4e47f
+    last_write_checksum: sha1:29b2900134ce6ded5415ec9a3a214a5c85d25e84
+    pristine_git_object: eb00c1a043971c75ca13b480ec9647a4ceb9a269
   docs/models/updatedocumentresponse.md:
     id: cbe19d0def44
     last_write_checksum: sha1:cbd70423eaeed019922759d0c4e7d98513da5179
@@ -946,8 +1042,8 @@ trackedFiles:
     pristine_git_object: 9dcb104087cc3a5c5dcac744af51a60e998b68f9
   docs/sdks/documents/README.md:
     id: 9758e88a0a9d
-    last_write_checksum: sha1:89a966634eb109196d11b1105c5a3524d414274a
-    pristine_git_object: 95083c8e3d4ad7b9b4cbf7cb93d0b0847425ec1c
+    last_write_checksum: sha1:372c345ea658fd792f94d7d5ffcec5018a8ab329
+    pristine_git_object: 94f87cdc5571ff4680827be9763ba450ea1fae5d
   docs/sdks/entrypages/README.md:
     id: 7fec98293884
     last_write_checksum: sha1:c171abfb492af76519bbfc8c8d731c70d1839496
@@ -1010,8 +1106,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a6c1f98299d11098820348c0748fc30bfa88fa2f
-    pristine_git_object: 275b8657b26e938002870917ba9daef01704606b
+    last_write_checksum: sha1:79d7d75e9e6d97b8ffb53e7bdc88fd75ef25aec3
+    pristine_git_object: 144be0543f3d3e0596a447e27a7e4276c561a892
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -1038,8 +1134,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:2de1229ad5f6be73e7b4708d57bd94341c4c8702
-    pristine_git_object: a75de38bedec71abc97ee33af7c50cbc0646d2a9
+    last_write_checksum: sha1:4828343fdf72cf489b290a0d2bdf1a07da8dab03
+    pristine_git_object: 8d873898a34879ae528cc566665a33b202ab56f6
   src/factify/accessrequests.py:
     id: 31a20ba0373b
     last_write_checksum: sha1:2ae2764fb41d3e303510aa968e9d2d31a9b4861b
@@ -1054,8 +1150,8 @@ trackedFiles:
     pristine_git_object: d12c57680f6d7c60f6f990c09bfdd91fc0be137b
   src/factify/documents.py:
     id: d7b8f9150d12
-    last_write_checksum: sha1:0fa8926dd34695bbe737e3f6172e03c281b0bf8c
-    pristine_git_object: 3bc5ea5ce4f09dce21a54c808221acc15a7f0442
+    last_write_checksum: sha1:85fff5907b7a3f764d729b1a268d5ea84d6cbc71
+    pristine_git_object: 12b85499a37dc3d1b518badc81e5abe5c1b4cbad
   src/factify/entrypages.py:
     id: dd805ed9ee64
     last_write_checksum: sha1:bd9ff1743397225efb96f4f5aa204105bf2a17e4
@@ -1098,8 +1194,8 @@ trackedFiles:
     pristine_git_object: afa826e38268941162edc0f37d6b68dc24ed1773
   src/factify/models/__init__.py:
     id: b45df6051cc0
-    last_write_checksum: sha1:6b0b89f2a1008547acff72bde76220580a64bef1
-    pristine_git_object: d0754484f94a80009c9fe0c51a18cee04ba6e66c
+    last_write_checksum: sha1:e50bf4c44043b86caad7e9655895229a808cd357
+    pristine_git_object: 848f31dd40fe0507f6f2c508136ea9701735f017
   src/factify/models/acceptorganizationinviteop.py:
     id: 90bc63055feb
     last_write_checksum: sha1:f20b151a408c61fc3f958393f751b2ee99ecd08d
@@ -1262,8 +1358,8 @@ trackedFiles:
     pristine_git_object: 9f6bf9b78b262d0b94d07f399d3f2a0d2bcbf8c2
   src/factify/models/document.py:
     id: a1fadbc5e723
-    last_write_checksum: sha1:5f54605ad2a7d6b0a4465dd51c17c729b907f576
-    pristine_git_object: 183b589c0b220a1826ed6fa753f52e37aa643e8b
+    last_write_checksum: sha1:7d95862f5b13f4101c73194922bb37e16d7571ef
+    pristine_git_object: 2572e591f11f4571b65673b88432a93038569c5e
   src/factify/models/documentownership.py:
     id: 18fa97c46b49
     last_write_checksum: sha1:2a3a727de7e34ee344cd5bb49a81a2da614c16c5
@@ -1284,6 +1380,10 @@ trackedFiles:
     id: 9699a0a88b28
     last_write_checksum: sha1:3659753b6ed7d51f64cf6f0cd1e3306f7e227124
     pristine_git_object: 9353b8186a63644cfa255b6c155c6d3bb89d7761
+  src/factify/models/duplicatedocument.py:
+    id: b0d8a72a22ae
+    last_write_checksum: sha1:52386fd3d0058f2074af1fb34da089dedd2e7367
+    pristine_git_object: 9e09c77af525215785cef542b7844d2f8f8baa73
   src/factify/models/empty.py:
     id: 8f2c7e3e13cf
     last_write_checksum: sha1:70e41156e18e51202fd4c3d44d6da36015b185c2
@@ -1296,6 +1396,14 @@ trackedFiles:
     id: 003520b9cd8b
     last_write_checksum: sha1:505ec649a30976530243bb46b50041b12654c86f
     pristine_git_object: e251fb42bcab0f46ea79802cbfb23eab7451bb72
+  src/factify/models/exportdocumentop.py:
+    id: d53b1a8dba42
+    last_write_checksum: sha1:ee3f122e107f357666efc939f8f1a9ec6b42a586
+    pristine_git_object: 44abead28950cc6cb3994dea318e87db6ca7558c
+  src/factify/models/exportdocumentresponse.py:
+    id: ec3a5fbf6c6d
+    last_write_checksum: sha1:27701a998165d8b8c50d8a9d572e77e0d19208aa
+    pristine_git_object: 9785bd948ae5e1e40ab52a87d0920208d09c729c
   src/factify/models/generalaccesslevel.py:
     id: ecf2a6e503bc
     last_write_checksum: sha1:cf2cce20cfd9e675668adab55c7aeddd03e3de66
@@ -1310,8 +1418,8 @@ trackedFiles:
     pristine_git_object: 49c31d63c9aaec102f1956c507e85ff5cf384f67
   src/factify/models/getdocumentop.py:
     id: 7c3498f50517
-    last_write_checksum: sha1:04a5846f5f4d3c35295b58e92964e08284225b20
-    pristine_git_object: b63e3cfb3b0cb6f1cf91c16adc638ef0ca64bf27
+    last_write_checksum: sha1:0f9dd8bcc294ff043ea5f3fd8e720f2d8b3928a5
+    pristine_git_object: 0929c9d1b568e452f7e7660ea7430da7c9cf70f5
   src/factify/models/getdocumentquotaop.py:
     id: 2823cf98ab9b
     last_write_checksum: sha1:cde8d86dfa3b624b20183f44c84b548ef2f54d1d
@@ -1432,6 +1540,14 @@ trackedFiles:
     id: 645b17a66d6f
     last_write_checksum: sha1:62d81cad5ffc7cb9bac5b254de42a5f62ce5d513
     pristine_git_object: 56ff1024f3b8bb6282729c86b661c4c1cd9c349c
+  src/factify/models/listdocumentduplicatesop.py:
+    id: 721bd5805309
+    last_write_checksum: sha1:64159e86b1266c88eb460723297a7bc2084a5623
+    pristine_git_object: 798233d9a8661387d974cf57a0b0379404720540
+  src/factify/models/listdocumentduplicatesresponse.py:
+    id: d36594b1589e
+    last_write_checksum: sha1:2aef182cf1ec724e139ee9ccee31c8d2c5899119
+    pristine_git_object: ec5308099665a0743791b23b87c9814a7b026c68
   src/factify/models/listdocumentpoliciesop.py:
     id: 619b79954bbc
     last_write_checksum: sha1:3052884db99bd29fa3571c6bc2cc44035771da27
@@ -1516,6 +1632,18 @@ trackedFiles:
     id: ba246a9a5e62
     last_write_checksum: sha1:b1ecda49287624c1b423dedbf5e2832b84172591
     pristine_git_object: fe74779ebce7c093850be273253fd2c5d841504c
+  src/factify/models/processdocumentop.py:
+    id: a11daf3acb71
+    last_write_checksum: sha1:13404773debb8f55301cedf0eb1b32928cd13741
+    pristine_git_object: 0f231b76b05bed0acbec9ab63bad5606ae45e1e5
+  src/factify/models/processdocumentresponse.py:
+    id: 01d9828c9294
+    last_write_checksum: sha1:d74d6d3045efa34069e539e3b9e1821546ae647e
+    pristine_git_object: 2bb898de41dd3e9c68403a6b8c8173d6d6d7c3c5
+  src/factify/models/processingoutcome.py:
+    id: bc0c9285526c
+    last_write_checksum: sha1:e8b3018d2b0d1b9db20dd76a155e389b0458dc9d
+    pristine_git_object: 6c4cb7110a2111761b3ef4f8b80bbcc67555a828
   src/factify/models/processingstatus.py:
     id: df1e201ffe54
     last_write_checksum: sha1:9839eddbe887a91b417cff74127d651f03d1984b
@@ -1632,6 +1760,30 @@ trackedFiles:
     id: 37209b12fbed
     last_write_checksum: sha1:ba35b53f7f39486728df2d5e82dadac19ec2dee2
     pristine_git_object: 4feca413b1a18b5fd629a29613faa49a152a0707
+  src/factify/models/transferdocumentownershipop.py:
+    id: 8640fc7f8f58
+    last_write_checksum: sha1:13e84292439d1d922fe616ded9a51fdabff5a095
+    pristine_git_object: 5e0f4710a63391e8f32e1b409e1f2ce24a6c2dd5
+  src/factify/models/transferdocumentownershipresponse.py:
+    id: e4ba5a772c6f
+    last_write_checksum: sha1:ce5a9b353a4cca87f2e18b1f3632463163815dcc
+    pristine_git_object: 7b7fa53a5523e873760e78116370982178a7d525
+  src/factify/models/trashdocumentop.py:
+    id: 215b26d909b0
+    last_write_checksum: sha1:06ccf911dcb780198e8f8c7e0a253fbed70bba23
+    pristine_git_object: 42852d09f50a7d42772ea1ca121892fd159080e7
+  src/factify/models/trashdocumentresponse.py:
+    id: a2e4705af613
+    last_write_checksum: sha1:4a90699e90249b011dd324cb17d561331d10048a
+    pristine_git_object: 19f37db85c5f3cf6ed07005b2284c7f8e9b43140
+  src/factify/models/untrashdocumentop.py:
+    id: c0cee42e7031
+    last_write_checksum: sha1:9f1adb6f9a64f9a14b1c04c0e20fa9a840a58bcf
+    pristine_git_object: 5c7a1fb1b4217fecd72e87420971e43676cd1047
+  src/factify/models/untrashdocumentresponse.py:
+    id: da3260fae174
+    last_write_checksum: sha1:9f260d083c3c3306bdc1a7cc5fb2a37b356061bd
+    pristine_git_object: e576aad2eafe903b0edbd20a9c905b4fcef93e72
   src/factify/models/updatedocumentaccessop.py:
     id: d71f633b4eac
     last_write_checksum: sha1:70c87dcd4f3ab03af24b07682884c8d2b134febb
@@ -1642,8 +1794,8 @@ trackedFiles:
     pristine_git_object: 960ebaefc7e691c52bbf5e1f5a65f445265e34a8
   src/factify/models/updatedocumentop.py:
     id: 5f43cea1006c
-    last_write_checksum: sha1:08612154ee527da8c74e8114590a95033027d4c1
-    pristine_git_object: 792e5546fc5baea84f8e3ef23b3c5d118cb42e07
+    last_write_checksum: sha1:caa4d4268d189371c83142ab8d63e799a9517083
+    pristine_git_object: 5e8f15a18c98cf4763ab16899db4a42d89a4ba09
   src/factify/models/updatedocumentresponse.py:
     id: 6fc670e04b8d
     last_write_checksum: sha1:b7a22d6bfdadaf302fab27b06802024ce3e8d82f
@@ -1939,7 +2091,7 @@ examples:
         multipart/form-data: {"payload": "x-file: example.file", "title": "<value>"}
       responses:
         "200":
-          application/json: {"document": {"access_level": "private", "created_at": "2024-02-28T19:09:19.845Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "failed", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
+          application/json: {"document": {"access_level": "private", "created_at": "2024-02-28T19:09:19.845Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "user"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "owner_organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "failed", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
         "400":
           application/json: {"code": "unknown", "message": "<value>"}
         "429":
@@ -1964,7 +2116,7 @@ examples:
           document_id: "<id>"
       responses:
         "200":
-          application/json: {"document": {"access_level": "organization", "created_at": "2025-08-28T09:44:27.862Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "bot"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "processing", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
+          application/json: {"document": {"access_level": "organization", "created_at": "2025-08-28T09:44:27.862Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "bot"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "owner_organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "processing", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
         "400":
           application/json: {"code": "resource_exhausted", "message": "<value>"}
         "429":
@@ -1993,7 +2145,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"document": {"access_level": "public", "created_at": "2024-08-12T11:38:39.237Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "bot"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "failed", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
+          application/json: {"document": {"access_level": "public", "created_at": "2024-08-12T11:38:39.237Z", "created_by": {"id": "user_01h2xcejqtf2nbrexx3vqjhp41", "name": "John Doe", "type": "bot"}, "current_version": {"id": "ver_01h2abcd1234efgh5678jkmnpt"}, "description": "Quarterly financial report for Q4 2024", "id": "doc_01h2xcejqtf2nbrexx3vqjhp41", "owner_organization_id": "org_01h2xcejqtf2nbrexx3vqjhp41", "processing_status": "failed", "title": "Q4 2024 Financial Report", "url": "https://d.factify.com/d/01h2xcejqtf2nbrexx3vqjhp41"}}
         "400":
           application/json: {"code": "unimplemented", "message": "<value>"}
         "429":
@@ -3225,28 +3377,186 @@ examples:
           application/json: {"code": "unknown", "message": "<value>"}
         "500":
           application/json: {"code": "unknown", "message": "<value>"}
+  listDocumentDuplicates:
+    validation_error:
+      parameters:
+        path:
+          document_id: "doc_01h2xcejqtf2nbrexx3vqjhp41"
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-list-document-duplicates:
+      parameters:
+        path:
+          document_id: "doc_01h2xcejqtf2nbrexx3vqjhp41"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "unimplemented", "message": "<value>"}
+        "429":
+          application/json: {"code": "unimplemented", "message": "<value>"}
+        "500":
+          application/json: {"code": "unimplemented", "message": "<value>"}
+  exportDocument:
+    validation_error:
+      parameters:
+        path:
+          document_id: "doc_01h2xcejqtf2nbrexx3vqjhp41"
+        query:
+          version_id: "ver_01h2abcd1234efgh5678jkmnpt"
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-export-document:
+      parameters:
+        path:
+          document_id: "doc_01h2xcejqtf2nbrexx3vqjhp41"
+        query:
+          version_id: "ver_01h2abcd1234efgh5678jkmnpt"
+      responses:
+        "200":
+          application/json: {"expires_at": "2024-08-14T01:07:43.140Z", "url": "https://amused-jellyfish.net/"}
+        "400":
+          application/json: {"code": "already_exists", "message": "<value>"}
+        "429":
+          application/json: {"code": "already_exists", "message": "<value>"}
+        "500":
+          application/json: {"code": "already_exists", "message": "<value>"}
+  processDocument:
+    validation_error:
+      parameters:
+        path:
+          document_id: "doc_01h2xcejqtf2nbrexx3vqjhp41"
+      requestBody:
+        application/json: {"version_id": "ver_01h2abcd1234efgh5678jkmnpt"}
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-process-document:
+      parameters:
+        path:
+          document_id: "doc_01h2xcejqtf2nbrexx3vqjhp41"
+      requestBody:
+        application/json: {"version_id": "ver_01h2abcd1234efgh5678jkmnpt"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "resource_exhausted", "message": "<value>"}
+        "429":
+          application/json: {"code": "resource_exhausted", "message": "<value>"}
+        "500":
+          application/json: {"code": "resource_exhausted", "message": "<value>"}
+  transferDocumentOwnership:
+    validation_error:
+      parameters:
+        path:
+          document_id: "doc_01h2xcejqtf2nbrexx3vqjhp41"
+      requestBody:
+        application/json: {"new_owner_id": "user_01h2xcejqtf2nbrexx3vqjhp41"}
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-transfer-document-ownership:
+      parameters:
+        path:
+          document_id: "doc_01h2xcejqtf2nbrexx3vqjhp41"
+      requestBody:
+        application/json: {"new_owner_id": "user_01h2xcejqtf2nbrexx3vqjhp41"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "invalid_argument", "message": "<value>"}
+        "429":
+          application/json: {"code": "invalid_argument", "message": "<value>"}
+        "500":
+          application/json: {"code": "invalid_argument", "message": "<value>"}
+  trashDocument:
+    validation_error:
+      parameters:
+        path:
+          document_id: "doc_01h2xcejqtf2nbrexx3vqjhp41"
+      requestBody:
+        application/json: {}
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-trash-document:
+      parameters:
+        path:
+          document_id: "doc_01h2xcejqtf2nbrexx3vqjhp41"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "canceled", "message": "<value>"}
+        "429":
+          application/json: {"code": "canceled", "message": "<value>"}
+        "500":
+          application/json: {"code": "canceled", "message": "<value>"}
+  untrashDocument:
+    validation_error:
+      parameters:
+        path:
+          document_id: "doc_01h2xcejqtf2nbrexx3vqjhp41"
+      requestBody:
+        application/json: {}
+      responses:
+        "400":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "429":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+        "500":
+          application/json: {"code": "invalid_argument", "details": [{"param": "title", "reason": "missing_required_field", "request_id": "req_01arwx4k8xrgqskvxq69gdn019"}], "message": "Document title cannot be empty"}
+    speakeasy-default-untrash-document:
+      parameters:
+        path:
+          document_id: "doc_01h2xcejqtf2nbrexx3vqjhp41"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"code": "internal", "message": "<value>"}
+        "429":
+          application/json: {"code": "internal", "message": "<value>"}
+        "500":
+          application/json: {"code": "internal", "message": "<value>"}
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `factify.timelines.get_document_timeline()`: **Added**
-  * `factify.users.get_me()`: **Added**
-  * `factify.organizations.update_organization()`: **Added**
-  * `factify.invites.accept_organization_invite()`: **Added**
-  * `factify.invites.resend_organization_invite()`: **Added**
-  * `factify.invites.revoke_organization_invite()`: **Added**
-  * `factify.members.list_organization_members()`: **Added**
-  * `factify.members.add_organization_member()`: **Added**
-  * `factify.members.remove_organization_member()`: **Added**
-  * `factify.members.update_organization_member()`: **Added**
-  * `factify.organizations.create()`: **Removed** (Breaking ⚠️)
-  * `factify.organizations.accept_organization_invite()`: **Removed** (Breaking ⚠️)
-  * `factify.organizations.resend_organization_invite()`: **Removed** (Breaking ⚠️)
-  * `factify.organizations.revoke_organization_invite()`: **Removed** (Breaking ⚠️)
-  * `factify.organizations.list_organization_members()`: **Removed** (Breaking ⚠️)
-  * `factify.organizations.add_organization_member()`: **Removed** (Breaking ⚠️)
-  * `factify.organizations.remove_organization_member()`: **Removed** (Breaking ⚠️)
-  * `factify.organizations.update_organization_member()`: **Removed** (Breaking ⚠️)
-  * `factify.organizations.list()`:  `response.items[].logo_image_url` **Added**
-  * `factify.organizations.get()`:  `response.organization.logo_image_url` **Added**
-  * `factify.organizations.invites.list()`:  `response.items[].accepted_by` **Changed**
-  * `factify.organizations.invites.create()`:  `response.invite.accepted_by` **Changed**
+  * `factify.documents.list_duplicates()`: **Added**
+  * `factify.documents.export()`: **Added**
+  * `factify.documents.process()`: **Added**
+  * `factify.documents.transfer_ownership()`: **Added**
+  * `factify.documents.trash()`: **Added**
+  * `factify.documents.untrash()`: **Added**
+  * `factify.documents.list()`:  `response.items[].owner_organization_id` **Added**
+  * `factify.documents.create()`:  `response.document.owner_organization_id` **Added**
+  * `factify.documents.get()`:  `response.document.owner_organization_id` **Added**
+  * `factify.documents.update()`:  `response.document.owner_organization_id` **Added**
