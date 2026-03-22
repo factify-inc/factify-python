@@ -1,0 +1,58 @@
+# TODO: Enable this workflow once we have the PyPI org set up.
+# Uncomment the workflow below to send Slack notifications on SDK releases.
+#
+# name: SDK Release Notification
+#
+# permissions:
+#   contents: read
+#
+# on:
+#   release:
+#     types: [created]
+#
+# jobs:
+#   notify:
+#     name: Send Slack notification
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Prepare message payload
+#         id: prepare-message
+#         shell: bash
+#         env:
+#           RELEASE_NAME: ${{ github.event.release.name }}
+#           RELEASE_URL: ${{ github.event.release.html_url }}
+#         run: |
+#           PAYLOAD=$(jq -n \
+#             --arg name "$RELEASE_NAME" \
+#             --arg url "$RELEASE_URL" \
+#             '{
+#               text: "SDK Published: \($name)",
+#               blocks: [
+#                 {
+#                   type: "section",
+#                   text: {
+#                     type: "mrkdwn",
+#                     text: "*SDK Published: \($name)*"
+#                   },
+#                   accessory: {
+#                     type: "button",
+#                     text: {
+#                       type: "plain_text",
+#                       text: "View Release"
+#                     },
+#                     url: $url
+#                   }
+#                 }
+#               ]
+#             }')
+#
+#           echo "payload<<EOF" >> $GITHUB_OUTPUT
+#           echo "$PAYLOAD" >> $GITHUB_OUTPUT
+#           echo "EOF" >> $GITHUB_OUTPUT
+#
+#       - name: Send Slack notification
+#         uses: slackapi/slack-github-action@v2.1.1
+#         with:
+#           webhook: ${{ secrets.FACTOPS_PROD_RELEASE_SLACK_URL }}
+#           webhook-type: incoming-webhook
+#           payload: ${{ steps.prepare-message.outputs.payload }}
