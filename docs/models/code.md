@@ -1,4 +1,4 @@
-# ErrorResponseCode
+# Code
 
 ConnectRPC error code. Maps to HTTP status codes:
 - invalid_argument, failed_precondition -> 400
@@ -17,8 +17,8 @@ ConnectRPC error code. Maps to HTTP status codes:
 ## Example Usage
 
 ```python
-from factify.models import ErrorResponseCode
-value: ErrorResponseCode = "unknown"
+from factify.models import Code
+value: Code = "unknown"
 ```
 
 

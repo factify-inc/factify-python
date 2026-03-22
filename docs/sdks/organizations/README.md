@@ -8,7 +8,7 @@ Create and manage organizations.
 
 * [list](#list) - List organizations
 * [get](#get) - Retrieve an organization
-* [update_organization](#update_organization) - Update an organization
+* [update](#update) - Update an organization
 
 ## list
 
@@ -98,7 +98,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## update_organization
+## update
 
 Update an organization's display name.
  Authorization: Requires organization#administer permission (owner or admin).
@@ -114,7 +114,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.organizations.update_organization(organization_id="<id>")
+    res = f_client.organizations.update(organization_id="<id>")
 
     # Handle response
     print(res)

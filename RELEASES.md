@@ -269,3 +269,13 @@ Based on:
 - [python v1.2.0-rc.1] .
 ### Releases
 - [PyPI v1.2.0-rc.1] https://pypi.org/project/factify/1.2.0-rc.1 - .
+
+## 2026-03-22 15:04:49
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.759.0 (2.869.3) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.0-rc.1] .
+### Releases
+- [PyPI v1.0.0-rc.1] https://pypi.org/project/factify/1.0.0-rc.1 - .

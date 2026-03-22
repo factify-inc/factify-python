@@ -4,7 +4,8 @@ from .basesdk import BaseSDK
 from .sdkconfiguration import SDKConfiguration
 from factify import errors, models, utils
 from factify._hooks import HookContext
-from factify.organizations_invites import OrganizationsInvites
+from factify.invites import Invites
+from factify.members import Members
 from factify.types import OptionalNullable, UNSET
 from factify.utils.unmarshal_json_response import unmarshal_json_response
 from jsonpath import JSONPath
@@ -14,7 +15,8 @@ from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
 class Organizations(BaseSDK):
     r"""Create and manage organizations."""
 
-    invites: OrganizationsInvites
+    invites: Invites
+    members: Members
 
     def __init__(
         self, sdk_config: SDKConfiguration, parent_ref: Optional[object] = None
@@ -24,9 +26,8 @@ class Organizations(BaseSDK):
         self._init_sdks()
 
     def _init_sdks(self):
-        self.invites = OrganizationsInvites(
-            self.sdk_configuration, parent_ref=self.parent_ref
-        )
+        self.invites = Invites(self.sdk_configuration, parent_ref=self.parent_ref)
+        self.members = Members(self.sdk_configuration, parent_ref=self.parent_ref)
 
     def list(
         self,
@@ -503,7 +504,7 @@ class Organizations(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def update_organization(
+    def update(
         self,
         *,
         organization_id: str,
@@ -620,7 +621,7 @@ class Organizations(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def update_organization_async(
+    async def update_async(
         self,
         *,
         organization_id: str,

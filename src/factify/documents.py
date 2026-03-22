@@ -604,7 +604,7 @@ class Documents(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def get_document_quota(
+    def get_quota(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -700,7 +700,7 @@ class Documents(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def get_document_quota_async(
+    async def get_quota_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,

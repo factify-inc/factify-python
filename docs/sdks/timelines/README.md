@@ -4,9 +4,9 @@
 
 ### Available Operations
 
-* [get_document_timeline](#get_document_timeline) - Get document timeline
+* [get](#get) - Get document timeline
 
-## get_document_timeline
+## get
 
 Retrieves timeline events for a document. Admins see all events; viewers see only their own.
 
@@ -21,7 +21,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.timelines.get_document_timeline(document_id="doc_01h2xcejqtf2nbrexx3vqjhp41")
+    res = f_client.timelines.get(document_id="doc_01h2xcejqtf2nbrexx3vqjhp41")
 
     # Handle response
     print(res)

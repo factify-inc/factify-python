@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional
 
 
 class UserPreferences(BaseSDK):
-    def get_user_preferences(
+    def get(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -105,7 +105,7 @@ class UserPreferences(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def get_user_preferences_async(
+    async def get_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,

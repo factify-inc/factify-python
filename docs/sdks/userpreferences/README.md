@@ -4,9 +4,9 @@
 
 ### Available Operations
 
-* [get_user_preferences](#get_user_preferences) - Get user preferences
+* [get](#get) - Get user preferences
 
-## get_user_preferences
+## get
 
 Returns the authenticated user's onboarding preferences. Only available for user accounts, not API keys.
 
@@ -21,7 +21,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.user_preferences.get_user_preferences()
+    res = f_client.user_preferences.get()
 
     # Handle response
     print(res)

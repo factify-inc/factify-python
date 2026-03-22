@@ -8,7 +8,7 @@ Create and manage legally-binding documents.
 
 * [list](#list) - List documents
 * [create](#create) - Create a document
-* [get_document_quota](#get_document_quota) - Get document quota
+* [get_quota](#get_quota) - Get document quota
 * [get](#get) - Retrieve a document
 * [update](#update) - Update a document
 * [list_duplicates](#list_duplicates) - List duplicate documents
@@ -122,7 +122,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## get_document_quota
+## get_quota
 
 Returns the document quota status for the authenticated user's organization, including the number of documents used, the configured limit, and remaining capacity.
 
@@ -137,7 +137,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.documents.get_document_quota()
+    res = f_client.documents.get_quota()
 
     # Handle response
     print(res)

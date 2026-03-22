@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional
 
 
 class Timelines(BaseSDK):
-    def get_document_timeline(
+    def get(
         self,
         *,
         document_id: str,
@@ -116,7 +116,7 @@ class Timelines(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def get_document_timeline_async(
+    async def get_async(
         self,
         *,
         document_id: str,

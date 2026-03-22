@@ -10,9 +10,7 @@ from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
 
 
 class Members(BaseSDK):
-    r"""Manage organization members and their roles."""
-
-    def list_organization_members(
+    def list(
         self,
         *,
         organization_id: str,
@@ -102,7 +100,7 @@ class Members(BaseSDK):
             if next_cursor is None or str(next_cursor).strip() == "":
                 return None
 
-            return self.list_organization_members(
+            return self.list(
                 organization_id=organization_id,
                 page_token=next_cursor,
                 page_size=page_size,
@@ -142,7 +140,7 @@ class Members(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def list_organization_members_async(
+    async def list_async(
         self,
         *,
         organization_id: str,
@@ -237,7 +235,7 @@ class Members(BaseSDK):
             if next_cursor is None or str(next_cursor).strip() == "":
                 return empty_result()
 
-            return self.list_organization_members_async(
+            return self.list_async(
                 organization_id=organization_id,
                 page_token=next_cursor,
                 page_size=page_size,
@@ -277,7 +275,7 @@ class Members(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def add_organization_member(
+    def add(
         self,
         *,
         organization_id: str,
@@ -397,7 +395,7 @@ class Members(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def add_organization_member_async(
+    async def add_async(
         self,
         *,
         organization_id: str,
@@ -517,7 +515,7 @@ class Members(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def remove_organization_member(
+    def remove(
         self,
         *,
         organization_id: str,
@@ -625,7 +623,7 @@ class Members(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def remove_organization_member_async(
+    async def remove_async(
         self,
         *,
         organization_id: str,
@@ -733,7 +731,7 @@ class Members(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def update_organization_member(
+    def update(
         self,
         *,
         organization_id: str,
@@ -853,7 +851,7 @@ class Members(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def update_organization_member_async(
+    async def update_async(
         self,
         *,
         organization_id: str,

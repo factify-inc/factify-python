@@ -1,17 +1,15 @@
-# Members
+# Organizations.Members
 
 ## Overview
 
-Manage organization members and their roles.
-
 ### Available Operations
 
-* [list_organization_members](#list_organization_members) - List organization members
-* [add_organization_member](#add_organization_member) - Add a member to an organization
-* [remove_organization_member](#remove_organization_member) - Remove an organization member
-* [update_organization_member](#update_organization_member) - Update an organization member
+* [list](#list) - List organization members
+* [add](#add) - Add a member to an organization
+* [remove](#remove) - Remove an organization member
+* [update](#update) - Update an organization member
 
-## list_organization_members
+## list
 
 List members of an organization. Requires organization membership.
 
@@ -26,7 +24,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.members.list_organization_members(organization_id="<id>")
+    res = f_client.organizations.members.list(organization_id="<id>")
 
     while res is not None:
         # Handle items
@@ -57,7 +55,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## add_organization_member
+## add
 
 Directly adds a user as a member of an organization. Requires manage permission (owner or admin).
 
@@ -72,7 +70,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.members.add_organization_member(organization_id="<id>", role="owner", user_id="<id>")
+    res = f_client.organizations.members.add(organization_id="<id>", role="owner", user_id="<id>")
 
     # Handle response
     print(res)
@@ -101,7 +99,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## remove_organization_member
+## remove
 
 Remove a member from an organization. Requires manage permission, or the member can remove themselves. The organization owner cannot be removed.
 
@@ -116,7 +114,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.members.remove_organization_member(organization_id="<id>", user_id="<id>")
+    res = f_client.organizations.members.remove(organization_id="<id>", user_id="<id>")
 
     # Handle response
     print(res)
@@ -144,7 +142,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## update_organization_member
+## update
 
 Update a member's role within an organization. Requires manage permission (owner or admin). The organization owner's role cannot be changed.
 
@@ -159,7 +157,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.members.update_organization_member(organization_id="<id>", user_id="<id>", role="member")
+    res = f_client.organizations.members.update(organization_id="<id>", user_id="<id>", role="member")
 
     # Handle response
     print(res)

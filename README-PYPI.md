@@ -209,10 +209,12 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.quotas.quota_service_delete_organization_quota()
+    res = f_client.api_keys.list(organization_id="<id>")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 <!-- End Authentication [security] -->
@@ -242,7 +244,7 @@ with Factify(
 
 * [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#list) - List documents
 * [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#create) - Create a document
-* [get_document_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#get_document_quota) - Get document quota
+* [get_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#get_quota) - Get document quota
 * [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#get) - Retrieve a document
 * [update](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#update) - Update a document
 * [list_duplicates](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/documents/README.md#list_duplicates) - List duplicate documents
@@ -256,40 +258,32 @@ with Factify(
 
 * [generate](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/entrypages/README.md#generate) - Generate entry page
 
-### [Invites](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md)
-
-* [accept_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#accept_organization_invite) - Accept an invitation
-* [resend_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#resend_organization_invite) - Resend an invitation email
-* [revoke_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#revoke_organization_invite) - Revoke an invitation
-
-### [Members](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md)
-
-* [list_organization_members](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md#list_organization_members) - List organization members
-* [add_organization_member](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md#add_organization_member) - Add a member to an organization
-* [remove_organization_member](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md#remove_organization_member) - Remove an organization member
-* [update_organization_member](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md#update_organization_member) - Update an organization member
-
 ### [Organizations](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md)
 
 * [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#list) - List organizations
 * [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#get) - Retrieve an organization
-* [update_organization](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#update_organization) - Update an organization
+* [update](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#update) - Update an organization
 
-### [Organizations.Invites](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationsinvites/README.md)
+### [Organizations.Invites](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md)
 
-* [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationsinvites/README.md#list) - List organization invitations
-* [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationsinvites/README.md#create) - Invite a user to join an organization
+* [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#list) - List organization invitations
+* [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#create) - Invite a user to join an organization
+* [accept](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#accept) - Accept an invitation
+* [resend](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#resend) - Resend an invitation email
+* [revoke](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#revoke) - Revoke an invitation
+
+### [Organizations.Members](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md)
+
+* [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md#list) - List organization members
+* [add](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md#add) - Add a member to an organization
+* [remove](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md#remove) - Remove an organization member
+* [update](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md#update) - Update an organization member
 
 ### [Policies](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policies/README.md)
 
 * [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policies/README.md#list) - List document policies
 * [attach](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policies/README.md#attach) - Attach a policy
 * [detach](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policies/README.md#detach) - Detach a policy
-
-### [Quotas](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quotas/README.md)
-
-* [quota_service_delete_organization_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quotas/README.md#quota_service_delete_organization_quota) - DeleteOrganizationQuota
-* [quota_service_set_organization_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/quotas/README.md#quota_service_set_organization_quota) - SetOrganizationQuota
 
 ### [Sharing](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharing/README.md)
 
@@ -303,19 +297,19 @@ with Factify(
 
 ### [Timelines](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/timelines/README.md)
 
-* [get_document_timeline](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/timelines/README.md#get_document_timeline) - Get document timeline
+* [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/timelines/README.md#get) - Get document timeline
 
 ### [Usage](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md)
 
-* [get_organization_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#get_organization_quota) - Get organization quota status
-* [list_api_key_quotas](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#list_api_key_quotas) - List API key quotas
-* [delete_api_key_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#delete_api_key_quota) - Delete API key quota
-* [set_api_key_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#set_api_key_quota) - Set API key quota
-* [get_usage_history](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#get_usage_history) - Get usage history
+* [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#get) - Get organization quota status
+* [list_key_quotas](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#list_key_quotas) - List API key quotas
+* [delete_key_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#delete_key_quota) - Delete API key quota
+* [set_key_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#set_key_quota) - Set API key quota
+* [get_history](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#get_history) - Get usage history
 
 ### [UserPreferences](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/userpreferences/README.md)
 
-* [get_user_preferences](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/userpreferences/README.md#get_user_preferences) - Get user preferences
+* [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/userpreferences/README.md#get) - Get user preferences
 
 ### [Users](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/users/README.md)
 
@@ -401,11 +395,13 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.quotas.quota_service_delete_organization_quota(,
+    res = f_client.api_keys.list(organization_id="<id>",
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -420,10 +416,12 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.quotas.quota_service_delete_organization_quota()
+    res = f_client.api_keys.list(organization_id="<id>")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 <!-- End Retries [retries] -->
@@ -453,10 +451,12 @@ with Factify(
     res = None
     try:
 
-        res = f_client.quotas.quota_service_delete_organization_quota()
+        res = f_client.api_keys.list(organization_id="<id>")
 
-        # Handle response
-        print(res)
+        while res is not None:
+            # Handle items
+
+            res = res.next()
 
 
     except errors.FactifyError as e:
@@ -469,7 +469,7 @@ with Factify(
 
         # Depending on the method different errors may be thrown
         if isinstance(e, errors.ErrorResponse):
-            print(e.data.code)  # models.ErrorResponseCode
+            print(e.data.code)  # models.Code
             print(e.data.details)  # Optional[List[models.ErrorDetail]]
             print(e.data.message)  # str
 ```
@@ -518,10 +518,12 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.quotas.quota_service_delete_organization_quota()
+    res = f_client.api_keys.list(organization_id="<id>")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -537,10 +539,12 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.quotas.quota_service_delete_organization_quota()
+    res = f_client.api_keys.list(organization_id="<id>")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 <!-- End Server Selection [server] -->

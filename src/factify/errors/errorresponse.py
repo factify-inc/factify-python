@@ -13,7 +13,7 @@ from typing import List, Optional
 
 
 class ErrorResponseData(BaseModel):
-    code: models_errorresponse.ErrorResponseCode
+    code: models_errorresponse.Code
     r"""ConnectRPC error code. Maps to HTTP status codes:
     - invalid_argument, failed_precondition -> 400
     - unauthenticated -> 401

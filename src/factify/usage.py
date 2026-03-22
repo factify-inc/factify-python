@@ -12,7 +12,7 @@ from typing import Any, Mapping, Optional
 class Usage(BaseSDK):
     r"""Query API usage and quota information for your organization."""
 
-    def get_organization_quota(
+    def get(
         self,
         *,
         organization_id: Optional[str] = None,
@@ -116,7 +116,7 @@ class Usage(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def get_organization_quota_async(
+    async def get_async(
         self,
         *,
         organization_id: Optional[str] = None,
@@ -220,7 +220,7 @@ class Usage(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def list_api_key_quotas(
+    def list_key_quotas(
         self,
         *,
         organization_id: Optional[str] = None,
@@ -323,7 +323,7 @@ class Usage(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def list_api_key_quotas_async(
+    async def list_key_quotas_async(
         self,
         *,
         organization_id: Optional[str] = None,
@@ -426,7 +426,7 @@ class Usage(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def delete_api_key_quota(
+    def delete_key_quota(
         self,
         *,
         api_key_id: str,
@@ -532,7 +532,7 @@ class Usage(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def delete_api_key_quota_async(
+    async def delete_key_quota_async(
         self,
         *,
         api_key_id: str,
@@ -638,7 +638,7 @@ class Usage(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def set_api_key_quota(
+    def set_key_quota(
         self,
         *,
         api_key_id: str,
@@ -754,7 +754,7 @@ class Usage(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def set_api_key_quota_async(
+    async def set_key_quota_async(
         self,
         *,
         api_key_id: str,
@@ -870,7 +870,7 @@ class Usage(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def get_usage_history(
+    def get_history(
         self,
         *,
         organization_id: Optional[str] = None,
@@ -979,7 +979,7 @@ class Usage(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def get_usage_history_async(
+    async def get_history_async(
         self,
         *,
         organization_id: Optional[str] = None,

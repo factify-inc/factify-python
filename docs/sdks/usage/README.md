@@ -6,13 +6,13 @@ Query API usage and quota information for your organization.
 
 ### Available Operations
 
-* [get_organization_quota](#get_organization_quota) - Get organization quota status
-* [list_api_key_quotas](#list_api_key_quotas) - List API key quotas
-* [delete_api_key_quota](#delete_api_key_quota) - Delete API key quota
-* [set_api_key_quota](#set_api_key_quota) - Set API key quota
-* [get_usage_history](#get_usage_history) - Get usage history
+* [get](#get) - Get organization quota status
+* [list_key_quotas](#list_key_quotas) - List API key quotas
+* [delete_key_quota](#delete_key_quota) - Delete API key quota
+* [set_key_quota](#set_key_quota) - Set API key quota
+* [get_history](#get_history) - Get usage history
 
-## get_organization_quota
+## get
 
 Returns the current quota status for an organization including usage, limits, tier, and reset date.
 
@@ -27,7 +27,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.usage.get_organization_quota(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
+    res = f_client.usage.get(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
 
     # Handle response
     print(res)
@@ -54,7 +54,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## list_api_key_quotas
+## list_key_quotas
 
 Returns all per-key quota configurations and current usage for an organization.
 
@@ -69,7 +69,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.usage.list_api_key_quotas(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
+    res = f_client.usage.list_key_quotas(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
 
     # Handle response
     print(res)
@@ -96,7 +96,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## delete_api_key_quota
+## delete_key_quota
 
 Removes the per-key quota limit. The key will only be subject to the organization-level quota.
 
@@ -111,7 +111,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.usage.delete_api_key_quota(api_key_id="<id>", organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
+    res = f_client.usage.delete_key_quota(api_key_id="<id>", organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
 
     # Handle response
     print(res)
@@ -139,7 +139,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## set_api_key_quota
+## set_key_quota
 
 Creates or updates a per-key quota limit. The key will be enforced independently of the organization quota.
 
@@ -154,7 +154,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.usage.set_api_key_quota(api_key_id="<id>", organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
+    res = f_client.usage.set_key_quota(api_key_id="<id>", organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
 
     # Handle response
     print(res)
@@ -183,7 +183,7 @@ with Factify(
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
 
-## get_usage_history
+## get_history
 
 Returns daily usage records for an organization within a specified date range.
 
@@ -199,7 +199,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.usage.get_usage_history(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41", date_after=parse_datetime("2023-01-15T01:30:15.01Z"), date_before=parse_datetime("2023-01-15T01:30:15.01Z"))
+    res = f_client.usage.get_history(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41", date_after=parse_datetime("2023-01-15T01:30:15.01Z"), date_before=parse_datetime("2023-01-15T01:30:15.01Z"))
 
     # Handle response
     print(res)

@@ -19,15 +19,12 @@ if TYPE_CHECKING:
     from factify.api_keys import APIKeys
     from factify.documents import Documents
     from factify.entrypages import EntryPages
-    from factify.invites import Invites
-    from factify.members import Members
     from factify.organizations import Organizations
     from factify.policies import Policies
-    from factify.quotas import Quotas
     from factify.sharing import Sharing
     from factify.timelines import Timelines
     from factify.usage import Usage
-    from factify.user_preferences import UserPreferences
+    from factify.userpreferences import UserPreferences
     from factify.users import Users
     from factify.versions import Versions
 
@@ -69,7 +66,6 @@ class Factify(BaseSDK):
 
     """
 
-    quotas: "Quotas"
     api_keys: "APIKeys"
     r"""Generate and manage API keys for authentication."""
     documents: "Documents"
@@ -86,15 +82,10 @@ class Factify(BaseSDK):
     r"""User profile and account information."""
     organizations: "Organizations"
     r"""Create and manage organizations."""
-    invites: "Invites"
-    r"""Invite users to join an organization."""
-    members: "Members"
-    r"""Manage organization members and their roles."""
     usage: "Usage"
     r"""Query API usage and quota information for your organization."""
     user_preferences: "UserPreferences"
     _sub_sdk_map = {
-        "quotas": ("factify.quotas", "Quotas"),
         "api_keys": ("factify.api_keys", "APIKeys"),
         "documents": ("factify.documents", "Documents"),
         "access_requests": ("factify.accessrequests", "AccessRequests"),
@@ -105,10 +96,8 @@ class Factify(BaseSDK):
         "versions": ("factify.versions", "Versions"),
         "users": ("factify.users", "Users"),
         "organizations": ("factify.organizations", "Organizations"),
-        "invites": ("factify.invites", "Invites"),
-        "members": ("factify.members", "Members"),
         "usage": ("factify.usage", "Usage"),
-        "user_preferences": ("factify.user_preferences", "UserPreferences"),
+        "user_preferences": ("factify.userpreferences", "UserPreferences"),
     }
 
     def __init__(

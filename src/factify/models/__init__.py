@@ -66,13 +66,6 @@ if TYPE_CHECKING:
         CheckAccessRequestStatusResponse,
         CheckAccessRequestStatusResponseTypedDict,
     )
-    from .connect_error import ConnectError, ConnectErrorCode, ConnectErrorTypedDict
-    from .connect_error_details_any import (
-        ConnectErrorDetailsAny,
-        ConnectErrorDetailsAnyTypedDict,
-        Debug,
-        DebugTypedDict,
-    )
     from .createaccessrequestop import (
         CreateAccessRequestCreateAccessRequestRequest,
         CreateAccessRequestCreateAccessRequestRequestTypedDict,
@@ -155,14 +148,6 @@ if TYPE_CHECKING:
         DeleteAPIKeyQuotaResponse,
         DeleteAPIKeyQuotaResponseTypedDict,
     )
-    from .deleteorganizationquotarequest import (
-        DeleteOrganizationQuotaRequest,
-        DeleteOrganizationQuotaRequestTypedDict,
-    )
-    from .deleteorganizationquotaresponse import (
-        DeleteOrganizationQuotaResponse,
-        DeleteOrganizationQuotaResponseTypedDict,
-    )
     from .denyaccessrequestop import (
         DenyAccessRequestDenyAccessRequestRequest,
         DenyAccessRequestDenyAccessRequestRequestTypedDict,
@@ -193,7 +178,7 @@ if TYPE_CHECKING:
     from .duplicatedocument import DuplicateDocument, DuplicateDocumentTypedDict
     from .empty import Empty, EmptyTypedDict
     from .errordetail import ErrorDetail, ErrorDetailTypedDict, Reason
-    from .errorresponse import ErrorResponseCode
+    from .errorresponse import Code
     from .exportdocumentop import (
         ExportDocumentRequest,
         ExportDocumentRequestTypedDict,
@@ -427,10 +412,6 @@ if TYPE_CHECKING:
     from .organizationinvitestatus import OrganizationInviteStatus
     from .organizationmember import OrganizationMember, OrganizationMemberTypedDict
     from .organizationquota import OrganizationQuota, OrganizationQuotaTypedDict
-    from .organizationquotaconfig import (
-        OrganizationQuotaConfig,
-        OrganizationQuotaConfigTypedDict,
-    )
     from .organizationrole import OrganizationRole
     from .pagination import Pagination, PaginationTypedDict
     from .policy import Policy, PolicyTypedDict
@@ -448,22 +429,6 @@ if TYPE_CHECKING:
     )
     from .processingoutcome import ProcessingOutcome
     from .processingstatus import ProcessingStatus
-    from .quotaservice_deleteorganizationquotaop import (
-        QuotaServiceDeleteOrganizationQuotaRequest,
-        QuotaServiceDeleteOrganizationQuotaRequestTypedDict,
-        QuotaServiceDeleteOrganizationQuotaResponse,
-        QuotaServiceDeleteOrganizationQuotaResponseResult,
-        QuotaServiceDeleteOrganizationQuotaResponseResultTypedDict,
-        QuotaServiceDeleteOrganizationQuotaResponseTypedDict,
-    )
-    from .quotaservice_setorganizationquotaop import (
-        QuotaServiceSetOrganizationQuotaRequest,
-        QuotaServiceSetOrganizationQuotaRequestTypedDict,
-        QuotaServiceSetOrganizationQuotaResponse,
-        QuotaServiceSetOrganizationQuotaResponseResult,
-        QuotaServiceSetOrganizationQuotaResponseResultTypedDict,
-        QuotaServiceSetOrganizationQuotaResponseTypedDict,
-    )
     from .quotatier import QuotaTier
     from .recipient import Recipient, RecipientTypedDict
     from .recipientgrant import RecipientGrant, RecipientGrantTypedDict
@@ -548,14 +513,6 @@ if TYPE_CHECKING:
     from .setgeneralaccessresponse import (
         SetGeneralAccessResponse,
         SetGeneralAccessResponseTypedDict,
-    )
-    from .setorganizationquotarequest import (
-        SetOrganizationQuotaRequest,
-        SetOrganizationQuotaRequestTypedDict,
-    )
-    from .setorganizationquotaresponse import (
-        SetOrganizationQuotaResponse,
-        SetOrganizationQuotaResponseTypedDict,
     )
     from .sharelink import ShareLink, ShareLinkTypedDict
     from .subject import Subject, SubjectTypedDict
@@ -707,11 +664,7 @@ __all__ = [
     "CheckAccessRequestStatusResponseResponse",
     "CheckAccessRequestStatusResponseResponseTypedDict",
     "CheckAccessRequestStatusResponseTypedDict",
-    "ConnectError",
-    "ConnectErrorCode",
-    "ConnectErrorDetailsAny",
-    "ConnectErrorDetailsAnyTypedDict",
-    "ConnectErrorTypedDict",
+    "Code",
     "CreateAPIKeyRequest",
     "CreateAPIKeyRequestTypedDict",
     "CreateAPIKeyResponse",
@@ -760,18 +713,12 @@ __all__ = [
     "CreateVersionRequestTypedDict",
     "DailyUsage",
     "DailyUsageTypedDict",
-    "Debug",
-    "DebugTypedDict",
     "DeleteAPIKeyQuotaRequest",
     "DeleteAPIKeyQuotaRequestTypedDict",
     "DeleteAPIKeyQuotaResponse",
     "DeleteAPIKeyQuotaResponseResponse",
     "DeleteAPIKeyQuotaResponseResponseTypedDict",
     "DeleteAPIKeyQuotaResponseTypedDict",
-    "DeleteOrganizationQuotaRequest",
-    "DeleteOrganizationQuotaRequestTypedDict",
-    "DeleteOrganizationQuotaResponse",
-    "DeleteOrganizationQuotaResponseTypedDict",
     "DenyAccessRequestDenyAccessRequestRequest",
     "DenyAccessRequestDenyAccessRequestRequestTypedDict",
     "DenyAccessRequestRequest",
@@ -799,7 +746,6 @@ __all__ = [
     "EmptyTypedDict",
     "ErrorDetail",
     "ErrorDetailTypedDict",
-    "ErrorResponseCode",
     "ExportDocumentRequest",
     "ExportDocumentRequestTypedDict",
     "ExportDocumentResponse",
@@ -952,8 +898,6 @@ __all__ = [
     "OrganizationMember",
     "OrganizationMemberTypedDict",
     "OrganizationQuota",
-    "OrganizationQuotaConfig",
-    "OrganizationQuotaConfigTypedDict",
     "OrganizationQuotaTypedDict",
     "OrganizationRole",
     "OrganizationTypedDict",
@@ -971,18 +915,6 @@ __all__ = [
     "ProcessDocumentResponseTypedDict",
     "ProcessingOutcome",
     "ProcessingStatus",
-    "QuotaServiceDeleteOrganizationQuotaRequest",
-    "QuotaServiceDeleteOrganizationQuotaRequestTypedDict",
-    "QuotaServiceDeleteOrganizationQuotaResponse",
-    "QuotaServiceDeleteOrganizationQuotaResponseResult",
-    "QuotaServiceDeleteOrganizationQuotaResponseResultTypedDict",
-    "QuotaServiceDeleteOrganizationQuotaResponseTypedDict",
-    "QuotaServiceSetOrganizationQuotaRequest",
-    "QuotaServiceSetOrganizationQuotaRequestTypedDict",
-    "QuotaServiceSetOrganizationQuotaResponse",
-    "QuotaServiceSetOrganizationQuotaResponseResult",
-    "QuotaServiceSetOrganizationQuotaResponseResultTypedDict",
-    "QuotaServiceSetOrganizationQuotaResponseTypedDict",
     "QuotaTier",
     "Reason",
     "Recipient",
@@ -1044,10 +976,6 @@ __all__ = [
     "SetGeneralAccessResponseTypedDict",
     "SetGeneralAccessSetGeneralAccessRequest",
     "SetGeneralAccessSetGeneralAccessRequestTypedDict",
-    "SetOrganizationQuotaRequest",
-    "SetOrganizationQuotaRequestTypedDict",
-    "SetOrganizationQuotaResponse",
-    "SetOrganizationQuotaResponseTypedDict",
     "ShareLink",
     "ShareLinkTypedDict",
     "Subject",
@@ -1176,13 +1104,6 @@ _dynamic_imports: dict[str, str] = {
     "CheckAccessRequestStatusResponseResponseTypedDict": ".checkaccessrequeststatusop",
     "CheckAccessRequestStatusResponse": ".checkaccessrequeststatusresponse",
     "CheckAccessRequestStatusResponseTypedDict": ".checkaccessrequeststatusresponse",
-    "ConnectError": ".connect_error",
-    "ConnectErrorCode": ".connect_error",
-    "ConnectErrorTypedDict": ".connect_error",
-    "ConnectErrorDetailsAny": ".connect_error_details_any",
-    "ConnectErrorDetailsAnyTypedDict": ".connect_error_details_any",
-    "Debug": ".connect_error_details_any",
-    "DebugTypedDict": ".connect_error_details_any",
     "CreateAccessRequestCreateAccessRequestRequest": ".createaccessrequestop",
     "CreateAccessRequestCreateAccessRequestRequestTypedDict": ".createaccessrequestop",
     "CreateAccessRequestRequest": ".createaccessrequestop",
@@ -1237,10 +1158,6 @@ _dynamic_imports: dict[str, str] = {
     "DeleteAPIKeyQuotaResponseResponseTypedDict": ".deleteapikeyquotaop",
     "DeleteAPIKeyQuotaResponse": ".deleteapikeyquotaresponse",
     "DeleteAPIKeyQuotaResponseTypedDict": ".deleteapikeyquotaresponse",
-    "DeleteOrganizationQuotaRequest": ".deleteorganizationquotarequest",
-    "DeleteOrganizationQuotaRequestTypedDict": ".deleteorganizationquotarequest",
-    "DeleteOrganizationQuotaResponse": ".deleteorganizationquotaresponse",
-    "DeleteOrganizationQuotaResponseTypedDict": ".deleteorganizationquotaresponse",
     "DenyAccessRequestDenyAccessRequestRequest": ".denyaccessrequestop",
     "DenyAccessRequestDenyAccessRequestRequestTypedDict": ".denyaccessrequestop",
     "DenyAccessRequestRequest": ".denyaccessrequestop",
@@ -1269,7 +1186,7 @@ _dynamic_imports: dict[str, str] = {
     "ErrorDetail": ".errordetail",
     "ErrorDetailTypedDict": ".errordetail",
     "Reason": ".errordetail",
-    "ErrorResponseCode": ".errorresponse",
+    "Code": ".errorresponse",
     "ExportDocumentRequest": ".exportdocumentop",
     "ExportDocumentRequestTypedDict": ".exportdocumentop",
     "ExportDocumentResponseResponse": ".exportdocumentop",
@@ -1424,8 +1341,6 @@ _dynamic_imports: dict[str, str] = {
     "OrganizationMemberTypedDict": ".organizationmember",
     "OrganizationQuota": ".organizationquota",
     "OrganizationQuotaTypedDict": ".organizationquota",
-    "OrganizationQuotaConfig": ".organizationquotaconfig",
-    "OrganizationQuotaConfigTypedDict": ".organizationquotaconfig",
     "OrganizationRole": ".organizationrole",
     "Pagination": ".pagination",
     "PaginationTypedDict": ".pagination",
@@ -1441,18 +1356,6 @@ _dynamic_imports: dict[str, str] = {
     "ProcessDocumentResponseTypedDict": ".processdocumentresponse",
     "ProcessingOutcome": ".processingoutcome",
     "ProcessingStatus": ".processingstatus",
-    "QuotaServiceDeleteOrganizationQuotaRequest": ".quotaservice_deleteorganizationquotaop",
-    "QuotaServiceDeleteOrganizationQuotaRequestTypedDict": ".quotaservice_deleteorganizationquotaop",
-    "QuotaServiceDeleteOrganizationQuotaResponse": ".quotaservice_deleteorganizationquotaop",
-    "QuotaServiceDeleteOrganizationQuotaResponseResult": ".quotaservice_deleteorganizationquotaop",
-    "QuotaServiceDeleteOrganizationQuotaResponseResultTypedDict": ".quotaservice_deleteorganizationquotaop",
-    "QuotaServiceDeleteOrganizationQuotaResponseTypedDict": ".quotaservice_deleteorganizationquotaop",
-    "QuotaServiceSetOrganizationQuotaRequest": ".quotaservice_setorganizationquotaop",
-    "QuotaServiceSetOrganizationQuotaRequestTypedDict": ".quotaservice_setorganizationquotaop",
-    "QuotaServiceSetOrganizationQuotaResponse": ".quotaservice_setorganizationquotaop",
-    "QuotaServiceSetOrganizationQuotaResponseResult": ".quotaservice_setorganizationquotaop",
-    "QuotaServiceSetOrganizationQuotaResponseResultTypedDict": ".quotaservice_setorganizationquotaop",
-    "QuotaServiceSetOrganizationQuotaResponseTypedDict": ".quotaservice_setorganizationquotaop",
     "QuotaTier": ".quotatier",
     "Recipient": ".recipient",
     "RecipientTypedDict": ".recipient",
@@ -1513,10 +1416,6 @@ _dynamic_imports: dict[str, str] = {
     "SetGeneralAccessSetGeneralAccessRequestTypedDict": ".setgeneralaccessop",
     "SetGeneralAccessResponse": ".setgeneralaccessresponse",
     "SetGeneralAccessResponseTypedDict": ".setgeneralaccessresponse",
-    "SetOrganizationQuotaRequest": ".setorganizationquotarequest",
-    "SetOrganizationQuotaRequestTypedDict": ".setorganizationquotarequest",
-    "SetOrganizationQuotaResponse": ".setorganizationquotaresponse",
-    "SetOrganizationQuotaResponseTypedDict": ".setorganizationquotaresponse",
     "ShareLink": ".sharelink",
     "ShareLinkTypedDict": ".sharelink",
     "Subject": ".subject",
