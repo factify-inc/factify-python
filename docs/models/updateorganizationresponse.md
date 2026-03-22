@@ -1,6 +1,6 @@
-# CreateOrganizationResponse
+# UpdateOrganizationResponse
 
-CreateOrganizationResponse contains the newly created organization.
+UpdateOrganizationResponse contains the updated organization.
 
 
 ## Fields

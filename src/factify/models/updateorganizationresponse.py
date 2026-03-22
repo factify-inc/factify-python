@@ -6,15 +6,15 @@ from factify.types import BaseModel
 from typing_extensions import TypedDict
 
 
-class CreateOrganizationResponseTypedDict(TypedDict):
-    r"""CreateOrganizationResponse contains the newly created organization."""
+class UpdateOrganizationResponseTypedDict(TypedDict):
+    r"""UpdateOrganizationResponse contains the updated organization."""
 
     organization: OrganizationTypedDict
     r"""Organization represents a Factify organization."""
 
 
-class CreateOrganizationResponse(BaseModel):
-    r"""CreateOrganizationResponse contains the newly created organization."""
+class UpdateOrganizationResponse(BaseModel):
+    r"""UpdateOrganizationResponse contains the updated organization."""
 
     organization: Organization
     r"""Organization represents a Factify organization."""

@@ -126,18 +126,6 @@ if TYPE_CHECKING:
         CreateOrganizationInviteResponse,
         CreateOrganizationInviteResponseTypedDict,
     )
-    from .createorganizationop import (
-        CreateOrganizationResponseResponse,
-        CreateOrganizationResponseResponseTypedDict,
-    )
-    from .createorganizationrequest import (
-        CreateOrganizationRequest,
-        CreateOrganizationRequestTypedDict,
-    )
-    from .createorganizationresponse import (
-        CreateOrganizationResponse,
-        CreateOrganizationResponseTypedDict,
-    )
     from .createsharelinkop import (
         CreateShareLinkCreateShareLinkRequest,
         CreateShareLinkCreateShareLinkRequestTypedDict,
@@ -231,6 +219,12 @@ if TYPE_CHECKING:
         GetDocumentQuotaResponseTypedDict,
     )
     from .getdocumentresponse import GetDocumentResponse, GetDocumentResponseTypedDict
+    from .getdocumenttimelineop import (
+        GetDocumentTimelineRequest,
+        GetDocumentTimelineRequestTypedDict,
+        GetDocumentTimelineResponse,
+        GetDocumentTimelineResponseTypedDict,
+    )
     from .getgeneralaccessop import (
         GetGeneralAccessRequest,
         GetGeneralAccessRequestTypedDict,
@@ -241,6 +235,8 @@ if TYPE_CHECKING:
         GetGeneralAccessResponse,
         GetGeneralAccessResponseTypedDict,
     )
+    from .getmeop import GetMeResponseResponse, GetMeResponseResponseTypedDict
+    from .getmeresponse import GetMeResponse, GetMeResponseTypedDict
     from .getorganizationop import (
         GetOrganizationRequest,
         GetOrganizationRequestTypedDict,
@@ -261,6 +257,7 @@ if TYPE_CHECKING:
         GetOrganizationResponse,
         GetOrganizationResponseTypedDict,
     )
+    from .gettimelineresponse import GetTimelineResponse, GetTimelineResponseTypedDict
     from .getusagehistoryop import (
         GetUsageHistoryRequest,
         GetUsageHistoryRequestTypedDict,
@@ -529,6 +526,8 @@ if TYPE_CHECKING:
     from .sharelink import ShareLink, ShareLinkTypedDict
     from .subject import Subject, SubjectTypedDict
     from .subjecttype import SubjectType
+    from .timelineevent import TimelineEvent, TimelineEventTypedDict
+    from .timelineeventtype import TimelineEventType
     from .updatedocumentaccessop import (
         UpdateDocumentAccessRequest,
         UpdateDocumentAccessRequestTypedDict,
@@ -565,6 +564,18 @@ if TYPE_CHECKING:
         UpdateOrganizationMemberResponse,
         UpdateOrganizationMemberResponseTypedDict,
     )
+    from .updateorganizationop import (
+        UpdateOrganizationRequest,
+        UpdateOrganizationRequestTypedDict,
+        UpdateOrganizationResponseResponse,
+        UpdateOrganizationResponseResponseTypedDict,
+        UpdateOrganizationUpdateOrganizationRequest,
+        UpdateOrganizationUpdateOrganizationRequestTypedDict,
+    )
+    from .updateorganizationresponse import (
+        UpdateOrganizationResponse,
+        UpdateOrganizationResponseTypedDict,
+    )
     from .updateversionop import (
         UpdateVersionRequest,
         UpdateVersionRequestTypedDict,
@@ -574,6 +585,7 @@ if TYPE_CHECKING:
         UpdateVersionUpdateVersionRequestTypedDict,
     )
     from .user import User, UserTypedDict
+    from .value import Value, ValueTypedDict
     from .version import Version, VersionTypedDict
     from .versionref import VersionRef, VersionRefTypedDict
 
@@ -664,12 +676,6 @@ __all__ = [
     "CreateOrganizationInviteResponseResponse",
     "CreateOrganizationInviteResponseResponseTypedDict",
     "CreateOrganizationInviteResponseTypedDict",
-    "CreateOrganizationRequest",
-    "CreateOrganizationRequestTypedDict",
-    "CreateOrganizationResponse",
-    "CreateOrganizationResponseResponse",
-    "CreateOrganizationResponseResponseTypedDict",
-    "CreateOrganizationResponseTypedDict",
     "CreateShareLinkCreateShareLinkRequest",
     "CreateShareLinkCreateShareLinkRequestTypedDict",
     "CreateShareLinkRequest",
@@ -739,12 +745,20 @@ __all__ = [
     "GetDocumentResponseResponse",
     "GetDocumentResponseResponseTypedDict",
     "GetDocumentResponseTypedDict",
+    "GetDocumentTimelineRequest",
+    "GetDocumentTimelineRequestTypedDict",
+    "GetDocumentTimelineResponse",
+    "GetDocumentTimelineResponseTypedDict",
     "GetGeneralAccessRequest",
     "GetGeneralAccessRequestTypedDict",
     "GetGeneralAccessResponse",
     "GetGeneralAccessResponseResponse",
     "GetGeneralAccessResponseResponseTypedDict",
     "GetGeneralAccessResponseTypedDict",
+    "GetMeResponse",
+    "GetMeResponseResponse",
+    "GetMeResponseResponseTypedDict",
+    "GetMeResponseTypedDict",
     "GetOrganizationQuotaRequest",
     "GetOrganizationQuotaRequestTypedDict",
     "GetOrganizationQuotaResponse",
@@ -757,6 +771,8 @@ __all__ = [
     "GetOrganizationResponseResponse",
     "GetOrganizationResponseResponseTypedDict",
     "GetOrganizationResponseTypedDict",
+    "GetTimelineResponse",
+    "GetTimelineResponseTypedDict",
     "GetUsageHistoryRequest",
     "GetUsageHistoryRequestTypedDict",
     "GetUsageHistoryResponse",
@@ -944,6 +960,9 @@ __all__ = [
     "Subject",
     "SubjectType",
     "SubjectTypedDict",
+    "TimelineEvent",
+    "TimelineEventType",
+    "TimelineEventTypedDict",
     "UpdateDocumentAccessRequest",
     "UpdateDocumentAccessRequestTypedDict",
     "UpdateDocumentAccessResponse",
@@ -968,6 +987,14 @@ __all__ = [
     "UpdateOrganizationMemberResponseTypedDict",
     "UpdateOrganizationMemberUpdateOrganizationMemberRequest",
     "UpdateOrganizationMemberUpdateOrganizationMemberRequestTypedDict",
+    "UpdateOrganizationRequest",
+    "UpdateOrganizationRequestTypedDict",
+    "UpdateOrganizationResponse",
+    "UpdateOrganizationResponseResponse",
+    "UpdateOrganizationResponseResponseTypedDict",
+    "UpdateOrganizationResponseTypedDict",
+    "UpdateOrganizationUpdateOrganizationRequest",
+    "UpdateOrganizationUpdateOrganizationRequestTypedDict",
     "UpdateVersionRequest",
     "UpdateVersionRequestTypedDict",
     "UpdateVersionResponse",
@@ -976,6 +1003,8 @@ __all__ = [
     "UpdateVersionUpdateVersionRequestTypedDict",
     "User",
     "UserTypedDict",
+    "Value",
+    "ValueTypedDict",
     "Version",
     "VersionRef",
     "VersionRefTypedDict",
@@ -1071,12 +1100,6 @@ _dynamic_imports: dict[str, str] = {
     "CreateOrganizationInviteResponseResponseTypedDict": ".createorganizationinviteop",
     "CreateOrganizationInviteResponse": ".createorganizationinviteresponse",
     "CreateOrganizationInviteResponseTypedDict": ".createorganizationinviteresponse",
-    "CreateOrganizationResponseResponse": ".createorganizationop",
-    "CreateOrganizationResponseResponseTypedDict": ".createorganizationop",
-    "CreateOrganizationRequest": ".createorganizationrequest",
-    "CreateOrganizationRequestTypedDict": ".createorganizationrequest",
-    "CreateOrganizationResponse": ".createorganizationresponse",
-    "CreateOrganizationResponseTypedDict": ".createorganizationresponse",
     "CreateShareLinkCreateShareLinkRequest": ".createsharelinkop",
     "CreateShareLinkCreateShareLinkRequestTypedDict": ".createsharelinkop",
     "CreateShareLinkRequest": ".createsharelinkop",
@@ -1145,12 +1168,20 @@ _dynamic_imports: dict[str, str] = {
     "GetDocumentQuotaResponseTypedDict": ".getdocumentquotaresponse",
     "GetDocumentResponse": ".getdocumentresponse",
     "GetDocumentResponseTypedDict": ".getdocumentresponse",
+    "GetDocumentTimelineRequest": ".getdocumenttimelineop",
+    "GetDocumentTimelineRequestTypedDict": ".getdocumenttimelineop",
+    "GetDocumentTimelineResponse": ".getdocumenttimelineop",
+    "GetDocumentTimelineResponseTypedDict": ".getdocumenttimelineop",
     "GetGeneralAccessRequest": ".getgeneralaccessop",
     "GetGeneralAccessRequestTypedDict": ".getgeneralaccessop",
     "GetGeneralAccessResponseResponse": ".getgeneralaccessop",
     "GetGeneralAccessResponseResponseTypedDict": ".getgeneralaccessop",
     "GetGeneralAccessResponse": ".getgeneralaccessresponse",
     "GetGeneralAccessResponseTypedDict": ".getgeneralaccessresponse",
+    "GetMeResponseResponse": ".getmeop",
+    "GetMeResponseResponseTypedDict": ".getmeop",
+    "GetMeResponse": ".getmeresponse",
+    "GetMeResponseTypedDict": ".getmeresponse",
     "GetOrganizationRequest": ".getorganizationop",
     "GetOrganizationRequestTypedDict": ".getorganizationop",
     "GetOrganizationResponseResponse": ".getorganizationop",
@@ -1163,6 +1194,8 @@ _dynamic_imports: dict[str, str] = {
     "GetOrganizationQuotaResponseTypedDict": ".getorganizationquotaresponse",
     "GetOrganizationResponse": ".getorganizationresponse",
     "GetOrganizationResponseTypedDict": ".getorganizationresponse",
+    "GetTimelineResponse": ".gettimelineresponse",
+    "GetTimelineResponseTypedDict": ".gettimelineresponse",
     "GetUsageHistoryRequest": ".getusagehistoryop",
     "GetUsageHistoryRequestTypedDict": ".getusagehistoryop",
     "GetUsageHistoryResponseResponse": ".getusagehistoryop",
@@ -1349,6 +1382,9 @@ _dynamic_imports: dict[str, str] = {
     "Subject": ".subject",
     "SubjectTypedDict": ".subject",
     "SubjectType": ".subjecttype",
+    "TimelineEvent": ".timelineevent",
+    "TimelineEventTypedDict": ".timelineevent",
+    "TimelineEventType": ".timelineeventtype",
     "UpdateDocumentAccessRequest": ".updatedocumentaccessop",
     "UpdateDocumentAccessRequestTypedDict": ".updatedocumentaccessop",
     "UpdateDocumentAccessResponseResponse": ".updatedocumentaccessop",
@@ -1373,6 +1409,14 @@ _dynamic_imports: dict[str, str] = {
     "UpdateOrganizationMemberUpdateOrganizationMemberRequestTypedDict": ".updateorganizationmemberop",
     "UpdateOrganizationMemberResponse": ".updateorganizationmemberresponse",
     "UpdateOrganizationMemberResponseTypedDict": ".updateorganizationmemberresponse",
+    "UpdateOrganizationRequest": ".updateorganizationop",
+    "UpdateOrganizationRequestTypedDict": ".updateorganizationop",
+    "UpdateOrganizationResponseResponse": ".updateorganizationop",
+    "UpdateOrganizationResponseResponseTypedDict": ".updateorganizationop",
+    "UpdateOrganizationUpdateOrganizationRequest": ".updateorganizationop",
+    "UpdateOrganizationUpdateOrganizationRequestTypedDict": ".updateorganizationop",
+    "UpdateOrganizationResponse": ".updateorganizationresponse",
+    "UpdateOrganizationResponseTypedDict": ".updateorganizationresponse",
     "UpdateVersionRequest": ".updateversionop",
     "UpdateVersionRequestTypedDict": ".updateversionop",
     "UpdateVersionResponse": ".updateversionop",
@@ -1381,6 +1425,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateVersionUpdateVersionRequestTypedDict": ".updateversionop",
     "User": ".user",
     "UserTypedDict": ".user",
+    "Value": ".value",
+    "ValueTypedDict": ".value",
     "Version": ".version",
     "VersionTypedDict": ".version",
     "VersionRef": ".versionref",

@@ -250,23 +250,29 @@ with Factify(
 
 * [generate](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/entrypages/README.md#generate) - Generate entry page
 
+### [Invites](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md)
+
+* [accept_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#accept_organization_invite) - Accept an invitation
+* [resend_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#resend_organization_invite) - Resend an invitation email
+* [revoke_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#revoke_organization_invite) - Revoke an invitation
+
+### [Members](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md)
+
+* [list_organization_members](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md#list_organization_members) - List organization members
+* [add_organization_member](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md#add_organization_member) - Add a member to an organization
+* [remove_organization_member](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md#remove_organization_member) - Remove an organization member
+* [update_organization_member](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md#update_organization_member) - Update an organization member
+
 ### [Organizations](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md)
 
 * [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#list) - List organizations
-* [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#create) - Create an organization
 * [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#get) - Retrieve an organization
-* [accept_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#accept_organization_invite) - Accept an invitation
-* [resend_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#resend_organization_invite) - Resend an invitation email
-* [revoke_organization_invite](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#revoke_organization_invite) - Revoke an invitation
-* [list_organization_members](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#list_organization_members) - List organization members
-* [add_organization_member](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#add_organization_member) - Add a member to an organization
-* [remove_organization_member](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#remove_organization_member) - Remove an organization member
-* [update_organization_member](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#update_organization_member) - Update an organization member
+* [update_organization](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#update_organization) - Update an organization
 
-### [Organizations.Invites](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md)
+### [Organizations.Invites](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationsinvites/README.md)
 
-* [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#list) - List organization invitations
-* [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#create) - Invite a user to join an organization
+* [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationsinvites/README.md#list) - List organization invitations
+* [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizationsinvites/README.md#create) - Invite a user to join an organization
 
 ### [Policies](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policies/README.md)
 
@@ -289,6 +295,10 @@ with Factify(
 * [revoke](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharing/README.md#revoke) - Revoke document access
 * [update](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharing/README.md#update) - Update document access
 
+### [Timelines](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/timelines/README.md)
+
+* [get_document_timeline](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/timelines/README.md#get_document_timeline) - Get document timeline
+
 ### [Usage](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md)
 
 * [get_organization_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#get_organization_quota) - Get organization quota status
@@ -300,6 +310,10 @@ with Factify(
 ### [UserPreferences](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/userpreferences/README.md)
 
 * [get_user_preferences](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/userpreferences/README.md#get_user_preferences) - Get user preferences
+
+### [Users](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/users/README.md)
+
+* [get_me](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/users/README.md#get_me) - Get current user
 
 ### [Versions](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versions/README.md)
 

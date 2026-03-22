@@ -165,6 +165,12 @@ actions:
         - "lang": "python"
           "label": "updateDocumentAccess"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.update(document_id=\"<id>\", recipient_id=\"<id>\", document_role=\"admin\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/timeline"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "getDocumentTimeline"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.timelines.get_document_timeline(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/documents/{document_id}/versions"]["get"]
     update:
       "x-codeSamples":
@@ -177,24 +183,30 @@ actions:
         - "lang": "python"
           "label": "createDocumentVersion"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.versions.create(document_id=\"<value>\", payload={\n        \"file_name\": \"example.file\",\n        \"content\": open(\"example.file\", \"rb\"),\n    })\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/me"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "getMe"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.users.get_me()\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/organizations"]["get"]
     update:
       "x-codeSamples":
         - "lang": "python"
           "label": "listOrganizations"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.list()\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
-  - target: $["paths"]["/v1beta/organizations"]["post"]
-    update:
-      "x-codeSamples":
-        - "lang": "python"
-          "label": "createOrganization"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.create(name=\"<value>\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/organizations/{organization_id}"]["get"]
     update:
       "x-codeSamples":
         - "lang": "python"
           "label": "getOrganization"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.get(organization_id=\"<id>\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}"]["patch"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "updateOrganization"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.update_organization(organization_id=\"<id>\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/invites"]["get"]
     update:
       "x-codeSamples":
@@ -212,43 +224,43 @@ actions:
       "x-codeSamples":
         - "lang": "python"
           "label": "acceptOrganizationInvite"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.accept_organization_invite(organization_id=\"<id>\", token=\"<value>\")\n\n    # Handle response\n    print(res)"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.invites.accept_organization_invite(organization_id=\"<id>\", token=\"<value>\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/invites/{invite_id}/resend"]["post"]
     update:
       "x-codeSamples":
         - "lang": "python"
           "label": "resendOrganizationInvite"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.resend_organization_invite(organization_id=\"<id>\", invite_id=\"<id>\", body={})\n\n    # Handle response\n    print(res)"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.invites.resend_organization_invite(organization_id=\"<id>\", invite_id=\"<id>\", body={})\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/invites/{invite_id}/revoke"]["post"]
     update:
       "x-codeSamples":
         - "lang": "python"
           "label": "revokeOrganizationInvite"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.revoke_organization_invite(organization_id=\"<id>\", invite_id=\"<id>\", body={})\n\n    # Handle response\n    print(res)"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.invites.revoke_organization_invite(organization_id=\"<id>\", invite_id=\"<id>\", body={})\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/members"]["get"]
     update:
       "x-codeSamples":
         - "lang": "python"
           "label": "listOrganizationMembers"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.list_organization_members(organization_id=\"<id>\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.members.list_organization_members(organization_id=\"<id>\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/members"]["post"]
     update:
       "x-codeSamples":
         - "lang": "python"
           "label": "addOrganizationMember"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.add_organization_member(organization_id=\"<id>\", role=\"owner\", user_id=\"<id>\")\n\n    # Handle response\n    print(res)"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.members.add_organization_member(organization_id=\"<id>\", role=\"owner\", user_id=\"<id>\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/members/{user_id}"]["delete"]
     update:
       "x-codeSamples":
         - "lang": "python"
           "label": "removeOrganizationMember"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.remove_organization_member(organization_id=\"<id>\", user_id=\"<id>\")\n\n    # Handle response\n    print(res)"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.members.remove_organization_member(organization_id=\"<id>\", user_id=\"<id>\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/members/{user_id}"]["patch"]
     update:
       "x-codeSamples":
         - "lang": "python"
           "label": "updateOrganizationMember"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.update_organization_member(organization_id=\"<id>\", user_id=\"<id>\", role=\"member\")\n\n    # Handle response\n    print(res)"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.members.update_organization_member(organization_id=\"<id>\", user_id=\"<id>\", role=\"member\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/quota"]["get"]
     update:
       "x-codeSamples":

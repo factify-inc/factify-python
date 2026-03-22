@@ -5,29 +5,32 @@ from factify import errors, models, utils
 from factify._hooks import HookContext
 from factify.types import OptionalNullable, UNSET
 from factify.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from jsonpath import JSONPath
+from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
 
 
-class Invites(BaseSDK):
-    r"""Invite users to join an organization."""
+class Members(BaseSDK):
+    r"""Manage organization members and their roles."""
 
-    def accept_organization_invite(
+    def list_organization_members(
         self,
         *,
         organization_id: str,
-        token: str,
+        page_token: Optional[str] = None,
+        page_size: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AcceptOrganizationInviteResponseResponse:
-        r"""Accept an invitation
+    ) -> Optional[models.ListOrganizationMembersResponseResponse]:
+        r"""List organization members
 
-        Accepts the invitation and adds the authenticated user as a member of the organization. The authenticated user's verified email must match the invitation email (case-insensitive). Returns PERMISSION_DENIED if emails don't match, FAILED_PRECONDITION if the user is already a member, or NOT_FOUND if the invitation is invalid/expired.
+        List members of an organization. Requires organization membership.
 
-        :param organization_id: Organization the invitation belongs to (for validation).
+        :param organization_id: Organization to list members for.
             Pattern: org_[0-9a-hjkmnp-tv-z]{26}
-        :param token: The invitation token from the email link.
+        :param page_token: Opaque pagination token from a previous response.
+        :param page_size: Maximum number of items to return per page (1-100). Default: 50.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -43,16 +46,283 @@ class Invites(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.AcceptOrganizationInviteRequest(
+        request = models.ListOrganizationMembersRequest(
             organization_id=organization_id,
-            body=models.AcceptOrganizationInviteAcceptOrganizationInviteRequest(
-                token=token,
+            page_token=page_token,
+            page_size=page_size,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/v1beta/organizations/{organization_id}/members",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listOrganizationMembers",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        def next_func() -> Optional[models.ListOrganizationMembersResponseResponse]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+
+            next_cursor = JSONPath("$.pagination.next_page_token").parse(body)
+
+            if len(next_cursor) == 0:
+                return None
+
+            next_cursor = next_cursor[0]
+            if next_cursor is None or str(next_cursor).strip() == "":
+                return None
+
+            return self.list_organization_members(
+                organization_id=organization_id,
+                page_token=next_cursor,
+                page_size=page_size,
+                retries=retries,
+            )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.ListOrganizationMembersResponseResponse(
+                result=unmarshal_json_response(
+                    models.ListOrganizationMembersResponse, http_res
+                ),
+                next=next_func,
+                headers={},
+            )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.FactifyDefaultError("Unexpected response received", http_res)
+
+    async def list_organization_members_async(
+        self,
+        *,
+        organization_id: str,
+        page_token: Optional[str] = None,
+        page_size: Optional[int] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Optional[models.ListOrganizationMembersResponseResponse]:
+        r"""List organization members
+
+        List members of an organization. Requires organization membership.
+
+        :param organization_id: Organization to list members for.
+            Pattern: org_[0-9a-hjkmnp-tv-z]{26}
+        :param page_token: Opaque pagination token from a previous response.
+        :param page_size: Maximum number of items to return per page (1-100). Default: 50.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListOrganizationMembersRequest(
+            organization_id=organization_id,
+            page_token=page_token,
+            page_size=page_size,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/v1beta/organizations/{organization_id}/members",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listOrganizationMembers",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        def next_func() -> (
+            Awaitable[Optional[models.ListOrganizationMembersResponseResponse]]
+        ):
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+
+            async def empty_result():
+                return None
+
+            next_cursor = JSONPath("$.pagination.next_page_token").parse(body)
+
+            if len(next_cursor) == 0:
+                return empty_result()
+
+            next_cursor = next_cursor[0]
+            if next_cursor is None or str(next_cursor).strip() == "":
+                return empty_result()
+
+            return self.list_organization_members_async(
+                organization_id=organization_id,
+                page_token=next_cursor,
+                page_size=page_size,
+                retries=retries,
+            )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.ListOrganizationMembersResponseResponse(
+                result=unmarshal_json_response(
+                    models.ListOrganizationMembersResponse, http_res
+                ),
+                next=next_func,
+                headers={},
+            )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.FactifyDefaultError("Unexpected response received", http_res)
+
+    def add_organization_member(
+        self,
+        *,
+        organization_id: str,
+        role: models.OrganizationRole,
+        user_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.AddOrganizationMemberResponseResponse:
+        r"""Add a member to an organization
+
+        Directly adds a user as a member of an organization. Requires manage permission (owner or admin).
+
+        :param organization_id: Organization to add the member to.
+            Pattern: org_[0-9a-hjkmnp-tv-z]{26}
+        :param role:
+        :param user_id: User account ID of the member to add.
+            Pattern: user_[0-9a-hjkmnp-tv-z]{26}
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.AddOrganizationMemberRequest(
+            organization_id=organization_id,
+            body=models.AddOrganizationMemberAddOrganizationMemberRequest(
+                role=role,
+                user_id=user_id,
             ),
         )
 
         req = self._build_request(
             method="POST",
-            path="/v1beta/organizations/{organization_id}/invites/accept",
+            path="/v1beta/organizations/{organization_id}/members",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -68,7 +338,7 @@ class Invites(BaseSDK):
                 False,
                 False,
                 "json",
-                models.AcceptOrganizationInviteAcceptOrganizationInviteRequest,
+                models.AddOrganizationMemberAddOrganizationMemberRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -86,7 +356,7 @@ class Invites(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="acceptOrganizationInvite",
+                operation_id="addOrganizationMember",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -97,9 +367,9 @@ class Invites(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.AcceptOrganizationInviteResponseResponse(
+            return models.AddOrganizationMemberResponseResponse(
                 result=unmarshal_json_response(
-                    models.AcceptOrganizationInviteResponse, http_res
+                    models.AddOrganizationMemberResponse, http_res
                 ),
                 headers={},
             )
@@ -127,23 +397,26 @@ class Invites(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def accept_organization_invite_async(
+    async def add_organization_member_async(
         self,
         *,
         organization_id: str,
-        token: str,
+        role: models.OrganizationRole,
+        user_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AcceptOrganizationInviteResponseResponse:
-        r"""Accept an invitation
+    ) -> models.AddOrganizationMemberResponseResponse:
+        r"""Add a member to an organization
 
-        Accepts the invitation and adds the authenticated user as a member of the organization. The authenticated user's verified email must match the invitation email (case-insensitive). Returns PERMISSION_DENIED if emails don't match, FAILED_PRECONDITION if the user is already a member, or NOT_FOUND if the invitation is invalid/expired.
+        Directly adds a user as a member of an organization. Requires manage permission (owner or admin).
 
-        :param organization_id: Organization the invitation belongs to (for validation).
+        :param organization_id: Organization to add the member to.
             Pattern: org_[0-9a-hjkmnp-tv-z]{26}
-        :param token: The invitation token from the email link.
+        :param role:
+        :param user_id: User account ID of the member to add.
+            Pattern: user_[0-9a-hjkmnp-tv-z]{26}
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -159,16 +432,17 @@ class Invites(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.AcceptOrganizationInviteRequest(
+        request = models.AddOrganizationMemberRequest(
             organization_id=organization_id,
-            body=models.AcceptOrganizationInviteAcceptOrganizationInviteRequest(
-                token=token,
+            body=models.AddOrganizationMemberAddOrganizationMemberRequest(
+                role=role,
+                user_id=user_id,
             ),
         )
 
         req = self._build_request_async(
             method="POST",
-            path="/v1beta/organizations/{organization_id}/invites/accept",
+            path="/v1beta/organizations/{organization_id}/members",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -184,7 +458,7 @@ class Invites(BaseSDK):
                 False,
                 False,
                 "json",
-                models.AcceptOrganizationInviteAcceptOrganizationInviteRequest,
+                models.AddOrganizationMemberAddOrganizationMemberRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -202,7 +476,7 @@ class Invites(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="acceptOrganizationInvite",
+                operation_id="addOrganizationMember",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -213,9 +487,9 @@ class Invites(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.AcceptOrganizationInviteResponseResponse(
+            return models.AddOrganizationMemberResponseResponse(
                 result=unmarshal_json_response(
-                    models.AcceptOrganizationInviteResponse, http_res
+                    models.AddOrganizationMemberResponse, http_res
                 ),
                 headers={},
             )
@@ -243,29 +517,24 @@ class Invites(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    def resend_organization_invite(
+    def remove_organization_member(
         self,
         *,
         organization_id: str,
-        invite_id: str,
-        body: Union[
-            models.ResendOrganizationInviteResendOrganizationInviteRequest,
-            models.ResendOrganizationInviteResendOrganizationInviteRequestTypedDict,
-        ],
+        user_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ResendOrganizationInviteResponseResponse:
-        r"""Resend an invitation email
+    ) -> models.RemoveOrganizationMemberResponseResponse:
+        r"""Remove an organization member
 
-        Resend an invitation email to the recipient. Useful if the original email was lost or expired. Requires permission to invite organization members.
+        Remove a member from an organization. Requires manage permission, or the member can remove themselves. The organization owner cannot be removed.
 
-        :param organization_id: Organization the invitation belongs to.
+        :param organization_id: Organization to remove the member from.
             Pattern: org_[0-9a-hjkmnp-tv-z]{26}
-        :param invite_id: Invitation ID to resend.
-            Pattern: inv_[0-9a-hjkmnp-tv-z]{26}
-        :param body:
+        :param user_id: User account ID of the member to remove.
+            Pattern: user_[0-9a-hjkmnp-tv-z]{26}
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -281,17 +550,235 @@ class Invites(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ResendOrganizationInviteRequest(
+        request = models.RemoveOrganizationMemberRequest(
             organization_id=organization_id,
-            invite_id=invite_id,
-            body=utils.get_pydantic_model(
-                body, models.ResendOrganizationInviteResendOrganizationInviteRequest
+            user_id=user_id,
+        )
+
+        req = self._build_request(
+            method="DELETE",
+            path="/v1beta/organizations/{organization_id}/members/{user_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="removeOrganizationMember",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.RemoveOrganizationMemberResponseResponse(
+                result=unmarshal_json_response(
+                    models.RemoveOrganizationMemberResponse, http_res
+                ),
+                headers={},
+            )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.FactifyDefaultError("Unexpected response received", http_res)
+
+    async def remove_organization_member_async(
+        self,
+        *,
+        organization_id: str,
+        user_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.RemoveOrganizationMemberResponseResponse:
+        r"""Remove an organization member
+
+        Remove a member from an organization. Requires manage permission, or the member can remove themselves. The organization owner cannot be removed.
+
+        :param organization_id: Organization to remove the member from.
+            Pattern: org_[0-9a-hjkmnp-tv-z]{26}
+        :param user_id: User account ID of the member to remove.
+            Pattern: user_[0-9a-hjkmnp-tv-z]{26}
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.RemoveOrganizationMemberRequest(
+            organization_id=organization_id,
+            user_id=user_id,
+        )
+
+        req = self._build_request_async(
+            method="DELETE",
+            path="/v1beta/organizations/{organization_id}/members/{user_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="removeOrganizationMember",
+                oauth2_scopes=None,
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.RemoveOrganizationMemberResponseResponse(
+                result=unmarshal_json_response(
+                    models.RemoveOrganizationMemberResponse, http_res
+                ),
+                headers={},
+            )
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
+            raise errors.ErrorResponse(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.FactifyDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.FactifyDefaultError("Unexpected response received", http_res)
+
+    def update_organization_member(
+        self,
+        *,
+        organization_id: str,
+        user_id: str,
+        role: models.OrganizationRole,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdateOrganizationMemberResponseResponse:
+        r"""Update an organization member
+
+        Update a member's role within an organization. Requires manage permission (owner or admin). The organization owner's role cannot be changed.
+
+        :param organization_id: Organization the member belongs to.
+            Pattern: org_[0-9a-hjkmnp-tv-z]{26}
+        :param user_id: User account ID of the member to update.
+            Pattern: user_[0-9a-hjkmnp-tv-z]{26}
+        :param role:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateOrganizationMemberRequest(
+            organization_id=organization_id,
+            user_id=user_id,
+            body=models.UpdateOrganizationMemberUpdateOrganizationMemberRequest(
+                role=role,
             ),
         )
 
         req = self._build_request(
-            method="POST",
-            path="/v1beta/organizations/{organization_id}/invites/{invite_id}/resend",
+            method="PATCH",
+            path="/v1beta/organizations/{organization_id}/members/{user_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -307,7 +794,7 @@ class Invites(BaseSDK):
                 False,
                 False,
                 "json",
-                models.ResendOrganizationInviteResendOrganizationInviteRequest,
+                models.UpdateOrganizationMemberUpdateOrganizationMemberRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -325,7 +812,7 @@ class Invites(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="resendOrganizationInvite",
+                operation_id="updateOrganizationMember",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -336,9 +823,9 @@ class Invites(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.ResendOrganizationInviteResponseResponse(
+            return models.UpdateOrganizationMemberResponseResponse(
                 result=unmarshal_json_response(
-                    models.ResendOrganizationInviteResponse, http_res
+                    models.UpdateOrganizationMemberResponse, http_res
                 ),
                 headers={},
             )
@@ -366,29 +853,26 @@ class Invites(BaseSDK):
 
         raise errors.FactifyDefaultError("Unexpected response received", http_res)
 
-    async def resend_organization_invite_async(
+    async def update_organization_member_async(
         self,
         *,
         organization_id: str,
-        invite_id: str,
-        body: Union[
-            models.ResendOrganizationInviteResendOrganizationInviteRequest,
-            models.ResendOrganizationInviteResendOrganizationInviteRequestTypedDict,
-        ],
+        user_id: str,
+        role: models.OrganizationRole,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ResendOrganizationInviteResponseResponse:
-        r"""Resend an invitation email
+    ) -> models.UpdateOrganizationMemberResponseResponse:
+        r"""Update an organization member
 
-        Resend an invitation email to the recipient. Useful if the original email was lost or expired. Requires permission to invite organization members.
+        Update a member's role within an organization. Requires manage permission (owner or admin). The organization owner's role cannot be changed.
 
-        :param organization_id: Organization the invitation belongs to.
+        :param organization_id: Organization the member belongs to.
             Pattern: org_[0-9a-hjkmnp-tv-z]{26}
-        :param invite_id: Invitation ID to resend.
-            Pattern: inv_[0-9a-hjkmnp-tv-z]{26}
-        :param body:
+        :param user_id: User account ID of the member to update.
+            Pattern: user_[0-9a-hjkmnp-tv-z]{26}
+        :param role:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -404,17 +888,17 @@ class Invites(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ResendOrganizationInviteRequest(
+        request = models.UpdateOrganizationMemberRequest(
             organization_id=organization_id,
-            invite_id=invite_id,
-            body=utils.get_pydantic_model(
-                body, models.ResendOrganizationInviteResendOrganizationInviteRequest
+            user_id=user_id,
+            body=models.UpdateOrganizationMemberUpdateOrganizationMemberRequest(
+                role=role,
             ),
         )
 
         req = self._build_request_async(
-            method="POST",
-            path="/v1beta/organizations/{organization_id}/invites/{invite_id}/resend",
+            method="PATCH",
+            path="/v1beta/organizations/{organization_id}/members/{user_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -430,7 +914,7 @@ class Invites(BaseSDK):
                 False,
                 False,
                 "json",
-                models.ResendOrganizationInviteResendOrganizationInviteRequest,
+                models.UpdateOrganizationMemberUpdateOrganizationMemberRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -448,7 +932,7 @@ class Invites(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="resendOrganizationInvite",
+                operation_id="updateOrganizationMember",
                 oauth2_scopes=None,
                 security_source=self.sdk_configuration.security,
             ),
@@ -459,255 +943,9 @@ class Invites(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return models.ResendOrganizationInviteResponseResponse(
+            return models.UpdateOrganizationMemberResponseResponse(
                 result=unmarshal_json_response(
-                    models.ResendOrganizationInviteResponse, http_res
-                ),
-                headers={},
-            )
-        if utils.match_response(
-            http_res, ["400", "401", "403", "404"], "application/json"
-        ):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "429", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.FactifyDefaultError(
-                "API error occurred", http_res, http_res_text
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.FactifyDefaultError(
-                "API error occurred", http_res, http_res_text
-            )
-
-        raise errors.FactifyDefaultError("Unexpected response received", http_res)
-
-    def revoke_organization_invite(
-        self,
-        *,
-        organization_id: str,
-        invite_id: str,
-        body: Union[
-            models.RevokeOrganizationInviteRevokeOrganizationInviteRequest,
-            models.RevokeOrganizationInviteRevokeOrganizationInviteRequestTypedDict,
-        ],
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.RevokeOrganizationInviteResponseResponse:
-        r"""Revoke an invitation
-
-        Revoke a pending invitation, preventing the recipient from joining. Requires permission to manage organization members.
-
-        :param organization_id: Organization the invitation belongs to.
-            Pattern: org_[0-9a-hjkmnp-tv-z]{26}
-        :param invite_id: Invitation ID to revoke.
-            Pattern: inv_[0-9a-hjkmnp-tv-z]{26}
-        :param body:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.RevokeOrganizationInviteRequest(
-            organization_id=organization_id,
-            invite_id=invite_id,
-            body=utils.get_pydantic_model(
-                body, models.RevokeOrganizationInviteRevokeOrganizationInviteRequest
-            ),
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/v1beta/organizations/{organization_id}/invites/{invite_id}/revoke",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.body,
-                False,
-                False,
-                "json",
-                models.RevokeOrganizationInviteRevokeOrganizationInviteRequest,
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="revokeOrganizationInvite",
-                oauth2_scopes=None,
-                security_source=self.sdk_configuration.security,
-            ),
-            request=req,
-            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return models.RevokeOrganizationInviteResponseResponse(
-                result=unmarshal_json_response(
-                    models.RevokeOrganizationInviteResponse, http_res
-                ),
-                headers={},
-            )
-        if utils.match_response(
-            http_res, ["400", "401", "403", "404"], "application/json"
-        ):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "429", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(errors.ErrorResponseData, http_res)
-            raise errors.ErrorResponse(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.FactifyDefaultError(
-                "API error occurred", http_res, http_res_text
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.FactifyDefaultError(
-                "API error occurred", http_res, http_res_text
-            )
-
-        raise errors.FactifyDefaultError("Unexpected response received", http_res)
-
-    async def revoke_organization_invite_async(
-        self,
-        *,
-        organization_id: str,
-        invite_id: str,
-        body: Union[
-            models.RevokeOrganizationInviteRevokeOrganizationInviteRequest,
-            models.RevokeOrganizationInviteRevokeOrganizationInviteRequestTypedDict,
-        ],
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.RevokeOrganizationInviteResponseResponse:
-        r"""Revoke an invitation
-
-        Revoke a pending invitation, preventing the recipient from joining. Requires permission to manage organization members.
-
-        :param organization_id: Organization the invitation belongs to.
-            Pattern: org_[0-9a-hjkmnp-tv-z]{26}
-        :param invite_id: Invitation ID to revoke.
-            Pattern: inv_[0-9a-hjkmnp-tv-z]{26}
-        :param body:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.RevokeOrganizationInviteRequest(
-            organization_id=organization_id,
-            invite_id=invite_id,
-            body=utils.get_pydantic_model(
-                body, models.RevokeOrganizationInviteRevokeOrganizationInviteRequest
-            ),
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/v1beta/organizations/{organization_id}/invites/{invite_id}/revoke",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.body,
-                False,
-                False,
-                "json",
-                models.RevokeOrganizationInviteRevokeOrganizationInviteRequest,
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="revokeOrganizationInvite",
-                oauth2_scopes=None,
-                security_source=self.sdk_configuration.security,
-            ),
-            request=req,
-            error_status_codes=["400", "401", "403", "404", "429", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return models.RevokeOrganizationInviteResponseResponse(
-                result=unmarshal_json_response(
-                    models.RevokeOrganizationInviteResponse, http_res
+                    models.UpdateOrganizationMemberResponse, http_res
                 ),
                 headers={},
             )

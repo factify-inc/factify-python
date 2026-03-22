@@ -250,23 +250,29 @@ with Factify(
 
 * [generate](docs/sdks/entrypages/README.md#generate) - Generate entry page
 
+### [Invites](docs/sdks/invites/README.md)
+
+* [accept_organization_invite](docs/sdks/invites/README.md#accept_organization_invite) - Accept an invitation
+* [resend_organization_invite](docs/sdks/invites/README.md#resend_organization_invite) - Resend an invitation email
+* [revoke_organization_invite](docs/sdks/invites/README.md#revoke_organization_invite) - Revoke an invitation
+
+### [Members](docs/sdks/members/README.md)
+
+* [list_organization_members](docs/sdks/members/README.md#list_organization_members) - List organization members
+* [add_organization_member](docs/sdks/members/README.md#add_organization_member) - Add a member to an organization
+* [remove_organization_member](docs/sdks/members/README.md#remove_organization_member) - Remove an organization member
+* [update_organization_member](docs/sdks/members/README.md#update_organization_member) - Update an organization member
+
 ### [Organizations](docs/sdks/organizations/README.md)
 
 * [list](docs/sdks/organizations/README.md#list) - List organizations
-* [create](docs/sdks/organizations/README.md#create) - Create an organization
 * [get](docs/sdks/organizations/README.md#get) - Retrieve an organization
-* [accept_organization_invite](docs/sdks/organizations/README.md#accept_organization_invite) - Accept an invitation
-* [resend_organization_invite](docs/sdks/organizations/README.md#resend_organization_invite) - Resend an invitation email
-* [revoke_organization_invite](docs/sdks/organizations/README.md#revoke_organization_invite) - Revoke an invitation
-* [list_organization_members](docs/sdks/organizations/README.md#list_organization_members) - List organization members
-* [add_organization_member](docs/sdks/organizations/README.md#add_organization_member) - Add a member to an organization
-* [remove_organization_member](docs/sdks/organizations/README.md#remove_organization_member) - Remove an organization member
-* [update_organization_member](docs/sdks/organizations/README.md#update_organization_member) - Update an organization member
+* [update_organization](docs/sdks/organizations/README.md#update_organization) - Update an organization
 
-### [Organizations.Invites](docs/sdks/invites/README.md)
+### [Organizations.Invites](docs/sdks/organizationsinvites/README.md)
 
-* [list](docs/sdks/invites/README.md#list) - List organization invitations
-* [create](docs/sdks/invites/README.md#create) - Invite a user to join an organization
+* [list](docs/sdks/organizationsinvites/README.md#list) - List organization invitations
+* [create](docs/sdks/organizationsinvites/README.md#create) - Invite a user to join an organization
 
 ### [Policies](docs/sdks/policies/README.md)
 
@@ -289,6 +295,10 @@ with Factify(
 * [revoke](docs/sdks/sharing/README.md#revoke) - Revoke document access
 * [update](docs/sdks/sharing/README.md#update) - Update document access
 
+### [Timelines](docs/sdks/timelines/README.md)
+
+* [get_document_timeline](docs/sdks/timelines/README.md#get_document_timeline) - Get document timeline
+
 ### [Usage](docs/sdks/usage/README.md)
 
 * [get_organization_quota](docs/sdks/usage/README.md#get_organization_quota) - Get organization quota status
@@ -300,6 +310,10 @@ with Factify(
 ### [UserPreferences](docs/sdks/userpreferences/README.md)
 
 * [get_user_preferences](docs/sdks/userpreferences/README.md#get_user_preferences) - Get user preferences
+
+### [Users](docs/sdks/users/README.md)
+
+* [get_me](docs/sdks/users/README.md#get_me) - Get current user
 
 ### [Versions](docs/sdks/versions/README.md)
 
