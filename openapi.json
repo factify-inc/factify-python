@@ -1192,6 +1192,12 @@
             "title": "last_viewed_at",
             "type": "string"
           },
+          "owner_organization_id": {
+            "description": "Organization that owns this document (via the document creator).\n Empty if the owner's organization could not be resolved.",
+            "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
+            "title": "owner_organization_id",
+            "type": "string"
+          },
           "permission_set": {
             "$ref": "#/components/schemas/DocumentPermissionSet",
             "description": "Permissions the authenticated user has on this document.\n Present in list and get responses when the caller is authenticated.",
@@ -1377,6 +1383,40 @@
           "trashed"
         ]
       },
+      "DuplicateDocument": {
+        "additionalProperties": false,
+        "description": "DuplicateDocument represents a document that is a visual duplicate.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID of the duplicate.",
+            "title": "document_id",
+            "type": "string"
+          },
+          "last_viewed_at": {
+            "description": "When the caller last viewed this document.",
+            "format": "date-time",
+            "title": "last_viewed_at",
+            "type": "string"
+          },
+          "title": {
+            "description": "Document title.",
+            "title": "title",
+            "type": "string"
+          },
+          "version_id": {
+            "description": "Version ID of the duplicate.",
+            "title": "version_id",
+            "type": "string"
+          },
+          "version_title": {
+            "description": "Version title.",
+            "title": "version_title",
+            "type": "string"
+          }
+        },
+        "title": "DuplicateDocument",
+        "type": "object"
+      },
       "Empty": {
         "description": "A generic empty message that you can re-use to avoid defining duplicated\n empty messages in your APIs. A typical example is to use it as the request\n or the response type of an API method. For instance:\n\n     service Foo {\n       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);\n     }",
         "type": "object"
@@ -1460,6 +1500,78 @@
         ],
         "type": "object"
       },
+      "ExportDocumentRequest": {
+        "additionalProperties": false,
+        "description": "ExportDocumentRequest identifies the document to export.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "version_id": {
+            "description": "Optional version ID. If omitted, exports the current version.",
+            "example": "ver_01h2abcd1234efgh5678jkmnpt",
+            "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "version_id",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "title": "ExportDocumentRequest",
+        "type": "object"
+      },
+      "ExportDocumentResponse": {
+        "additionalProperties": false,
+        "description": "ExportDocumentResponse contains the download URL.",
+        "properties": {
+          "expires_at": {
+            "description": "Timestamp when the download URL expires.",
+            "format": "date-time",
+            "title": "expires_at",
+            "type": "string"
+          },
+          "headers": {
+            "additionalProperties": {
+              "title": "value",
+              "type": "string"
+            },
+            "description": "HTTP headers to include when fetching the URL.",
+            "title": "headers",
+            "type": "object"
+          },
+          "url": {
+            "description": "Presigned URL to download the document PDF.",
+            "title": "url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "expires_at"
+        ],
+        "title": "ExportDocumentResponse",
+        "type": "object"
+      },
+      "ExportDocumentResponse.HeadersEntry": {
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "title": "key",
+            "type": "string"
+          },
+          "value": {
+            "title": "value",
+            "type": "string"
+          }
+        },
+        "title": "HeadersEntry",
+        "type": "object"
+      },
       "GeneralAccessLevel": {
         "enum": [
           "restricted",
@@ -1536,7 +1648,8 @@
         "description": "GetDocumentRequest identifies a document to retrieve.",
         "properties": {
           "document_id": {
-            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "description": "Document ID.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
@@ -2117,6 +2230,44 @@
           }
         },
         "title": "ListDocumentAccessResponse",
+        "type": "object"
+      },
+      "ListDocumentDuplicatesRequest": {
+        "additionalProperties": false,
+        "description": "ListDocumentDuplicatesRequest identifies the document to check for duplicates.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID to check for duplicates.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "file_contents_hash": {
+            "description": "SHA256 hash of the document's visual content for duplicate matching.",
+            "maxLength": 64,
+            "minLength": 64,
+            "title": "file_contents_hash",
+            "type": "string"
+          }
+        },
+        "title": "ListDocumentDuplicatesRequest",
+        "type": "object"
+      },
+      "ListDocumentDuplicatesResponse": {
+        "additionalProperties": false,
+        "description": "ListDocumentDuplicatesResponse contains the duplicate documents.",
+        "properties": {
+          "items": {
+            "description": "Duplicate documents found. Empty if none found or accessible.",
+            "items": {
+              "$ref": "#/components/schemas/DuplicateDocument"
+            },
+            "title": "items",
+            "type": "array"
+          }
+        },
+        "title": "ListDocumentDuplicatesResponse",
         "type": "object"
       },
       "ListDocumentPoliciesRequest": {
@@ -2936,6 +3087,71 @@
         "title": "Policy",
         "type": "object"
       },
+      "ProcessDocumentRequest": {
+        "additionalProperties": false,
+        "description": "ProcessDocumentRequest triggers processing for a document version.",
+        "properties": {
+          "async": {
+            "description": "If true, returns immediately without waiting for processing to complete.",
+            "title": "async",
+            "type": "boolean"
+          },
+          "document_id": {
+            "description": "Document ID.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "version_id": {
+            "description": "Optional version ID. If omitted, processes the current version.",
+            "example": "ver_01h2abcd1234efgh5678jkmnpt",
+            "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "version_id",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "title": "ProcessDocumentRequest",
+        "type": "object"
+      },
+      "ProcessDocumentResponse": {
+        "additionalProperties": false,
+        "description": "ProcessDocumentResponse contains the processing result.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID being processed.",
+            "title": "document_id",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProcessingOutcome",
+            "description": "Outcome of the processing trigger.",
+            "title": "status"
+          },
+          "version_id": {
+            "description": "Version ID being processed.",
+            "title": "version_id",
+            "type": "string"
+          }
+        },
+        "title": "ProcessDocumentResponse",
+        "type": "object"
+      },
+      "ProcessingOutcome": {
+        "description": "ProcessingOutcome describes the result of a processing trigger request.",
+        "enum": [
+          "PROCESSING_OUTCOME_UNSPECIFIED",
+          "PROCESSING_OUTCOME_STARTED",
+          "PROCESSING_OUTCOME_ALREADY_PROCESSING",
+          "PROCESSING_OUTCOME_ALREADY_COMPLETED",
+          "PROCESSING_OUTCOME_FAILED"
+        ],
+        "title": "ProcessingOutcome",
+        "type": "string"
+      },
       "ProcessingStatus": {
         "enum": [
           "processing",
@@ -3545,6 +3761,88 @@
         "title": "TimestampFilter",
         "type": "object"
       },
+      "TransferDocumentOwnershipRequest": {
+        "additionalProperties": false,
+        "description": "TransferDocumentOwnershipRequest specifies the document and new owner.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          },
+          "new_owner_id": {
+            "description": "User ID of the new owner.",
+            "example": "user_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "new_owner_id",
+            "type": "string"
+          }
+        },
+        "title": "TransferDocumentOwnershipRequest",
+        "type": "object"
+      },
+      "TransferDocumentOwnershipResponse": {
+        "additionalProperties": false,
+        "description": "TransferDocumentOwnershipResponse confirms the transfer.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID that was transferred.",
+            "title": "document_id",
+            "type": "string"
+          },
+          "new_owner_id": {
+            "description": "User ID of the new owner.",
+            "title": "new_owner_id",
+            "type": "string"
+          }
+        },
+        "title": "TransferDocumentOwnershipResponse",
+        "type": "object"
+      },
+      "TrashDocumentRequest": {
+        "additionalProperties": false,
+        "description": "TrashDocumentRequest identifies the document to trash.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          }
+        },
+        "title": "TrashDocumentRequest",
+        "type": "object"
+      },
+      "TrashDocumentResponse": {
+        "additionalProperties": false,
+        "description": "TrashDocumentResponse is empty on success.",
+        "title": "TrashDocumentResponse",
+        "type": "object"
+      },
+      "UntrashDocumentRequest": {
+        "additionalProperties": false,
+        "description": "UntrashDocumentRequest identifies the document to restore.",
+        "properties": {
+          "document_id": {
+            "description": "Document ID.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+            "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "document_id",
+            "type": "string"
+          }
+        },
+        "title": "UntrashDocumentRequest",
+        "type": "object"
+      },
+      "UntrashDocumentResponse": {
+        "additionalProperties": false,
+        "description": "UntrashDocumentResponse is empty on success.",
+        "title": "UntrashDocumentResponse",
+        "type": "object"
+      },
       "UpdateDocumentAccessRequest": {
         "additionalProperties": false,
         "description": "UpdateDocumentAccessRequest updates a single recipient's role.",
@@ -3605,7 +3903,8 @@
             ]
           },
           "document_id": {
-            "description": "Document ID to update.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "description": "Document ID to update.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
@@ -4038,7 +4337,7 @@
       "url": "https://factify.com/terms"
     },
     "title": "Factify API",
-    "version": "1.1.0-rc.2"
+    "version": "1.2.0-rc.1"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -4817,12 +5116,13 @@
         "operationId": "getDocument",
         "parameters": [
           {
-            "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "description": "Document ID.",
             "in": "path",
             "name": "document_id",
             "required": true,
             "schema": {
-              "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+              "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "document_id",
               "type": "string"
@@ -4867,12 +5167,12 @@
           {
             "label": "getDocument",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.get({\n    documentId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.get({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "getDocument",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.get(document_id=\"<id>\")\n\n    assert res.get_document_response is not None\n\n    # Handle response\n    print(res.get_document_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.get(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_document_response is not None\n\n    # Handle response\n    print(res.get_document_response)"
           }
         ],
         "x-speakeasy-name-override": "get"
@@ -4882,12 +5182,13 @@
         "operationId": "updateDocument",
         "parameters": [
           {
-            "description": "Document ID to update.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "description": "Document ID to update.",
             "in": "path",
             "name": "document_id",
             "required": true,
             "schema": {
-              "description": "Document ID to update.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+              "description": "Document ID to update.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "document_id",
               "type": "string"
@@ -4966,12 +5267,12 @@
           {
             "label": "updateDocument",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.update({\n    documentId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.update({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "updateDocument",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.update(document_id=\"<id>\")\n\n    assert res.update_document_response is not None\n\n    # Handle response\n    print(res.update_document_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.update(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.update_document_response is not None\n\n    # Handle response\n    print(res.update_document_response)"
           }
         ],
         "x-speakeasy-name-override": "update"
@@ -5478,6 +5779,86 @@
         "x-speakeasy-name-override": "deny"
       }
     },
+    "/v1beta/documents/{document_id}/duplicates": {
+      "get": {
+        "description": "Finds documents that are visual duplicates of the specified document using perceptual hashing.",
+        "operationId": "listDocumentDuplicates",
+        "parameters": [
+          {
+            "description": "Document ID to check for duplicates.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID to check for duplicates.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "SHA256 hash of the document's visual content for duplicate matching.",
+            "in": "query",
+            "name": "file_contents_hash",
+            "schema": {
+              "description": "SHA256 hash of the document's visual content for duplicate matching.",
+              "maxLength": 64,
+              "minLength": 64,
+              "title": "file_contents_hash",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListDocumentDuplicatesResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "List duplicate documents",
+        "tags": [
+          "Documents"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "listDocumentDuplicates",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.listDuplicates({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "listDocumentDuplicates",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.list_duplicates(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.list_document_duplicates_response is not None\n\n    # Handle response\n    print(res.list_document_duplicates_response)"
+          }
+        ],
+        "x-speakeasy-name-override": "listDuplicates"
+      }
+    },
     "/v1beta/documents/{document_id}/entry_page": {
       "post": {
         "description": "Generate and return a temporary downloadable URL for the document entry page PDF.",
@@ -5544,6 +5925,86 @@
         ],
         "x-speakeasy-group": "entryPages",
         "x-speakeasy-name-override": "generate"
+      }
+    },
+    "/v1beta/documents/{document_id}/export": {
+      "get": {
+        "description": "Generates a time-limited download URL for the document PDF.",
+        "operationId": "exportDocument",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional version ID. If omitted, exports the current version.",
+            "in": "query",
+            "name": "version_id",
+            "schema": {
+              "description": "Optional version ID. If omitted, exports the current version.",
+              "example": "ver_01h2abcd1234efgh5678jkmnpt",
+              "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "version_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportDocumentResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Export a document",
+        "tags": [
+          "Documents"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "exportDocument",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.export({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    versionId: \"ver_01h2abcd1234efgh5678jkmnpt\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "exportDocument",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.export(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", version_id=\"ver_01h2abcd1234efgh5678jkmnpt\")\n\n    assert res.export_document_response is not None\n\n    # Handle response\n    print(res.export_document_response)"
+          }
+        ],
+        "x-speakeasy-name-override": "export"
       }
     },
     "/v1beta/documents/{document_id}/general-access": {
@@ -5973,6 +6434,104 @@
           }
         ],
         "x-speakeasy-name-override": "detach"
+      }
+    },
+    "/v1beta/documents/{document_id}/process": {
+      "post": {
+        "description": "Triggers the AI processing pipeline (extraction and summarization) for the document's current or specified version.",
+        "operationId": "processDocument",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "ProcessDocumentRequest triggers processing for a document version.",
+                "properties": {
+                  "async": {
+                    "description": "If true, returns immediately without waiting for processing to complete.",
+                    "title": "async",
+                    "type": "boolean"
+                  },
+                  "version_id": {
+                    "description": "Optional version ID. If omitted, processes the current version.",
+                    "example": "ver_01h2abcd1234efgh5678jkmnpt",
+                    "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
+                    "title": "version_id",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "title": "ProcessDocumentRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessDocumentResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Process a document",
+        "tags": [
+          "Documents"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "processDocument",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.process({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {\n      versionId: \"ver_01h2abcd1234efgh5678jkmnpt\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "processDocument",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.process(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", version_id=\"ver_01h2abcd1234efgh5678jkmnpt\")\n\n    assert res.process_document_response is not None\n\n    # Handle response\n    print(res.process_document_response)"
+          }
+        ],
+        "x-speakeasy-name-override": "process"
       }
     },
     "/v1beta/documents/{document_id}/share": {
@@ -6495,6 +7054,260 @@
             "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.timelines.get_document_timeline(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_timeline_response is not None\n\n    # Handle response\n    print(res.get_timeline_response)"
           }
         ]
+      }
+    },
+    "/v1beta/documents/{document_id}/transfer": {
+      "post": {
+        "description": "Transfers ownership of a document to another user in the organization.",
+        "operationId": "transferDocumentOwnership",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "TransferDocumentOwnershipRequest specifies the document and new owner.",
+                "properties": {
+                  "new_owner_id": {
+                    "description": "User ID of the new owner.",
+                    "example": "user_01h2xcejqtf2nbrexx3vqjhp41",
+                    "pattern": "^user_[0-9a-hjkmnp-tv-z]{26}$",
+                    "title": "new_owner_id",
+                    "type": "string"
+                  }
+                },
+                "title": "TransferDocumentOwnershipRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferDocumentOwnershipResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Transfer document ownership",
+        "tags": [
+          "Documents"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "transferDocumentOwnership",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.transferOwnership({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {\n      newOwnerId: \"user_01h2xcejqtf2nbrexx3vqjhp41\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "transferDocumentOwnership",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.transfer_ownership(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", new_owner_id=\"user_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.transfer_document_ownership_response is not None\n\n    # Handle response\n    print(res.transfer_document_ownership_response)"
+          }
+        ],
+        "x-speakeasy-name-override": "transferOwnership"
+      }
+    },
+    "/v1beta/documents/{document_id}/trash": {
+      "post": {
+        "description": "Moves a document to trash and revokes all non-owner access.",
+        "operationId": "trashDocument",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "TrashDocumentRequest identifies the document to trash.",
+                "properties": {},
+                "title": "TrashDocumentRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrashDocumentResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Trash a document",
+        "tags": [
+          "Documents"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "trashDocument",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.trash({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "trashDocument",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.trash(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", body={})\n\n    assert res.trash_document_response is not None\n\n    # Handle response\n    print(res.trash_document_response)"
+          }
+        ],
+        "x-speakeasy-name-override": "trash"
+      }
+    },
+    "/v1beta/documents/{document_id}/untrash": {
+      "post": {
+        "description": "Restores a document from trash. Previous sharing and access permissions are NOT restored.",
+        "operationId": "untrashDocument",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "UntrashDocumentRequest identifies the document to restore.",
+                "properties": {},
+                "title": "UntrashDocumentRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UntrashDocumentResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Restore a document from trash",
+        "tags": [
+          "Documents"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "untrashDocument",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.untrash({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "untrashDocument",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.untrash(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", body={})\n\n    assert res.untrash_document_response is not None\n\n    # Handle response\n    print(res.untrash_document_response)"
+          }
+        ],
+        "x-speakeasy-name-override": "untrash"
       }
     },
     "/v1beta/documents/{document_id}/versions": {
