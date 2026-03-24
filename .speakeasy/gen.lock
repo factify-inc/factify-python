@@ -5,15 +5,15 @@ management:
   docVersion: 1.0.0-rc.1
   speakeasyVersion: 1.759.1
   generationVersion: 2.869.10
-  releaseVersion: 1.0.1-rc.1
-  configChecksum: 5c81a8650f05934e1f1e3018c7d31f90
+  releaseVersion: 1.0.1
+  configChecksum: 06538a93d01971c2f47a7c8d7ef83a8e
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: 59a736d3-4fe9-4542-ba76-d6f7e982f976
-  pristine_commit_hash: d93ed131653c1d20b9d1153b715176e305545373
-  pristine_tree_hash: 93d57ee17b4dea15191d05f89ec71d74639f08b4
+  generation_id: d699928a-3920-4b76-9ce3-1584a979c112
+  pristine_commit_hash: 6afd77c80ace9615ef32088e22d7e2af76f75ff3
+  pristine_tree_hash: 400702cb65116681a0cc9783ef44fd33faf859cc
 features:
   python:
     additionalDependencies: 1.0.0
@@ -1036,8 +1036,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:c3383f7c3e6c85bac43c594e74c6d541ca7b9313
-    pristine_git_object: ec7e404046b2cab14453e39d585be0ea7d076dc5
+    last_write_checksum: sha1:c4ccf90477e63556309a905f60f19f58793d3812
+    pristine_git_object: 60d53e1c169159dc7169918b0793e79f38070346
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -1064,8 +1064,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:70abca7dedfe01bf91e04f8a77cb07aece58f0f8
-    pristine_git_object: 40501d89a79709b3efab533ca05897b761616ba7
+    last_write_checksum: sha1:e9f43f84a0f2b5683f548bb130c4670058e2618a
+    pristine_git_object: 5aa173f90608b9daeb9073bb92e010b370631d6f
   src/factify/accessrequests.py:
     id: 31a20ba0373b
     last_write_checksum: sha1:2ae2764fb41d3e303510aa968e9d2d31a9b4861b
