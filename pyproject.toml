@@ -1,6 +1,6 @@
 [project]
 name = "factify"
-version = "0.7.3-rc.2"
+version = "0.7.3-rc.3"
 description = "Python SDK for the Factify API"
 authors = [{ name = "map[name:Factify]" },]
 readme = "README-PYPI.md"
