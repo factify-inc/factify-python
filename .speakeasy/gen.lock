@@ -3,21 +3,21 @@ id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
   docChecksum: 520a1efe18ccdc865fc63ce5db5160ed
   docVersion: 1.0.0-rc.1
-  speakeasyVersion: 1.759.0
-  generationVersion: 2.869.3
-  releaseVersion: 1.0.0-rc.1
-  configChecksum: 409d5932444e16bd593e1744bcccc712
+  speakeasyVersion: 1.759.1
+  generationVersion: 2.869.10
+  releaseVersion: 1.0.1-rc.1
+  configChecksum: 5c81a8650f05934e1f1e3018c7d31f90
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: 3b79fd9b-46e7-4c71-af39-57e92157e2f8
-  pristine_commit_hash: b6935c47a0b23df0125267844534f8d33a365598
-  pristine_tree_hash: 74fc5424f1b09eb24b8b92bbc0e5e2a4eba2e17f
+  generation_id: 59a736d3-4fe9-4542-ba76-d6f7e982f976
+  pristine_commit_hash: d93ed131653c1d20b9d1153b715176e305545373
+  pristine_tree_hash: 93d57ee17b4dea15191d05f89ec71d74639f08b4
 features:
   python:
     additionalDependencies: 1.0.0
-    core: 6.0.19
+    core: 6.0.20
     defaultEnabledRetries: 0.2.0
     enumUnions: 0.1.1
     envVarSecurityUsage: 0.3.2
@@ -1036,8 +1036,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a9e1b380d4f5ca2d5257a3bb8c0cceac5cadc337
-    pristine_git_object: 61588fbbddceea649d1c96ff43771c8d488aca53
+    last_write_checksum: sha1:c3383f7c3e6c85bac43c594e74c6d541ca7b9313
+    pristine_git_object: ec7e404046b2cab14453e39d585be0ea7d076dc5
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -1064,8 +1064,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:1434af8d15f4e839695c2db0115191a8de507081
-    pristine_git_object: 968f97b1f987cd897e1b06dcb61a5025827e8949
+    last_write_checksum: sha1:70abca7dedfe01bf91e04f8a77cb07aece58f0f8
+    pristine_git_object: 40501d89a79709b3efab533ca05897b761616ba7
   src/factify/accessrequests.py:
     id: 31a20ba0373b
     last_write_checksum: sha1:2ae2764fb41d3e303510aa968e9d2d31a9b4861b
@@ -3434,39 +3434,3 @@ examples:
         "500":
           application/json: {"code": "internal", "message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `factify.documents.get_quota()`: **Added**
-  * `factify.timelines.get()`: **Added**
-  * `factify.organizations.update()`: **Added**
-  * `factify.organizations.invites.accept()`: **Added**
-  * `factify.organizations.invites.resend()`: **Added**
-  * `factify.organizations.invites.revoke()`: **Added**
-  * `factify.organizations.members.list()`: **Added**
-  * `factify.organizations.members.add()`: **Added**
-  * `factify.organizations.members.remove()`: **Added**
-  * `factify.organizations.members.update()`: **Added**
-  * `factify.usage.get()`: **Added**
-  * `factify.usage.list_key_quotas()`: **Added**
-  * `factify.usage.delete_key_quota()`: **Added**
-  * `factify.usage.set_key_quota()`: **Added**
-  * `factify.usage.get_history()`: **Added**
-  * `factify.user_preferences.get()`: **Added**
-  * `factify.quotas.quota_service_delete_organization_quota()`: **Removed** (Breaking ⚠️)
-  * `factify.quotas.quota_service_set_organization_quota()`: **Removed** (Breaking ⚠️)
-  * `factify.documents.get_document_quota()`: **Removed** (Breaking ⚠️)
-  * `factify.timelines.get_document_timeline()`: **Removed** (Breaking ⚠️)
-  * `factify.organizations.update_organization()`: **Removed** (Breaking ⚠️)
-  * `factify.invites.accept_organization_invite()`: **Removed** (Breaking ⚠️)
-  * `factify.invites.resend_organization_invite()`: **Removed** (Breaking ⚠️)
-  * `factify.invites.revoke_organization_invite()`: **Removed** (Breaking ⚠️)
-  * `factify.members.list_organization_members()`: **Removed** (Breaking ⚠️)
-  * `factify.members.add_organization_member()`: **Removed** (Breaking ⚠️)
-  * `factify.members.remove_organization_member()`: **Removed** (Breaking ⚠️)
-  * `factify.members.update_organization_member()`: **Removed** (Breaking ⚠️)
-  * `factify.usage.get_organization_quota()`: **Removed** (Breaking ⚠️)
-  * `factify.usage.list_api_key_quotas()`: **Removed** (Breaking ⚠️)
-  * `factify.usage.delete_api_key_quota()`: **Removed** (Breaking ⚠️)
-  * `factify.usage.set_api_key_quota()`: **Removed** (Breaking ⚠️)
-  * `factify.usage.get_usage_history()`: **Removed** (Breaking ⚠️)
-  * `factify.user_preferences.get_user_preferences()`: **Removed** (Breaking ⚠️)
