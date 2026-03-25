@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:2da4456d0ee590135a044b9ef8419e207212ccadd49fa9f0a3e5d443ada06065
         sourceBlobDigest: sha256:766636f5a286f272b455e8e14b06118f796931d99ac2fd11fca41bb7fd83d19e
         codeSamplesNamespace: factify-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:c4b64e952aace81495a68a45e2c8f953cfc27e5b81eff45ff8522e7d851cecae
+        codeSamplesRevisionDigest: sha256:59f8a8a36bf92cfc530c042eadee68f5fa6e39a14667e57370e50fcd4e408902
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
