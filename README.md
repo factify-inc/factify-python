@@ -263,6 +263,7 @@ with Factify(
 * [list](docs/sdks/organizations/README.md#list) - List organizations
 * [get](docs/sdks/organizations/README.md#get) - Retrieve an organization
 * [update](docs/sdks/organizations/README.md#update) - Update an organization
+* [get_public_profile](docs/sdks/organizations/README.md#get_public_profile) - Get an organization's public profile
 
 ### [Organizations.Invites](docs/sdks/invites/README.md)
 
@@ -271,6 +272,10 @@ with Factify(
 * [accept](docs/sdks/invites/README.md#accept) - Accept an invitation
 * [resend](docs/sdks/invites/README.md#resend) - Resend an invitation email
 * [revoke](docs/sdks/invites/README.md#revoke) - Revoke an invitation
+
+### [Organizations.Logo](docs/sdks/logo/README.md)
+
+* [upload](docs/sdks/logo/README.md#upload) - Upload organization logo
 
 ### [Organizations.Members](docs/sdks/members/README.md)
 

@@ -263,6 +263,7 @@ with Factify(
 * [list](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#list) - List organizations
 * [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#get) - Retrieve an organization
 * [update](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#update) - Update an organization
+* [get_public_profile](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/organizations/README.md#get_public_profile) - Get an organization's public profile
 
 ### [Organizations.Invites](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md)
 
@@ -271,6 +272,10 @@ with Factify(
 * [accept](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#accept) - Accept an invitation
 * [resend](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#resend) - Resend an invitation email
 * [revoke](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/invites/README.md#revoke) - Revoke an invitation
+
+### [Organizations.Logo](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/logo/README.md)
+
+* [upload](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/logo/README.md#upload) - Upload organization logo
 
 ### [Organizations.Members](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/members/README.md)
 

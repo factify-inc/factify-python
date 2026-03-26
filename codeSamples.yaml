@@ -261,6 +261,12 @@ actions:
         - "lang": "python"
           "label": "revokeOrganizationInvite"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.invites.revoke(organization_id=\"<id>\", invite_id=\"<id>\", body={})\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/logo"]["post"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "uploadOrganizationLogo"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.logo.upload(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/organizations/{organization_id}/members"]["get"]
     update:
       "x-codeSamples":
@@ -285,6 +291,12 @@ actions:
         - "lang": "python"
           "label": "updateOrganizationMember"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.members.update(organization_id=\"<id>\", user_id=\"<id>\", role=\"member\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/organizations/{organization_id}/public-profile"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "getOrganizationPublicProfile"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.get_public_profile(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/quota"]["get"]
     update:
       "x-codeSamples":

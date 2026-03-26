@@ -9,6 +9,7 @@ Create and manage organizations.
 * [list](#list) - List organizations
 * [get](#get) - Retrieve an organization
 * [update](#update) - Update an organization
+* [get_public_profile](#get_public_profile) - Get an organization's public profile
 
 ## list
 
@@ -132,6 +133,48 @@ with Factify(
 ### Response
 
 **[models.UpdateOrganizationResponseResponse](../../models/updateorganizationresponseresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## get_public_profile
+
+Returns the public-facing profile of an organization. This endpoint does not require authentication.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="getOrganizationPublicProfile" method="get" path="/v1beta/organizations/{organization_id}/public-profile" -->
+```python
+from factify import Factify
+
+
+with Factify(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+) as f_client:
+
+    res = f_client.organizations.get_public_profile(organization_id="org_01h2xcejqtf2nbrexx3vqjhp41")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `organization_id`                                                   | *str*                                                               | :heavy_check_mark:                                                  | Organization ID.<br/> Pattern: org_[0-9a-hjkmnp-tv-z]{26}           | org_01h2xcejqtf2nbrexx3vqjhp41                                      |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
+
+### Response
+
+**[models.GetOrganizationPublicProfileResponseResponse](../../models/getorganizationpublicprofileresponseresponse.md)**
 
 ### Errors
 
