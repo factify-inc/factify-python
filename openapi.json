@@ -919,6 +919,7 @@
         "properties": {
           "document_id": {
             "description": "Document ID.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
@@ -1659,6 +1660,7 @@
         "properties": {
           "document_id": {
             "description": "Document ID.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
@@ -1985,6 +1987,7 @@
           },
           "document_id": {
             "description": "Document ID.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
@@ -2216,6 +2219,7 @@
         "properties": {
           "document_id": {
             "description": "Document ID.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
@@ -3324,12 +3328,14 @@
         "properties": {
           "document_id": {
             "description": "Document ID.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
           },
           "recipient_id": {
             "description": "Recipient ID (TypeID: user_xxx or bot_xxx).",
+            "example": "user_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^(user|bot)_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "recipient_id",
             "type": "string"
@@ -3450,6 +3456,7 @@
         "properties": {
           "document_id": {
             "description": "Document ID.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
@@ -3778,6 +3785,7 @@
         "properties": {
           "document_id": {
             "description": "Document ID.",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
@@ -3789,6 +3797,7 @@
           },
           "recipient_id": {
             "description": "Recipient ID (TypeID: user_xxx or bot_xxx).",
+            "example": "user_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^(user|bot)_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "recipient_id",
             "type": "string"
@@ -4310,7 +4319,7 @@
       "url": "https://factify.com/terms"
     },
     "title": "Factify API",
-    "version": "1.1.0-rc.1"
+    "version": "1.1.0-rc.2"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -5815,6 +5824,7 @@
             "required": true,
             "schema": {
               "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "document_id",
               "type": "string"
@@ -5859,12 +5869,12 @@
           {
             "label": "getGeneralAccess",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.getGeneralAccess({\n    documentId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.getGeneralAccess({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "getGeneralAccess",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.get_general_access(document_id=\"<id>\")\n\n    assert res.get_general_access_response is not None\n\n    # Handle response\n    print(res.get_general_access_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.get_general_access(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_general_access_response is not None\n\n    # Handle response\n    print(res.get_general_access_response)"
           }
         ],
         "x-speakeasy-group": "sharing",
@@ -5881,6 +5891,7 @@
             "required": true,
             "schema": {
               "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "document_id",
               "type": "string"
@@ -5948,12 +5959,12 @@
           {
             "label": "setGeneralAccess",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.setGeneralAccess({\n    documentId: \"<id>\",\n    body: {\n      generalAccessLevel: \"organization\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.setGeneralAccess({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {\n      generalAccessLevel: \"organization\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "setGeneralAccess",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.set_general_access(document_id=\"<id>\", general_access_level=\"organization\")\n\n    assert res.set_general_access_response is not None\n\n    # Handle response\n    print(res.set_general_access_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.set_general_access(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", general_access_level=\"organization\")\n\n    assert res.set_general_access_response is not None\n\n    # Handle response\n    print(res.set_general_access_response)"
           }
         ],
         "x-speakeasy-group": "sharing",
@@ -6342,6 +6353,7 @@
             "required": true,
             "schema": {
               "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "document_id",
               "type": "string"
@@ -6386,12 +6398,12 @@
           {
             "label": "listDocumentAccess",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.list({\n    documentId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.list({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "listDocumentAccess",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.list(document_id=\"<id>\")\n\n    assert res.list_document_access_response is not None\n\n    # Handle response\n    print(res.list_document_access_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.list(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.list_document_access_response is not None\n\n    # Handle response\n    print(res.list_document_access_response)"
           }
         ],
         "x-speakeasy-group": "sharing",
@@ -6408,6 +6420,7 @@
             "required": true,
             "schema": {
               "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "document_id",
               "type": "string"
@@ -6493,12 +6506,12 @@
           {
             "label": "grantDocumentAccess",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.grant({\n    documentId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.grant({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "grantDocumentAccess",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.grant(document_id=\"<id>\")\n\n    assert res.grant_document_access_response is not None\n\n    # Handle response\n    print(res.grant_document_access_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.grant(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.grant_document_access_response is not None\n\n    # Handle response\n    print(res.grant_document_access_response)"
           }
         ],
         "x-speakeasy-group": "sharing",
@@ -6517,6 +6530,7 @@
             "required": true,
             "schema": {
               "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "document_id",
               "type": "string"
@@ -6575,12 +6589,12 @@
           {
             "label": "createShareLink",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.createShareLink({\n    documentId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.createShareLink({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "createShareLink",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.create_share_link(document_id=\"<id>\", body={})\n\n    assert res.create_share_link_response is not None\n\n    # Handle response\n    print(res.create_share_link_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.create_share_link(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", body={})\n\n    assert res.create_share_link_response is not None\n\n    # Handle response\n    print(res.create_share_link_response)"
           }
         ],
         "x-speakeasy-group": "sharing",
@@ -6599,6 +6613,7 @@
             "required": true,
             "schema": {
               "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "document_id",
               "type": "string"
@@ -6611,6 +6626,7 @@
             "required": true,
             "schema": {
               "description": "Recipient ID (TypeID: user_xxx or bot_xxx).",
+              "example": "user_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^(user|bot)_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "recipient_id",
               "type": "string"
@@ -6655,12 +6671,12 @@
           {
             "label": "revokeDocumentAccess",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.revoke({\n    documentId: \"<id>\",\n    recipientId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.revoke({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    recipientId: \"user_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "revokeDocumentAccess",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.revoke(document_id=\"<id>\", recipient_id=\"<id>\")\n\n    assert res.revoke_document_access_response is not None\n\n    # Handle response\n    print(res.revoke_document_access_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.revoke(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", recipient_id=\"user_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.revoke_document_access_response is not None\n\n    # Handle response\n    print(res.revoke_document_access_response)"
           }
         ],
         "x-speakeasy-group": "sharing",
@@ -6677,6 +6693,7 @@
             "required": true,
             "schema": {
               "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "document_id",
               "type": "string"
@@ -6689,6 +6706,7 @@
             "required": true,
             "schema": {
               "description": "Recipient ID (TypeID: user_xxx or bot_xxx).",
+              "example": "user_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^(user|bot)_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "recipient_id",
               "type": "string"
@@ -6756,12 +6774,12 @@
           {
             "label": "updateDocumentAccess",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.update({\n    documentId: \"<id>\",\n    recipientId: \"<id>\",\n    body: {\n      documentRole: \"admin\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.update({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    recipientId: \"user_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {\n      documentRole: \"admin\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "updateDocumentAccess",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.update(document_id=\"<id>\", recipient_id=\"<id>\", document_role=\"admin\")\n\n    assert res.update_document_access_response is not None\n\n    # Handle response\n    print(res.update_document_access_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.update(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", recipient_id=\"user_01h2xcejqtf2nbrexx3vqjhp41\", document_role=\"admin\")\n\n    assert res.update_document_access_response is not None\n\n    # Handle response\n    print(res.update_document_access_response)"
           }
         ],
         "x-speakeasy-group": "sharing",
