@@ -23,13 +23,13 @@ jobs:
             --arg name "$RELEASE_NAME" \
             --arg url "$RELEASE_URL" \
             '{
-              text: "SDK Published: \($name)",
+              text: "✅ SDK Published: \($name)",
               blocks: [
                 {
                   type: "section",
                   text: {
                     type: "mrkdwn",
-                    text: "*SDK Published: \($name)*"
+                    text: "✅ *SDK Published: \($name)*"
                   },
                   accessory: {
                     type: "button",
