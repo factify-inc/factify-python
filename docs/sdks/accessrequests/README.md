@@ -4,54 +4,12 @@
 
 ### Available Operations
 
-* [inspect](#inspect) - Inspect document access
 * [list](#list) - List access requests
 * [create](#create) - Create an access request
 * [check_status](#check_status) - Check access request status
 * [approve](#approve) - Approve an access request
 * [deny](#deny) - Deny an access request
-
-## inspect
-
-Returns the caller's permissions and any access policies on a document.
-
-### Example Usage
-
-<!-- UsageSnippet language="python" operationID="inspectDocumentAccess" method="get" path="/v1beta/documents/{document_id}/access" -->
-```python
-from factify import Factify
-
-
-with Factify(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-) as f_client:
-
-    res = f_client.access_requests.inspect(document_id="<id>")
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `document_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Document ID.                                                        | doc_01h2xcejqtf2nbrexx3vqjhp41                                      |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
-
-### Response
-
-**[models.InspectDocumentAccessResponse](../../models/inspectdocumentaccessresponse.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
-| errors.ErrorResponse       | 429                        | application/json           |
-| errors.ErrorResponse       | 500                        | application/json           |
-| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+* [inspect](#inspect) - Inspect document access
 
 ## list
 
@@ -259,6 +217,48 @@ with Factify(
 ### Response
 
 **[models.DenyAccessRequestResponseResponse](../../models/denyaccessrequestresponseresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorResponse       | 429                        | application/json           |
+| errors.ErrorResponse       | 500                        | application/json           |
+| errors.FactifyDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## inspect
+
+Returns the caller's permissions and any access policies on a document.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="inspectDocumentAccess" method="get" path="/v1beta/documents/{document_id}/capabilities" -->
+```python
+from factify import Factify
+
+
+with Factify(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+) as f_client:
+
+    res = f_client.access_requests.inspect(document_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `document_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Document ID.                                                        | doc_01h2xcejqtf2nbrexx3vqjhp41                                      |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
+
+### Response
+
+**[models.InspectDocumentAccessResponse](../../models/inspectdocumentaccessresponse.md)**
 
 ### Errors
 

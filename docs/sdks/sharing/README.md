@@ -18,7 +18,7 @@ Get general access level for a document.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="getGeneralAccess" method="get" path="/v1beta/documents/{document_id}/general-access" -->
+<!-- UsageSnippet language="python" operationID="getGeneralAccess" method="get" path="/v1beta/documents/{document_id}/access" -->
 ```python
 from factify import Factify
 
@@ -60,7 +60,7 @@ Set general access level for a document.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="setGeneralAccess" method="put" path="/v1beta/documents/{document_id}/general-access" example="validation_error" -->
+<!-- UsageSnippet language="python" operationID="setGeneralAccess" method="put" path="/v1beta/documents/{document_id}/access" example="validation_error" -->
 ```python
 from factify import Factify
 

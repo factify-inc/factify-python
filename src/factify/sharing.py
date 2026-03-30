@@ -44,7 +44,7 @@ class Sharing(BaseSDK):
 
         req = self._build_request(
             method="GET",
-            path="/v1beta/documents/{document_id}/general-access",
+            path="/v1beta/documents/{document_id}/access",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -147,7 +147,7 @@ class Sharing(BaseSDK):
 
         req = self._build_request_async(
             method="GET",
-            path="/v1beta/documents/{document_id}/general-access",
+            path="/v1beta/documents/{document_id}/access",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -255,7 +255,7 @@ class Sharing(BaseSDK):
 
         req = self._build_request(
             method="PUT",
-            path="/v1beta/documents/{document_id}/general-access",
+            path="/v1beta/documents/{document_id}/access",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -370,7 +370,7 @@ class Sharing(BaseSDK):
 
         req = self._build_request_async(
             method="PUT",
-            path="/v1beta/documents/{document_id}/general-access",
+            path="/v1beta/documents/{document_id}/access",
             base_url=base_url,
             url_variables=url_variables,
             request=request,

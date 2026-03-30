@@ -34,7 +34,9 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.documents.list(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", created_after=parse_datetime("2023-01-15T01:30:15.01Z"), created_before=parse_datetime("2023-01-15T01:30:15.01Z"))
+    res = f_client.documents.list(page_token="eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0", created_after=parse_datetime("2023-01-15T01:30:15.01Z"), created_before=parse_datetime("2023-01-15T01:30:15.01Z"), created_by_id=[
+        "user_01h2xcejqtf2nbrexx3vqjhp41",
+    ])
 
     while res is not None:
         # Handle items

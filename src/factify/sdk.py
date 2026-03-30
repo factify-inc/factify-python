@@ -70,9 +70,9 @@ class Factify(BaseSDK):
     r"""Generate and manage API keys for authentication."""
     documents: "Documents"
     r"""Create and manage legally-binding documents."""
+    sharing: "Sharing"
     access_requests: "AccessRequests"
     entry_pages: "EntryPages"
-    sharing: "Sharing"
     policies: "Policies"
     r"""Attach and manage access policies for documents."""
     timelines: "Timelines"
@@ -88,9 +88,9 @@ class Factify(BaseSDK):
     _sub_sdk_map = {
         "api_keys": ("factify.api_keys", "APIKeys"),
         "documents": ("factify.documents", "Documents"),
+        "sharing": ("factify.sharing", "Sharing"),
         "access_requests": ("factify.accessrequests", "AccessRequests"),
         "entry_pages": ("factify.entrypages", "EntryPages"),
-        "sharing": ("factify.sharing", "Sharing"),
         "policies": ("factify.policies", "Policies"),
         "timelines": ("factify.timelines", "Timelines"),
         "versions": ("factify.versions", "Versions"),

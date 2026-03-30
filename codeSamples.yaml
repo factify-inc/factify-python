@@ -26,7 +26,7 @@ actions:
       "x-codeSamples":
         - "lang": "python"
           "label": "listDocuments"
-          "source": "from factify import Factify\nfrom factify.utils import parse_datetime\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\", created_after=parse_datetime(\"2023-01-15T01:30:15.01Z\"), created_before=parse_datetime(\"2023-01-15T01:30:15.01Z\"))\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+          "source": "from factify import Factify\nfrom factify.utils import parse_datetime\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\", created_after=parse_datetime(\"2023-01-15T01:30:15.01Z\"), created_before=parse_datetime(\"2023-01-15T01:30:15.01Z\"), created_by_id=[\n        \"user_01h2xcejqtf2nbrexx3vqjhp41\",\n    ])\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
   - target: $["paths"]["/v1beta/documents"]["post"]
     update:
       "x-codeSamples":
@@ -55,8 +55,14 @@ actions:
     update:
       "x-codeSamples":
         - "lang": "python"
-          "label": "inspectDocumentAccess"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.inspect(document_id=\"<id>\")\n\n    # Handle response\n    print(res)"
+          "label": "getGeneralAccess"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.get_general_access(document_id=\"<id>\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/access"]["put"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "setGeneralAccess"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.set_general_access(document_id=\"<id>\", general_access_level=\"organization\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/documents/{document_id}/access-requests"]["get"]
     update:
       "x-codeSamples":
@@ -87,6 +93,12 @@ actions:
         - "lang": "python"
           "label": "denyAccessRequest"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.deny(document_id=\"<id>\", access_request_id=\"<id>\", body={})\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/documents/{document_id}/capabilities"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "inspectDocumentAccess"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.inspect(document_id=\"<id>\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/documents/{document_id}/duplicates"]["get"]
     update:
       "x-codeSamples":
@@ -105,18 +117,6 @@ actions:
         - "lang": "python"
           "label": "exportDocument"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.export(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", version_id=\"ver_01h2abcd1234efgh5678jkmnpt\")\n\n    # Handle response\n    print(res)"
-  - target: $["paths"]["/v1beta/documents/{document_id}/general-access"]["get"]
-    update:
-      "x-codeSamples":
-        - "lang": "python"
-          "label": "getGeneralAccess"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.get_general_access(document_id=\"<id>\")\n\n    # Handle response\n    print(res)"
-  - target: $["paths"]["/v1beta/documents/{document_id}/general-access"]["put"]
-    update:
-      "x-codeSamples":
-        - "lang": "python"
-          "label": "setGeneralAccess"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.set_general_access(document_id=\"<id>\", general_access_level=\"organization\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/documents/{document_id}/policies"]["get"]
     update:
       "x-codeSamples":
