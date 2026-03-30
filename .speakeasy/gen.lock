@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: f333850b7b6354f26bff2e3e152074c3
-  docVersion: 1.1.0-rc.4
+  docChecksum: e234483b4fec0f08be5ac263bb0eda34
+  docVersion: 1.1.0-rc.5
   speakeasyVersion: 1.759.3
   generationVersion: 2.869.25
-  releaseVersion: 1.1.0-rc.4
-  configChecksum: fcdac143a37381b2607fe13f62278865
+  releaseVersion: 1.1.0-rc.5
+  configChecksum: 15f01eae7a0b33a11c511d44ab2983a2
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: 82a4a3eb-4b2a-47a9-82b3-4b79ad95f20a
-  pristine_commit_hash: 10b38abdf5c7dbf22db2bba8515137e4fe243db3
-  pristine_tree_hash: 188493a331975ab4b7e308bdc52caf9f1b9234ed
+  generation_id: e4eccbb0-0838-4b3a-8345-596e76d37f4c
+  pristine_commit_hash: adf25a5a071ac8b08e8d286603542cb809b4d218
+  pristine_tree_hash: 9790757b30111d3521d5c8c245b015ae37a34397
 features:
   python:
     additionalDependencies: 1.0.0
@@ -1068,8 +1068,8 @@ trackedFiles:
     pristine_git_object: f456032107a9387ba6c98afd1c981df2f4b3d636
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:36c674f0318c24cb6c923c61a563aa5913fc4a8f
-    pristine_git_object: 063669c54108833a5992c71cc338f1f875190563
+    last_write_checksum: sha1:71fcde5e623f4d5d711694d80fe64571764eddf2
+    pristine_git_object: 2011b7894293bc0eaa78af9fc3931e48c8025326
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -1096,8 +1096,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:d620509b6a2b4b34a7fbbd8b84c6f18fcc3e0ed4
-    pristine_git_object: 6a7e5ed9b8f184862b64db40af01a09eee4520b5
+    last_write_checksum: sha1:149a7b9583715d7ee6b5480b543b8f2a0e3efad3
+    pristine_git_object: 1f3979d04afddffa5bdfab918f433b630f656c90
   src/factify/accessrequests.py:
     id: 31a20ba0373b
     last_write_checksum: sha1:ad8cfaf096e7e4d4581a9478d7fd29a84b646242
