@@ -2375,6 +2375,7 @@
           "created_by_id": {
             "description": "Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.\n REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx&created_by_id=bot_yyy",
             "items": {
+              "example": "user_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^(user|bot)_[0-9a-hjkmnp-tv-z]{26}$",
               "type": "string"
             },
@@ -4648,6 +4649,7 @@
             "schema": {
               "description": "Filter by creator ID(s) (user or bot). Returns documents matching ANY of the specified IDs.\n REST: ?created_by_id=user_01h2xcejqtf2nbrexx3vqjhp41 or ?created_by_id=user_xxx&created_by_id=bot_yyy",
               "items": {
+                "example": "user_01h2xcejqtf2nbrexx3vqjhp41",
                 "pattern": "^(user|bot)_[0-9a-hjkmnp-tv-z]{26}$",
                 "type": "string"
               },
@@ -4776,12 +4778,12 @@
           {
             "label": "listDocuments",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.list({\n    pageToken: \"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\",\n    createdAfter: new Date(\"2023-01-15T01:30:15.01Z\"),\n    createdBefore: new Date(\"2023-01-15T01:30:15.01Z\"),\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.documents.list({\n    pageToken: \"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\",\n    createdAfter: new Date(\"2023-01-15T01:30:15.01Z\"),\n    createdBefore: new Date(\"2023-01-15T01:30:15.01Z\"),\n    createdById: [\n      \"user_01h2xcejqtf2nbrexx3vqjhp41\",\n    ],\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
           },
           {
             "label": "listDocuments",
             "lang": "python",
-            "source": "from factify import Factify\nfrom factify.utils import parse_datetime\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\", created_after=parse_datetime(\"2023-01-15T01:30:15.01Z\"), created_before=parse_datetime(\"2023-01-15T01:30:15.01Z\"))\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+            "source": "from factify import Factify\nfrom factify.utils import parse_datetime\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.documents.list(page_token=\"eyJpZCI6ImRvY18wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0In0\", created_after=parse_datetime(\"2023-01-15T01:30:15.01Z\"), created_before=parse_datetime(\"2023-01-15T01:30:15.01Z\"), created_by_id=[\n        \"user_01h2xcejqtf2nbrexx3vqjhp41\",\n    ])\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
           }
         ],
         "x-speakeasy-name-override": "list",
