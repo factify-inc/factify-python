@@ -584,12 +584,14 @@
         "properties": {
           "document_id": {
             "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
           },
           "policy_id": {
             "description": "Policy ID to attach.\n Pattern: pol_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "pol_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^pol_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "policy_id",
             "type": "string"
@@ -1093,12 +1095,14 @@
         "properties": {
           "document_id": {
             "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
           },
           "policy_id": {
             "description": "Policy ID to detach.\n Pattern: pol_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "pol_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^pol_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "policy_id",
             "type": "string"
@@ -2298,6 +2302,7 @@
         "properties": {
           "document_id": {
             "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "document_id",
             "type": "string"
@@ -5985,6 +5990,7 @@
             "required": true,
             "schema": {
               "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "document_id",
               "type": "string"
@@ -6053,12 +6059,12 @@
           {
             "label": "listDocumentPolicies",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.policies.list({\n    documentId: \"<id>\",\n    pageToken: \"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.policies.list({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    pageToken: \"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\",\n  });\n\n  for await (const page of result) {\n    console.log(page);\n  }\n}\n\nrun();"
           },
           {
             "label": "listDocumentPolicies",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.policies.list(document_id=\"<id>\", page_token=\"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.policies.list(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", page_token=\"eyJpZCI6InBvbF8wMWgyeGNlanF0ZjJuYnJleHgzdnFqaHA0MSIsImQiOiJuZXh0IiwiZiI6eyJkb2NfaWQiOiJkb2NfMDFoMnhjZWpxdGYybmJyZXh4M3ZxamhwNDEifX0\")\n\n    while res is not None:\n        # Handle items\n\n        res = res.next()"
           }
         ],
         "x-speakeasy-name-override": "list",
@@ -6087,6 +6093,7 @@
             "required": true,
             "schema": {
               "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "document_id",
               "type": "string"
@@ -6102,6 +6109,7 @@
                 "properties": {
                   "policy_id": {
                     "description": "Policy ID to attach.\n Pattern: pol_[0-9a-hjkmnp-tv-z]{26}",
+                    "example": "pol_01h2xcejqtf2nbrexx3vqjhp41",
                     "pattern": "^pol_[0-9a-hjkmnp-tv-z]{26}$",
                     "title": "policy_id",
                     "type": "string"
@@ -6155,12 +6163,12 @@
           {
             "label": "attachDocumentPolicy",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.policies.attach({\n    documentId: \"<id>\",\n    body: {\n      policyId: \"<id>\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.policies.attach({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {\n      policyId: \"pol_01h2xcejqtf2nbrexx3vqjhp41\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "attachDocumentPolicy",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.policies.attach(document_id=\"<id>\", policy_id=\"<id>\")\n\n    assert res.document_policy is not None\n\n    # Handle response\n    print(res.document_policy)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.policies.attach(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", policy_id=\"pol_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.document_policy is not None\n\n    # Handle response\n    print(res.document_policy)"
           }
         ],
         "x-speakeasy-name-override": "attach"
@@ -6178,6 +6186,7 @@
             "required": true,
             "schema": {
               "description": "Document ID.\n Pattern: doc_[0-9a-hjkmnp-tv-z]{26}",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "document_id",
               "type": "string"
@@ -6190,6 +6199,7 @@
             "required": true,
             "schema": {
               "description": "Policy ID to detach.\n Pattern: pol_[0-9a-hjkmnp-tv-z]{26}",
+              "example": "pol_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^pol_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "policy_id",
               "type": "string"
@@ -6234,12 +6244,12 @@
           {
             "label": "detachDocumentPolicy",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.policies.detach({\n    documentId: \"<id>\",\n    policyId: \"<id>\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.policies.detach({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    policyId: \"pol_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "detachDocumentPolicy",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.policies.detach(document_id=\"<id>\", policy_id=\"<id>\")\n\n    assert res.empty is not None\n\n    # Handle response\n    print(res.empty)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.policies.detach(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", policy_id=\"pol_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.empty is not None\n\n    # Handle response\n    print(res.empty)"
           }
         ],
         "x-speakeasy-name-override": "detach"
