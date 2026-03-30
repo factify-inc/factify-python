@@ -5087,8 +5087,8 @@
     },
     "/v1beta/documents/{document_id}/access": {
       "get": {
-        "description": "Returns the caller's permissions and any access policies on a document.",
-        "operationId": "inspectDocumentAccess",
+        "description": "Get general access level for a document.",
+        "operationId": "getGeneralAccess",
         "parameters": [
           {
             "description": "Document ID.",
@@ -5109,7 +5109,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InspectAccessResponse"
+                  "$ref": "#/components/schemas/GetGeneralAccessResponse"
                 }
               }
             },
@@ -5134,24 +5134,114 @@
             "$ref": "#/components/responses/InternalServerError"
           }
         },
-        "summary": "Inspect document access",
+        "summary": "Get general access",
         "tags": [
-          "Access Requests"
+          "Sharings"
         ],
         "x-codeSamples": [
           {
-            "label": "inspectDocumentAccess",
+            "label": "getGeneralAccess",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.inspect({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.getGeneralAccess({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
-            "label": "inspectDocumentAccess",
+            "label": "getGeneralAccess",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.inspect(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.inspect_access_response is not None\n\n    # Handle response\n    print(res.inspect_access_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.get_general_access(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_general_access_response is not None\n\n    # Handle response\n    print(res.get_general_access_response)"
           }
         ],
-        "x-speakeasy-group": "accessRequests",
-        "x-speakeasy-name-override": "inspect"
+        "x-speakeasy-group": "sharing",
+        "x-speakeasy-name-override": "getGeneralAccess"
+      },
+      "put": {
+        "description": "Set general access level for a document.",
+        "operationId": "setGeneralAccess",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "description": "SetGeneralAccessRequest sets the general access level.",
+                "properties": {
+                  "general_access_level": {
+                    "$ref": "#/components/schemas/GeneralAccessLevel",
+                    "description": "General access level to set.",
+                    "title": "general_access_level"
+                  }
+                },
+                "required": [
+                  "general_access_level"
+                ],
+                "title": "SetGeneralAccessRequest",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetGeneralAccessResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Set general access",
+        "tags": [
+          "Sharings"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "setGeneralAccess",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.setGeneralAccess({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {\n      generalAccessLevel: \"organization\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "setGeneralAccess",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.set_general_access(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", general_access_level=\"organization\")\n\n    assert res.set_general_access_response is not None\n\n    # Handle response\n    print(res.set_general_access_response)"
+          }
+        ],
+        "x-speakeasy-group": "sharing",
+        "x-speakeasy-name-override": "setGeneralAccess"
       }
     },
     "/v1beta/documents/{document_id}/access-requests": {
@@ -5586,6 +5676,75 @@
         "x-speakeasy-name-override": "deny"
       }
     },
+    "/v1beta/documents/{document_id}/capabilities": {
+      "get": {
+        "description": "Returns the caller's permissions and any access policies on a document.",
+        "operationId": "inspectDocumentAccess",
+        "parameters": [
+          {
+            "description": "Document ID.",
+            "in": "path",
+            "name": "document_id",
+            "required": true,
+            "schema": {
+              "description": "Document ID.",
+              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
+              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "document_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InspectAccessResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Inspect document access",
+        "tags": [
+          "Access Requests"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "inspectDocumentAccess",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.accessRequests.inspect({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "inspectDocumentAccess",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.access_requests.inspect(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.inspect_access_response is not None\n\n    # Handle response\n    print(res.inspect_access_response)"
+          }
+        ],
+        "x-speakeasy-group": "accessRequests",
+        "x-speakeasy-name-override": "inspect"
+      }
+    },
     "/v1beta/documents/{document_id}/duplicates": {
       "get": {
         "description": "Finds documents that are visual duplicates of the specified document using perceptual hashing.",
@@ -5812,165 +5971,6 @@
           }
         ],
         "x-speakeasy-name-override": "export"
-      }
-    },
-    "/v1beta/documents/{document_id}/general-access": {
-      "get": {
-        "description": "Get general access level for a document.",
-        "operationId": "getGeneralAccess",
-        "parameters": [
-          {
-            "description": "Document ID.",
-            "in": "path",
-            "name": "document_id",
-            "required": true,
-            "schema": {
-              "description": "Document ID.",
-              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
-              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
-              "title": "document_id",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetGeneralAccessResponse"
-                }
-              }
-            },
-            "description": "Success"
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "429": {
-            "$ref": "#/components/responses/RateLimitExceeded"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        },
-        "summary": "Get general access",
-        "tags": [
-          "Sharings"
-        ],
-        "x-codeSamples": [
-          {
-            "label": "getGeneralAccess",
-            "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.getGeneralAccess({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "label": "getGeneralAccess",
-            "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.get_general_access(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.get_general_access_response is not None\n\n    # Handle response\n    print(res.get_general_access_response)"
-          }
-        ],
-        "x-speakeasy-group": "sharing",
-        "x-speakeasy-name-override": "getGeneralAccess"
-      },
-      "put": {
-        "description": "Set general access level for a document.",
-        "operationId": "setGeneralAccess",
-        "parameters": [
-          {
-            "description": "Document ID.",
-            "in": "path",
-            "name": "document_id",
-            "required": true,
-            "schema": {
-              "description": "Document ID.",
-              "example": "doc_01h2xcejqtf2nbrexx3vqjhp41",
-              "pattern": "^doc_[0-9a-hjkmnp-tv-z]{26}$",
-              "title": "document_id",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "additionalProperties": false,
-                "description": "SetGeneralAccessRequest sets the general access level.",
-                "properties": {
-                  "general_access_level": {
-                    "$ref": "#/components/schemas/GeneralAccessLevel",
-                    "description": "General access level to set.",
-                    "title": "general_access_level"
-                  }
-                },
-                "required": [
-                  "general_access_level"
-                ],
-                "title": "SetGeneralAccessRequest",
-                "type": "object"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SetGeneralAccessResponse"
-                }
-              }
-            },
-            "description": "Success"
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "429": {
-            "$ref": "#/components/responses/RateLimitExceeded"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        },
-        "summary": "Set general access",
-        "tags": [
-          "Sharings"
-        ],
-        "x-codeSamples": [
-          {
-            "label": "setGeneralAccess",
-            "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.sharing.setGeneralAccess({\n    documentId: \"doc_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {\n      generalAccessLevel: \"organization\",\n    },\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "label": "setGeneralAccess",
-            "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.sharing.set_general_access(document_id=\"doc_01h2xcejqtf2nbrexx3vqjhp41\", general_access_level=\"organization\")\n\n    assert res.set_general_access_response is not None\n\n    # Handle response\n    print(res.set_general_access_response)"
-          }
-        ],
-        "x-speakeasy-group": "sharing",
-        "x-speakeasy-name-override": "setGeneralAccess"
       }
     },
     "/v1beta/documents/{document_id}/policies": {
