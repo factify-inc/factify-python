@@ -4325,7 +4325,7 @@
       "url": "https://factify.com/terms"
     },
     "title": "Factify API",
-    "version": "1.1.0-rc.5"
+    "version": "1.1.0-rc.6"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -9234,15 +9234,15 @@
           {
             "label": "getUserPreferences",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.userPreferences.get();\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.users.preferences.get();\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "getUserPreferences",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.user_preferences.get()\n\n    assert res.get_user_preferences_response is not None\n\n    # Handle response\n    print(res.get_user_preferences_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.users.preferences.get()\n\n    assert res.get_user_preferences_response is not None\n\n    # Handle response\n    print(res.get_user_preferences_response)"
           }
         ],
-        "x-speakeasy-group": "userPreferences",
+        "x-speakeasy-group": "users.preferences",
         "x-speakeasy-name-override": "get"
       }
     },
