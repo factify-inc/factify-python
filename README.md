@@ -316,13 +316,13 @@ with Factify(
 * [set_key_quota](docs/sdks/usage/README.md#set_key_quota) - Set API key quota
 * [get_history](docs/sdks/usage/README.md#get_history) - Get usage history
 
-### [UserPreferences](docs/sdks/userpreferences/README.md)
-
-* [get](docs/sdks/userpreferences/README.md#get) - Get user preferences
-
 ### [Users](docs/sdks/users/README.md)
 
 * [get_me](docs/sdks/users/README.md#get_me) - Get current user
+
+### [Users.Preferences](docs/sdks/preferences/README.md)
+
+* [get](docs/sdks/preferences/README.md#get) - Get user preferences
 
 ### [Versions](docs/sdks/versions/README.md)
 

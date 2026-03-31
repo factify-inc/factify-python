@@ -316,13 +316,13 @@ with Factify(
 * [set_key_quota](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#set_key_quota) - Set API key quota
 * [get_history](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/usage/README.md#get_history) - Get usage history
 
-### [UserPreferences](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/userpreferences/README.md)
-
-* [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/userpreferences/README.md#get) - Get user preferences
-
 ### [Users](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/users/README.md)
 
 * [get_me](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/users/README.md#get_me) - Get current user
+
+### [Users.Preferences](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/preferences/README.md)
+
+* [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/preferences/README.md#get) - Get user preferences
 
 ### [Versions](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versions/README.md)
 

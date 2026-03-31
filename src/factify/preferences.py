@@ -8,7 +8,7 @@ from factify.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional
 
 
-class UserPreferences(BaseSDK):
+class Preferences(BaseSDK):
     def get(
         self,
         *,

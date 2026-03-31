@@ -1,4 +1,4 @@
-# UserPreferences
+# Users.Preferences
 
 ## Overview
 
@@ -21,7 +21,7 @@ with Factify(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 ) as f_client:
 
-    res = f_client.user_preferences.get()
+    res = f_client.users.preferences.get()
 
     # Handle response
     print(res)
