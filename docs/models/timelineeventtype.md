@@ -4,34 +4,33 @@
 
 ```python
 from factify.models import TimelineEventType
-value: TimelineEventType = "TIMELINE_EVENT_TYPE_UNSPECIFIED"
+value: TimelineEventType = "comment_created"
 ```
 
 
 ## Values
 
-- `"TIMELINE_EVENT_TYPE_UNSPECIFIED"`
-- `"TIMELINE_EVENT_TYPE_COMMENT_CREATED"`
-- `"TIMELINE_EVENT_TYPE_COMMENT_UPDATED"`
-- `"TIMELINE_EVENT_TYPE_THREAD_CREATED"`
-- `"TIMELINE_EVENT_TYPE_THREAD_UPDATED"`
-- `"TIMELINE_EVENT_TYPE_APPROVAL_VOTED"`
-- `"TIMELINE_EVENT_TYPE_APPROVAL_STARTED"`
-- `"TIMELINE_EVENT_TYPE_APPROVAL_TERMINATED"`
-- `"TIMELINE_EVENT_TYPE_DOCUMENT_LOADED"`
-- `"TIMELINE_EVENT_TYPE_APPROVAL_READY"`
-- `"TIMELINE_EVENT_TYPE_APPROVAL_SUBMITTED"`
-- `"TIMELINE_EVENT_TYPE_APPROVAL_SKIP_DISSEMINATION"`
-- `"TIMELINE_EVENT_TYPE_DOCUMENT_CREATED"`
-- `"TIMELINE_EVENT_TYPE_DOCUMENT_UPDATED"`
-- `"TIMELINE_EVENT_TYPE_COMMENT_DELETED"`
-- `"TIMELINE_EVENT_TYPE_DOCUMENT_USER_ACCESS_GRANTED"`
-- `"TIMELINE_EVENT_TYPE_DOCUMENT_USER_ACCESS_REVOKED"`
-- `"TIMELINE_EVENT_TYPE_DOCUMENT_ENTRY_PAGE_DOWNLOADED"`
-- `"TIMELINE_EVENT_TYPE_DOCUMENT_VERSION_UPLOADED"`
-- `"TIMELINE_EVENT_TYPE_DOCUMENT_PRINTED"`
-- `"TIMELINE_EVENT_TYPE_DOCUMENT_SETTINGS_ACCESS_CHANGED"`
-- `"TIMELINE_EVENT_TYPE_ANNOTATION_ADDED"`
-- `"TIMELINE_EVENT_TYPE_ANNOTATION_EDITED"`
-- `"TIMELINE_EVENT_TYPE_ANNOTATION_DELETED"`
-- `"TIMELINE_EVENT_TYPE_ANNOTATION_RESOLVED"`
+- `"comment_created"`
+- `"comment_updated"`
+- `"thread_created"`
+- `"thread_updated"`
+- `"approval_voted"`
+- `"approval_started"`
+- `"approval_terminated"`
+- `"document_loaded"`
+- `"approval_ready"`
+- `"approval_submitted"`
+- `"approval_skip_dissemination"`
+- `"document_created"`
+- `"document_updated"`
+- `"comment_deleted"`
+- `"document_user_access_granted"`
+- `"document_user_access_revoked"`
+- `"document_entry_page_downloaded"`
+- `"document_version_uploaded"`
+- `"document_printed"`
+- `"document_settings_access_changed"`
+- `"annotation_added"`
+- `"annotation_edited"`
+- `"annotation_deleted"`
+- `"annotation_resolved"`
