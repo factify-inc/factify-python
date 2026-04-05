@@ -28,6 +28,8 @@ class Documents(BaseSDK):
         ownership: Optional[List[models.DocumentOwnership]] = None,
         trash_state: Optional[List[models.DocumentTrashState]] = None,
         organization_scope: Optional[bool] = None,
+        title_contains: Optional[str] = None,
+        description_contains: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -62,6 +64,11 @@ class Documents(BaseSDK):
             Default (omitted): active documents only.
         :param organization_scope: Organization scope filter. When true, restrict to documents within the user's organization.
             REST: ?organization_scope=true
+        :param title_contains: Case-insensitive substring match on document title.
+            REST: ?title_contains=quarterly
+        :param description_contains: Case-insensitive substring match on document description.
+            Documents with no description set will not match this filter.
+            REST: ?description_contains=financial
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -90,6 +97,8 @@ class Documents(BaseSDK):
             ownership=ownership,
             trash_state=trash_state,
             organization_scope=organization_scope,
+            title_contains=title_contains,
+            description_contains=description_contains,
         )
 
         req = self._build_request(
@@ -155,7 +164,12 @@ class Documents(BaseSDK):
                 ownership=ownership,
                 trash_state=trash_state,
                 organization_scope=organization_scope,
+                title_contains=title_contains,
+                description_contains=description_contains,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -204,6 +218,8 @@ class Documents(BaseSDK):
         ownership: Optional[List[models.DocumentOwnership]] = None,
         trash_state: Optional[List[models.DocumentTrashState]] = None,
         organization_scope: Optional[bool] = None,
+        title_contains: Optional[str] = None,
+        description_contains: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -238,6 +254,11 @@ class Documents(BaseSDK):
             Default (omitted): active documents only.
         :param organization_scope: Organization scope filter. When true, restrict to documents within the user's organization.
             REST: ?organization_scope=true
+        :param title_contains: Case-insensitive substring match on document title.
+            REST: ?title_contains=quarterly
+        :param description_contains: Case-insensitive substring match on document description.
+            Documents with no description set will not match this filter.
+            REST: ?description_contains=financial
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -266,6 +287,8 @@ class Documents(BaseSDK):
             ownership=ownership,
             trash_state=trash_state,
             organization_scope=organization_scope,
+            title_contains=title_contains,
+            description_contains=description_contains,
         )
 
         req = self._build_request_async(
@@ -334,7 +357,12 @@ class Documents(BaseSDK):
                 ownership=ownership,
                 trash_state=trash_state,
                 organization_scope=organization_scope,
+                title_contains=title_contains,
+                description_contains=description_contains,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None

@@ -62,6 +62,15 @@ class ListDocumentsRequestTypedDict(TypedDict):
     r"""Organization scope filter. When true, restrict to documents within the user's organization.
     REST: ?organization_scope=true
     """
+    title_contains: NotRequired[str]
+    r"""Case-insensitive substring match on document title.
+    REST: ?title_contains=quarterly
+    """
+    description_contains: NotRequired[str]
+    r"""Case-insensitive substring match on document description.
+    Documents with no description set will not match this filter.
+    REST: ?description_contains=financial
+    """
 
 
 class ListDocumentsRequest(BaseModel):
@@ -161,6 +170,23 @@ class ListDocumentsRequest(BaseModel):
     REST: ?organization_scope=true
     """
 
+    title_contains: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Case-insensitive substring match on document title.
+    REST: ?title_contains=quarterly
+    """
+
+    description_contains: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Case-insensitive substring match on document description.
+    Documents with no description set will not match this filter.
+    REST: ?description_contains=financial
+    """
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -177,6 +203,8 @@ class ListDocumentsRequest(BaseModel):
                 "ownership",
                 "trash_state",
                 "organization_scope",
+                "title_contains",
+                "description_contains",
             ]
         )
         serialized = handler(self)

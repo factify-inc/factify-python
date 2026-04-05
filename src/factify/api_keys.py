@@ -115,6 +115,9 @@ class APIKeys(BaseSDK):
                 page_token=next_cursor,
                 page_size=page_size,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -253,6 +256,9 @@ class APIKeys(BaseSDK):
                 page_token=next_cursor,
                 page_size=page_size,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None

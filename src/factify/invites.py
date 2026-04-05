@@ -136,6 +136,9 @@ class Invites(BaseSDK):
                 created_after=created_after,
                 created_before=created_before,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -301,6 +304,9 @@ class Invites(BaseSDK):
                 created_after=created_after,
                 created_before=created_before,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None

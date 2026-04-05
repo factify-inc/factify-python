@@ -128,6 +128,9 @@ class Organizations(BaseSDK):
                 page_size=page_size,
                 role=role,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -264,6 +267,9 @@ class Organizations(BaseSDK):
                 page_size=page_size,
                 role=role,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
