@@ -2387,6 +2387,15 @@
             "title": "created_by_id",
             "type": "array"
           },
+          "description_contains": {
+            "description": "Case-insensitive substring match on document description.\n Documents with no description set will not match this filter.\n REST: ?description_contains=financial",
+            "maxLength": 255,
+            "title": "description_contains",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "organization_scope": {
             "description": "Organization scope filter. When true, restrict to documents within the user's organization.\n REST: ?organization_scope=true",
             "title": "organization_scope",
@@ -2439,6 +2448,15 @@
           "sort": {
             "description": "Sort field and direction. Prefix with `-` for descending order.\n Allowed values: created_at, updated_at, name, last_viewed_at, last_shared_at.\n Default (omitted): created_at descending.\n REST: ?sort=last_viewed_at or ?sort=-name",
             "title": "sort",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title_contains": {
+            "description": "Case-insensitive substring match on document title.\n REST: ?title_contains=quarterly",
+            "maxLength": 255,
+            "title": "title_contains",
             "type": [
               "string",
               "null"
@@ -4325,7 +4343,7 @@
       "url": "https://factify.com/terms"
     },
     "title": "Factify API",
-    "version": "1.1.0-rc.6"
+    "version": "1.1.0-rc.7"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -4742,6 +4760,28 @@
               "description": "Organization scope filter. When true, restrict to documents within the user's organization.\n REST: ?organization_scope=true",
               "title": "organization_scope",
               "type": "boolean"
+            }
+          },
+          {
+            "description": "Case-insensitive substring match on document title.\n REST: ?title_contains=quarterly",
+            "in": "query",
+            "name": "title_contains",
+            "schema": {
+              "description": "Case-insensitive substring match on document title.\n REST: ?title_contains=quarterly",
+              "maxLength": 255,
+              "title": "title_contains",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Case-insensitive substring match on document description.\n Documents with no description set will not match this filter.\n REST: ?description_contains=financial",
+            "in": "query",
+            "name": "description_contains",
+            "schema": {
+              "description": "Case-insensitive substring match on document description.\n Documents with no description set will not match this filter.\n REST: ?description_contains=financial",
+              "maxLength": 255,
+              "title": "description_contains",
+              "type": "string"
             }
           }
         ],
