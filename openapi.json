@@ -1824,6 +1824,53 @@
         "title": "GetOrganizationResponse",
         "type": "object"
       },
+      "GetRecordRequest": {
+        "additionalProperties": false,
+        "description": "GetRecordRequest identifies a version whose record to retrieve.",
+        "properties": {
+          "version_id": {
+            "description": "Version ID to retrieve the record for.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "ver_01h2abcd1234efgh5678jkmnpt",
+            "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
+            "title": "version_id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "version_id"
+        ],
+        "title": "GetRecordRequest",
+        "type": "object"
+      },
+      "GetRecordResponse": {
+        "additionalProperties": false,
+        "description": "GetRecordResponse contains the processed document content and layout.",
+        "properties": {
+          "document": {
+            "$ref": "#/components/schemas/qcr.v1alpha.DocumentRecord",
+            "description": "Parsed document content from the ingestion pipeline.",
+            "title": "document"
+          },
+          "id": {
+            "description": "Unique record ID (UUID format).",
+            "example": "019d3b1b-c4a7-7376-b6f9-229f44354d27",
+            "title": "id",
+            "type": "string"
+          },
+          "layout": {
+            "$ref": "#/components/schemas/qcr.v1alpha.DocumentLayout",
+            "description": "Parsed layout data from the ingestion pipeline.\n Absent when layout has not been generated.",
+            "title": "layout"
+          },
+          "source_format": {
+            "description": "Source format of the original upload (e.g., pdf, docx, xlsx).",
+            "title": "source_format",
+            "type": "string"
+          }
+        },
+        "title": "GetRecordResponse",
+        "type": "object"
+      },
       "GetTimelineRequest": {
         "additionalProperties": false,
         "properties": {
@@ -4317,6 +4364,1108 @@
           }
         },
         "type": "object"
+      },
+      "qcr.v1alpha.Block": {
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "properties": {
+              "attributes": {
+                "$ref": "#/components/schemas/Struct",
+                "description": "per-block extraction metadata",
+                "title": "attributes"
+              },
+              "id": {
+                "description": "Optional stable ID for external references (claim anchoring, annotations).\n Not used for layout addressing — positional paths serve that purpose.",
+                "title": "id",
+                "type": "string"
+              }
+            }
+          },
+          {
+            "oneOf": [
+              {
+                "properties": {
+                  "code_block": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.CodeBlockData",
+                    "title": "code_block"
+                  }
+                },
+                "required": [
+                  "code_block"
+                ],
+                "title": "code_block",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "figure": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.VectorImageData",
+                    "title": "figure"
+                  }
+                },
+                "required": [
+                  "figure"
+                ],
+                "title": "figure",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "footnote": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.FootnoteData",
+                    "title": "footnote"
+                  }
+                },
+                "required": [
+                  "footnote"
+                ],
+                "title": "footnote",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "heading": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.HeadingData",
+                    "title": "heading"
+                  }
+                },
+                "required": [
+                  "heading"
+                ],
+                "title": "heading",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "image": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.RasterImageData",
+                    "title": "image"
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "title": "image",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "list": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.ListData",
+                    "title": "list"
+                  }
+                },
+                "required": [
+                  "list"
+                ],
+                "title": "list",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "paragraph": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.ParagraphData",
+                    "title": "paragraph"
+                  }
+                },
+                "required": [
+                  "paragraph"
+                ],
+                "title": "paragraph",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "quote": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.QuoteData",
+                    "title": "quote"
+                  }
+                },
+                "required": [
+                  "quote"
+                ],
+                "title": "quote",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "section": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.SectionData",
+                    "title": "section"
+                  }
+                },
+                "required": [
+                  "section"
+                ],
+                "title": "section",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "table": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.TableData",
+                    "title": "table"
+                  }
+                },
+                "required": [
+                  "table"
+                ],
+                "title": "table",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "thematic_break": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.ThematicBreakData",
+                    "title": "thematic_break"
+                  }
+                },
+                "required": [
+                  "thematic_break"
+                ],
+                "title": "thematic_break",
+                "type": "object"
+              }
+            ]
+          }
+        ],
+        "description": "Block is the unit of document content. Each block carries exactly one\n type-specific payload via oneof. Blocks do not nest generically — only\n SectionData can contain child blocks, enforcing valid containment at the\n schema level.",
+        "title": "Block",
+        "type": "object"
+      },
+      "qcr.v1alpha.BlockPath": {
+        "additionalProperties": false,
+        "description": "BlockPath addresses an element within the record's typed containment\n hierarchy. Each segment steps into a specific typed child collection.\n\n Examples:\n   [block(2)]                                → blocks[2]\n   [block(2), block(0)]                      → blocks[2].section.blocks[0]\n   [block(4), row(1), cell(0)]               → blocks[4].table.rows[1].cells[0]\n   [block(3), item(2)]                       → blocks[3].list.items[2]\n   [block(3), item(2), item(0)]              → nested sub-list item\n\n The path is unambiguous because each segment type implies which child\n collection to descend into (blocks for sections, rows for tables, etc.).",
+        "properties": {
+          "segments": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.PathSegment"
+            },
+            "title": "segments",
+            "type": "array"
+          }
+        },
+        "title": "BlockPath",
+        "type": "object"
+      },
+      "qcr.v1alpha.BlockSpacing": {
+        "additionalProperties": false,
+        "properties": {
+          "after_mm": {
+            "format": "float",
+            "title": "after_mm",
+            "type": "number"
+          },
+          "before_mm": {
+            "format": "float",
+            "title": "before_mm",
+            "type": "number"
+          },
+          "line_spacing": {
+            "$ref": "#/components/schemas/qcr.v1alpha.LineSpacingValue",
+            "title": "line_spacing"
+          }
+        },
+        "title": "BlockSpacing",
+        "type": "object"
+      },
+      "qcr.v1alpha.BoundingBox": {
+        "additionalProperties": false,
+        "description": "Normalized bounding box relative to the page (0.0–1.0).\n Origin is top-left: (0,0) is the top-left corner of the page,\n x increases rightward, y increases downward.\n Extraction pipelines must flip the y-axis for bottom-left origin formats (PDF).\n To get absolute coordinates, multiply by the page's PhysicalDimensions.",
+        "properties": {
+          "height": {
+            "format": "float",
+            "title": "height",
+            "type": "number"
+          },
+          "width": {
+            "format": "float",
+            "title": "width",
+            "type": "number"
+          },
+          "x": {
+            "format": "float",
+            "title": "x",
+            "type": "number"
+          },
+          "y": {
+            "format": "float",
+            "title": "y",
+            "type": "number"
+          }
+        },
+        "title": "BoundingBox",
+        "type": "object"
+      },
+      "qcr.v1alpha.CodeBlockData": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "title": "code",
+            "type": "string"
+          },
+          "language": {
+            "title": "language",
+            "type": "string"
+          }
+        },
+        "title": "CodeBlockData",
+        "type": "object"
+      },
+      "qcr.v1alpha.DataSource": {
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "properties": {
+              "mime_type": {
+                "$ref": "#/components/schemas/qcr.v1alpha.MimeType",
+                "title": "mime_type"
+              }
+            }
+          },
+          {
+            "oneOf": [
+              {
+                "properties": {
+                  "inline_data": {
+                    "description": "raw bytes for small/embedded content",
+                    "format": "byte",
+                    "title": "inline_data",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "inline_data"
+                ],
+                "title": "inline_data",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "storage_ref": {
+                    "description": "S3 key, CDN URL, or other stable reference",
+                    "title": "storage_ref",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "storage_ref"
+                ],
+                "title": "storage_ref",
+                "type": "object"
+              }
+            ]
+          }
+        ],
+        "description": "DataSource represents a media payload — either a stable external reference\n or inline bytes — paired with its MIME type.",
+        "title": "DataSource",
+        "type": "object"
+      },
+      "qcr.v1alpha.Direction": {
+        "description": "Text direction / reading order.",
+        "enum": [
+          "DIRECTION_UNSPECIFIED",
+          "DIRECTION_LTR",
+          "DIRECTION_RTL"
+        ],
+        "title": "Direction",
+        "type": "string"
+      },
+      "qcr.v1alpha.DocumentLayout": {
+        "additionalProperties": false,
+        "description": "Top-level layout structure, joined to a DocumentRecord by record_id.\n Used with the Block-based record representation (DocumentRecord.blocks).",
+        "properties": {
+          "bindings": {
+            "description": "sparse element → layout entries",
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.LayoutBinding"
+            },
+            "title": "bindings",
+            "type": "array"
+          },
+          "defaults": {
+            "$ref": "#/components/schemas/qcr.v1alpha.LayoutDefaults",
+            "title": "defaults"
+          },
+          "extracted_at": {
+            "format": "date-time",
+            "title": "extracted_at",
+            "type": "string"
+          },
+          "pages": {
+            "description": "page-level geometry (all pages)",
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.PageGeometry"
+            },
+            "title": "pages",
+            "type": "array"
+          },
+          "record_id": {
+            "description": "references DocumentRecord.id",
+            "title": "record_id",
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/qcr.v1alpha.SourceReference",
+            "title": "source"
+          }
+        },
+        "title": "DocumentLayout",
+        "type": "object"
+      },
+      "qcr.v1alpha.DocumentMetadata": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "#/components/schemas/Struct",
+            "description": "extraction backend, pipeline version, etc.",
+            "title": "attributes"
+          },
+          "extracted_at": {
+            "format": "date-time",
+            "title": "extracted_at",
+            "type": "string"
+          },
+          "language": {
+            "title": "language",
+            "type": "string"
+          },
+          "title": {
+            "title": "title",
+            "type": "string"
+          }
+        },
+        "title": "DocumentMetadata",
+        "type": "object"
+      },
+      "qcr.v1alpha.DocumentRecord": {
+        "additionalProperties": false,
+        "description": "DocumentRecord is the QCR representation of an ingested document.\n Immutable once extracted. Source-format-agnostic.\n\n Structure is a flat sequence of blocks. Sections provide optional grouping\n and can nest, but block-level elements (paragraphs, tables, etc.) are leaves\n — they do not contain other blocks. This constrains nesting to only what is\n semantically valid and gives every element a natural positional address.\n\n Addressing convention: every element is addressable by its index path through\n the typed containment hierarchy. Examples:\n   blocks[2]                        → third block\n   blocks[2].section.blocks[0]      → first block inside a section\n   blocks[4].table.rows[1].cells[0] → second row, first cell of a table\n   blocks[3].list.items[2]          → third item of a list\n\n These addresses are deterministic for a given record and are used by\n DocumentLayout to join layout data to semantic content.",
+        "properties": {
+          "blocks": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.Block"
+            },
+            "title": "blocks",
+            "type": "array"
+          },
+          "id": {
+            "title": "id",
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/qcr.v1alpha.DocumentMetadata",
+            "title": "metadata"
+          },
+          "source": {
+            "$ref": "#/components/schemas/qcr.v1alpha.SourceReference",
+            "title": "source"
+          }
+        },
+        "title": "DocumentRecord",
+        "type": "object"
+      },
+      "qcr.v1alpha.FootnoteData": {
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "title": "label",
+            "type": "string"
+          },
+          "text": {
+            "title": "text",
+            "type": "string"
+          }
+        },
+        "title": "FootnoteData",
+        "type": "object"
+      },
+      "qcr.v1alpha.HeadingData": {
+        "additionalProperties": false,
+        "properties": {
+          "level": {
+            "format": "int32",
+            "title": "level",
+            "type": "integer"
+          },
+          "text": {
+            "title": "text",
+            "type": "string"
+          }
+        },
+        "title": "HeadingData",
+        "type": "object"
+      },
+      "qcr.v1alpha.Indentation": {
+        "additionalProperties": false,
+        "properties": {
+          "first_line_mm": {
+            "description": "positive = indent, negative = hanging",
+            "format": "float",
+            "title": "first_line_mm",
+            "type": "number"
+          },
+          "left_mm": {
+            "format": "float",
+            "title": "left_mm",
+            "type": "number"
+          },
+          "right_mm": {
+            "format": "float",
+            "title": "right_mm",
+            "type": "number"
+          }
+        },
+        "title": "Indentation",
+        "type": "object"
+      },
+      "qcr.v1alpha.Insets": {
+        "additionalProperties": false,
+        "description": "Directional spacing (padding, insets). Same shape as Margins but distinct\n semantic meaning — internal spacing rather than external.",
+        "properties": {
+          "bottom_mm": {
+            "format": "float",
+            "title": "bottom_mm",
+            "type": "number"
+          },
+          "left_mm": {
+            "format": "float",
+            "title": "left_mm",
+            "type": "number"
+          },
+          "right_mm": {
+            "format": "float",
+            "title": "right_mm",
+            "type": "number"
+          },
+          "top_mm": {
+            "format": "float",
+            "title": "top_mm",
+            "type": "number"
+          }
+        },
+        "title": "Insets",
+        "type": "object"
+      },
+      "qcr.v1alpha.LayoutBinding": {
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "properties": {
+              "fragments": {
+                "description": "Spatial fragments — one per page the element appears on.\n A paragraph spanning pages 3–4 has two fragments.\n Order matches reading order (fragment 0 is the first appearance).",
+                "items": {
+                  "$ref": "#/components/schemas/qcr.v1alpha.LayoutFragment"
+                },
+                "title": "fragments",
+                "type": "array"
+              },
+              "path": {
+                "$ref": "#/components/schemas/qcr.v1alpha.BlockPath",
+                "title": "path"
+              }
+            }
+          },
+          {
+            "oneOf": [
+              {
+                "properties": {
+                  "table": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.TableLayout",
+                    "title": "table"
+                  }
+                },
+                "required": [
+                  "table"
+                ],
+                "title": "table",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "table_cell": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.TableCellLayout",
+                    "title": "table_cell"
+                  }
+                },
+                "required": [
+                  "table_cell"
+                ],
+                "title": "table_cell",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "table_row": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.TableRowLayout",
+                    "title": "table_row"
+                  }
+                },
+                "required": [
+                  "table_row"
+                ],
+                "title": "table_row",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "text_block": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.TextBlockLayout",
+                    "title": "text_block"
+                  }
+                },
+                "required": [
+                  "text_block"
+                ],
+                "title": "text_block",
+                "type": "object"
+              }
+            ]
+          }
+        ],
+        "description": "LayoutBinding attaches layout data to a specific element in the record.\n One binding per addressable element. Elements without layout data have no\n binding entry (sparse).",
+        "title": "LayoutBinding",
+        "type": "object"
+      },
+      "qcr.v1alpha.LayoutDefaults": {
+        "additionalProperties": false,
+        "description": "Document-wide layout defaults.",
+        "properties": {
+          "dimensions": {
+            "$ref": "#/components/schemas/qcr.v1alpha.PhysicalDimensions",
+            "description": "explicit width/height when page_size is CUSTOM",
+            "title": "dimensions"
+          },
+          "direction": {
+            "$ref": "#/components/schemas/qcr.v1alpha.Direction",
+            "title": "direction"
+          },
+          "margins": {
+            "$ref": "#/components/schemas/qcr.v1alpha.Margins",
+            "title": "margins"
+          },
+          "orientation": {
+            "$ref": "#/components/schemas/qcr.v1alpha.Orientation",
+            "title": "orientation"
+          },
+          "page_size": {
+            "$ref": "#/components/schemas/qcr.v1alpha.PageSize",
+            "title": "page_size"
+          }
+        },
+        "title": "LayoutDefaults",
+        "type": "object"
+      },
+      "qcr.v1alpha.LayoutFragment": {
+        "additionalProperties": false,
+        "description": "A single spatial fragment of an element on a specific page.",
+        "properties": {
+          "bounding_box": {
+            "$ref": "#/components/schemas/qcr.v1alpha.BoundingBox",
+            "description": "normalized 0.0–1.0 relative to the page",
+            "title": "bounding_box"
+          },
+          "page_number": {
+            "description": "0-indexed, references PageGeometry.page_number",
+            "format": "int32",
+            "title": "page_number",
+            "type": "integer"
+          },
+          "rotation_degrees": {
+            "format": "float",
+            "title": "rotation_degrees",
+            "type": "number"
+          }
+        },
+        "title": "LayoutFragment",
+        "type": "object"
+      },
+      "qcr.v1alpha.LineSpacing": {
+        "enum": [
+          "LINE_SPACING_UNSPECIFIED",
+          "LINE_SPACING_SINGLE",
+          "LINE_SPACING_ONE_AND_HALF",
+          "LINE_SPACING_DOUBLE"
+        ],
+        "title": "LineSpacing",
+        "type": "string"
+      },
+      "qcr.v1alpha.LineSpacingValue": {
+        "additionalProperties": false,
+        "description": "Line spacing as mode + optional explicit value.\n Using a message instead of a bare enum avoids a future wire break when\n exact/at-least modes are added (they need a companion float value).",
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/qcr.v1alpha.LineSpacing",
+            "title": "mode"
+          },
+          "value_mm": {
+            "description": "meaningful only for EXACT / AT_LEAST (future)",
+            "format": "float",
+            "title": "value_mm",
+            "type": "number"
+          }
+        },
+        "title": "LineSpacingValue",
+        "type": "object"
+      },
+      "qcr.v1alpha.ListData": {
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.ListData.Item"
+            },
+            "title": "items",
+            "type": "array"
+          },
+          "start": {
+            "format": "int32",
+            "title": "start",
+            "type": "integer"
+          },
+          "style": {
+            "$ref": "#/components/schemas/qcr.v1alpha.ListStyle",
+            "title": "style"
+          }
+        },
+        "title": "ListData",
+        "type": "object"
+      },
+      "qcr.v1alpha.ListData.Item": {
+        "additionalProperties": false,
+        "properties": {
+          "sub_list": {
+            "$ref": "#/components/schemas/qcr.v1alpha.ListData",
+            "description": "optional single nested list",
+            "title": "sub_list"
+          },
+          "text": {
+            "title": "text",
+            "type": "string"
+          }
+        },
+        "title": "Item",
+        "type": "object"
+      },
+      "qcr.v1alpha.ListStyle": {
+        "enum": [
+          "LIST_STYLE_UNSPECIFIED",
+          "LIST_STYLE_UNORDERED",
+          "LIST_STYLE_ORDERED"
+        ],
+        "title": "ListStyle",
+        "type": "string"
+      },
+      "qcr.v1alpha.Margins": {
+        "additionalProperties": false,
+        "description": "Page/section margins in millimeters.",
+        "properties": {
+          "bottom_mm": {
+            "format": "float",
+            "title": "bottom_mm",
+            "type": "number"
+          },
+          "left_mm": {
+            "format": "float",
+            "title": "left_mm",
+            "type": "number"
+          },
+          "right_mm": {
+            "format": "float",
+            "title": "right_mm",
+            "type": "number"
+          },
+          "top_mm": {
+            "format": "float",
+            "title": "top_mm",
+            "type": "number"
+          }
+        },
+        "title": "Margins",
+        "type": "object"
+      },
+      "qcr.v1alpha.MimeType": {
+        "enum": [
+          "MIME_TYPE_UNSPECIFIED",
+          "MIME_TYPE_IMAGE_PNG",
+          "MIME_TYPE_IMAGE_JPEG",
+          "MIME_TYPE_IMAGE_GIF",
+          "MIME_TYPE_IMAGE_WEBP",
+          "MIME_TYPE_IMAGE_BMP",
+          "MIME_TYPE_IMAGE_TIFF",
+          "MIME_TYPE_IMAGE_SVG",
+          "MIME_TYPE_IMAGE_EPS",
+          "MIME_TYPE_APPLICATION_PDF"
+        ],
+        "title": "MimeType",
+        "type": "string"
+      },
+      "qcr.v1alpha.Orientation": {
+        "enum": [
+          "ORIENTATION_UNSPECIFIED",
+          "ORIENTATION_PORTRAIT",
+          "ORIENTATION_LANDSCAPE"
+        ],
+        "title": "Orientation",
+        "type": "string"
+      },
+      "qcr.v1alpha.PageGeometry": {
+        "additionalProperties": false,
+        "description": "Per-page geometry. Every page gets an entry (indexed by page_number).\n Pages that match defaults can omit dimensions/orientation and inherit.",
+        "properties": {
+          "dimensions": {
+            "$ref": "#/components/schemas/qcr.v1alpha.PhysicalDimensions",
+            "description": "omit to inherit from defaults",
+            "title": "dimensions"
+          },
+          "orientation": {
+            "$ref": "#/components/schemas/qcr.v1alpha.Orientation",
+            "description": "omit to inherit from defaults",
+            "title": "orientation"
+          },
+          "page_number": {
+            "description": "0-indexed",
+            "format": "int32",
+            "title": "page_number",
+            "type": "integer"
+          }
+        },
+        "title": "PageGeometry",
+        "type": "object"
+      },
+      "qcr.v1alpha.PageSize": {
+        "enum": [
+          "PAGE_SIZE_UNSPECIFIED",
+          "PAGE_SIZE_A4",
+          "PAGE_SIZE_LETTER",
+          "PAGE_SIZE_LEGAL",
+          "PAGE_SIZE_A3",
+          "PAGE_SIZE_TABLOID",
+          "PAGE_SIZE_CUSTOM"
+        ],
+        "title": "PageSize",
+        "type": "string"
+      },
+      "qcr.v1alpha.ParagraphData": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "title": "text",
+            "type": "string"
+          }
+        },
+        "title": "ParagraphData",
+        "type": "object"
+      },
+      "qcr.v1alpha.PathSegment": {
+        "additionalProperties": false,
+        "oneOf": [
+          {
+            "properties": {
+              "block": {
+                "description": "index into blocks[] (document-level or section-level)",
+                "title": "block",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "block"
+            ],
+            "title": "block",
+            "type": "object"
+          },
+          {
+            "properties": {
+              "cell": {
+                "description": "index into Row.cells[]",
+                "title": "cell",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "cell"
+            ],
+            "title": "cell",
+            "type": "object"
+          },
+          {
+            "properties": {
+              "item": {
+                "description": "index into ListData.items[] or sub_list.items[]",
+                "title": "item",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "item"
+            ],
+            "title": "item",
+            "type": "object"
+          },
+          {
+            "properties": {
+              "row": {
+                "description": "index into TableData.rows[]",
+                "title": "row",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "row"
+            ],
+            "title": "row",
+            "type": "object"
+          }
+        ],
+        "title": "PathSegment",
+        "type": "object"
+      },
+      "qcr.v1alpha.PhysicalDimensions": {
+        "additionalProperties": false,
+        "description": "Physical dimensions in millimeters.",
+        "properties": {
+          "height_mm": {
+            "format": "float",
+            "title": "height_mm",
+            "type": "number"
+          },
+          "width_mm": {
+            "format": "float",
+            "title": "width_mm",
+            "type": "number"
+          }
+        },
+        "title": "PhysicalDimensions",
+        "type": "object"
+      },
+      "qcr.v1alpha.QuoteData": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "title": "text",
+            "type": "string"
+          }
+        },
+        "title": "QuoteData",
+        "type": "object"
+      },
+      "qcr.v1alpha.RasterImageData": {
+        "additionalProperties": false,
+        "description": "RasterImageData represents a raster image (PNG, JPEG, WebP, etc.).",
+        "properties": {
+          "alt_text": {
+            "title": "alt_text",
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/qcr.v1alpha.DataSource",
+            "title": "source"
+          }
+        },
+        "title": "RasterImageData",
+        "type": "object"
+      },
+      "qcr.v1alpha.SectionData": {
+        "additionalProperties": false,
+        "description": "Section groups blocks under a logical heading. Only sections can nest blocks.",
+        "properties": {
+          "blocks": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.Block"
+            },
+            "title": "blocks",
+            "type": "array"
+          }
+        },
+        "title": "SectionData",
+        "type": "object"
+      },
+      "qcr.v1alpha.SourceReference": {
+        "additionalProperties": false,
+        "description": "SourceReference links a record back to the source it was extracted from.\n\n Three typed fields identify WHAT, WHERE, and WHEN. Everything else —\n format, content hash, storage location, checksums, external URLs — goes\n in the attributes bag, because the relevant metadata varies by source type.\n\n Examples by source type:\n\n   File upload:\n     source_id  = \"intg_01j8k...\"                    (upload channel instance)\n     remote_id  = \"req_01h2xcejqtf2nbrexx3vqjhp41\"   (upload request ID)\n     attributes = {format: \"pdf\", location: \"uploads/.../original.pdf\",\n                   content_hash: \"a1b2c3...\", storage_etag: \"\\\"abc\\\"\"}\n\n   Gmail integration:\n     source_id  = \"intg_01k9m...\"                    (Gmail connector instance)\n     remote_id  = \"18abc123def\"                       (Gmail message ID)\n     attributes = {format: \"eml\", thread_id: \"...\",\n                   external_url: \"https://mail.google.com/...\"}\n\n   Confluence sync:\n     source_id  = \"intg_01p3q...\"                    (Confluence connector instance)\n     remote_id  = \"12345678\"                          (Confluence page ID)\n     attributes = {format: \"html\", space_key: \"ENG\",\n                   external_url: \"https://acme.atlassian.net/wiki/...\"}",
+        "properties": {
+          "attributes": {
+            "$ref": "#/components/schemas/Struct",
+            "description": "Source-type-specific metadata. The relevant keys vary by integration:\n format, location, content_hash, external_url, checksum, etag, etc.",
+            "title": "attributes"
+          },
+          "ingested_at": {
+            "description": "When this content was ingested into the system.",
+            "format": "date-time",
+            "title": "ingested_at",
+            "type": "string"
+          },
+          "remote_id": {
+            "description": "The content's coordinates in the external system — whatever identifier\n the source system uses for this specific piece of content.\n Examples: upload request ID, Gmail message ID, Confluence page ID,\n           S3 object key, Merge remote_id.",
+            "title": "remote_id",
+            "type": "string"
+          },
+          "source_id": {
+            "description": "Identifies the integration or connector instance that produced this\n record. Stable across re-syncs of the same source.\n Example: \"intg_01j8k...\" (opaque ID from integration registry).",
+            "title": "source_id",
+            "type": "string"
+          }
+        },
+        "title": "SourceReference",
+        "type": "object"
+      },
+      "qcr.v1alpha.TableCellLayout": {
+        "additionalProperties": false,
+        "properties": {
+          "padding": {
+            "$ref": "#/components/schemas/qcr.v1alpha.Insets",
+            "title": "padding"
+          }
+        },
+        "title": "TableCellLayout",
+        "type": "object"
+      },
+      "qcr.v1alpha.TableData": {
+        "additionalProperties": false,
+        "properties": {
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.TableData.Row"
+            },
+            "title": "rows",
+            "type": "array"
+          }
+        },
+        "title": "TableData",
+        "type": "object"
+      },
+      "qcr.v1alpha.TableData.Row": {
+        "additionalProperties": false,
+        "properties": {
+          "cells": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.TableData.Row.Cell"
+            },
+            "title": "cells",
+            "type": "array"
+          }
+        },
+        "title": "Row",
+        "type": "object"
+      },
+      "qcr.v1alpha.TableData.Row.Cell": {
+        "additionalProperties": false,
+        "properties": {
+          "col_span": {
+            "format": "int32",
+            "title": "col_span",
+            "type": "integer"
+          },
+          "is_header": {
+            "title": "is_header",
+            "type": "boolean"
+          },
+          "row_span": {
+            "format": "int32",
+            "title": "row_span",
+            "type": "integer"
+          },
+          "text": {
+            "title": "text",
+            "type": "string"
+          }
+        },
+        "title": "Cell",
+        "type": "object"
+      },
+      "qcr.v1alpha.TableLayout": {
+        "additionalProperties": false,
+        "properties": {
+          "column_widths_mm": {
+            "items": {
+              "format": "float",
+              "type": "number"
+            },
+            "title": "column_widths_mm",
+            "type": "array"
+          },
+          "width_mode": {
+            "$ref": "#/components/schemas/qcr.v1alpha.TableWidthMode",
+            "title": "width_mode"
+          }
+        },
+        "title": "TableLayout",
+        "type": "object"
+      },
+      "qcr.v1alpha.TableRowLayout": {
+        "additionalProperties": false,
+        "properties": {
+          "height_mm": {
+            "format": "float",
+            "title": "height_mm",
+            "type": "number"
+          }
+        },
+        "title": "TableRowLayout",
+        "type": "object"
+      },
+      "qcr.v1alpha.TableWidthMode": {
+        "enum": [
+          "TABLE_WIDTH_MODE_UNSPECIFIED",
+          "TABLE_WIDTH_MODE_AUTO",
+          "TABLE_WIDTH_MODE_FIXED"
+        ],
+        "title": "TableWidthMode",
+        "type": "string"
+      },
+      "qcr.v1alpha.TextAlignment": {
+        "enum": [
+          "TEXT_ALIGNMENT_UNSPECIFIED",
+          "TEXT_ALIGNMENT_LEFT",
+          "TEXT_ALIGNMENT_CENTER",
+          "TEXT_ALIGNMENT_RIGHT",
+          "TEXT_ALIGNMENT_JUSTIFY"
+        ],
+        "title": "TextAlignment",
+        "type": "string"
+      },
+      "qcr.v1alpha.TextBlockLayout": {
+        "additionalProperties": false,
+        "description": "Layout for block-level text elements (paragraphs, headings, list items, quotes).",
+        "properties": {
+          "alignment": {
+            "$ref": "#/components/schemas/qcr.v1alpha.TextAlignment",
+            "title": "alignment"
+          },
+          "indentation": {
+            "$ref": "#/components/schemas/qcr.v1alpha.Indentation",
+            "title": "indentation"
+          },
+          "spacing": {
+            "$ref": "#/components/schemas/qcr.v1alpha.BlockSpacing",
+            "title": "spacing"
+          }
+        },
+        "title": "TextBlockLayout",
+        "type": "object"
+      },
+      "qcr.v1alpha.ThematicBreakData": {
+        "additionalProperties": false,
+        "description": "Explicit authorial boundary (e.g. markdown `---`). Leaf block, no children.",
+        "title": "ThematicBreakData",
+        "type": "object"
+      },
+      "qcr.v1alpha.VectorImageData": {
+        "additionalProperties": false,
+        "description": "VectorImageData represents a vector graphic (SVG, diagram, chart).",
+        "properties": {
+          "alt_text": {
+            "title": "alt_text",
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/qcr.v1alpha.DataSource",
+            "title": "source"
+          }
+        },
+        "title": "VectorImageData",
+        "type": "object"
       }
     },
     "securitySchemes": {
@@ -4340,7 +5489,7 @@
       "url": "https://factify.com/terms"
     },
     "title": "Factify API",
-    "version": "1.1.0-rc.8"
+    "version": "1.1.0-rc.9"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -9229,6 +10378,74 @@
         "x-speakeasy-name-override": "getHistory"
       }
     },
+    "/v1beta/records": {
+      "get": {
+        "description": "Retrieves the processed document content record for a given version. Returns the full document and layout data.",
+        "operationId": "getRecord",
+        "parameters": [
+          {
+            "description": "Version ID to retrieve the record for.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "query",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "description": "Version ID to retrieve the record for.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+              "example": "ver_01h2abcd1234efgh5678jkmnpt",
+              "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "version_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRecordResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Retrieve a record",
+        "tags": [
+          "Records"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "getRecord",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.records.get({\n    versionId: \"ver_01h2abcd1234efgh5678jkmnpt\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getRecord",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.records.get(version_id=\"ver_01h2abcd1234efgh5678jkmnpt\")\n\n    assert res.get_record_response is not None\n\n    # Handle response\n    print(res.get_record_response)"
+          }
+        ],
+        "x-speakeasy-name-override": "get"
+      }
+    },
     "/v1beta/user-preferences": {
       "get": {
         "description": "Returns the authenticated user's onboarding preferences. Only available for user accounts, not API keys.",
@@ -9471,6 +10688,10 @@
     {
       "description": "Document version tracking and management.",
       "name": "Versions"
+    },
+    {
+      "description": "Retrieve processed document content records.",
+      "name": "Records"
     },
     {
       "description": "Create and manage organizations.",
