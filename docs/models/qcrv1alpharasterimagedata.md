@@ -1,0 +1,11 @@
+# QcrV1alphaRasterImageData
+
+RasterImageData represents a raster image (PNG, JPEG, WebP, etc.).
+
+
+## Fields
+
+| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `alt_text`                                                                                                               | *Optional[str]*                                                                                                          | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |
+| `source`                                                                                                                 | [Optional[models.QcrV1alphaDataSource]](../models/qcrv1alphadatasource.md)                                               | :heavy_minus_sign:                                                                                                       | DataSource represents a media payload — either a stable external reference<br/> or inline bytes — paired with its MIME type. |

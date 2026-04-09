@@ -294,6 +294,10 @@ with Factify(
 * [attach](docs/sdks/policies/README.md#attach) - Attach a policy
 * [detach](docs/sdks/policies/README.md#detach) - Detach a policy
 
+### [Records](docs/sdks/records/README.md)
+
+* [get](docs/sdks/records/README.md#get) - Retrieve a record
+
 ### [Sharing](docs/sdks/sharing/README.md)
 
 * [get_general_access](docs/sdks/sharing/README.md#get_general_access) - Get general access

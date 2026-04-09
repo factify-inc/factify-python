@@ -1,0 +1,14 @@
+# QcrV1alphaLayoutDefaults
+
+Document-wide layout defaults.
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `dimensions`                                                                               | [Optional[models.QcrV1alphaPhysicalDimensions]](../models/qcrv1alphaphysicaldimensions.md) | :heavy_minus_sign:                                                                         | Physical dimensions in millimeters.                                                        |
+| `direction`                                                                                | [Optional[models.QcrV1alphaDirection]](../models/qcrv1alphadirection.md)                   | :heavy_minus_sign:                                                                         | Text direction / reading order.                                                            |
+| `margins`                                                                                  | [Optional[models.QcrV1alphaMargins]](../models/qcrv1alphamargins.md)                       | :heavy_minus_sign:                                                                         | Page/section margins in millimeters.                                                       |
+| `orientation`                                                                              | [Optional[models.QcrV1alphaOrientation]](../models/qcrv1alphaorientation.md)               | :heavy_minus_sign:                                                                         | N/A                                                                                        |
+| `page_size`                                                                                | [Optional[models.QcrV1alphaPageSize]](../models/qcrv1alphapagesize.md)                     | :heavy_minus_sign:                                                                         | N/A                                                                                        |
