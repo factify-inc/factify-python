@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: 2f21ad1d6dc583236cda8a250505515a
-  docVersion: 1.1.0-rc.9
-  speakeasyVersion: 1.761.1
-  generationVersion: 2.879.6
-  releaseVersion: 1.1.0-rc.9
-  configChecksum: f1daf85ce4742e8a3b22429569467911
+  docChecksum: 002dc8bda46980ebd3a67e62bf0c77bc
+  docVersion: 1.1.0-rc.10
+  speakeasyVersion: 1.761.3
+  generationVersion: 2.879.11
+  releaseVersion: 1.1.0-rc.10
+  configChecksum: 39d0717a98b830cb7a698e7d9c8c352a
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: dcbae602-aa7b-4372-b5db-8471345079c3
-  pristine_commit_hash: 522a54969a76012a04862c9145175b00fa20d1a7
-  pristine_tree_hash: 8031c0fd38bed52907170f0b2cae630d715f7d63
+  generation_id: 72c368c6-b49d-444c-97e0-e23df84111ee
+  pristine_commit_hash: 307a0df351577ce96a58fa69872ffdf54ce3cedf
+  pristine_tree_hash: b75491c4a56bb7244841e5b8d94429e84f3c94ee
 features:
   python:
     additionalDependencies: 1.0.0
@@ -1348,8 +1348,8 @@ trackedFiles:
     pristine_git_object: b9f7f2c7e2a0b39fb1445ed3edb76a0b33c97f23
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:8635f92f6e8564bc22c0fe0d738646b68e1a629c
-    pristine_git_object: dba4e737decd339aaa6242b8ec46276cc79fdf52
+    last_write_checksum: sha1:1bb8ac69d205aac03c0a3cacc81e3a0fe76781d4
+    pristine_git_object: f4ff28b94c82bd8a46f608e4b168ded4707c212b
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -1376,8 +1376,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:271706b89d973c03c1e4bd803e84fff2d7d1751c
-    pristine_git_object: f902f81590c71cc25324dc719a21ddc11b24d005
+    last_write_checksum: sha1:a1b302ddb786ceeb29b2b721f654ad5f26eeb118
+    pristine_git_object: be2622e183a791b6c70ae7f65e86c4147713176b
   src/factify/accessrequests.py:
     id: 31a20ba0373b
     last_write_checksum: sha1:ad8cfaf096e7e4d4581a9478d7fd29a84b646242
@@ -4039,6 +4039,3 @@ examples:
         "500":
           application/json: {"code": "canceled", "message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `factify.records.get()`: **Added**
