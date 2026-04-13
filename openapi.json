@@ -1243,6 +1243,24 @@
         "title": "Document",
         "type": "object"
       },
+      "DocumentBundle": {
+        "additionalProperties": false,
+        "description": "DocumentBundle groups a document record with its optional spatial layout.",
+        "properties": {
+          "layout": {
+            "$ref": "#/components/schemas/qcr.v1alpha.DocumentLayout",
+            "description": "Spatial layout overlay. Absent for format-only sources (e.g. markdown).",
+            "title": "layout"
+          },
+          "record": {
+            "$ref": "#/components/schemas/qcr.v1alpha.DocumentRecord",
+            "description": "Parsed document content blocks (paragraphs, headings, tables, images, etc.).",
+            "title": "record"
+          }
+        },
+        "title": "DocumentBundle",
+        "type": "object"
+      },
       "DocumentOwnership": {
         "enum": [
           "owned",
@@ -1844,30 +1862,56 @@
       },
       "GetRecordResponse": {
         "additionalProperties": false,
-        "description": "GetRecordResponse contains the processed document content and layout.",
-        "properties": {
-          "document": {
-            "$ref": "#/components/schemas/qcr.v1alpha.DocumentRecord",
-            "description": "Parsed document content from the ingestion pipeline.",
-            "title": "document"
+        "allOf": [
+          {
+            "properties": {
+              "id": {
+                "description": "Unique record ID (UUID format).",
+                "example": "019d3b1b-c4a7-7376-b6f9-229f44354d27",
+                "title": "id",
+                "type": "string"
+              },
+              "source_format": {
+                "description": "Source format of the original upload (e.g., pdf, docx, xlsx, csv).",
+                "title": "source_format",
+                "type": "string"
+              }
+            }
           },
-          "id": {
-            "description": "Unique record ID (UUID format).",
-            "example": "019d3b1b-c4a7-7376-b6f9-229f44354d27",
-            "title": "id",
-            "type": "string"
-          },
-          "layout": {
-            "$ref": "#/components/schemas/qcr.v1alpha.DocumentLayout",
-            "description": "Parsed layout data from the ingestion pipeline.\n Absent when layout has not been generated.",
-            "title": "layout"
-          },
-          "source_format": {
-            "description": "Source format of the original upload (e.g., pdf, docx, xlsx).",
-            "title": "source_format",
-            "type": "string"
+          {
+            "oneOf": [
+              {
+                "properties": {
+                  "document": {
+                    "$ref": "#/components/schemas/DocumentBundle",
+                    "description": "Populated for pdf, docx, and markdown formats.",
+                    "title": "document"
+                  }
+                },
+                "required": [
+                  "document"
+                ],
+                "title": "document",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "spreadsheet": {
+                    "$ref": "#/components/schemas/SpreadsheetBundle",
+                    "description": "Populated for xlsx and csv formats.",
+                    "title": "spreadsheet"
+                  }
+                },
+                "required": [
+                  "spreadsheet"
+                ],
+                "title": "spreadsheet",
+                "type": "object"
+              }
+            ]
           }
-        },
+        ],
+        "description": "GetRecordResponse contains the processed content and layout for a version.\n The content oneof is populated based on source_format:\n   - document formats (pdf, docx, markdown): document field\n   - spreadsheet formats (xlsx, csv):        spreadsheet field",
         "title": "GetRecordResponse",
         "type": "object"
       },
@@ -3591,6 +3635,24 @@
         "title": "ShareLink",
         "type": "object"
       },
+      "SpreadsheetBundle": {
+        "additionalProperties": false,
+        "description": "SpreadsheetBundle groups a spreadsheet record with its optional grid layout.",
+        "properties": {
+          "layout": {
+            "$ref": "#/components/schemas/qcr.v1alpha.SpreadsheetLayout",
+            "description": "Grid layout overlay (column widths, row heights, cell formatting).\n Absent when layout has not been generated.",
+            "title": "layout"
+          },
+          "record": {
+            "$ref": "#/components/schemas/qcr.v1alpha.SpreadsheetRecord",
+            "description": "Parsed spreadsheet content (sheets, tables, images, charts).",
+            "title": "record"
+          }
+        },
+        "title": "SpreadsheetBundle",
+        "type": "object"
+      },
       "StringFilter": {
         "additionalProperties": false,
         "description": "StringFilter provides flexible string matching options.\n Used with Vanguard dot notation: ?email.contains=john or ?email.exact=john@example.com\n\n Note on case sensitivity: `contains` is case-insensitive for user-friendly partial\n matching (e.g., finding \"john\" matches \"John.Doe@...\"). `exact` is case-sensitive\n for precise lookups where the caller knows the exact value. For email addresses,\n this matches RFC 5321 behavior where the domain is case-insensitive but local-part\n handling varies by provider.\nmutually_exclusive // only one of contains or exact can be specified\n",
@@ -4598,6 +4660,114 @@
         "title": "BoundingBox",
         "type": "object"
       },
+      "qcr.v1alpha.CellAlignment": {
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "properties": {
+              "horizontal": {
+                "$ref": "#/components/schemas/qcr.v1alpha.HorizontalAlignment",
+                "title": "horizontal"
+              },
+              "vertical": {
+                "$ref": "#/components/schemas/qcr.v1alpha.VerticalAlignment",
+                "title": "vertical"
+              }
+            }
+          },
+          {
+            "oneOf": [
+              {
+                "properties": {
+                  "rotation_degrees": {
+                    "description": "-90 to 90; positive = counter-clockwise",
+                    "format": "int32",
+                    "title": "rotation_degrees",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "rotation_degrees"
+                ],
+                "title": "rotation_degrees",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "vertical_text": {
+                    "description": "stacked vertical text",
+                    "title": "vertical_text",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "vertical_text"
+                ],
+                "title": "vertical_text",
+                "type": "object"
+              }
+            ]
+          }
+        ],
+        "title": "CellAlignment",
+        "type": "object"
+      },
+      "qcr.v1alpha.CellErrorType": {
+        "enum": [
+          "CELL_ERROR_TYPE_UNSPECIFIED",
+          "CELL_ERROR_TYPE_NULL",
+          "CELL_ERROR_TYPE_DIV_ZERO",
+          "CELL_ERROR_TYPE_VALUE",
+          "CELL_ERROR_TYPE_REF",
+          "CELL_ERROR_TYPE_NAME",
+          "CELL_ERROR_TYPE_NUM",
+          "CELL_ERROR_TYPE_NA",
+          "CELL_ERROR_TYPE_GETTING_DATA",
+          "CELL_ERROR_TYPE_SPILL",
+          "CELL_ERROR_TYPE_CALC"
+        ],
+        "title": "CellErrorType",
+        "type": "string"
+      },
+      "qcr.v1alpha.CellLayoutBinding": {
+        "additionalProperties": false,
+        "properties": {
+          "alignment": {
+            "$ref": "#/components/schemas/qcr.v1alpha.CellAlignment",
+            "title": "alignment"
+          },
+          "col": {
+            "format": "int32",
+            "title": "col",
+            "type": "integer"
+          },
+          "row": {
+            "format": "int32",
+            "title": "row",
+            "type": "integer"
+          },
+          "text_wrap": {
+            "title": "text_wrap",
+            "type": "boolean"
+          }
+        },
+        "title": "CellLayoutBinding",
+        "type": "object"
+      },
+      "qcr.v1alpha.CellType": {
+        "enum": [
+          "CELL_TYPE_UNSPECIFIED",
+          "CELL_TYPE_STRING",
+          "CELL_TYPE_NUMBER",
+          "CELL_TYPE_BOOLEAN",
+          "CELL_TYPE_DATE",
+          "CELL_TYPE_ERROR",
+          "CELL_TYPE_TIME",
+          "CELL_TYPE_DATE_TIME"
+        ],
+        "title": "CellType",
+        "type": "string"
+      },
       "qcr.v1alpha.CodeBlockData": {
         "additionalProperties": false,
         "properties": {
@@ -4611,6 +4781,177 @@
           }
         },
         "title": "CodeBlockData",
+        "type": "object"
+      },
+      "qcr.v1alpha.ColumnDef": {
+        "additionalProperties": false,
+        "description": "ColumnDef defines a single column in a DataTable.",
+        "properties": {
+          "attributes": {
+            "$ref": "#/components/schemas/Struct",
+            "title": "attributes"
+          },
+          "name": {
+            "description": "header text",
+            "title": "name",
+            "type": "string"
+          },
+          "number_format_category": {
+            "$ref": "#/components/schemas/qcr.v1alpha.NumberFormatCategory",
+            "title": "number_format_category"
+          },
+          "type": {
+            "$ref": "#/components/schemas/qcr.v1alpha.CellType",
+            "description": "dominant column type",
+            "title": "type"
+          }
+        },
+        "title": "ColumnDef",
+        "type": "object"
+      },
+      "qcr.v1alpha.ColumnFormatBinding": {
+        "additionalProperties": false,
+        "description": "Format binding for a column within a DataTable, used for rendering.",
+        "properties": {
+          "column_index": {
+            "description": "index into DataTable.columns[]",
+            "format": "int32",
+            "title": "column_index",
+            "type": "integer"
+          },
+          "number_format_category": {
+            "$ref": "#/components/schemas/qcr.v1alpha.NumberFormatCategory",
+            "title": "number_format_category"
+          },
+          "number_format_pattern": {
+            "description": "e.g. \"#,##0.00\", \"yyyy-mm-dd\", \"0.00%\"",
+            "title": "number_format_pattern",
+            "type": "string"
+          },
+          "table_name": {
+            "description": "references DataTable.name",
+            "title": "table_name",
+            "type": "string"
+          }
+        },
+        "title": "ColumnFormatBinding",
+        "type": "object"
+      },
+      "qcr.v1alpha.ColumnLayout": {
+        "additionalProperties": false,
+        "properties": {
+          "col": {
+            "format": "int32",
+            "title": "col",
+            "type": "integer"
+          },
+          "is_hidden": {
+            "title": "is_hidden",
+            "type": "boolean"
+          },
+          "width_mm": {
+            "format": "float",
+            "title": "width_mm",
+            "type": "number"
+          }
+        },
+        "title": "ColumnLayout",
+        "type": "object"
+      },
+      "qcr.v1alpha.DataCell": {
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "properties": {
+              "hyperlink": {
+                "title": "hyperlink",
+                "type": "string"
+              },
+              "note": {
+                "title": "note",
+                "type": "string"
+              }
+            }
+          },
+          {
+            "oneOf": [
+              {
+                "properties": {
+                  "bool_value": {
+                    "title": "bool_value",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "bool_value"
+                ],
+                "title": "bool_value",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "error_value": {
+                    "$ref": "#/components/schemas/qcr.v1alpha.CellErrorType",
+                    "title": "error_value"
+                  }
+                },
+                "required": [
+                  "error_value"
+                ],
+                "title": "error_value",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "number_value": {
+                    "format": "double",
+                    "title": "number_value",
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "number_value"
+                ],
+                "title": "number_value",
+                "type": "object"
+              },
+              {
+                "properties": {
+                  "string_value": {
+                    "title": "string_value",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "string_value"
+                ],
+                "title": "string_value",
+                "type": "object"
+              }
+            ]
+          }
+        ],
+        "description": "DataCell holds a single semantic value. Source-format concerns (formulas,\n formatting) are not modeled — the record captures what the data means.",
+        "title": "DataCell",
+        "type": "object"
+      },
+      "qcr.v1alpha.DataRow": {
+        "additionalProperties": false,
+        "description": "DataRow is a single record in a DataTable.\n cells are positional: cells[i] corresponds to columns[i].",
+        "properties": {
+          "attributes": {
+            "$ref": "#/components/schemas/Struct",
+            "title": "attributes"
+          },
+          "cells": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.DataCell"
+            },
+            "title": "cells",
+            "type": "array"
+          }
+        },
+        "title": "DataRow",
         "type": "object"
       },
       "qcr.v1alpha.DataSource": {
@@ -4660,6 +5001,48 @@
         ],
         "description": "DataSource represents a media payload — either a stable external reference\n or inline bytes — paired with its MIME type.",
         "title": "DataSource",
+        "type": "object"
+      },
+      "qcr.v1alpha.DataTable": {
+        "additionalProperties": false,
+        "description": "DataTable is the semantic core: schema + records.\n For CSV: one DataTable per file. For XLSX: one per ListObject or detected\n table region. When a sheet is a single table, there is one DataTable.",
+        "properties": {
+          "attributes": {
+            "$ref": "#/components/schemas/Struct",
+            "title": "attributes"
+          },
+          "columns": {
+            "description": "the schema",
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.ColumnDef"
+            },
+            "title": "columns",
+            "type": "array"
+          },
+          "has_total_row": {
+            "title": "has_total_row",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "from ListObject or extractor-assigned",
+            "title": "name",
+            "type": "string"
+          },
+          "range_ref": {
+            "description": "A1-notation origin, e.g. \"A1:D100\"",
+            "title": "range_ref",
+            "type": "string"
+          },
+          "rows": {
+            "description": "ordered data rows (excludes header)",
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.DataRow"
+            },
+            "title": "rows",
+            "type": "array"
+          }
+        },
+        "title": "DataTable",
         "type": "object"
       },
       "qcr.v1alpha.Direction": {
@@ -4781,6 +5164,25 @@
         "title": "FootnoteData",
         "type": "object"
       },
+      "qcr.v1alpha.FrozenPane": {
+        "additionalProperties": false,
+        "properties": {
+          "frozen_col": {
+            "description": "0 = no col freeze; N = cols 0..N-1 frozen",
+            "format": "int32",
+            "title": "frozen_col",
+            "type": "integer"
+          },
+          "frozen_row": {
+            "description": "0 = no row freeze; N = rows 0..N-1 frozen",
+            "format": "int32",
+            "title": "frozen_row",
+            "type": "integer"
+          }
+        },
+        "title": "FrozenPane",
+        "type": "object"
+      },
       "qcr.v1alpha.HeadingData": {
         "additionalProperties": false,
         "properties": {
@@ -4796,6 +5198,18 @@
         },
         "title": "HeadingData",
         "type": "object"
+      },
+      "qcr.v1alpha.HorizontalAlignment": {
+        "enum": [
+          "HORIZONTAL_ALIGNMENT_UNSPECIFIED",
+          "HORIZONTAL_ALIGNMENT_LEFT",
+          "HORIZONTAL_ALIGNMENT_CENTER",
+          "HORIZONTAL_ALIGNMENT_RIGHT",
+          "HORIZONTAL_ALIGNMENT_FILL",
+          "HORIZONTAL_ALIGNMENT_JUSTIFY"
+        ],
+        "title": "HorizontalAlignment",
+        "type": "string"
       },
       "qcr.v1alpha.Indentation": {
         "additionalProperties": false,
@@ -5085,6 +5499,34 @@
         "title": "Margins",
         "type": "object"
       },
+      "qcr.v1alpha.MergedRegion": {
+        "additionalProperties": false,
+        "description": "Rectangular merge region. All bounds 0-indexed and inclusive.",
+        "properties": {
+          "end_col": {
+            "format": "int32",
+            "title": "end_col",
+            "type": "integer"
+          },
+          "end_row": {
+            "format": "int32",
+            "title": "end_row",
+            "type": "integer"
+          },
+          "start_col": {
+            "format": "int32",
+            "title": "start_col",
+            "type": "integer"
+          },
+          "start_row": {
+            "format": "int32",
+            "title": "start_row",
+            "type": "integer"
+          }
+        },
+        "title": "MergedRegion",
+        "type": "object"
+      },
       "qcr.v1alpha.MimeType": {
         "enum": [
           "MIME_TYPE_UNSPECIFIED",
@@ -5099,6 +5541,50 @@
           "MIME_TYPE_APPLICATION_PDF"
         ],
         "title": "MimeType",
+        "type": "string"
+      },
+      "qcr.v1alpha.NamedRange": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "#/components/schemas/Struct",
+            "title": "attributes"
+          },
+          "name": {
+            "title": "name",
+            "type": "string"
+          },
+          "range_ref": {
+            "description": "A1-notation",
+            "title": "range_ref",
+            "type": "string"
+          },
+          "sheet_name": {
+            "description": "empty = workbook-scoped",
+            "title": "sheet_name",
+            "type": "string"
+          }
+        },
+        "title": "NamedRange",
+        "type": "object"
+      },
+      "qcr.v1alpha.NumberFormatCategory": {
+        "enum": [
+          "NUMBER_FORMAT_CATEGORY_UNSPECIFIED",
+          "NUMBER_FORMAT_CATEGORY_GENERAL",
+          "NUMBER_FORMAT_CATEGORY_NUMBER",
+          "NUMBER_FORMAT_CATEGORY_CURRENCY",
+          "NUMBER_FORMAT_CATEGORY_ACCOUNTING",
+          "NUMBER_FORMAT_CATEGORY_PERCENTAGE",
+          "NUMBER_FORMAT_CATEGORY_FRACTION",
+          "NUMBER_FORMAT_CATEGORY_SCIENTIFIC",
+          "NUMBER_FORMAT_CATEGORY_TEXT",
+          "NUMBER_FORMAT_CATEGORY_DATE",
+          "NUMBER_FORMAT_CATEGORY_TIME",
+          "NUMBER_FORMAT_CATEGORY_DATE_TIME",
+          "NUMBER_FORMAT_CATEGORY_DURATION"
+        ],
+        "title": "NumberFormatCategory",
         "type": "string"
       },
       "qcr.v1alpha.Orientation": {
@@ -5266,6 +5752,27 @@
         "title": "RasterImageData",
         "type": "object"
       },
+      "qcr.v1alpha.RowLayout": {
+        "additionalProperties": false,
+        "properties": {
+          "height_mm": {
+            "format": "float",
+            "title": "height_mm",
+            "type": "number"
+          },
+          "is_hidden": {
+            "title": "is_hidden",
+            "type": "boolean"
+          },
+          "row": {
+            "format": "int32",
+            "title": "row",
+            "type": "integer"
+          }
+        },
+        "title": "RowLayout",
+        "type": "object"
+      },
       "qcr.v1alpha.SectionData": {
         "additionalProperties": false,
         "description": "Section groups blocks under a logical heading. Only sections can nest blocks.",
@@ -5279,6 +5786,188 @@
           }
         },
         "title": "SectionData",
+        "type": "object"
+      },
+      "qcr.v1alpha.Sheet": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "#/components/schemas/Struct",
+            "title": "attributes"
+          },
+          "charts": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.SheetChart"
+            },
+            "title": "charts",
+            "type": "array"
+          },
+          "images": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.SheetImage"
+            },
+            "title": "images",
+            "type": "array"
+          },
+          "name": {
+            "description": "unique within workbook, used as join key by SheetLayout",
+            "title": "name",
+            "type": "string"
+          },
+          "tables": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.DataTable"
+            },
+            "title": "tables",
+            "type": "array"
+          }
+        },
+        "title": "Sheet",
+        "type": "object"
+      },
+      "qcr.v1alpha.SheetChart": {
+        "additionalProperties": false,
+        "description": "Chart rendered as a figure plus metadata.",
+        "properties": {
+          "anchor_col": {
+            "format": "int32",
+            "title": "anchor_col",
+            "type": "integer"
+          },
+          "anchor_row": {
+            "format": "int32",
+            "title": "anchor_row",
+            "type": "integer"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/Struct",
+            "title": "attributes"
+          },
+          "chart_type": {
+            "description": "e.g., \"bar\", \"line\", \"pie\"",
+            "title": "chart_type",
+            "type": "string"
+          },
+          "rendered": {
+            "$ref": "#/components/schemas/qcr.v1alpha.VectorImageData",
+            "title": "rendered"
+          },
+          "source_ranges": {
+            "description": "A1-notation data ranges",
+            "items": {
+              "type": "string"
+            },
+            "title": "source_ranges",
+            "type": "array"
+          },
+          "title": {
+            "title": "title",
+            "type": "string"
+          }
+        },
+        "title": "SheetChart",
+        "type": "object"
+      },
+      "qcr.v1alpha.SheetImage": {
+        "additionalProperties": false,
+        "properties": {
+          "anchor_col": {
+            "format": "int32",
+            "title": "anchor_col",
+            "type": "integer"
+          },
+          "anchor_row": {
+            "format": "int32",
+            "title": "anchor_row",
+            "type": "integer"
+          },
+          "height_mm": {
+            "format": "float",
+            "title": "height_mm",
+            "type": "number"
+          },
+          "image": {
+            "$ref": "#/components/schemas/qcr.v1alpha.RasterImageData",
+            "title": "image"
+          },
+          "offset_x_mm": {
+            "description": "horizontal offset within anchor cell",
+            "format": "float",
+            "title": "offset_x_mm",
+            "type": "number"
+          },
+          "offset_y_mm": {
+            "description": "vertical offset within anchor cell",
+            "format": "float",
+            "title": "offset_y_mm",
+            "type": "number"
+          },
+          "width_mm": {
+            "format": "float",
+            "title": "width_mm",
+            "type": "number"
+          }
+        },
+        "title": "SheetImage",
+        "type": "object"
+      },
+      "qcr.v1alpha.SheetLayout": {
+        "additionalProperties": false,
+        "properties": {
+          "cell_bindings": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.CellLayoutBinding"
+            },
+            "title": "cell_bindings",
+            "type": "array"
+          },
+          "column_formats": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.ColumnFormatBinding"
+            },
+            "title": "column_formats",
+            "type": "array"
+          },
+          "columns": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.ColumnLayout"
+            },
+            "title": "columns",
+            "type": "array"
+          },
+          "direction": {
+            "$ref": "#/components/schemas/qcr.v1alpha.Direction",
+            "title": "direction"
+          },
+          "frozen_pane": {
+            "$ref": "#/components/schemas/qcr.v1alpha.FrozenPane",
+            "title": "frozen_pane"
+          },
+          "is_hidden": {
+            "title": "is_hidden",
+            "type": "boolean"
+          },
+          "merged_regions": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.MergedRegion"
+            },
+            "title": "merged_regions",
+            "type": "array"
+          },
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.RowLayout"
+            },
+            "title": "rows",
+            "type": "array"
+          },
+          "sheet_name": {
+            "description": "references Sheet.name",
+            "title": "sheet_name",
+            "type": "string"
+          }
+        },
+        "title": "SheetLayout",
         "type": "object"
       },
       "qcr.v1alpha.SourceReference": {
@@ -5308,6 +5997,108 @@
           }
         },
         "title": "SourceReference",
+        "type": "object"
+      },
+      "qcr.v1alpha.SpreadsheetLayout": {
+        "additionalProperties": false,
+        "properties": {
+          "defaults": {
+            "$ref": "#/components/schemas/qcr.v1alpha.SpreadsheetLayoutDefaults",
+            "title": "defaults"
+          },
+          "extracted_at": {
+            "format": "date-time",
+            "title": "extracted_at",
+            "type": "string"
+          },
+          "record_id": {
+            "title": "record_id",
+            "type": "string"
+          },
+          "sheet_layouts": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.SheetLayout"
+            },
+            "title": "sheet_layouts",
+            "type": "array"
+          },
+          "source": {
+            "$ref": "#/components/schemas/qcr.v1alpha.SourceReference",
+            "title": "source"
+          }
+        },
+        "title": "SpreadsheetLayout",
+        "type": "object"
+      },
+      "qcr.v1alpha.SpreadsheetLayoutDefaults": {
+        "additionalProperties": false,
+        "properties": {
+          "column_width_mm": {
+            "format": "float",
+            "title": "column_width_mm",
+            "type": "number"
+          },
+          "row_height_mm": {
+            "format": "float",
+            "title": "row_height_mm",
+            "type": "number"
+          }
+        },
+        "title": "SpreadsheetLayoutDefaults",
+        "type": "object"
+      },
+      "qcr.v1alpha.SpreadsheetMetadata": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "$ref": "#/components/schemas/Struct",
+            "title": "attributes"
+          },
+          "extracted_at": {
+            "format": "date-time",
+            "title": "extracted_at",
+            "type": "string"
+          },
+          "title": {
+            "title": "title",
+            "type": "string"
+          }
+        },
+        "title": "SpreadsheetMetadata",
+        "type": "object"
+      },
+      "qcr.v1alpha.SpreadsheetRecord": {
+        "additionalProperties": false,
+        "description": "SpreadsheetRecord is the QCR representation of an ingested spreadsheet\n workbook (XLSX, CSV, Parquet). Immutable once extracted. Source-format-agnostic.\n\n Hierarchy: SpreadsheetRecord 1:M Sheet 1:M DataTable/SheetImage/SheetChart.\n The semantic core is DataTable: named, typed columns applied to ordered rows.\n The extractor identifies headers and schemas so consumers don't have to.",
+        "properties": {
+          "id": {
+            "title": "id",
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/qcr.v1alpha.SpreadsheetMetadata",
+            "title": "metadata"
+          },
+          "named_ranges": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.NamedRange"
+            },
+            "title": "named_ranges",
+            "type": "array"
+          },
+          "sheets": {
+            "items": {
+              "$ref": "#/components/schemas/qcr.v1alpha.Sheet"
+            },
+            "title": "sheets",
+            "type": "array"
+          },
+          "source": {
+            "$ref": "#/components/schemas/qcr.v1alpha.SourceReference",
+            "title": "source"
+          }
+        },
+        "title": "SpreadsheetRecord",
         "type": "object"
       },
       "qcr.v1alpha.TableCellLayout": {
@@ -5466,6 +6257,16 @@
         },
         "title": "VectorImageData",
         "type": "object"
+      },
+      "qcr.v1alpha.VerticalAlignment": {
+        "enum": [
+          "VERTICAL_ALIGNMENT_UNSPECIFIED",
+          "VERTICAL_ALIGNMENT_TOP",
+          "VERTICAL_ALIGNMENT_CENTER",
+          "VERTICAL_ALIGNMENT_BOTTOM"
+        ],
+        "title": "VerticalAlignment",
+        "type": "string"
       }
     },
     "securitySchemes": {
@@ -5489,7 +6290,7 @@
       "url": "https://factify.com/terms"
     },
     "title": "Factify API",
-    "version": "1.1.0-rc.11"
+    "version": "1.1.0-rc.12"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -10378,74 +11179,6 @@
         "x-speakeasy-name-override": "getHistory"
       }
     },
-    "/v1beta/records": {
-      "get": {
-        "description": "Retrieves the processed document content record for a given version. Returns the full document and layout data.",
-        "operationId": "getRecord",
-        "parameters": [
-          {
-            "description": "Version ID to retrieve the record for.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
-            "in": "query",
-            "name": "version_id",
-            "required": true,
-            "schema": {
-              "description": "Version ID to retrieve the record for.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
-              "example": "ver_01h2abcd1234efgh5678jkmnpt",
-              "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
-              "title": "version_id",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetRecordResponse"
-                }
-              }
-            },
-            "description": "Success"
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "429": {
-            "$ref": "#/components/responses/RateLimitExceeded"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        },
-        "summary": "Retrieve a record",
-        "tags": [
-          "Records"
-        ],
-        "x-codeSamples": [
-          {
-            "label": "getRecord",
-            "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.records.get({\n    versionId: \"ver_01h2abcd1234efgh5678jkmnpt\",\n  });\n\n  console.log(result);\n}\n\nrun();"
-          },
-          {
-            "label": "getRecord",
-            "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.records.get(version_id=\"ver_01h2abcd1234efgh5678jkmnpt\")\n\n    assert res.get_record_response is not None\n\n    # Handle response\n    print(res.get_record_response)"
-          }
-        ],
-        "x-speakeasy-name-override": "get"
-      }
-    },
     "/v1beta/user-preferences": {
       "get": {
         "description": "Returns the authenticated user's onboarding preferences. Only available for user accounts, not API keys.",
@@ -10662,6 +11395,74 @@
           }
         ],
         "x-speakeasy-name-override": "update"
+      }
+    },
+    "/v1beta/versions/{version_id}/record": {
+      "get": {
+        "description": "Retrieves the processed content record for a given version. The content oneof is populated based on source_format: document formats (pdf, docx, markdown) populate the document field; spreadsheet formats (xlsx, csv) populate the spreadsheet field.",
+        "operationId": "getVersionRecord",
+        "parameters": [
+          {
+            "description": "Version ID to retrieve the record for.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "description": "Version ID to retrieve the record for.\n Pattern: ver_[0-9a-hjkmnp-tv-z]{26}",
+              "example": "ver_01h2abcd1234efgh5678jkmnpt",
+              "pattern": "^ver_[0-9a-hjkmnp-tv-z]{26}$",
+              "title": "version_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRecordResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimitExceeded"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "summary": "Retrieve a record",
+        "tags": [
+          "Versions"
+        ],
+        "x-codeSamples": [
+          {
+            "label": "getVersionRecord",
+            "lang": "typescript",
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.versions.getRecord({\n    versionId: \"ver_01h2abcd1234efgh5678jkmnpt\",\n  });\n\n  console.log(result);\n}\n\nrun();"
+          },
+          {
+            "label": "getVersionRecord",
+            "lang": "python",
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.versions.get_record(version_id=\"ver_01h2abcd1234efgh5678jkmnpt\")\n\n    assert res.get_record_response is not None\n\n    # Handle response\n    print(res.get_record_response)"
+          }
+        ],
+        "x-speakeasy-name-override": "getRecord"
       }
     }
   },
