@@ -294,10 +294,6 @@ with Factify(
 * [attach](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policies/README.md#attach) - Attach a policy
 * [detach](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/policies/README.md#detach) - Detach a policy
 
-### [Records](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/records/README.md)
-
-* [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/records/README.md#get) - Retrieve a record
-
 ### [Sharing](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharing/README.md)
 
 * [get_general_access](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/sharing/README.md#get_general_access) - Get general access
@@ -334,6 +330,7 @@ with Factify(
 * [create](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versions/README.md#create) - Create a new version
 * [get](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versions/README.md#get) - Retrieve a version
 * [update](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versions/README.md#update) - Update a version
+* [get_record](https://github.com/factify-inc/factify-python/blob/master/docs/sdks/versions/README.md#get_record) - Retrieve a record
 
 </details>
 <!-- End Available Resources and Operations [operations] -->

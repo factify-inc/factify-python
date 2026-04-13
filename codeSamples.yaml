@@ -327,12 +327,6 @@ actions:
         - "lang": "python"
           "label": "getUsageHistory"
           "source": "from factify import Factify\nfrom factify.utils import parse_datetime\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.usage.get_history(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\", date_after=parse_datetime(\"2023-01-15T01:30:15.01Z\"), date_before=parse_datetime(\"2023-01-15T01:30:15.01Z\"))\n\n    # Handle response\n    print(res)"
-  - target: $["paths"]["/v1beta/records"]["get"]
-    update:
-      "x-codeSamples":
-        - "lang": "python"
-          "label": "getRecord"
-          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.records.get(version_id=\"ver_01h2abcd1234efgh5678jkmnpt\")\n\n    # Handle response\n    print(res)"
   - target: $["paths"]["/v1beta/user-preferences"]["get"]
     update:
       "x-codeSamples":
@@ -351,3 +345,9 @@ actions:
         - "lang": "python"
           "label": "updateVersion"
           "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.versions.update(version_id=\"<id>\")\n\n    # Handle response\n    print(res)"
+  - target: $["paths"]["/v1beta/versions/{version_id}/record"]["get"]
+    update:
+      "x-codeSamples":
+        - "lang": "python"
+          "label": "getVersionRecord"
+          "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.versions.get_record(version_id=\"ver_01h2abcd1234efgh5678jkmnpt\")\n\n    # Handle response\n    print(res)"

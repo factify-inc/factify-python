@@ -1,4 +1,4 @@
-# GetRecordRequest
+# GetVersionRecordRequest
 
 
 ## Fields

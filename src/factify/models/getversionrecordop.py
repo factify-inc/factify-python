@@ -3,33 +3,33 @@
 from __future__ import annotations
 from .getrecordresponse import GetRecordResponse, GetRecordResponseTypedDict
 from factify.types import BaseModel
-from factify.utils import FieldMetadata, QueryParamMetadata
+from factify.utils import FieldMetadata, PathParamMetadata
 from typing import Dict, List
 from typing_extensions import Annotated, TypedDict
 
 
-class GetRecordRequestTypedDict(TypedDict):
+class GetVersionRecordRequestTypedDict(TypedDict):
     version_id: str
     r"""Version ID to retrieve the record for.
     Pattern: ver_[0-9a-hjkmnp-tv-z]{26}
     """
 
 
-class GetRecordRequest(BaseModel):
+class GetVersionRecordRequest(BaseModel):
     version_id: Annotated[
-        str, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
+        str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
     r"""Version ID to retrieve the record for.
     Pattern: ver_[0-9a-hjkmnp-tv-z]{26}
     """
 
 
-class GetRecordResponseResponseTypedDict(TypedDict):
+class GetVersionRecordResponseTypedDict(TypedDict):
     headers: Dict[str, List[str]]
     result: GetRecordResponseTypedDict
 
 
-class GetRecordResponseResponse(BaseModel):
+class GetVersionRecordResponse(BaseModel):
     headers: Dict[str, List[str]]
 
     result: GetRecordResponse

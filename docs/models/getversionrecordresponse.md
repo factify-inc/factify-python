@@ -1,4 +1,4 @@
-# GetRecordResponseResponse
+# GetVersionRecordResponse
 
 
 ## Fields

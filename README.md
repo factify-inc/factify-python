@@ -294,10 +294,6 @@ with Factify(
 * [attach](docs/sdks/policies/README.md#attach) - Attach a policy
 * [detach](docs/sdks/policies/README.md#detach) - Detach a policy
 
-### [Records](docs/sdks/records/README.md)
-
-* [get](docs/sdks/records/README.md#get) - Retrieve a record
-
 ### [Sharing](docs/sdks/sharing/README.md)
 
 * [get_general_access](docs/sdks/sharing/README.md#get_general_access) - Get general access
@@ -334,6 +330,7 @@ with Factify(
 * [create](docs/sdks/versions/README.md#create) - Create a new version
 * [get](docs/sdks/versions/README.md#get) - Retrieve a version
 * [update](docs/sdks/versions/README.md#update) - Update a version
+* [get_record](docs/sdks/versions/README.md#get_record) - Retrieve a record
 
 </details>
 <!-- End Available Resources and Operations [operations] -->

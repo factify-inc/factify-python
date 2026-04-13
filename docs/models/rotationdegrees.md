@@ -1,0 +1,10 @@
+# RotationDegrees
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `rotation_degrees`                                                                           | *int*                                                                                        | :heavy_check_mark:                                                                           | -90 to 90; positive = counter-clockwise                                                      |
+| `horizontal`                                                                                 | [Optional[models.QcrV1alphaHorizontalAlignment]](../models/qcrv1alphahorizontalalignment.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `vertical`                                                                                   | [Optional[models.QcrV1alphaVerticalAlignment]](../models/qcrv1alphaverticalalignment.md)     | :heavy_minus_sign:                                                                           | N/A                                                                                          |

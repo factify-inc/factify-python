@@ -1,0 +1,10 @@
+# Spreadsheet
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  | Example                                                                      |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `spreadsheet`                                                                | [models.SpreadsheetBundle](../models/spreadsheetbundle.md)                   | :heavy_check_mark:                                                           | SpreadsheetBundle groups a spreadsheet record with its optional grid layout. |                                                                              |
+| `id`                                                                         | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | Unique record ID (UUID format).                                              | 019d3b1b-c4a7-7376-b6f9-229f44354d27                                         |
+| `source_format`                                                              | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | Source format of the original upload (e.g., pdf, docx, xlsx, csv).           |                                                                              |

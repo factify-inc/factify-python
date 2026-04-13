@@ -1,0 +1,11 @@
+# QcrV1alphaCellLayoutBinding
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `alignment`                                                                      | [Optional[models.QcrV1alphaCellAlignment]](../models/qcrv1alphacellalignment.md) | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `col`                                                                            | *Optional[int]*                                                                  | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `row`                                                                            | *Optional[int]*                                                                  | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `text_wrap`                                                                      | *Optional[bool]*                                                                 | :heavy_minus_sign:                                                               | N/A                                                                              |

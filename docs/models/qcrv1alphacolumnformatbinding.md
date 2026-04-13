@@ -1,0 +1,13 @@
+# QcrV1alphaColumnFormatBinding
+
+Format binding for a column within a DataTable, used for rendering.
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `column_index`                                                                                 | *Optional[int]*                                                                                | :heavy_minus_sign:                                                                             | index into DataTable.columns[]                                                                 |
+| `number_format_category`                                                                       | [Optional[models.QcrV1alphaNumberFormatCategory]](../models/qcrv1alphanumberformatcategory.md) | :heavy_minus_sign:                                                                             | N/A                                                                                            |
+| `number_format_pattern`                                                                        | *Optional[str]*                                                                                | :heavy_minus_sign:                                                                             | e.g. "#,##0.00", "yyyy-mm-dd", "0.00%"                                                         |
+| `table_name`                                                                                   | *Optional[str]*                                                                                | :heavy_minus_sign:                                                                             | references DataTable.name                                                                      |

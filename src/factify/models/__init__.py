@@ -202,6 +202,7 @@ if TYPE_CHECKING:
         DetachDocumentPolicyResponseTypedDict,
     )
     from .document import Document, DocumentTypedDict
+    from .documentbundle import DocumentBundle, DocumentBundleTypedDict
     from .documentownership import DocumentOwnership
     from .documentpermissionset import (
         DocumentPermissionSet,
@@ -298,13 +299,14 @@ if TYPE_CHECKING:
         GetOrganizationResponse,
         GetOrganizationResponseTypedDict,
     )
-    from .getrecordop import (
-        GetRecordRequest,
-        GetRecordRequestTypedDict,
-        GetRecordResponseResponse,
-        GetRecordResponseResponseTypedDict,
+    from .getrecordresponse import (
+        GetRecordResponse,
+        GetRecordResponseDocument,
+        GetRecordResponseDocumentTypedDict,
+        GetRecordResponseTypedDict,
+        Spreadsheet,
+        SpreadsheetTypedDict,
     )
-    from .getrecordresponse import GetRecordResponse, GetRecordResponseTypedDict
     from .gettimelineresponse import GetTimelineResponse, GetTimelineResponseTypedDict
     from .getusagehistoryop import (
         GetUsageHistoryRequest,
@@ -329,6 +331,12 @@ if TYPE_CHECKING:
         GetVersionRequestTypedDict,
         GetVersionResponse,
         GetVersionResponseTypedDict,
+    )
+    from .getversionrecordop import (
+        GetVersionRecordRequest,
+        GetVersionRecordRequestTypedDict,
+        GetVersionRecordResponse,
+        GetVersionRecordResponseTypedDict,
     )
     from .grantdocumentaccessop import (
         GrantDocumentAccessGrantDocumentAccessRequest,
@@ -490,10 +498,46 @@ if TYPE_CHECKING:
         QcrV1alphaBoundingBox,
         QcrV1alphaBoundingBoxTypedDict,
     )
+    from .qcr_v1alpha_cellalignment import (
+        QcrV1alphaCellAlignment,
+        QcrV1alphaCellAlignmentTypedDict,
+        RotationDegrees,
+        RotationDegreesTypedDict,
+        VerticalText,
+        VerticalTextTypedDict,
+    )
+    from .qcr_v1alpha_cellerrortype import QcrV1alphaCellErrorType
+    from .qcr_v1alpha_celllayoutbinding import (
+        QcrV1alphaCellLayoutBinding,
+        QcrV1alphaCellLayoutBindingTypedDict,
+    )
+    from .qcr_v1alpha_celltype import QcrV1alphaCellType
     from .qcr_v1alpha_codeblockdata import (
         QcrV1alphaCodeBlockData,
         QcrV1alphaCodeBlockDataTypedDict,
     )
+    from .qcr_v1alpha_columndef import QcrV1alphaColumnDef, QcrV1alphaColumnDefTypedDict
+    from .qcr_v1alpha_columnformatbinding import (
+        QcrV1alphaColumnFormatBinding,
+        QcrV1alphaColumnFormatBindingTypedDict,
+    )
+    from .qcr_v1alpha_columnlayout import (
+        QcrV1alphaColumnLayout,
+        QcrV1alphaColumnLayoutTypedDict,
+    )
+    from .qcr_v1alpha_datacell import (
+        BoolValue,
+        BoolValueTypedDict,
+        ErrorValue,
+        ErrorValueTypedDict,
+        NumberValue,
+        NumberValueTypedDict,
+        QcrV1alphaDataCell,
+        QcrV1alphaDataCellTypedDict,
+        StringValue,
+        StringValueTypedDict,
+    )
+    from .qcr_v1alpha_datarow import QcrV1alphaDataRow, QcrV1alphaDataRowTypedDict
     from .qcr_v1alpha_datasource import (
         InlineData,
         InlineDataTypedDict,
@@ -502,6 +546,7 @@ if TYPE_CHECKING:
         StorageRef,
         StorageRefTypedDict,
     )
+    from .qcr_v1alpha_datatable import QcrV1alphaDataTable, QcrV1alphaDataTableTypedDict
     from .qcr_v1alpha_direction import QcrV1alphaDirection
     from .qcr_v1alpha_documentlayout import (
         QcrV1alphaDocumentLayout,
@@ -519,10 +564,15 @@ if TYPE_CHECKING:
         QcrV1alphaFootnoteData,
         QcrV1alphaFootnoteDataTypedDict,
     )
+    from .qcr_v1alpha_frozenpane import (
+        QcrV1alphaFrozenPane,
+        QcrV1alphaFrozenPaneTypedDict,
+    )
     from .qcr_v1alpha_headingdata import (
         QcrV1alphaHeadingData,
         QcrV1alphaHeadingDataTypedDict,
     )
+    from .qcr_v1alpha_horizontalalignment import QcrV1alphaHorizontalAlignment
     from .qcr_v1alpha_indentation import (
         QcrV1alphaIndentation,
         QcrV1alphaIndentationTypedDict,
@@ -555,7 +605,16 @@ if TYPE_CHECKING:
     )
     from .qcr_v1alpha_liststyle import QcrV1alphaListStyle
     from .qcr_v1alpha_margins import QcrV1alphaMargins, QcrV1alphaMarginsTypedDict
+    from .qcr_v1alpha_mergedregion import (
+        QcrV1alphaMergedRegion,
+        QcrV1alphaMergedRegionTypedDict,
+    )
     from .qcr_v1alpha_mimetype import QcrV1alphaMimeType
+    from .qcr_v1alpha_namedrange import (
+        QcrV1alphaNamedRange,
+        QcrV1alphaNamedRangeTypedDict,
+    )
+    from .qcr_v1alpha_numberformatcategory import QcrV1alphaNumberFormatCategory
     from .qcr_v1alpha_orientation import QcrV1alphaOrientation
     from .qcr_v1alpha_pagegeometry import (
         QcrV1alphaPageGeometry,
@@ -587,9 +646,39 @@ if TYPE_CHECKING:
         QcrV1alphaRasterImageData,
         QcrV1alphaRasterImageDataTypedDict,
     )
+    from .qcr_v1alpha_rowlayout import QcrV1alphaRowLayout, QcrV1alphaRowLayoutTypedDict
+    from .qcr_v1alpha_sheet import QcrV1alphaSheet, QcrV1alphaSheetTypedDict
+    from .qcr_v1alpha_sheetchart import (
+        QcrV1alphaSheetChart,
+        QcrV1alphaSheetChartTypedDict,
+    )
+    from .qcr_v1alpha_sheetimage import (
+        QcrV1alphaSheetImage,
+        QcrV1alphaSheetImageTypedDict,
+    )
+    from .qcr_v1alpha_sheetlayout import (
+        QcrV1alphaSheetLayout,
+        QcrV1alphaSheetLayoutTypedDict,
+    )
     from .qcr_v1alpha_sourcereference import (
         QcrV1alphaSourceReference,
         QcrV1alphaSourceReferenceTypedDict,
+    )
+    from .qcr_v1alpha_spreadsheetlayout import (
+        QcrV1alphaSpreadsheetLayout,
+        QcrV1alphaSpreadsheetLayoutTypedDict,
+    )
+    from .qcr_v1alpha_spreadsheetlayoutdefaults import (
+        QcrV1alphaSpreadsheetLayoutDefaults,
+        QcrV1alphaSpreadsheetLayoutDefaultsTypedDict,
+    )
+    from .qcr_v1alpha_spreadsheetmetadata import (
+        QcrV1alphaSpreadsheetMetadata,
+        QcrV1alphaSpreadsheetMetadataTypedDict,
+    )
+    from .qcr_v1alpha_spreadsheetrecord import (
+        QcrV1alphaSpreadsheetRecord,
+        QcrV1alphaSpreadsheetRecordTypedDict,
     )
     from .qcr_v1alpha_tablecelllayout import (
         QcrV1alphaTableCellLayout,
@@ -626,6 +715,7 @@ if TYPE_CHECKING:
         QcrV1alphaVectorImageData,
         QcrV1alphaVectorImageDataTypedDict,
     )
+    from .qcr_v1alpha_verticalalignment import QcrV1alphaVerticalAlignment
     from .quotatier import QuotaTier
     from .recipient import Recipient, RecipientTypedDict
     from .recipientgrant import RecipientGrant, RecipientGrantTypedDict
@@ -712,6 +802,7 @@ if TYPE_CHECKING:
         SetGeneralAccessResponseTypedDict,
     )
     from .sharelink import ShareLink, ShareLinkTypedDict
+    from .spreadsheetbundle import SpreadsheetBundle, SpreadsheetBundleTypedDict
     from .subject import Subject, SubjectTypedDict
     from .subjecttype import SubjectType
     from .timelineevent import TimelineEvent, TimelineEventTypedDict
@@ -877,6 +968,8 @@ __all__ = [
     "AttachPolicyRequestTypedDict",
     "Block",
     "BlockTypedDict",
+    "BoolValue",
+    "BoolValueTypedDict",
     "Cell",
     "CellTypedDict",
     "CheckAccessRequestStatusRequest",
@@ -955,6 +1048,8 @@ __all__ = [
     "DetachDocumentPolicyResponse",
     "DetachDocumentPolicyResponseTypedDict",
     "Document",
+    "DocumentBundle",
+    "DocumentBundleTypedDict",
     "DocumentOwnership",
     "DocumentPermissionSet",
     "DocumentPermissionSetTypedDict",
@@ -969,6 +1064,8 @@ __all__ = [
     "EmptyTypedDict",
     "ErrorDetail",
     "ErrorDetailTypedDict",
+    "ErrorValue",
+    "ErrorValueTypedDict",
     "ExportDocumentRequest",
     "ExportDocumentRequestTypedDict",
     "ExportDocumentResponse",
@@ -1028,11 +1125,9 @@ __all__ = [
     "GetOrganizationResponseResponse",
     "GetOrganizationResponseResponseTypedDict",
     "GetOrganizationResponseTypedDict",
-    "GetRecordRequest",
-    "GetRecordRequestTypedDict",
     "GetRecordResponse",
-    "GetRecordResponseResponse",
-    "GetRecordResponseResponseTypedDict",
+    "GetRecordResponseDocument",
+    "GetRecordResponseDocumentTypedDict",
     "GetRecordResponseTypedDict",
     "GetTimelineResponse",
     "GetTimelineResponseTypedDict",
@@ -1046,6 +1141,10 @@ __all__ = [
     "GetUserPreferencesResponseResponse",
     "GetUserPreferencesResponseResponseTypedDict",
     "GetUserPreferencesResponseTypedDict",
+    "GetVersionRecordRequest",
+    "GetVersionRecordRequestTypedDict",
+    "GetVersionRecordResponse",
+    "GetVersionRecordResponseTypedDict",
     "GetVersionRequest",
     "GetVersionRequestTypedDict",
     "GetVersionResponse",
@@ -1140,6 +1239,8 @@ __all__ = [
     "ListTTypedDict",
     "ListVersionsResponse",
     "ListVersionsResponseTypedDict",
+    "NumberValue",
+    "NumberValueTypedDict",
     "Organization",
     "OrganizationInvite",
     "OrganizationInviteStatus",
@@ -1176,10 +1277,28 @@ __all__ = [
     "QcrV1alphaBlockTypedDict",
     "QcrV1alphaBoundingBox",
     "QcrV1alphaBoundingBoxTypedDict",
+    "QcrV1alphaCellAlignment",
+    "QcrV1alphaCellAlignmentTypedDict",
+    "QcrV1alphaCellErrorType",
+    "QcrV1alphaCellLayoutBinding",
+    "QcrV1alphaCellLayoutBindingTypedDict",
+    "QcrV1alphaCellType",
     "QcrV1alphaCodeBlockData",
     "QcrV1alphaCodeBlockDataTypedDict",
+    "QcrV1alphaColumnDef",
+    "QcrV1alphaColumnDefTypedDict",
+    "QcrV1alphaColumnFormatBinding",
+    "QcrV1alphaColumnFormatBindingTypedDict",
+    "QcrV1alphaColumnLayout",
+    "QcrV1alphaColumnLayoutTypedDict",
+    "QcrV1alphaDataCell",
+    "QcrV1alphaDataCellTypedDict",
+    "QcrV1alphaDataRow",
+    "QcrV1alphaDataRowTypedDict",
     "QcrV1alphaDataSource",
     "QcrV1alphaDataSourceTypedDict",
+    "QcrV1alphaDataTable",
+    "QcrV1alphaDataTableTypedDict",
     "QcrV1alphaDirection",
     "QcrV1alphaDocumentLayout",
     "QcrV1alphaDocumentLayoutTypedDict",
@@ -1189,8 +1308,11 @@ __all__ = [
     "QcrV1alphaDocumentRecordTypedDict",
     "QcrV1alphaFootnoteData",
     "QcrV1alphaFootnoteDataTypedDict",
+    "QcrV1alphaFrozenPane",
+    "QcrV1alphaFrozenPaneTypedDict",
     "QcrV1alphaHeadingData",
     "QcrV1alphaHeadingDataTypedDict",
+    "QcrV1alphaHorizontalAlignment",
     "QcrV1alphaIndentation",
     "QcrV1alphaIndentationTypedDict",
     "QcrV1alphaInsets",
@@ -1213,7 +1335,12 @@ __all__ = [
     "QcrV1alphaListStyle",
     "QcrV1alphaMargins",
     "QcrV1alphaMarginsTypedDict",
+    "QcrV1alphaMergedRegion",
+    "QcrV1alphaMergedRegionTypedDict",
     "QcrV1alphaMimeType",
+    "QcrV1alphaNamedRange",
+    "QcrV1alphaNamedRangeTypedDict",
+    "QcrV1alphaNumberFormatCategory",
     "QcrV1alphaOrientation",
     "QcrV1alphaPageGeometry",
     "QcrV1alphaPageGeometryTypedDict",
@@ -1228,10 +1355,28 @@ __all__ = [
     "QcrV1alphaQuoteDataTypedDict",
     "QcrV1alphaRasterImageData",
     "QcrV1alphaRasterImageDataTypedDict",
+    "QcrV1alphaRowLayout",
+    "QcrV1alphaRowLayoutTypedDict",
     "QcrV1alphaSectionData",
     "QcrV1alphaSectionDataTypedDict",
+    "QcrV1alphaSheet",
+    "QcrV1alphaSheetChart",
+    "QcrV1alphaSheetChartTypedDict",
+    "QcrV1alphaSheetImage",
+    "QcrV1alphaSheetImageTypedDict",
+    "QcrV1alphaSheetLayout",
+    "QcrV1alphaSheetLayoutTypedDict",
+    "QcrV1alphaSheetTypedDict",
     "QcrV1alphaSourceReference",
     "QcrV1alphaSourceReferenceTypedDict",
+    "QcrV1alphaSpreadsheetLayout",
+    "QcrV1alphaSpreadsheetLayoutDefaults",
+    "QcrV1alphaSpreadsheetLayoutDefaultsTypedDict",
+    "QcrV1alphaSpreadsheetLayoutTypedDict",
+    "QcrV1alphaSpreadsheetMetadata",
+    "QcrV1alphaSpreadsheetMetadataTypedDict",
+    "QcrV1alphaSpreadsheetRecord",
+    "QcrV1alphaSpreadsheetRecordTypedDict",
     "QcrV1alphaTableCellLayout",
     "QcrV1alphaTableCellLayoutTypedDict",
     "QcrV1alphaTableData",
@@ -1252,6 +1397,7 @@ __all__ = [
     "QcrV1alphaThematicBreakDataTypedDict",
     "QcrV1alphaVectorImageData",
     "QcrV1alphaVectorImageDataTypedDict",
+    "QcrV1alphaVerticalAlignment",
     "QuotaTier",
     "Quote",
     "QuoteTypedDict",
@@ -1297,6 +1443,8 @@ __all__ = [
     "RevokeOrganizationInviteResponseTypedDict",
     "RevokeOrganizationInviteRevokeOrganizationInviteRequest",
     "RevokeOrganizationInviteRevokeOrganizationInviteRequestTypedDict",
+    "RotationDegrees",
+    "RotationDegreesTypedDict",
     "Row",
     "RowTypedDict",
     "Section",
@@ -1321,8 +1469,14 @@ __all__ = [
     "SetGeneralAccessSetGeneralAccessRequestTypedDict",
     "ShareLink",
     "ShareLinkTypedDict",
+    "Spreadsheet",
+    "SpreadsheetBundle",
+    "SpreadsheetBundleTypedDict",
+    "SpreadsheetTypedDict",
     "StorageRef",
     "StorageRefTypedDict",
+    "StringValue",
+    "StringValueTypedDict",
     "Subject",
     "SubjectType",
     "SubjectTypedDict",
@@ -1415,6 +1569,8 @@ __all__ = [
     "VersionRef",
     "VersionRefTypedDict",
     "VersionTypedDict",
+    "VerticalText",
+    "VerticalTextTypedDict",
 ]
 
 _dynamic_imports: dict[str, str] = {
@@ -1533,6 +1689,8 @@ _dynamic_imports: dict[str, str] = {
     "DetachDocumentPolicyResponseTypedDict": ".detachdocumentpolicyop",
     "Document": ".document",
     "DocumentTypedDict": ".document",
+    "DocumentBundle": ".documentbundle",
+    "DocumentBundleTypedDict": ".documentbundle",
     "DocumentOwnership": ".documentownership",
     "DocumentPermissionSet": ".documentpermissionset",
     "DocumentPermissionSetTypedDict": ".documentpermissionset",
@@ -1603,12 +1761,12 @@ _dynamic_imports: dict[str, str] = {
     "GetOrganizationQuotaResponseTypedDict": ".getorganizationquotaresponse",
     "GetOrganizationResponse": ".getorganizationresponse",
     "GetOrganizationResponseTypedDict": ".getorganizationresponse",
-    "GetRecordRequest": ".getrecordop",
-    "GetRecordRequestTypedDict": ".getrecordop",
-    "GetRecordResponseResponse": ".getrecordop",
-    "GetRecordResponseResponseTypedDict": ".getrecordop",
     "GetRecordResponse": ".getrecordresponse",
+    "GetRecordResponseDocument": ".getrecordresponse",
+    "GetRecordResponseDocumentTypedDict": ".getrecordresponse",
     "GetRecordResponseTypedDict": ".getrecordresponse",
+    "Spreadsheet": ".getrecordresponse",
+    "SpreadsheetTypedDict": ".getrecordresponse",
     "GetTimelineResponse": ".gettimelineresponse",
     "GetTimelineResponseTypedDict": ".gettimelineresponse",
     "GetUsageHistoryRequest": ".getusagehistoryop",
@@ -1625,6 +1783,10 @@ _dynamic_imports: dict[str, str] = {
     "GetVersionRequestTypedDict": ".getversionop",
     "GetVersionResponse": ".getversionop",
     "GetVersionResponseTypedDict": ".getversionop",
+    "GetVersionRecordRequest": ".getversionrecordop",
+    "GetVersionRecordRequestTypedDict": ".getversionrecordop",
+    "GetVersionRecordResponse": ".getversionrecordop",
+    "GetVersionRecordResponseTypedDict": ".getversionrecordop",
     "GrantDocumentAccessGrantDocumentAccessRequest": ".grantdocumentaccessop",
     "GrantDocumentAccessGrantDocumentAccessRequestTypedDict": ".grantdocumentaccessop",
     "GrantDocumentAccessRequest": ".grantdocumentaccessop",
@@ -1735,14 +1897,44 @@ _dynamic_imports: dict[str, str] = {
     "QcrV1alphaBlockSpacingTypedDict": ".qcr_v1alpha_blockspacing",
     "QcrV1alphaBoundingBox": ".qcr_v1alpha_boundingbox",
     "QcrV1alphaBoundingBoxTypedDict": ".qcr_v1alpha_boundingbox",
+    "QcrV1alphaCellAlignment": ".qcr_v1alpha_cellalignment",
+    "QcrV1alphaCellAlignmentTypedDict": ".qcr_v1alpha_cellalignment",
+    "RotationDegrees": ".qcr_v1alpha_cellalignment",
+    "RotationDegreesTypedDict": ".qcr_v1alpha_cellalignment",
+    "VerticalText": ".qcr_v1alpha_cellalignment",
+    "VerticalTextTypedDict": ".qcr_v1alpha_cellalignment",
+    "QcrV1alphaCellErrorType": ".qcr_v1alpha_cellerrortype",
+    "QcrV1alphaCellLayoutBinding": ".qcr_v1alpha_celllayoutbinding",
+    "QcrV1alphaCellLayoutBindingTypedDict": ".qcr_v1alpha_celllayoutbinding",
+    "QcrV1alphaCellType": ".qcr_v1alpha_celltype",
     "QcrV1alphaCodeBlockData": ".qcr_v1alpha_codeblockdata",
     "QcrV1alphaCodeBlockDataTypedDict": ".qcr_v1alpha_codeblockdata",
+    "QcrV1alphaColumnDef": ".qcr_v1alpha_columndef",
+    "QcrV1alphaColumnDefTypedDict": ".qcr_v1alpha_columndef",
+    "QcrV1alphaColumnFormatBinding": ".qcr_v1alpha_columnformatbinding",
+    "QcrV1alphaColumnFormatBindingTypedDict": ".qcr_v1alpha_columnformatbinding",
+    "QcrV1alphaColumnLayout": ".qcr_v1alpha_columnlayout",
+    "QcrV1alphaColumnLayoutTypedDict": ".qcr_v1alpha_columnlayout",
+    "BoolValue": ".qcr_v1alpha_datacell",
+    "BoolValueTypedDict": ".qcr_v1alpha_datacell",
+    "ErrorValue": ".qcr_v1alpha_datacell",
+    "ErrorValueTypedDict": ".qcr_v1alpha_datacell",
+    "NumberValue": ".qcr_v1alpha_datacell",
+    "NumberValueTypedDict": ".qcr_v1alpha_datacell",
+    "QcrV1alphaDataCell": ".qcr_v1alpha_datacell",
+    "QcrV1alphaDataCellTypedDict": ".qcr_v1alpha_datacell",
+    "StringValue": ".qcr_v1alpha_datacell",
+    "StringValueTypedDict": ".qcr_v1alpha_datacell",
+    "QcrV1alphaDataRow": ".qcr_v1alpha_datarow",
+    "QcrV1alphaDataRowTypedDict": ".qcr_v1alpha_datarow",
     "InlineData": ".qcr_v1alpha_datasource",
     "InlineDataTypedDict": ".qcr_v1alpha_datasource",
     "QcrV1alphaDataSource": ".qcr_v1alpha_datasource",
     "QcrV1alphaDataSourceTypedDict": ".qcr_v1alpha_datasource",
     "StorageRef": ".qcr_v1alpha_datasource",
     "StorageRefTypedDict": ".qcr_v1alpha_datasource",
+    "QcrV1alphaDataTable": ".qcr_v1alpha_datatable",
+    "QcrV1alphaDataTableTypedDict": ".qcr_v1alpha_datatable",
     "QcrV1alphaDirection": ".qcr_v1alpha_direction",
     "QcrV1alphaDocumentLayout": ".qcr_v1alpha_documentlayout",
     "QcrV1alphaDocumentLayoutTypedDict": ".qcr_v1alpha_documentlayout",
@@ -1752,8 +1944,11 @@ _dynamic_imports: dict[str, str] = {
     "QcrV1alphaDocumentRecordTypedDict": ".qcr_v1alpha_documentrecord",
     "QcrV1alphaFootnoteData": ".qcr_v1alpha_footnotedata",
     "QcrV1alphaFootnoteDataTypedDict": ".qcr_v1alpha_footnotedata",
+    "QcrV1alphaFrozenPane": ".qcr_v1alpha_frozenpane",
+    "QcrV1alphaFrozenPaneTypedDict": ".qcr_v1alpha_frozenpane",
     "QcrV1alphaHeadingData": ".qcr_v1alpha_headingdata",
     "QcrV1alphaHeadingDataTypedDict": ".qcr_v1alpha_headingdata",
+    "QcrV1alphaHorizontalAlignment": ".qcr_v1alpha_horizontalalignment",
     "QcrV1alphaIndentation": ".qcr_v1alpha_indentation",
     "QcrV1alphaIndentationTypedDict": ".qcr_v1alpha_indentation",
     "QcrV1alphaInsets": ".qcr_v1alpha_insets",
@@ -1778,7 +1973,12 @@ _dynamic_imports: dict[str, str] = {
     "QcrV1alphaListStyle": ".qcr_v1alpha_liststyle",
     "QcrV1alphaMargins": ".qcr_v1alpha_margins",
     "QcrV1alphaMarginsTypedDict": ".qcr_v1alpha_margins",
+    "QcrV1alphaMergedRegion": ".qcr_v1alpha_mergedregion",
+    "QcrV1alphaMergedRegionTypedDict": ".qcr_v1alpha_mergedregion",
     "QcrV1alphaMimeType": ".qcr_v1alpha_mimetype",
+    "QcrV1alphaNamedRange": ".qcr_v1alpha_namedrange",
+    "QcrV1alphaNamedRangeTypedDict": ".qcr_v1alpha_namedrange",
+    "QcrV1alphaNumberFormatCategory": ".qcr_v1alpha_numberformatcategory",
     "QcrV1alphaOrientation": ".qcr_v1alpha_orientation",
     "QcrV1alphaPageGeometry": ".qcr_v1alpha_pagegeometry",
     "QcrV1alphaPageGeometryTypedDict": ".qcr_v1alpha_pagegeometry",
@@ -1801,8 +2001,26 @@ _dynamic_imports: dict[str, str] = {
     "QcrV1alphaQuoteDataTypedDict": ".qcr_v1alpha_quotedata",
     "QcrV1alphaRasterImageData": ".qcr_v1alpha_rasterimagedata",
     "QcrV1alphaRasterImageDataTypedDict": ".qcr_v1alpha_rasterimagedata",
+    "QcrV1alphaRowLayout": ".qcr_v1alpha_rowlayout",
+    "QcrV1alphaRowLayoutTypedDict": ".qcr_v1alpha_rowlayout",
+    "QcrV1alphaSheet": ".qcr_v1alpha_sheet",
+    "QcrV1alphaSheetTypedDict": ".qcr_v1alpha_sheet",
+    "QcrV1alphaSheetChart": ".qcr_v1alpha_sheetchart",
+    "QcrV1alphaSheetChartTypedDict": ".qcr_v1alpha_sheetchart",
+    "QcrV1alphaSheetImage": ".qcr_v1alpha_sheetimage",
+    "QcrV1alphaSheetImageTypedDict": ".qcr_v1alpha_sheetimage",
+    "QcrV1alphaSheetLayout": ".qcr_v1alpha_sheetlayout",
+    "QcrV1alphaSheetLayoutTypedDict": ".qcr_v1alpha_sheetlayout",
     "QcrV1alphaSourceReference": ".qcr_v1alpha_sourcereference",
     "QcrV1alphaSourceReferenceTypedDict": ".qcr_v1alpha_sourcereference",
+    "QcrV1alphaSpreadsheetLayout": ".qcr_v1alpha_spreadsheetlayout",
+    "QcrV1alphaSpreadsheetLayoutTypedDict": ".qcr_v1alpha_spreadsheetlayout",
+    "QcrV1alphaSpreadsheetLayoutDefaults": ".qcr_v1alpha_spreadsheetlayoutdefaults",
+    "QcrV1alphaSpreadsheetLayoutDefaultsTypedDict": ".qcr_v1alpha_spreadsheetlayoutdefaults",
+    "QcrV1alphaSpreadsheetMetadata": ".qcr_v1alpha_spreadsheetmetadata",
+    "QcrV1alphaSpreadsheetMetadataTypedDict": ".qcr_v1alpha_spreadsheetmetadata",
+    "QcrV1alphaSpreadsheetRecord": ".qcr_v1alpha_spreadsheetrecord",
+    "QcrV1alphaSpreadsheetRecordTypedDict": ".qcr_v1alpha_spreadsheetrecord",
     "QcrV1alphaTableCellLayout": ".qcr_v1alpha_tablecelllayout",
     "QcrV1alphaTableCellLayoutTypedDict": ".qcr_v1alpha_tablecelllayout",
     "QcrV1alphaTableData": ".qcr_v1alpha_tabledata",
@@ -1823,6 +2041,7 @@ _dynamic_imports: dict[str, str] = {
     "QcrV1alphaThematicBreakDataTypedDict": ".qcr_v1alpha_thematicbreakdata",
     "QcrV1alphaVectorImageData": ".qcr_v1alpha_vectorimagedata",
     "QcrV1alphaVectorImageDataTypedDict": ".qcr_v1alpha_vectorimagedata",
+    "QcrV1alphaVerticalAlignment": ".qcr_v1alpha_verticalalignment",
     "QuotaTier": ".quotatier",
     "Recipient": ".recipient",
     "RecipientTypedDict": ".recipient",
@@ -1885,6 +2104,8 @@ _dynamic_imports: dict[str, str] = {
     "SetGeneralAccessResponseTypedDict": ".setgeneralaccessresponse",
     "ShareLink": ".sharelink",
     "ShareLinkTypedDict": ".sharelink",
+    "SpreadsheetBundle": ".spreadsheetbundle",
+    "SpreadsheetBundleTypedDict": ".spreadsheetbundle",
     "Subject": ".subject",
     "SubjectTypedDict": ".subject",
     "SubjectType": ".subjecttype",

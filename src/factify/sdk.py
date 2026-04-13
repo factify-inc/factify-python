@@ -21,7 +21,6 @@ if TYPE_CHECKING:
     from factify.entrypages import EntryPages
     from factify.organizations import Organizations
     from factify.policies import Policies
-    from factify.records import Records
     from factify.sharing import Sharing
     from factify.timelines import Timelines
     from factify.usage import Usage
@@ -84,8 +83,6 @@ class Factify(BaseSDK):
     r"""Create and manage organizations."""
     usage: "Usage"
     r"""Query API usage and quota information for your organization."""
-    records: "Records"
-    r"""Retrieve processed document content records."""
     _sub_sdk_map = {
         "api_keys": ("factify.api_keys", "APIKeys"),
         "documents": ("factify.documents", "Documents"),
@@ -98,7 +95,6 @@ class Factify(BaseSDK):
         "users": ("factify.users", "Users"),
         "organizations": ("factify.organizations", "Organizations"),
         "usage": ("factify.usage", "Usage"),
-        "records": ("factify.records", "Records"),
     }
 
     def __init__(

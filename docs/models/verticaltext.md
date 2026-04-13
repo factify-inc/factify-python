@@ -1,0 +1,10 @@
+# VerticalText
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `vertical_text`                                                                              | *bool*                                                                                       | :heavy_check_mark:                                                                           | stacked vertical text                                                                        |
+| `horizontal`                                                                                 | [Optional[models.QcrV1alphaHorizontalAlignment]](../models/qcrv1alphahorizontalalignment.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `vertical`                                                                                   | [Optional[models.QcrV1alphaVerticalAlignment]](../models/qcrv1alphaverticalalignment.md)     | :heavy_minus_sign:                                                                           | N/A                                                                                          |
