@@ -15,6 +15,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class UpdateOrganizationUpdateOrganizationRequestTypedDict(TypedDict):
     r"""UpdateOrganizationRequest contains the fields to update on an organization."""
 
+    logo_image_url: NotRequired[Nullable[str]]
+    r"""Optional logo image URL. nil = no change. Pass the URL returned by UploadOrganizationLogo."""
     name: NotRequired[Nullable[str]]
     r"""Optional new display name. nil = no change. Minimum 1 character."""
 
@@ -22,13 +24,16 @@ class UpdateOrganizationUpdateOrganizationRequestTypedDict(TypedDict):
 class UpdateOrganizationUpdateOrganizationRequest(BaseModel):
     r"""UpdateOrganizationRequest contains the fields to update on an organization."""
 
+    logo_image_url: OptionalNullable[str] = UNSET
+    r"""Optional logo image URL. nil = no change. Pass the URL returned by UploadOrganizationLogo."""
+
     name: OptionalNullable[str] = UNSET
     r"""Optional new display name. nil = no change. Minimum 1 character."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name"])
-        nullable_fields = set(["name"])
+        optional_fields = set(["logo_image_url", "name"])
+        nullable_fields = set(["logo_image_url", "name"])
         serialized = handler(self)
         m = {}
 

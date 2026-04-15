@@ -517,6 +517,7 @@ class Organizations(BaseSDK):
         self,
         *,
         organization_id: str,
+        logo_image_url: OptionalNullable[str] = UNSET,
         name: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -530,6 +531,7 @@ class Organizations(BaseSDK):
 
         :param organization_id: Organization ID.
             Pattern: org_[0-9a-hjkmnp-tv-z]{26}
+        :param logo_image_url: Optional logo image URL. nil = no change. Pass the URL returned by UploadOrganizationLogo.
         :param name: Optional new display name. nil = no change. Minimum 1 character.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -549,6 +551,7 @@ class Organizations(BaseSDK):
         request = models.UpdateOrganizationRequest(
             organization_id=organization_id,
             body=models.UpdateOrganizationUpdateOrganizationRequest(
+                logo_image_url=logo_image_url,
                 name=name,
             ),
         )
@@ -634,6 +637,7 @@ class Organizations(BaseSDK):
         self,
         *,
         organization_id: str,
+        logo_image_url: OptionalNullable[str] = UNSET,
         name: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -647,6 +651,7 @@ class Organizations(BaseSDK):
 
         :param organization_id: Organization ID.
             Pattern: org_[0-9a-hjkmnp-tv-z]{26}
+        :param logo_image_url: Optional logo image URL. nil = no change. Pass the URL returned by UploadOrganizationLogo.
         :param name: Optional new display name. nil = no change. Minimum 1 character.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -666,6 +671,7 @@ class Organizations(BaseSDK):
         request = models.UpdateOrganizationRequest(
             organization_id=organization_id,
             body=models.UpdateOrganizationUpdateOrganizationRequest(
+                logo_image_url=logo_image_url,
                 name=name,
             ),
         )
