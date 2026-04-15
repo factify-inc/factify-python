@@ -4077,6 +4077,16 @@
         "additionalProperties": false,
         "description": "UpdateOrganizationRequest contains the fields to update on an organization.",
         "properties": {
+          "logo_image_url": {
+            "description": "Optional logo image URL. nil = no change. Pass the URL returned by UploadOrganizationLogo.",
+            "format": "uri",
+            "maxLength": 1024,
+            "title": "logo_image_url",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "name": {
             "description": "Optional new display name. nil = no change. Minimum 1 character.",
             "minLength": 1,
@@ -4088,6 +4098,7 @@
           },
           "organization_id": {
             "description": "Organization ID.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+            "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
             "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
             "title": "organization_id",
             "type": "string"
@@ -6310,7 +6321,7 @@
       "url": "https://factify.com/terms"
     },
     "title": "Factify API",
-    "version": "1.1.0-rc.13"
+    "version": "1.1.0-rc.1"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -9628,6 +9639,7 @@
             "required": true,
             "schema": {
               "description": "Organization ID.\n Pattern: org_[0-9a-hjkmnp-tv-z]{26}",
+              "example": "org_01h2xcejqtf2nbrexx3vqjhp41",
               "pattern": "^org_[0-9a-hjkmnp-tv-z]{26}$",
               "title": "organization_id",
               "type": "string"
@@ -9641,6 +9653,16 @@
                 "additionalProperties": false,
                 "description": "UpdateOrganizationRequest contains the fields to update on an organization.",
                 "properties": {
+                  "logo_image_url": {
+                    "description": "Optional logo image URL. nil = no change. Pass the URL returned by UploadOrganizationLogo.",
+                    "format": "uri",
+                    "maxLength": 1024,
+                    "title": "logo_image_url",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
                   "name": {
                     "description": "Optional new display name. nil = no change. Minimum 1 character.",
                     "minLength": 1,
@@ -9697,12 +9719,12 @@
           {
             "label": "updateOrganization",
             "lang": "typescript",
-            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.update({\n    organizationId: \"<id>\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
+            "source": "import { Factify } from \"@factify/sdk\";\n\nconst factify = new Factify({\n  bearerAuth: \"<YOUR_BEARER_TOKEN_HERE>\",\n});\n\nasync function run() {\n  const result = await factify.organizations.update({\n    organizationId: \"org_01h2xcejqtf2nbrexx3vqjhp41\",\n    body: {},\n  });\n\n  console.log(result);\n}\n\nrun();"
           },
           {
             "label": "updateOrganization",
             "lang": "python",
-            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.update(organization_id=\"<id>\")\n\n    assert res.update_organization_response is not None\n\n    # Handle response\n    print(res.update_organization_response)"
+            "source": "from factify import Factify\n\n\nwith Factify(\n    bearer_auth=\"<YOUR_BEARER_TOKEN_HERE>\",\n) as f_client:\n\n    res = f_client.organizations.update(organization_id=\"org_01h2xcejqtf2nbrexx3vqjhp41\")\n\n    assert res.update_organization_response is not None\n\n    # Handle response\n    print(res.update_organization_response)"
           }
         ],
         "x-speakeasy-name-override": "update"
