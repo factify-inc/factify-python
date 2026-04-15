@@ -30,6 +30,7 @@ class Documents(BaseSDK):
         organization_scope: Optional[bool] = None,
         title_contains: Optional[str] = None,
         description_contains: Optional[str] = None,
+        source_format: Optional[List[models.SourceFormat]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -69,6 +70,9 @@ class Documents(BaseSDK):
         :param description_contains: Case-insensitive substring match on document description.
             Documents with no description set will not match this filter.
             REST: ?description_contains=financial
+        :param source_format: Filter by source format(s). Returns documents matching ANY of the specified formats.
+            Allowed values: pdf, docx, xlsx, csv, markdown.
+            REST: ?source_format=pdf or ?source_format=docx&source_format=xlsx
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -99,6 +103,7 @@ class Documents(BaseSDK):
             organization_scope=organization_scope,
             title_contains=title_contains,
             description_contains=description_contains,
+            source_format=source_format,
         )
 
         req = self._build_request(
@@ -166,6 +171,7 @@ class Documents(BaseSDK):
                 organization_scope=organization_scope,
                 title_contains=title_contains,
                 description_contains=description_contains,
+                source_format=source_format,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -220,6 +226,7 @@ class Documents(BaseSDK):
         organization_scope: Optional[bool] = None,
         title_contains: Optional[str] = None,
         description_contains: Optional[str] = None,
+        source_format: Optional[List[models.SourceFormat]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -259,6 +266,9 @@ class Documents(BaseSDK):
         :param description_contains: Case-insensitive substring match on document description.
             Documents with no description set will not match this filter.
             REST: ?description_contains=financial
+        :param source_format: Filter by source format(s). Returns documents matching ANY of the specified formats.
+            Allowed values: pdf, docx, xlsx, csv, markdown.
+            REST: ?source_format=pdf or ?source_format=docx&source_format=xlsx
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -289,6 +299,7 @@ class Documents(BaseSDK):
             organization_scope=organization_scope,
             title_contains=title_contains,
             description_contains=description_contains,
+            source_format=source_format,
         )
 
         req = self._build_request_async(
@@ -359,6 +370,7 @@ class Documents(BaseSDK):
                 organization_scope=organization_scope,
                 title_contains=title_contains,
                 description_contains=description_contains,
+                source_format=source_format,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,

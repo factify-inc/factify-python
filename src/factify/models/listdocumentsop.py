@@ -11,8 +11,17 @@ from factify.types import BaseModel, UNSET_SENTINEL
 from factify.utils import FieldMetadata, QueryParamMetadata
 import pydantic
 from pydantic import model_serializer
-from typing import Awaitable, Callable, Dict, List, Optional, Union
+from typing import Awaitable, Callable, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+SourceFormat = Literal[
+    "pdf",
+    "docx",
+    "xlsx",
+    "csv",
+    "markdown",
+]
 
 
 class ListDocumentsRequestTypedDict(TypedDict):
@@ -70,6 +79,11 @@ class ListDocumentsRequestTypedDict(TypedDict):
     r"""Case-insensitive substring match on document description.
     Documents with no description set will not match this filter.
     REST: ?description_contains=financial
+    """
+    source_format: NotRequired[List[SourceFormat]]
+    r"""Filter by source format(s). Returns documents matching ANY of the specified formats.
+    Allowed values: pdf, docx, xlsx, csv, markdown.
+    REST: ?source_format=pdf or ?source_format=docx&source_format=xlsx
     """
 
 
@@ -187,6 +201,15 @@ class ListDocumentsRequest(BaseModel):
     REST: ?description_contains=financial
     """
 
+    source_format: Annotated[
+        Optional[List[SourceFormat]],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter by source format(s). Returns documents matching ANY of the specified formats.
+    Allowed values: pdf, docx, xlsx, csv, markdown.
+    REST: ?source_format=pdf or ?source_format=docx&source_format=xlsx
+    """
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -205,6 +228,7 @@ class ListDocumentsRequest(BaseModel):
                 "organization_scope",
                 "title_contains",
                 "description_contains",
+                "source_format",
             ]
         )
         serialized = handler(self)

@@ -422,6 +422,7 @@ if TYPE_CHECKING:
         ListDocumentsRequestTypedDict,
         ListDocumentsResponseResponse,
         ListDocumentsResponseResponseTypedDict,
+        SourceFormat,
     )
     from .listdocumentsresponse import (
         ListDocumentsResponse,
@@ -1469,6 +1470,7 @@ __all__ = [
     "SetGeneralAccessSetGeneralAccessRequestTypedDict",
     "ShareLink",
     "ShareLinkTypedDict",
+    "SourceFormat",
     "Spreadsheet",
     "SpreadsheetBundle",
     "SpreadsheetBundleTypedDict",
@@ -1841,6 +1843,7 @@ _dynamic_imports: dict[str, str] = {
     "ListDocumentsRequestTypedDict": ".listdocumentsop",
     "ListDocumentsResponseResponse": ".listdocumentsop",
     "ListDocumentsResponseResponseTypedDict": ".listdocumentsop",
+    "SourceFormat": ".listdocumentsop",
     "ListDocumentsResponse": ".listdocumentsresponse",
     "ListDocumentsResponseTypedDict": ".listdocumentsresponse",
     "ListDocumentVersionsRequest": ".listdocumentversionsop",

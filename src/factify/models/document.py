@@ -56,6 +56,11 @@ class DocumentTypedDict(TypedDict):
     r"""Timestamp when this document was last shared to the authenticated user.
     Absent if the document was never shared to them.
     """
+    source_format: NotRequired[str]
+    r"""Original file format of the document's current version (e.g., \"pdf\", \"docx\", \"xlsx\", \"csv\", \"markdown\").
+    Output-only field — not validated on input. Values are always one of the canonical format names
+    written by the upload layer; arbitrary strings will not appear here.
+    """
     thumbnail_url: NotRequired[str]
     r"""URL of the document thumbnail image."""
     trashed_at: NotRequired[datetime]
@@ -124,6 +129,12 @@ class Document(BaseModel):
     Absent if the document was never shared to them.
     """
 
+    source_format: Optional[str] = None
+    r"""Original file format of the document's current version (e.g., \"pdf\", \"docx\", \"xlsx\", \"csv\", \"markdown\").
+    Output-only field — not validated on input. Values are always one of the canonical format names
+    written by the upload layer; arbitrary strings will not appear here.
+    """
+
     thumbnail_url: Optional[str] = None
     r"""URL of the document thumbnail image."""
 
@@ -147,6 +158,7 @@ class Document(BaseModel):
                 "owner_organization_id",
                 "permission_set",
                 "shared_at",
+                "source_format",
                 "thumbnail_url",
                 "trashed_at",
                 "updated_at",
