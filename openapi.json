@@ -1198,6 +1198,11 @@
             "title": "shared_at",
             "type": "string"
           },
+          "source_format": {
+            "description": "Original file format of the document's current version (e.g., \"pdf\", \"docx\", \"xlsx\", \"csv\", \"markdown\").\n Output-only field — not validated on input. Values are always one of the canonical format names\n written by the upload layer; arbitrary strings will not appear here.",
+            "title": "source_format",
+            "type": "string"
+          },
           "thumbnail_url": {
             "description": "URL of the document thumbnail image.",
             "title": "thumbnail_url",
@@ -2543,6 +2548,21 @@
               "string",
               "null"
             ]
+          },
+          "source_format": {
+            "description": "Filter by source format(s). Returns documents matching ANY of the specified formats.\n Allowed values: pdf, docx, xlsx, csv, markdown.\n REST: ?source_format=pdf or ?source_format=docx&source_format=xlsx",
+            "items": {
+              "enum": [
+                "pdf",
+                "docx",
+                "xlsx",
+                "csv",
+                "markdown"
+              ],
+              "type": "string"
+            },
+            "title": "source_format",
+            "type": "array"
           },
           "title_contains": {
             "description": "Case-insensitive substring match on document title.\n REST: ?title_contains=quarterly",
@@ -6290,7 +6310,7 @@
       "url": "https://factify.com/terms"
     },
     "title": "Factify API",
-    "version": "1.1.0-rc.12"
+    "version": "1.1.0-rc.13"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -6729,6 +6749,26 @@
               "maxLength": 255,
               "title": "description_contains",
               "type": "string"
+            }
+          },
+          {
+            "description": "Filter by source format(s). Returns documents matching ANY of the specified formats.\n Allowed values: pdf, docx, xlsx, csv, markdown.\n REST: ?source_format=pdf or ?source_format=docx&source_format=xlsx",
+            "in": "query",
+            "name": "source_format",
+            "schema": {
+              "description": "Filter by source format(s). Returns documents matching ANY of the specified formats.\n Allowed values: pdf, docx, xlsx, csv, markdown.\n REST: ?source_format=pdf or ?source_format=docx&source_format=xlsx",
+              "items": {
+                "enum": [
+                  "pdf",
+                  "docx",
+                  "xlsx",
+                  "csv",
+                  "markdown"
+                ],
+                "type": "string"
+              },
+              "title": "source_format",
+              "type": "array"
             }
           }
         ],
