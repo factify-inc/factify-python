@@ -2,19 +2,19 @@ speakeasyVersion: 1.761.9
 sources:
     factify-api:
         sourceNamespace: factify-api
-        sourceRevisionDigest: sha256:d4a3521b491ddf4707c6cb0e65429c2ccff992a6d8692b4772fc3f7962468863
-        sourceBlobDigest: sha256:61fa4ff21de03e1bed7ef70669cc421e01838f80270a8ca6b9d67e51aaaf1061
+        sourceRevisionDigest: sha256:3e30aff9df6ec10f25bba7d960b22a6bff20329d7a1de30d07eeee095f51627a
+        sourceBlobDigest: sha256:c13fa1e7dd86cae6b1ee2742022a4a863099b71652db9cbbd05d00208f817bcc
         tags:
             - latest
-            - 1.1.0-rc.2
+            - 1.1.0-rc.3
 targets:
     python:
         source: factify-api
         sourceNamespace: factify-api
-        sourceRevisionDigest: sha256:d4a3521b491ddf4707c6cb0e65429c2ccff992a6d8692b4772fc3f7962468863
-        sourceBlobDigest: sha256:61fa4ff21de03e1bed7ef70669cc421e01838f80270a8ca6b9d67e51aaaf1061
+        sourceRevisionDigest: sha256:3e30aff9df6ec10f25bba7d960b22a6bff20329d7a1de30d07eeee095f51627a
+        sourceBlobDigest: sha256:c13fa1e7dd86cae6b1ee2742022a4a863099b71652db9cbbd05d00208f817bcc
         codeSamplesNamespace: factify-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:773a9462c5e988c12c4df160461d480d2a53aa2b4d74f40b39619f26e65d6652
+        codeSamplesRevisionDigest: sha256:1ba8ac8c11df39679cce5d848c81fc45464876f821176bf9b4b7936f1248e00f
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

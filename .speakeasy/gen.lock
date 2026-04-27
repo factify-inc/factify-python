@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: a1bdc1461159569cd80845790a61afef
-  docVersion: 1.1.0-rc.2
+  docChecksum: 242e6576dd6226f8c7ba165ce3febe48
+  docVersion: 1.1.0-rc.3
   speakeasyVersion: 1.761.9
   generationVersion: 2.881.4
-  releaseVersion: 1.1.0-rc.2
-  configChecksum: 5f932b56c3e89ae776d367583de4abd3
+  releaseVersion: 1.1.0-rc.3
+  configChecksum: ee8ff2ec32efad05e9d1389375b5f3f0
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: b36b338c-49d0-4827-a9a1-54285e8d6880
-  pristine_commit_hash: 0d27fbfbc8637a46b78913e06302eddf2aafd638
-  pristine_tree_hash: 9d477c2fca66f9d3c22a75202f99232053c67c0d
+  generation_id: 082f9eb8-03f9-4bbd-a47a-7c2f15974809
+  pristine_commit_hash: c184e73d9bff0ab2b2faaa41a887d60dfe2aa3b4
+  pristine_tree_hash: 2dc5e341f48b5aba830d9839820c9b181f6923b7
 features:
   python:
     additionalDependencies: 1.0.0
@@ -1488,8 +1488,8 @@ trackedFiles:
     pristine_git_object: b9f7f2c7e2a0b39fb1445ed3edb76a0b33c97f23
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:5ef35347923c8020740886ccb9daf965ae88e1cb
-    pristine_git_object: c3674418fc76c47ccc669823aa9fe7a202f7b89f
+    last_write_checksum: sha1:bb282476c6f6823ef0ce2114e8e040d24cf5d284
+    pristine_git_object: a8f736306d62b692b7dcb6d8538b6a92071db84b
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -1516,8 +1516,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:f21a4800dc81c6a48d9465c103d6d8910f37ea2f
-    pristine_git_object: 1879e4b649afa5670667cf5989e907207910d423
+    last_write_checksum: sha1:64c1e6e7c40e7cbe384b83e39faa3bab0b379dcf
+    pristine_git_object: 5077e8f56256b9000c940c9d2b1ea4056c606021
   src/factify/accessrequests.py:
     id: 31a20ba0373b
     last_write_checksum: sha1:7c64b08f555410755719a0160f8cfb12d317e5fa
