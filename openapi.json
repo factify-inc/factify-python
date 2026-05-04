@@ -6321,7 +6321,7 @@
       "url": "https://factify.com/terms"
     },
     "title": "Factify API",
-    "version": "1.1.0-rc.5"
+    "version": "1.1.0-rc.6"
   },
   "openapi": "3.1.0",
   "paths": {
