@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 06c893e7-bc40-402e-b664-c9e01e021712
 management:
-  docChecksum: 448bea6169cf153945c5e3970f557e7d
-  docVersion: 1.1.0-rc.11
+  docChecksum: b45f2337bf6b7890503658dad9a89b6c
+  docVersion: 1.1.0-rc.12
   speakeasyVersion: 1.762.0
   generationVersion: 2.882.0
-  releaseVersion: 1.1.0-rc.11
-  configChecksum: 3509e4959d08b0386a14d2337b7c8061
+  releaseVersion: 1.1.0-rc.12
+  configChecksum: b51d5b2d37c5844d9d1bc50cce64d93e
   repoURL: https://github.com/factify-inc/factify-python.git
   installationURL: https://github.com/factify-inc/factify-python.git
   published: true
 persistentEdits:
-  generation_id: 094dd589-02cd-44cf-be26-c58ee39b6df1
-  pristine_commit_hash: 35d7e514e64c337e7339fddfd6e3d3500ffee6c8
-  pristine_tree_hash: a1a688f8d5c7d24b43d23ed8d33fd778a898d83e
+  generation_id: 0f3cbab4-c742-4214-8215-120c057336eb
+  pristine_commit_hash: f484f764a1b5cc9391e81fda3616e10a6ef84fc9
+  pristine_tree_hash: 3b369c08ba4d2ae4dc43e77efcfd0d3374564884
 features:
   python:
     additionalDependencies: 1.0.0
@@ -1488,8 +1488,8 @@ trackedFiles:
     pristine_git_object: b9f7f2c7e2a0b39fb1445ed3edb76a0b33c97f23
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:130b97a8b35387661e334879655a0526f401e90e
-    pristine_git_object: b13a0ad56a9f2d4fbb1a8a480e061ade7eaa6a18
+    last_write_checksum: sha1:4739a6b60126b334504332fc6cb7596fdfd7c7f9
+    pristine_git_object: fe5d0b6e86416692da59d939041c6eac4bd3410e
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:c3d427d80db817d9c50136db170a3d7681ffe499
@@ -1516,8 +1516,8 @@ trackedFiles:
     pristine_git_object: fad11ac17c4eb84274b3fb45a8326d20ec64d9f4
   src/factify/_version.py:
     id: 0a3edb48f2fe
-    last_write_checksum: sha1:54260945c24407c46b31b677bde06a3d7d73403f
-    pristine_git_object: 53021ebd47e4c1fae1125798c05460174d48af6a
+    last_write_checksum: sha1:2809d24308979fed88ffc68542f9ee0e698afe66
+    pristine_git_object: eda55405a92081129e967b1d705ad10db7bdc4ed
   src/factify/accessrequests.py:
     id: 31a20ba0373b
     last_write_checksum: sha1:7c64b08f555410755719a0160f8cfb12d317e5fa
