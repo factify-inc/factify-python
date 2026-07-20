@@ -50,6 +50,6 @@ jobs:
       - name: Send Slack notification
         uses: slackapi/slack-github-action@v2.1.1
         with:
-          webhook: ${{ secrets.FACTOPS_PROD_RELEASE_SLACK_URL }}
+          webhook: ${{ secrets.FACTOPS_ENG_ALERTS_SLACK_URL }}
           webhook-type: incoming-webhook
           payload: ${{ steps.prepare-message.outputs.payload }}
